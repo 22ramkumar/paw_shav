@@ -27,8 +27,8 @@ function renderPawsNavbar() {
   const navClass = (name) => {
     const active = isCurrent(name);
     return active
-      ? "px-2 xl:px-3 py-2 text-xs xl:text-sm font-bold text-[var(--brand-primary)] bg-[var(--bg-subtle)] rounded-xl transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap flex-shrink-0"
-      : "px-2 xl:px-3 py-2 text-xs xl:text-sm font-semibold text-[var(--text-main)] hover:text-[var(--brand-primary)] hover:bg-[var(--bg-subtle)] rounded-xl transition flex items-center gap-1 xl:gap-1.5 whitespace-nowrap flex-shrink-0";
+      ? "px-2.5 xl:px-3.5 py-2 text-xs xl:text-sm font-bold text-[var(--brand-primary)] bg-[var(--bg-subtle)] rounded-xl transition flex items-center gap-1.5 whitespace-nowrap flex-shrink-0"
+      : "px-2.5 xl:px-3.5 py-2 text-xs xl:text-sm font-semibold text-[var(--text-main)] hover:text-[var(--brand-primary)] hover:bg-[var(--bg-subtle)] rounded-xl transition flex items-center gap-1.5 whitespace-nowrap flex-shrink-0";
   };
 
   let authButtonsHtml = '';
@@ -59,7 +59,7 @@ function renderPawsNavbar() {
     `;
   } else {
     authButtonsHtml = `
-      <button type="button" onclick="openAuthModal('login')" class="h-10 text-xs font-bold text-[var(--text-main)] hover:text-[var(--brand-primary)] px-2.5 xl:px-3 rounded-xl hover:bg-[var(--bg-subtle)] transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap flex-shrink-0">
+      <button type="button" onclick="openAuthModal('login')" class="h-10 text-xs font-bold text-[var(--text-main)] hover:text-[var(--brand-primary)] px-3 rounded-xl hover:bg-[var(--bg-subtle)] transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap flex-shrink-0">
         <i class="bi bi-box-arrow-in-right text-sm"></i>
         <span>Log In</span>
       </button>
@@ -67,7 +67,7 @@ function renderPawsNavbar() {
         <i class="bi bi-person-plus-fill text-[var(--brand-accent)] text-sm"></i>
         <span>Register</span>
       </button>
-      <button type="button" onclick="openAuthModal('login', 'booking.html')" class="h-10 btn-brand-accent text-xs font-bold px-3 xl:px-4 rounded-xl flex items-center gap-1.5 shadow-sm hover:shadow-md transition cursor-pointer whitespace-nowrap flex-shrink-0">
+      <button type="button" onclick="openAuthModal('login', 'booking.html')" class="h-10 btn-brand-accent text-xs font-bold px-3.5 xl:px-4 rounded-xl flex items-center gap-1.5 shadow-sm hover:shadow-md transition cursor-pointer whitespace-nowrap flex-shrink-0">
         <i class="bi bi-calendar-heart text-sm"></i>
         <span>Book a Stay</span>
       </button>
@@ -76,81 +76,80 @@ function renderPawsNavbar() {
 
   mount.innerHTML = `
     <header class="fixed top-0 left-0 w-full z-50 paws-navbar-header bg-[var(--bg-surface)] border-b border-[var(--border-color)] shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition-all duration-300" style="background-color: var(--bg-surface);">
-      <div class="paws-navbar-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-5 xl:px-8 h-20 flex items-center justify-between gap-3 xl:gap-4">
+      <div class="paws-navbar-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-8 h-20 flex items-center justify-between gap-4">
         
-        <!-- Left Side: Brand Logo & Desktop Navigation Links -->
-        <div class="paws-nav-left flex items-center gap-3 xl:gap-8 min-w-0">
-          <!-- Logo -->
-          <a href="index.html" class="paws-brand-link flex items-center gap-2.5 xl:gap-3 group flex-shrink-0">
-            <div class="w-10 h-10 xl:w-11 xl:h-11 rounded-2xl bg-[#F0F1EC] flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-300 overflow-hidden border border-[var(--border-color)] flex-shrink-0">
+        <!-- Left Column: Brand Logo -->
+        <div class="flex items-center flex-shrink-0">
+          <a href="index.html" class="paws-brand-link flex items-center gap-3 group">
+            <div class="w-11 h-11 rounded-2xl bg-[#F0F1EC] flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-300 overflow-hidden border border-[var(--border-color)] flex-shrink-0">
               <img src="images/logo.png" alt="PawsHaven Resort Logo" class="w-full h-full object-cover block">
             </div>
             <div class="flex flex-col justify-center">
-              <span class="text-lg xl:text-xl font-black tracking-tight text-[var(--brand-primary)] dark:text-emerald-400 leading-tight whitespace-nowrap">
+              <span class="text-xl font-black tracking-tight text-[var(--brand-primary)] dark:text-emerald-400 leading-tight whitespace-nowrap">
                 Paws<span class="text-[var(--brand-accent)]">Haven</span>
               </span>
-              <span class="text-[9px] xl:text-[10px] uppercase font-bold tracking-widest text-[var(--text-muted)] -mt-0.5 whitespace-nowrap">
+              <span class="text-[10px] uppercase font-bold tracking-widest text-[var(--text-muted)] -mt-0.5 whitespace-nowrap">
                 Resort & Daycare
               </span>
             </div>
           </a>
-
-          <!-- Desktop Navigation Links -->
-          <nav class="paws-desktop-nav hidden lg:flex items-center gap-0.5 xl:gap-1.5 flex-shrink-0">
-            <!-- Home Dropdown -->
-            <div class="paws-dropdown-wrapper relative group flex-shrink-0">
-              <button class="${navClass('home')} cursor-pointer">
-                <span>Home</span>
-                <i class="bi bi-chevron-down text-[10px] opacity-60 group-hover:rotate-180 transition-transform duration-200"></i>
-              </button>
-              <div class="paws-dropdown-menu absolute left-0 top-full pt-1.5 w-56 hidden group-hover:block z-50">
-                <div class="bg-[var(--bg-surface)] rounded-2xl shadow-xl border border-[var(--border-color)] py-2 animate-fadeIn">
-                  <a href="index.html" class="flex items-start gap-3 px-4 py-2.5 hover:bg-[var(--bg-subtle)] transition">
-                    <i class="bi bi-house-heart text-[var(--brand-accent)] text-base mt-0.5"></i>
-                    <div>
-                      <div class="text-xs font-bold text-[var(--text-main)]">Home 1 - Resort</div>
-                      <div class="text-[11px] text-[var(--text-muted)]">Luxury Boarding & Daycare</div>
-                    </div>
-                  </a>
-                  <a href="home2.html" class="flex items-start gap-3 px-4 py-2.5 hover:bg-[var(--bg-subtle)] transition">
-                    <i class="bi bi-cpu text-[var(--brand-primary)] text-base mt-0.5"></i>
-                    <div>
-                      <div class="text-xs font-bold text-[var(--text-main)]">Home 2 - Platform</div>
-                      <div class="text-[11px] text-[var(--text-muted)]">Modern Pet Care SaaS</div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <a href="about.html" class="${navClass('about.html')}">
-              About
-            </a>
-
-            <a href="services.html" class="${navClass('services')}">
-              Services
-            </a>
-
-            <a href="facilities.html" class="${navClass('facilities.html')}">
-              Facilities
-            </a>
-
-            <a href="pricing.html" class="${navClass('pricing.html')}">
-              Pricing
-            </a>
-
-            <a href="blog.html" class="${navClass('blog')}">
-              Blog
-            </a>
-
-            <a href="contact.html" class="${navClass('contact.html')}">
-              Contact
-            </a>
-          </nav>
         </div>
 
-        <!-- Right Side Controls: Theme, RTL, Auth -->
-        <div class="paws-nav-right flex items-center gap-1.5 sm:gap-2 xl:gap-2.5 flex-shrink-0">
+        <!-- Center Column: Desktop Navigation Links (Centered) -->
+        <nav class="paws-desktop-nav hidden lg:flex items-center justify-center gap-1 xl:gap-2 flex-1 mx-2 xl:mx-4">
+          <!-- Home Dropdown -->
+          <div class="paws-dropdown-wrapper relative group flex-shrink-0">
+            <button class="${navClass('home')} cursor-pointer">
+              <span>Home</span>
+              <i class="bi bi-chevron-down text-[10px] opacity-60 group-hover:rotate-180 transition-transform duration-200"></i>
+            </button>
+            <div class="paws-dropdown-menu absolute left-0 top-full pt-1.5 w-56 hidden group-hover:block z-50">
+              <div class="bg-[var(--bg-surface)] rounded-2xl shadow-xl border border-[var(--border-color)] py-2 animate-fadeIn">
+                <a href="index.html" class="flex items-start gap-3 px-4 py-2.5 hover:bg-[var(--bg-subtle)] transition">
+                  <i class="bi bi-house-heart text-[var(--brand-accent)] text-base mt-0.5"></i>
+                  <div>
+                    <div class="text-xs font-bold text-[var(--text-main)]">Home 1 - Resort</div>
+                    <div class="text-[11px] text-[var(--text-muted)]">Luxury Boarding & Daycare</div>
+                  </div>
+                </a>
+                <a href="home2.html" class="flex items-start gap-3 px-4 py-2.5 hover:bg-[var(--bg-subtle)] transition">
+                  <i class="bi bi-cpu text-[var(--brand-primary)] text-base mt-0.5"></i>
+                  <div>
+                    <div class="text-xs font-bold text-[var(--text-main)]">Home 2 - Platform</div>
+                    <div class="text-[11px] text-[var(--text-muted)]">Modern Pet Care SaaS</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <a href="about.html" class="${navClass('about.html')}">
+            About
+          </a>
+
+          <a href="services.html" class="${navClass('services')}">
+            Services
+          </a>
+
+          <a href="facilities.html" class="${navClass('facilities.html')}">
+            Facilities
+          </a>
+
+          <a href="pricing.html" class="${navClass('pricing.html')}">
+            Pricing
+          </a>
+
+          <a href="blog.html" class="${navClass('blog')}">
+            Blog
+          </a>
+
+          <a href="contact.html" class="${navClass('contact.html')}">
+            Contact
+          </a>
+        </nav>
+
+        <!-- Right Column: Utility Controls, Auth & CTAs -->
+        <div class="paws-nav-right flex items-center gap-2 sm:gap-2.5 flex-shrink-0">
           <!-- Utility Controls: Theme & RTL Toggles in sleek pill container -->
           <div class="paws-util-pill flex items-center p-1 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] gap-1 flex-shrink-0">
             <button onclick="toggleTheme()" class="btn-theme-toggle w-8 h-8 rounded-lg flex items-center justify-center text-[var(--text-main)] hover:bg-[var(--bg-surface)] transition cursor-pointer" title="Toggle Light/Dark Theme">
