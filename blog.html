@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Care Blog & Articles - PawsHaven</title>
+  <meta name="description" content="Expert pet boarding tips, canine behavioral guides, veterinary nutrition advice, and grooming recommendations written by certified caretakers.">
+  
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Prevent Theme & Layout Flicker (Anti-FOUC) -->
+  <script>
+    (function() {
+      const t = localStorage.getItem('paws_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.documentElement.classList.add('dark');
+      const d = localStorage.getItem('paws_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', d);
+      if (d === 'rtl') document.documentElement.classList.add('rtl');
+
+      document.documentElement.classList.add('paws-loading');
+      function reveal() {
+        document.documentElement.classList.remove('paws-loading');
+      }
+      if (document.readyState === 'complete') {
+        reveal();
+      } else {
+        window.addEventListener('DOMContentLoaded', reveal);
+        setTimeout(reveal, 250);
+      }
+    })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#1B4D3E',
+              sage: '#2D6A4F',
+              coral: '#E07A5F',
+              amber: '#F4A261',
+              ivory: '#FAF8F5',
+              sand: '#F4EFEA',
+              charcoal: '#2C3E35'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-theme-base text-theme-main antialiased selection:bg-[#E07A5F] selection:text-white">
+
+  <!-- Navbar -->
+  <div id="paws-navbar"></div>
+
+  <!-- Header -->
+  <section class="pt-32 pb-12 lg:pt-36 lg:pb-16 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="badge-pet badge-teal mb-3">Knowledge & Care Wisdom</span>
+      <h1 class="text-3xl sm:text-5xl font-black text-[var(--text-main)] max-w-2xl mx-auto leading-tight">
+        The PawsHaven Journal
+      </h1>
+      <p class="text-xs sm:text-base text-[var(--text-muted)] max-w-xl mx-auto mt-3">
+        Actionable pet care tips, boarding preparation guides, and wellness advice from our resident veterinarians and trainers.
+      </p>
+
+      <!-- Search & Category Filter Bar -->
+      <div class="max-w-3xl mx-auto mt-8 flex flex-col sm:flex-row gap-3">
+        <div class="relative flex-1">
+          <i class="bi bi-search absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]"></i>
+          <input type="text" id="blogSearchInput" placeholder="Search articles by title, topic, behavior..." class="w-full ps-11 pe-4 py-3.5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs font-semibold text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] shadow-sm">
+        </div>
+        <div class="relative min-w-[220px]">
+          <i class="bi bi-funnel absolute left-4 top-1/2 -translate-y-1/2 text-[var(--brand-primary)]"></i>
+          <select id="blogCategorySelect" onchange="filterBlogCategory(this.value)" class="w-full ps-10 pe-10 py-3.5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs font-bold text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] shadow-sm cursor-pointer appearance-none">
+            <option value="all">All Categories (12)</option>
+            <option value="Boarding Tips">Boarding Tips (3)</option>
+            <option value="Pet Behavior">Pet Behavior (3)</option>
+            <option value="Health & Wellness">Health & Wellness (3)</option>
+            <option value="Grooming">Grooming & Spa (3)</option>
+          </select>
+          <i class="bi bi-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-xs pointer-events-none text-[var(--text-muted)]"></i>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills (with Live Filter Background Capsule) -->
+      <div class="pt-6 flex justify-center">
+        <div class="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-full bg-[var(--bg-surface)]/90 backdrop-blur-md border border-[var(--border-color)] shadow-[0_4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300" id="blogFilterButtons">
+          <button onclick="filterBlogCategory('all')" class="blog-filter-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 bg-[var(--brand-primary)] text-white shadow-sm" data-category="all">
+            All (12)
+          </button>
+          <button onclick="filterBlogCategory('Boarding Tips')" class="blog-filter-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-subtle)]" data-category="Boarding Tips">
+            Boarding Tips
+          </button>
+          <button onclick="filterBlogCategory('Pet Behavior')" class="blog-filter-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-subtle)]" data-category="Pet Behavior">
+            Pet Behavior
+          </button>
+          <button onclick="filterBlogCategory('Health & Wellness')" class="blog-filter-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-subtle)]" data-category="Health & Wellness">
+            Health & Wellness
+          </button>
+          <button onclick="filterBlogCategory('Grooming')" class="blog-filter-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-subtle)]" data-category="Grooming">
+            Grooming & Spa
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Filter Status Indicator -->
+      <div id="blogFilterStatus" class="max-w-2xl mx-auto mt-4 flex items-center justify-between text-xs text-[var(--text-muted)] px-2">
+        <div>
+          Showing <span id="blogCountDisplay" class="font-bold text-[var(--text-main)]">12</span> articles
+          <span id="activeFilterBadge" class="hidden ml-2 badge-pet badge-teal text-[10px]"></span>
+        </div>
+        <button id="btnClearFilters" onclick="resetBlogFilters()" class="hidden text-[var(--brand-accent)] hover:underline font-bold flex items-center gap-1">
+          <i class="bi bi-x-circle"></i> Clear Filters
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Article Section -->
+  <section id="featuredArticleSection" class="pb-12 bg-[var(--bg-base)] transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="card-paw p-6 sm:p-8 bg-[var(--bg-surface)] rounded-3xl border-2 border-[var(--border-color)] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 rounded-2xl overflow-hidden aspect-video">
+          <img id="featuredImg" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1000&q=80" alt="Featured Article" class="w-full h-full object-cover">
+        </div>
+        <div class="lg:col-span-5 space-y-4">
+          <div class="flex items-center gap-2">
+            <span id="featuredCategory" class="badge-pet badge-coral text-[10px]">Boarding Tips</span>
+            <span id="featuredReadTime" class="text-xs text-[var(--text-muted)]">5 min read</span>
+          </div>
+          <h2 class="text-2xl font-black text-[var(--text-main)] hover:text-[var(--brand-primary)] transition leading-tight">
+            <a id="featuredTitleLink" href="blog-details.html?id=post-1">First Time Boarding? 7 Steps to Prepare Your Dog for a Stress-Free Stay</a>
+          </h2>
+          <p id="featuredExcerpt" class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+            Packing your dog's favorite blanket, sticking to their exact feeding schedule, and taking a pre-stay daycare visit make an extraordinary difference in separation comfort.
+          </p>
+          <div class="flex items-center justify-between pt-4 border-t border-[var(--border-color)]">
+            <span id="featuredAuthor" class="text-xs font-bold text-[var(--text-main)]">By Jessica Miller</span>
+            <a id="featuredReadLink" href="blog-details.html?id=post-1" class="text-xs font-bold text-[var(--brand-accent)] hover:underline flex items-center gap-1">
+              Read Article →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Listing Grid -->
+  <section class="pb-24 bg-[var(--bg-base)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="blogPostsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="paws-footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const selectEl = document.getElementById("blogCategorySelect");
+      const searchEl = document.getElementById("blogSearchInput");
+
+      if (selectEl) {
+        selectEl.addEventListener("change", (e) => {
+          filterBlogCategory(e.target.value);
+        });
+      }
+
+      if (searchEl) {
+        searchEl.addEventListener("input", (e) => {
+          searchBlogPosts(e.target.value);
+        });
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialCat = urlParams.get("category") || "all";
+      if (selectEl && initialCat !== "all") {
+        selectEl.value = initialCat;
+      }
+      renderBlogPosts(initialCat);
+    });
+
+    function getBlogPosts() {
+      let posts = JSON.parse(localStorage.getItem("paws_blogPosts") || "[]");
+      if (!posts.length && typeof PawsData !== "undefined" && PawsData.blogPosts) {
+        posts = PawsData.blogPosts;
+        localStorage.setItem("paws_blogPosts", JSON.stringify(posts));
+      }
+      return posts;
+    }
+
+    function renderBlogPosts(category = "all", query = "") {
+      const container = document.getElementById("blogPostsGrid");
+      if (!container) return;
+
+      const posts = getBlogPosts();
+      const catSelect = document.getElementById("blogCategorySelect");
+      const searchInput = document.getElementById("blogSearchInput");
+      
+      const currentCategory = category || (catSelect ? catSelect.value : "all");
+      const currentQuery = query !== undefined ? query : (searchInput ? searchInput.value : "");
+
+      // Normalize category comparison
+      let filtered = posts;
+      if (currentCategory && currentCategory !== "all") {
+        const catClean = currentCategory.toLowerCase().replace(/&amp;/g, '&').trim();
+        filtered = filtered.filter(p => {
+          const pCat = (p.category || "").toLowerCase().replace(/&amp;/g, '&').trim();
+          return pCat === catClean || pCat.includes(catClean) || (p.tags && p.tags.some(t => t.toLowerCase().trim() === catClean));
+        });
+      }
+
+      // Normalize query comparison
+      if (currentQuery && currentQuery.trim()) {
+        const q = currentQuery.toLowerCase().trim();
+        filtered = filtered.filter(p => 
+          (p.title && p.title.toLowerCase().includes(q)) ||
+          (p.excerpt && p.excerpt.toLowerCase().includes(q)) ||
+          (p.author && p.author.toLowerCase().includes(q)) ||
+          (p.tags && p.tags.some(t => t.toLowerCase().includes(q)))
+        );
+      }
+
+      // Synchronize Dropdown Value
+      if (catSelect && catSelect.value !== currentCategory) {
+        catSelect.value = currentCategory;
+      }
+
+      // Synchronize Pill Buttons styling
+      document.querySelectorAll(".blog-filter-btn").forEach(btn => {
+        if (btn.dataset.category === currentCategory) {
+          btn.className = "blog-filter-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 bg-[var(--brand-primary)] text-white shadow-sm";
+        } else {
+          btn.className = "blog-filter-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-subtle)]";
+        }
+      });
+
+      // Update Counts & Status Indicator
+      const countEl = document.getElementById("blogCountDisplay");
+      const badgeEl = document.getElementById("activeFilterBadge");
+      const clearBtn = document.getElementById("btnClearFilters");
+
+      if (countEl) countEl.textContent = filtered.length;
+      if (badgeEl) {
+        if (currentCategory !== "all" || currentQuery.trim()) {
+          badgeEl.textContent = currentCategory !== "all" ? currentCategory : `Search: "${currentQuery}"`;
+          badgeEl.classList.remove("hidden");
+        } else {
+          badgeEl.classList.add("hidden");
+        }
+      }
+      if (clearBtn) {
+        if (currentCategory !== "all" || currentQuery.trim()) {
+          clearBtn.classList.remove("hidden");
+        } else {
+          clearBtn.classList.add("hidden");
+        }
+      }
+
+      // Update Featured Article section
+      updateFeaturedArticle(filtered, currentCategory);
+
+      // Render Grid Cards
+      if (!filtered.length) {
+        container.innerHTML = `
+          <div class="col-span-full text-center py-16 bg-[var(--bg-surface)] rounded-3xl border border-[var(--border-color)] p-8">
+            <div class="w-16 h-16 rounded-full bg-[var(--bg-subtle)] flex items-center justify-center text-2xl text-[var(--text-muted)] mx-auto mb-3">
+              <i class="bi bi-search"></i>
+            </div>
+            <h4 class="font-bold text-base text-[var(--text-main)]">No articles found</h4>
+            <p class="text-xs text-[var(--text-muted)] mt-1 max-w-sm mx-auto">
+              We couldn't find any articles matching your search or category filter. Try clearing filters or searching for another keyword.
+            </p>
+            <button onclick="resetBlogFilters()" class="mt-4 btn-brand-primary text-xs py-2 px-4 rounded-xl font-bold">
+              View All Articles
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(post => `
+        <article class="card-paw flex flex-col justify-between overflow-hidden group">
+          <div class="relative h-52 overflow-hidden">
+            <img src="${post.image}" alt="${post.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="badge-pet badge-image-overlay text-[10px] font-bold absolute top-3 left-3 shadow-sm">
+              ${post.category}
+            </span>
+          </div>
+
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between text-[11px] text-[var(--text-muted)] mb-2">
+                <span><i class="bi bi-clock"></i> ${post.readTime}</span>
+                <span>${post.date}</span>
+              </div>
+              <h3 class="text-base font-bold text-[var(--text-main)] group-hover:text-[var(--brand-primary)] transition leading-snug">
+                <a href="blog-details.html?id=${post.id}">${post.title}</a>
+              </h3>
+              <p class="text-xs text-[var(--text-muted)] leading-relaxed mt-2 line-clamp-2">
+                ${post.excerpt}
+              </p>
+              ${post.tags ? `
+                <div class="flex flex-wrap gap-1.5 mt-3">
+                  ${post.tags.map(t => `<span class="text-[10px] px-2 py-0.5 rounded-md bg-[var(--bg-subtle)] text-[var(--text-muted)] font-medium">#${t}</span>`).join('')}
+                </div>
+              ` : ''}
+            </div>
+
+            <div class="pt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs">
+              <span class="font-medium text-[var(--text-muted)]">By ${post.author}</span>
+              <a href="blog-details.html?id=${post.id}" class="font-bold text-[var(--brand-accent)] hover:underline flex items-center gap-1">
+                <span>Read Story</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function updateFeaturedArticle(filteredPosts, category) {
+      const featuredSec = document.getElementById("featuredArticleSection");
+      if (!featuredSec) return;
+
+      if (!filteredPosts.length) {
+        featuredSec.classList.add("hidden");
+        return;
+      }
+
+      featuredSec.classList.remove("hidden");
+      const feat = filteredPosts[0];
+
+      const imgEl = document.getElementById("featuredImg");
+      const catEl = document.getElementById("featuredCategory");
+      const readEl = document.getElementById("featuredReadTime");
+      const titleLink = document.getElementById("featuredTitleLink");
+      const excerptEl = document.getElementById("featuredExcerpt");
+      const authorEl = document.getElementById("featuredAuthor");
+      const readLink = document.getElementById("featuredReadLink");
+
+      if (imgEl) imgEl.src = feat.image;
+      if (catEl) catEl.textContent = feat.category;
+      if (readEl) readEl.textContent = feat.readTime;
+      if (titleLink) {
+        titleLink.textContent = feat.title;
+        titleLink.href = `blog-details.html?id=${feat.id}`;
+      }
+      if (excerptEl) excerptEl.textContent = feat.excerpt;
+      if (authorEl) authorEl.textContent = `By ${feat.author}`;
+      if (readLink) readLink.href = `blog-details.html?id=${feat.id}`;
+    }
+
+    function filterBlogCategory(cat) {
+      const searchInput = document.getElementById("blogSearchInput");
+      renderBlogPosts(cat, searchInput ? searchInput.value : "");
+    }
+
+    function searchBlogPosts(q) {
+      const catSelect = document.getElementById("blogCategorySelect");
+      renderBlogPosts(catSelect ? catSelect.value : "all", q);
+    }
+
+    function resetBlogFilters() {
+      const catSelect = document.getElementById("blogCategorySelect");
+      const searchInput = document.getElementById("blogSearchInput");
+      if (catSelect) catSelect.value = "all";
+      if (searchInput) searchInput.value = "";
+      renderBlogPosts("all", "");
+    }
+  </script>
+</body>
+</html>

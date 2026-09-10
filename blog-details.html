@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Time Boarding: 7 Steps to Prepare Your Dog - PawsHaven Journal</title>
+  <meta name="description" content="A comprehensive guide to preparing your dog for their first overnight boarding stay. Learn packing tips, vaccination rules, and stress reduction strategies.">
+  
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Prevent Theme & Layout Flicker (Anti-FOUC) -->
+  <script>
+    (function() {
+      const t = localStorage.getItem('paws_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.documentElement.classList.add('dark');
+      const d = localStorage.getItem('paws_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', d);
+      if (d === 'rtl') document.documentElement.classList.add('rtl');
+
+      document.documentElement.classList.add('paws-loading');
+      function reveal() {
+        document.documentElement.classList.remove('paws-loading');
+      }
+      if (document.readyState === 'complete') {
+        reveal();
+      } else {
+        window.addEventListener('DOMContentLoaded', reveal);
+        setTimeout(reveal, 250);
+      }
+    })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#1B4D3E',
+              sage: '#2D6A4F',
+              coral: '#E07A5F',
+              amber: '#F4A261',
+              ivory: '#FAF8F5',
+              sand: '#F4EFEA',
+              charcoal: '#2C3E35'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-theme-base text-theme-main antialiased selection:bg-[#E07A5F] selection:text-white">
+
+  <!-- Navbar -->
+  <div id="paws-navbar"></div>
+
+  <!-- Article Header -->
+  <section class="pt-32 pb-12 lg:pt-36 lg:pb-16 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex items-center gap-2 text-xs font-semibold text-[var(--text-muted)] mb-4">
+        <a href="index.html" class="hover:text-[var(--brand-primary)]">Home</a>
+        <span>/</span>
+        <a href="blog.html" class="hover:text-[var(--brand-primary)]">Journal</a>
+        <span>/</span>
+        <span id="breadcrumbArticleTitle" class="text-[var(--brand-accent)] truncate max-w-xs">First Time Boarding Guide</span>
+      </div>
+
+      <span id="articleCategoryBadge" class="badge-pet badge-coral text-xs mb-3">Boarding Tips & Wellness</span>
+      <h1 id="articleMainTitle" class="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--text-main)] leading-tight">
+        First Time Boarding? 7 Steps to Prepare Your Dog for a Stress-Free Stay
+      </h1>
+
+      <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-[var(--border-color)] mt-6 text-xs text-[var(--text-muted)]">
+        <div class="flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=120&q=80" alt="Author" class="w-10 h-10 rounded-full object-cover">
+          <div>
+            <span id="articleAuthorName" class="font-bold text-[var(--text-main)] block">Jessica Miller</span>
+            <span>Resort Director & Vet Specialist</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <span id="articleDate"><i class="bi bi-calendar3"></i> Sep 2, 2026</span>
+          <span id="articleReadTime"><i class="bi bi-clock"></i> 5 min read</span>
+          <!-- Social Share -->
+          <div class="flex items-center gap-2">
+            <button onclick="shareArticle('twitter')" class="w-7 h-7 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-primary)] hover:text-white transition flex items-center justify-center border border-[var(--border-color)]">
+              <i class="bi bi-twitter-x"></i>
+            </button>
+            <button onclick="shareArticle('facebook')" class="w-7 h-7 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-primary)] hover:text-white transition flex items-center justify-center border border-[var(--border-color)]">
+              <i class="bi bi-facebook"></i>
+            </button>
+            <button onclick="copyArticleLink()" class="w-7 h-7 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-primary)] hover:text-white transition flex items-center justify-center border border-[var(--border-color)]" title="Copy Link">
+              <i class="bi bi-link-45deg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Article Body & Sidebar -->
+  <section class="pb-24 bg-[var(--bg-base)]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      
+      <!-- Featured Banner Image -->
+      <div class="rounded-3xl overflow-hidden shadow-xl aspect-video border-4 border-white dark:border-white/10">
+        <img id="articleMainImg" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=85" alt="Article image" class="w-full h-full object-cover">
+      </div>
+
+      <!-- Table of Contents -->
+      <div class="card-paw p-6 bg-[var(--bg-surface)] border border-[var(--border-color)]">
+        <h4 class="font-bold text-xs uppercase tracking-wider text-[var(--text-muted)] mb-3">Table of Contents</h4>
+        <ul class="space-y-2 text-xs font-semibold text-[var(--brand-primary)] dark:text-emerald-400">
+          <li><a href="#step1" class="hover:underline">1. Book a Trial Daycare Play Session First</a></li>
+          <li><a href="#step2" class="hover:underline">2. Maintain Their Exact Home Diet & Portioning</a></li>
+          <li><a href="#step3" class="hover:underline">3. Bring an Unwashed T-Shirt or Comfort Blanket</a></li>
+          <li><a href="#step4" class="hover:underline">4. Update Vaccines At Least 10 Days in Advance</a></li>
+          <li><a href="#step5" class="hover:underline">5. Keep Your Drop-Off Goodbye Upbeat and Brief</a></li>
+        </ul>
+      </div>
+
+      <!-- Main Rich Text Content -->
+      <div class="space-y-6 text-sm text-[var(--text-muted)] leading-relaxed">
+        <p>
+          Leaving your best friend for the first time can trigger intense travel guilt and separation anxiety—not just for your dog, but for you as the pet parent! The secret to a triumphant first stay lies in proactive familiarization. When a pet recognizes the sights, smells, and friendly faces of their caregivers, boarding transitions from an uncertain event into an exciting vacation retreat.
+        </p>
+
+        <h3 id="step1" class="text-xl font-black text-[var(--text-main)] pt-4">
+          1. Book a Trial Daycare Play Session First
+        </h3>
+        <p>
+          Never let overnight boarding be your dog's very first time through the facility doors. We always recommend booking a half-day daycare visit 1 to 2 weeks prior. This demonstrates to your dog that you always return to pick them up, turning the resort into a trusted playground.
+        </p>
+
+        <h3 id="step2" class="text-xl font-black text-[var(--text-main)] pt-4">
+          2. Maintain Their Exact Home Diet & Portioning
+        </h3>
+        <p>
+          Abrupt dietary changes combined with the excitement of a new environment can trigger sensitive stomach upsets. Pre-portion your dog's regular dry kibble or wet food into labeled zip-top bags with their daily feeding schedule clearly marked.
+        </p>
+
+        <div class="p-5 rounded-2xl bg-[var(--bg-subtle)] border-s-4 border-[var(--brand-accent)] text-xs text-[var(--text-main)] space-y-1">
+          <p class="font-bold text-[var(--brand-accent)]">Pro Caretaker Tip:</p>
+          <p>Pack a couple of extra food portions just in case your return flight or travel itinerary gets delayed by weather.</p>
+        </div>
+
+        <h3 id="step3" class="text-xl font-black text-[var(--text-main)] pt-4">
+          3. Bring an Unwashed T-Shirt or Comfort Blanket
+        </h3>
+        <p>
+          Canines experience the world primarily through their sense of smell. Sleeping with an unwashed t-shirt or towel carrying your personal scent releases calming endorphins, helping them fall soundly asleep on their luxury orthopedic mattress.
+        </p>
+
+        <h3 id="step4" class="text-xl font-black text-[var(--text-main)] pt-4">
+          4. Update Vaccines At Least 10 Days in Advance
+        </h3>
+        <p>
+          Vaccines require several days to build peak immune antibodies. Don't rush into a vet clinic the morning of your trip. Ensure Rabies, DHPP, and Bordetella are administered at least 10 days before your check-in date.
+        </p>
+
+        <h3 id="step5" class="text-xl font-black text-[var(--text-main)] pt-4">
+          5. Keep Your Drop-Off Goodbye Upbeat and Brief
+        </h3>
+        <p>
+          Dogs are emotional barometers. If you hug them tightly, cry, or linger with an anxious voice, your dog assumes something dangerous is happening. Keep drop-off cheerful, quick, and confident! Give a quick chin scratch, hand over their leash with a smile, and say: <em>"Have fun on vacation!"</em>
+        </p>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="pt-8 border-t border-[var(--border-color)] space-y-6">
+        <h3 class="text-xl font-black text-[var(--text-main)]">Discussion & Community Comments</h3>
+
+        <div id="commentsList" class="space-y-4">
+          <div class="p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-xs text-[var(--text-main)]">David Kim</span>
+                <span class="badge-pet badge-teal text-[9px]">Verified Parent</span>
+              </div>
+              <span class="text-[10px] text-[var(--text-muted)]">Yesterday</span>
+            </div>
+            <p class="text-xs text-[var(--text-muted)]">
+              The tip about bringing an unwashed t-shirt worked like magic for Milo! Jessica even sent us a photo of him resting his nose on it while snoozing.
+            </p>
+          </div>
+        </div>
+
+        <!-- Add Comment Form -->
+        <form onsubmit="event.preventDefault(); postComment();" class="card-paw p-6 bg-[var(--bg-surface)] space-y-3">
+          <h4 class="font-bold text-xs uppercase tracking-wider text-[var(--text-muted)]">Leave a Reply</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <input type="text" id="commentAuthor" required placeholder="Your Name *" class="px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)]">
+            <input type="email" id="commentEmail" required placeholder="Your Email Address *" class="px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)]">
+          </div>
+          <textarea id="commentText" required rows="3" placeholder="Share your experience or question..." class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-xs"></textarea>
+          <button type="submit" class="btn-brand-accent text-xs py-2.5 px-5 rounded-xl font-bold">
+            Post Comment
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="paws-footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get("id");
+      if (postId) {
+        let posts = JSON.parse(localStorage.getItem("paws_blogPosts") || "[]");
+        if (!posts.length && typeof PawsData !== "undefined" && PawsData.blogPosts) {
+          posts = PawsData.blogPosts;
+        }
+        const post = posts.find(p => p.id === postId || p.slug === postId);
+        if (post) {
+          document.title = `${post.title} - PawsHaven Journal`;
+          const breadcrumbTitle = document.getElementById("breadcrumbArticleTitle");
+          const categoryBadge = document.getElementById("articleCategoryBadge");
+          const articleTitle = document.getElementById("articleMainTitle");
+          const authorName = document.getElementById("articleAuthorName");
+          const postDate = document.getElementById("articleDate");
+          const readTime = document.getElementById("articleReadTime");
+          const mainImg = document.getElementById("articleMainImg");
+
+          if (breadcrumbTitle) breadcrumbTitle.textContent = post.title;
+          if (categoryBadge) categoryBadge.textContent = post.category;
+          if (articleTitle) articleTitle.textContent = post.title;
+          if (authorName) authorName.textContent = post.author;
+          if (postDate) postDate.innerHTML = `<i class="bi bi-calendar3"></i> ${post.date}`;
+          if (readTime) readTime.innerHTML = `<i class="bi bi-clock"></i> ${post.readTime}`;
+          if (mainImg) {
+            mainImg.src = post.image;
+            mainImg.alt = post.title;
+          }
+        }
+      }
+    });
+
+    function copyArticleLink() {
+      navigator.clipboard.writeText(window.location.href);
+      showToast("Link copied to clipboard!", "success");
+    }
+
+    function shareArticle(platform) {
+      const url = encodeURIComponent(window.location.href);
+      const title = encodeURIComponent(document.title);
+      if (platform === 'twitter') {
+        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank', 'noopener,noreferrer');
+      } else if (platform === 'facebook') {
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'noopener,noreferrer');
+      } else {
+        showToast(`Shared article to ${platform}!`, "info");
+      }
+    }
+
+    function postComment() {
+      const name = document.getElementById("commentAuthor").value.trim();
+      const text = document.getElementById("commentText").value.trim();
+      if (!name || !text) return;
+
+      const list = document.getElementById("commentsList");
+      const newComment = document.createElement("div");
+      newComment.className = "p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-2";
+      newComment.innerHTML = `
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-xs text-[var(--text-main)]">${name}</span>
+            <span class="badge-pet badge-coral text-[9px]">New Comment</span>
+          </div>
+          <span class="text-[10px] text-[var(--text-muted)]">Just now</span>
+        </div>
+        <p class="text-xs text-[var(--text-muted)]">${text}</p>
+      `;
+      list.prepend(newComment);
+      showToast("Thank you! Your comment has been posted.", "success");
+      document.getElementById("commentAuthor").value = "";
+      document.getElementById("commentEmail").value = "";
+      document.getElementById("commentText").value = "";
+    }
+  </script>
+</body>
+</html>

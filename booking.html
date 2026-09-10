@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserve Your Pet's Stay - PawsHaven Online Booking</title>
+  <meta name="description" content="Easy 5-step online booking wizard for pet boarding, daycare, and spa pampering. Select suites, feeding preferences, and check-in dates with instant confirmation.">
+  
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Prevent Theme & Layout Flicker (Anti-FOUC) -->
+  <script>
+    (function() {
+      const t = localStorage.getItem('paws_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.documentElement.classList.add('dark');
+      const d = localStorage.getItem('paws_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', d);
+      if (d === 'rtl') document.documentElement.classList.add('rtl');
+
+      document.documentElement.classList.add('paws-loading');
+      function reveal() {
+        document.documentElement.classList.remove('paws-loading');
+      }
+      if (document.readyState === 'complete') {
+        reveal();
+      } else {
+        window.addEventListener('DOMContentLoaded', reveal);
+        setTimeout(reveal, 250);
+      }
+    })();
+  </script>
+
+  <!-- Auth Route Protection Guard (Login Required to Book a Stay) -->
+  <script>
+    (function() {
+      const activeSession = sessionStorage.getItem('paws_logged_in_this_session');
+      const currentUser = localStorage.getItem('paws_current_user');
+      if (!activeSession || !currentUser) {
+        window.location.replace('index.html?auth=login&redirect=booking.html');
+      }
+    })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#1B4D3E',
+              sage: '#2D6A4F',
+              coral: '#E07A5F',
+              amber: '#F4A261',
+              ivory: '#FAF8F5',
+              sand: '#F4EFEA',
+              charcoal: '#2C3E35'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-theme-base text-theme-main antialiased selection:bg-[#E07A5F] selection:text-white">
+
+  <!-- Navbar -->
+  <div id="paws-navbar"></div>
+
+  <!-- Wizard Header -->
+  <section class="pt-32 pb-8 lg:pt-36 lg:pb-12 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="badge-pet badge-coral mb-3">5-Minute Online Reservation</span>
+      <h1 class="text-3xl sm:text-4xl font-black text-[var(--text-main)]">
+        Book Your Pet's VIP Resort Stay
+      </h1>
+      <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-2">
+        Instant confirmation • 100% Free cancellations up to 48 hours prior • Live webcam access included
+      </p>
+
+      <!-- 5-Step Visual Wizard Stepper -->
+      <div class="flex items-center justify-between max-w-xl mx-auto mt-8 relative">
+        <div class="wizard-step-node w-10 h-10 rounded-full bg-[var(--brand-accent)] text-white flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-[var(--brand-accent)]/20" data-step="1">1</div>
+        <div class="h-1 flex-1 bg-[var(--border-color)] mx-2"></div>
+        <div class="wizard-step-node w-10 h-10 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-color)] flex items-center justify-center font-bold text-sm" data-step="2">2</div>
+        <div class="h-1 flex-1 bg-[var(--border-color)] mx-2"></div>
+        <div class="wizard-step-node w-10 h-10 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-color)] flex items-center justify-center font-bold text-sm" data-step="3">3</div>
+        <div class="h-1 flex-1 bg-[var(--border-color)] mx-2"></div>
+        <div class="wizard-step-node w-10 h-10 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-color)] flex items-center justify-center font-bold text-sm" data-step="4">4</div>
+        <div class="h-1 flex-1 bg-[var(--border-color)] mx-2"></div>
+        <div class="wizard-step-node w-10 h-10 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-color)] flex items-center justify-center font-bold text-sm" data-step="5">5</div>
+      </div>
+
+      <h2 id="bookingStepTitle" class="text-lg font-bold text-[var(--brand-primary)] dark:text-emerald-400 mt-4">
+        Step 1: Select or Register Your Pet
+      </h2>
+    </div>
+  </section>
+
+  <!-- Main Wizard Container -->
+  <section class="pb-24 bg-[var(--bg-base)]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="card-paw p-6 sm:p-10 bg-[var(--bg-surface)] shadow-2xl border-2 border-[var(--border-color)]">
+        
+        <!-- Authenticated Pet Parent Account Banner -->
+        <div id="bookingAuthBanner" class="mb-8 p-4 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)] shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center text-lg font-bold">
+              <i class="bi bi-person-check-fill"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-[var(--text-main)]" id="authUserGreeting">Logged in as Sarah Jenkins</span>
+                <span class="badge-pet badge-teal text-[10px]" id="authRoleBadge">Pet Parent</span>
+              </div>
+              <p class="text-[11px] text-[var(--text-muted)]" id="authUserEmail">sarah@example.com</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 text-xs">
+            <span class="text-[var(--text-muted)] text-[11px] hidden sm:inline">Signed in</span>
+            <button type="button" onclick="logout()" class="text-rose-600 hover:underline font-semibold text-xs flex items-center gap-1">
+              <i class="bi bi-box-arrow-right"></i> Switch Account
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 1: PET SELECTION -->
+        <div id="bookingStep1" class="space-y-6">
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-base text-[var(--text-main)]">Choose from your registered pets:</h3>
+            <button onclick="toggleNewPetForm(true)" class="btn-brand-outline text-xs py-1.5 px-3 rounded-xl">
+              <i class="bi bi-plus-circle"></i> Add New Pet
+            </button>
+          </div>
+
+          <div id="bookingPetList" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Rendered by booking.js from LocalStorage -->
+          </div>
+
+          <!-- Add New Pet Inline Form -->
+          <div id="newPetFormContainer" class="hidden p-6 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--brand-accent)]/40 space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-sm text-[var(--text-main)]">Register New Pet for this Stay</h4>
+              <button onclick="toggleNewPetForm(false)" class="text-xs text-rose-500 font-semibold hover:underline">
+                Cancel
+              </button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+              <div>
+                <label class="block font-bold text-[var(--text-muted)] mb-1">Pet Name *</label>
+                <input type="text" id="newPetName" placeholder="e.g. Copper" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold focus:ring-2 focus:ring-[var(--brand-primary)]">
+              </div>
+              <div>
+                <label class="block font-bold text-[var(--text-muted)] mb-1">Species *</label>
+                <select id="newPetSpecies" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold focus:ring-2 focus:ring-[var(--brand-primary)]">
+                  <option value="Dog">Dog</option>
+                  <option value="Cat">Cat</option>
+                </select>
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block font-bold text-[var(--text-muted)] mb-1">Breed *</label>
+                <input type="text" id="newPetBreed" placeholder="e.g. Australian Shepherd" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold focus:ring-2 focus:ring-[var(--brand-primary)]">
+              </div>
+              <div>
+                <label class="block font-bold text-[var(--text-muted)] mb-1">Pet Age *</label>
+                <input type="text" id="newPetAge" placeholder="e.g. 3 years" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold focus:ring-2 focus:ring-[var(--brand-primary)]">
+              </div>
+              <div>
+                <label class="block font-bold text-[var(--text-muted)] mb-1">Pet Weight *</label>
+                <input type="text" id="newPetWeight" placeholder="e.g. 45 lbs" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold focus:ring-2 focus:ring-[var(--brand-primary)]">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: SERVICE & SUITE SELECTION -->
+        <div id="bookingStep2" class="space-y-6 hidden">
+          <h3 class="font-bold text-base text-[var(--text-main)]">Select Primary Service:</h3>
+          <div id="bookingServiceList" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Rendered by booking.js -->
+          </div>
+
+          <div class="pt-4 border-t border-[var(--border-color)]">
+            <h3 class="font-bold text-base text-[var(--text-main)] mb-3">Select Suite Accommodation Tier:</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              
+              <div onclick="selectSuiteTier('Standard Cozy Suite', 0)" class="suite-tier-card p-4 rounded-2xl border-2 transition cursor-pointer border-[var(--border-color)] bg-[var(--bg-surface)] hover:border-[var(--brand-primary)]/40 overflow-hidden group" data-tier="Standard Cozy Suite">
+                <div class="relative h-28 -mx-4 -mt-4 mb-3 overflow-hidden rounded-t-2xl">
+                  <img src="https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&w=400&q=80" alt="Standard Cozy Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <h4 class="font-bold text-sm text-[var(--text-main)]">Standard Cozy Suite</h4>
+                <p class="text-xs text-[var(--text-muted)] mt-1">35 sq ft • Memory foam bed</p>
+                <span class="inline-block mt-3 text-xs font-bold text-emerald-600">Included standard</span>
+              </div>
+
+              <div onclick="selectSuiteTier('Deluxe Glass Suite', 20)" class="suite-tier-card p-4 rounded-2xl border-2 transition cursor-pointer border-[var(--brand-accent)] bg-[var(--brand-accent)]/5 overflow-hidden group shadow-md" data-tier="Deluxe Glass Suite">
+                <div class="relative h-28 -mx-4 -mt-4 mb-3 overflow-hidden rounded-t-2xl">
+                  <img src="https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?auto=format&fit=crop&w=400&q=80" alt="Deluxe Glass Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                  <div class="absolute top-2 right-2">
+                    <span class="badge-pet badge-coral text-[9px] shadow-sm">Popular</span>
+                  </div>
+                </div>
+                <h4 class="font-bold text-sm text-[var(--text-main)]">Deluxe Glass Suite</h4>
+                <p class="text-xs text-[var(--text-muted)] mt-1">60 sq ft • 24/7 webcam stream</p>
+                <span class="inline-block mt-3 text-xs font-bold text-[var(--brand-accent)]">+$20 / night</span>
+              </div>
+
+              <div onclick="selectSuiteTier('Luxury Penthouse VIP', 40)" class="suite-tier-card p-4 rounded-2xl border-2 transition cursor-pointer border-[var(--border-color)] bg-[var(--bg-surface)] hover:border-[var(--brand-primary)]/40 overflow-hidden group" data-tier="Luxury Penthouse VIP">
+                <div class="relative h-28 -mx-4 -mt-4 mb-3 overflow-hidden rounded-t-2xl">
+                  <img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9?auto=format&fit=crop&w=400&q=80" alt="Luxury Penthouse VIP Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <h4 class="font-bold text-sm text-[var(--text-main)]">Luxury Penthouse VIP</h4>
+                <p class="text-xs text-[var(--text-muted)] mt-1">100 sq ft • DogTV™ & window view</p>
+                <span class="inline-block mt-3 text-xs font-bold text-[var(--brand-primary)]">+$40 / night</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: DATES & TIME SLOTS -->
+        <div id="bookingStep3" class="space-y-6 hidden">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="p-6 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)] space-y-4">
+              <h4 class="font-bold text-sm text-[var(--brand-primary)] flex items-center gap-2">
+                <i class="bi bi-box-arrow-in-right"></i> Check-in Schedule
+              </h4>
+              <div>
+                <label class="block text-xs font-bold text-[var(--text-muted)] mb-1">Arrival Date</label>
+                <input type="date" id="bookingCheckInDate" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-sm font-semibold text-[var(--text-main)]">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-[var(--text-muted)] mb-1">Estimated Drop-off Time Slot</label>
+                <select class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-sm font-semibold text-[var(--text-main)]">
+                  <option>07:00 AM – 09:00 AM (Early Drop-off)</option>
+                  <option selected>09:00 AM – 11:00 AM (Standard)</option>
+                  <option>11:00 AM – 01:00 PM (Midday)</option>
+                  <option>02:00 PM – 05:00 PM (Afternoon)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)] space-y-4">
+              <h4 class="font-bold text-sm text-[var(--brand-accent)] flex items-center gap-2">
+                <i class="bi bi-box-arrow-right"></i> Check-out Schedule
+              </h4>
+              <div>
+                <label class="block text-xs font-bold text-[var(--text-muted)] mb-1">Departure Date</label>
+                <input type="date" id="bookingCheckOutDate" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-sm font-semibold text-[var(--text-main)]">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-[var(--text-muted)] mb-1">Estimated Pickup Time Slot</label>
+                <select class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-sm font-semibold text-[var(--text-main)]">
+                  <option>08:00 AM – 10:00 AM (Morning)</option>
+                  <option selected>03:00 PM – 05:00 PM (Afternoon)</option>
+                  <option>05:00 PM – 07:30 PM (Evening Express)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: CARE & MEDICAL INSTRUCTIONS -->
+        <div id="bookingStep4" class="space-y-6 hidden">
+          <div class="space-y-4 text-xs">
+            <div>
+              <label class="block font-bold text-[var(--text-muted)] mb-1">Feeding Instructions & Food Brand</label>
+              <textarea id="bookingFeedingNotes" rows="3" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] focus:ring-2 focus:ring-[var(--brand-primary)]" placeholder="e.g. Purina Pro Plan Salmon kibble, 1.5 cups twice daily at 8 AM and 5 PM. No poultry treats."></textarea>
+            </div>
+
+            <div>
+              <label class="block font-bold text-[var(--text-muted)] mb-1">Medication Administration Details</label>
+              <textarea id="bookingMedicationNotes" rows="2" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] focus:ring-2 focus:ring-[var(--brand-primary)]" placeholder="e.g. Eye drops in left eye at 8 AM and 8 PM. Pills inside peanut butter pocket."></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-bold text-[var(--text-muted)] mb-1">Emergency Vet / Clinic Contact</label>
+                <input type="text" id="bookingEmergencyContact" value="Dr. Marcus Vance (555-900-4321)" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)]">
+              </div>
+              <div>
+                <label class="block font-bold text-[var(--text-muted)] mb-1">Owner Contact Phone *</label>
+                <input type="tel" id="bookingOwnerPhone" value="+1 (555) 234-5678" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)]">
+              </div>
+            </div>
+
+            <!-- Optional Add-ons Selection -->
+            <div class="pt-4 border-t border-[var(--border-color)] space-y-2">
+              <span class="block font-bold text-sm text-[var(--text-main)] mb-2">Optional Luxury Add-ons for this Stay:</span>
+              <label class="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-subtle)] cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <input type="checkbox" onchange="toggleAddOn('Full Departure Spa & Bath', 45)" class="rounded text-[var(--brand-accent)] focus:ring-0">
+                  <span class="font-bold text-[var(--text-main)]">Departure Spa & Fluff Bath</span>
+                </div>
+                <span class="font-bold text-[var(--brand-primary)]">+$45.00</span>
+              </label>
+
+              <label class="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-subtle)] cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <input type="checkbox" onchange="toggleAddOn('1-on-1 Extra Grass Playtime', 20)" class="rounded text-[var(--brand-accent)] focus:ring-0">
+                  <span class="font-bold text-[var(--text-main)]">Dedicated 1-on-1 Ball Fetch Session</span>
+                </div>
+                <span class="font-bold text-[var(--brand-primary)]">+$20.00</span>
+              </label>
+
+              <label class="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-subtle)] cursor-pointer">
+                <div class="flex items-center gap-2">
+                  <input type="checkbox" onchange="toggleAddOn('Paws Taxi Doorstep Shuttle', 30)" class="rounded text-[var(--brand-accent)] focus:ring-0">
+                  <span class="font-bold text-[var(--text-main)]">Air-conditioned Doorstep Paws Taxi Pickup</span>
+                </div>
+                <span class="font-bold text-[var(--brand-primary)]">+$30.00</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: REVIEW & CONFIRMATION -->
+        <div id="bookingStep5" class="space-y-6 hidden">
+          <div class="p-6 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)] space-y-4">
+            <h4 class="font-bold text-base text-[var(--text-main)] border-b border-[var(--border-color)] pb-3">
+              Reservation Summary
+            </h4>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs">
+              <div>
+                <span class="text-[var(--text-muted)] block">Pet Guest</span>
+                <strong id="sumPetName" class="text-[var(--text-main)] text-sm">Max (Golden Retriever)</strong>
+              </div>
+              <div>
+                <span class="text-[var(--text-muted)] block">Service & Room</span>
+                <strong id="sumService" class="text-[var(--text-main)] text-sm">Overnight Luxury Boarding</strong>
+                <p id="sumSuite" class="text-[11px] text-[var(--brand-primary)] font-semibold">Deluxe Glass Suite</p>
+              </div>
+              <div>
+                <span class="text-[var(--text-muted)] block">Stay Schedule</span>
+                <strong id="sumDates" class="text-[var(--text-main)]">2026-09-08 to 2026-09-12</strong>
+              </div>
+              <div>
+                <span class="text-[var(--text-muted)] block">Total Stay Duration</span>
+                <strong id="sumDuration" class="text-[var(--text-main)]">4 Nights</strong>
+              </div>
+              <div>
+                <span class="text-[var(--text-muted)] block">Pet Parent Account</span>
+                <strong id="sumOwnerName" class="text-[var(--text-main)]">Sarah Jenkins</strong>
+                <p id="sumOwnerEmail" class="text-[11px] text-[var(--brand-primary)] font-semibold">sarah@example.com</p>
+              </div>
+              <div>
+                <span class="text-[var(--text-muted)] block">Contact Phone</span>
+                <strong id="sumOwnerPhone" class="text-[var(--text-main)]">+1 (555) 234-5678</strong>
+              </div>
+            </div>
+
+            <!-- Price Breakdown Table -->
+            <div class="pt-4 border-t border-[var(--border-color)] space-y-2 text-xs">
+              <div class="flex justify-between text-[var(--text-muted)]">
+                <span>Subtotal (Base + Suite + Add-ons):</span>
+                <span id="sumSubtotal" class="font-semibold text-[var(--text-main)]">$0.00</span>
+              </div>
+              <div id="discountRow" class="flex justify-between text-emerald-600 hidden">
+                <span>Long Stay Discount:</span>
+                <span id="sumDiscount" class="font-bold">-$0.00</span>
+              </div>
+              <div class="flex justify-between text-[var(--text-muted)]">
+                <span>State & Resort Tax (8%):</span>
+                <span id="sumTax" class="font-semibold text-[var(--text-main)]">$0.00</span>
+              </div>
+              <div class="flex justify-between text-base font-black text-[var(--brand-primary)] dark:text-emerald-400 pt-2 border-t border-[var(--border-color)]">
+                <span>Total Amount Due:</span>
+                <span id="sumTotal" class="text-2xl text-[var(--brand-accent)]">$0.00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/40 text-xs flex items-center gap-3">
+            <i class="bi bi-shield-lock-fill text-2xl text-emerald-600"></i>
+            <div>
+              <p class="font-bold">Zero-Risk Reservation Guarantee</p>
+              <p class="text-[11px] opacity-80">Full refund if cancelled up to 48 hours prior to check-in.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wizard Navigation Buttons -->
+        <div class="flex items-center justify-between gap-3 sm:gap-4 pt-8 border-t border-[var(--border-color)] mt-8">
+          <div id="btnWizardPrevContainer" class="inline-flex items-center transition-all duration-200 opacity-40 pointer-events-none cursor-not-allowed">
+            <button id="btnWizardPrev" onclick="prevBookingStep()" class="btn-brand-outline btn-disabled py-2.5 px-3.5 sm:px-6 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 opacity-40 pointer-events-none cursor-not-allowed" disabled aria-disabled="true">
+              <i class="bi bi-arrow-left"></i> Previous Step
+            </button>
+          </div>
+
+          <button id="btnWizardNext" onclick="nextBookingStep()" class="btn-brand-primary py-2.5 px-4 sm:px-6 rounded-xl text-xs font-bold whitespace-nowrap">
+            Next Step <i class="bi bi-arrow-right"></i>
+          </button>
+
+          <button id="btnWizardSubmit" onclick="completeBooking()" class="btn-brand-accent py-2.5 px-4 sm:px-6 rounded-xl text-xs font-bold whitespace-nowrap shadow-md hidden">
+            <i class="bi bi-check-circle-fill"></i> Confirm & Reserve Stay
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Confirmation Modal -->
+  <div id="bookingSuccessModal" class="modal-overlay">
+    <div class="modal-dialog max-w-lg p-8 bg-[var(--bg-surface)] text-center space-y-6">
+      <div class="w-20 h-20 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-4xl mx-auto shadow-inner">
+        <i class="bi bi-check-circle-fill"></i>
+      </div>
+
+      <div>
+        <span class="badge-pet badge-teal text-xs mb-2">Reservation Confirmed!</span>
+        <h3 class="text-2xl font-black text-[var(--text-main)]">See You Soon at PawsHaven!</h3>
+        <p class="text-xs text-[var(--text-muted)] mt-1">
+          Your reservation details have been stored and assigned to our head caretaker.
+        </p>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-xs text-left space-y-2">
+        <div class="flex justify-between">
+          <span class="text-[var(--text-muted)]">Booking Reference ID:</span>
+          <strong id="successBookingId" class="text-[var(--brand-primary)] font-black text-sm">STAY-9041</strong>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-[var(--text-muted)]">Pet Guest:</span>
+          <strong id="successPetName" class="text-[var(--text-main)]">Max</strong>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-[var(--text-muted)]">Dates:</span>
+          <span id="successStayDates" class="text-[var(--text-main)]">Sep 8 – Sep 12, 2026</span>
+        </div>
+        <div class="flex justify-between font-bold text-emerald-600 border-t border-[var(--border-color)] pt-2">
+          <span>Amount Paid:</span>
+          <span id="successTotalAmount" class="text-sm">$254.88</span>
+        </div>
+      </div>
+
+      <div class="space-y-2.5">
+        <button id="btnTrackStay" class="btn-brand-accent w-full py-3 rounded-xl font-bold text-xs">
+          <i class="bi bi-radar"></i> Track This Stay Live
+        </button>
+        <button id="btnGoUserDashboard" class="btn-brand-outline w-full py-2.5 rounded-xl font-bold text-xs">
+          <i class="bi bi-speedometer2"></i> Go to Pet Owner Dashboard
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="paws-footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/booking.js"></script>
+  <script>
+    // Toggle Next vs Submit button visibility and Previous button half-shade state based on step
+    const originalUpdateStepView = updateStepView;
+    updateStepView = function() {
+      originalUpdateStepView();
+      const prevBtn = document.getElementById("btnWizardPrev");
+      const prevContainer = document.getElementById("btnWizardPrevContainer");
+      const nextBtn = document.getElementById("btnWizardNext");
+      const submitBtn = document.getElementById("btnWizardSubmit");
+
+      // When there is no previous step (step 1), apply half shade & disabled styling
+      if (bookingState.step <= 1) {
+        if (prevBtn) {
+          prevBtn.disabled = true;
+          prevBtn.setAttribute("aria-disabled", "true");
+          prevBtn.classList.add("btn-disabled", "opacity-40", "pointer-events-none", "cursor-not-allowed");
+        }
+        if (prevContainer) {
+          prevContainer.classList.add("opacity-40", "pointer-events-none", "cursor-not-allowed");
+        }
+      } else {
+        if (prevBtn) {
+          prevBtn.disabled = false;
+          prevBtn.removeAttribute("aria-disabled");
+          prevBtn.classList.remove("btn-disabled", "opacity-40", "pointer-events-none", "cursor-not-allowed");
+        }
+        if (prevContainer) {
+          prevContainer.classList.remove("opacity-40", "pointer-events-none", "cursor-not-allowed");
+        }
+      }
+
+      if (bookingState.step === 5) {
+        if (nextBtn) nextBtn.classList.add("hidden");
+        if (submitBtn) submitBtn.classList.remove("hidden");
+      } else {
+        if (nextBtn) nextBtn.classList.remove("hidden");
+        if (submitBtn) submitBtn.classList.add("hidden");
+      }
+    };
+  </script>
+</body>
+</html>

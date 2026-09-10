@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing & Packages - PawsHaven Resort</title>
+  <meta name="description" content="Clear, transparent pricing with zero surprise charges. All-inclusive luxury boarding tiers, daycare passes, and extended vacation discounts.">
+  
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Prevent Theme & Layout Flicker (Anti-FOUC) -->
+  <script>
+    (function() {
+      const t = localStorage.getItem('paws_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.documentElement.classList.add('dark');
+      const d = localStorage.getItem('paws_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', d);
+      if (d === 'rtl') document.documentElement.classList.add('rtl');
+
+      document.documentElement.classList.add('paws-loading');
+      function reveal() {
+        document.documentElement.classList.remove('paws-loading');
+      }
+      if (document.readyState === 'complete') {
+        reveal();
+      } else {
+        window.addEventListener('DOMContentLoaded', reveal);
+        setTimeout(reveal, 250);
+      }
+    })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#1B4D3E',
+              sage: '#2D6A4F',
+              coral: '#E07A5F',
+              amber: '#F4A261',
+              ivory: '#FAF8F5',
+              sand: '#F4EFEA',
+              charcoal: '#2C3E35'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-theme-base text-theme-main antialiased selection:bg-[#E07A5F] selection:text-white">
+
+  <!-- Navbar -->
+  <div id="paws-navbar"></div>
+
+  <!-- Header & Billing Toggle -->
+  <section class="pt-32 pb-16 lg:pt-36 lg:pb-20 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="badge-pet badge-teal mb-4">Transparent & All-Inclusive</span>
+      <h1 class="text-4xl sm:text-5xl font-black text-[var(--text-main)] max-w-2xl mx-auto leading-tight">
+        Simple, Honest Pricing. <br>
+        <span class="text-[var(--brand-accent)]">No Hidden Fees. Ever.</span>
+      </h1>
+      <p class="text-sm sm:text-base text-[var(--text-muted)] max-w-xl mx-auto mt-4 leading-relaxed">
+        Every stay includes standard orthopedic bedding, filtered water, outdoor bathroom breaks, and lots of loving hugs.
+      </p>
+
+      <!-- Nightly / Weekly Toggle -->
+      <div class="inline-flex items-center gap-3 p-1.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-md mt-8">
+        <button id="toggleNightly" onclick="setBillingCycle('nightly')" class="px-5 py-2 rounded-full text-xs font-bold transition bg-[var(--brand-primary)] text-white shadow-sm">
+          Nightly Rate
+        </button>
+        <button id="toggleWeekly" onclick="setBillingCycle('weekly')" class="px-5 py-2 rounded-full text-xs font-bold transition text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5">
+          <span>Weekly Package</span>
+          <span class="badge-pet badge-coral text-[9px]">Save 15%</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Pricing Tiers Cards -->
+  <section class="py-16 bg-[var(--bg-base)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <!-- Tier 1: Basic Stay -->
+        <div class="card-paw p-8 flex flex-col justify-between overflow-hidden group">
+          <div>
+            <div class="relative h-44 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-3xl">
+              <img src="https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&w=600&q=80" alt="Basic Stay Cozy Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <span class="badge-pet badge-image-overlay absolute top-3 left-3 text-[10px]">Cozy Suite (35 sq ft)</span>
+            </div>
+
+            <span class="badge-pet badge-gray text-[10px] mb-2">Essential Care</span>
+            <h3 class="text-xl font-bold text-[var(--text-main)]">Basic Stay</h3>
+            <p class="text-xs text-[var(--text-muted)] mt-1 mb-6">Ideal for calm pets requiring cozy resting accommodation.</p>
+
+            <div class="mb-6">
+              <span class="text-3xl font-black text-[var(--brand-primary)] dark:text-emerald-400 rate-val" data-nightly="39" data-weekly="232">$39</span>
+              <span class="text-xs text-[var(--text-muted)] rate-cycle">/ night</span>
+            </div>
+
+            <ul class="space-y-3 text-xs text-[var(--text-muted)] border-t border-[var(--border-color)] pt-6">
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Cozy Standard Suite (35 sq ft)</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> 2 Outdoor Yard Breaks</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Stainless Steel Food & Water</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Daily Text Status Update</li>
+              <li class="flex items-center gap-2 opacity-40"><i class="bi bi-x text-rose-500 font-bold"></i> Live Webcam Access</li>
+              <li class="flex items-center gap-2 opacity-40"><i class="bi bi-x text-rose-500 font-bold"></i> Bedtime Biscuit Tuck-in</li>
+            </ul>
+          </div>
+
+          <div class="pt-8 mt-6 border-t border-[var(--border-color)]">
+            <button onclick="quickBookService('overnight-boarding')" class="btn-brand-outline w-full text-xs py-3 rounded-xl font-bold text-center">
+              Choose Basic Stay
+            </button>
+          </div>
+        </div>
+
+        <!-- Tier 2: Standard Stay (Popular) -->
+        <div class="card-paw p-8 flex flex-col justify-between border-2 border-[var(--brand-primary)]/40 relative overflow-hidden group shadow-lg">
+          <div class="absolute top-3 right-3 z-10">
+            <span class="badge-pet badge-teal text-[10px] shadow-sm">Most Popular</span>
+          </div>
+
+          <div>
+            <div class="relative h-44 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-3xl">
+              <img src="https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?auto=format&fit=crop&w=600&q=80" alt="Standard Stay Deluxe Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <span class="badge-pet badge-image-overlay absolute bottom-3 left-3 text-[10px]">Deluxe Glass Suite (60 sq ft)</span>
+            </div>
+
+            <span class="badge-pet badge-teal text-[10px] mb-2">Balanced Care</span>
+            <h3 class="text-xl font-bold text-[var(--text-main)]">Standard Stay</h3>
+            <p class="text-xs text-[var(--text-muted)] mt-1 mb-6">Our signature experience with group play and daily photos.</p>
+
+            <div class="mb-6">
+              <span class="text-3xl font-black text-[var(--brand-primary)] dark:text-emerald-400 rate-val" data-nightly="59" data-weekly="351">$59</span>
+              <span class="text-xs text-[var(--text-muted)] rate-cycle">/ night</span>
+            </div>
+
+            <ul class="space-y-3 text-xs text-[var(--text-muted)] border-t border-[var(--border-color)] pt-6">
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Deluxe Glass Suite (60 sq ft)</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> 4 Outdoor Grass Play Sessions</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Orthopedic Foam Bedding</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Daily Action Photo Feed</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Bedtime Organic Treat</li>
+              <li class="flex items-center gap-2 opacity-40"><i class="bi bi-x text-rose-500 font-bold"></i> 24/7 Private Suite Webcam</li>
+            </ul>
+          </div>
+
+          <div class="pt-8 mt-6 border-t border-[var(--border-color)]">
+            <button onclick="quickBookService('overnight-boarding')" class="btn-brand-primary w-full text-xs py-3 rounded-xl font-bold text-center shadow-md">
+              Choose Standard Stay
+            </button>
+          </div>
+        </div>
+
+        <!-- Tier 3: Premium Stay (Recommended) -->
+        <div class="card-paw p-8 flex flex-col justify-between border-2 border-[var(--brand-accent)] shadow-xl relative bg-gradient-to-b from-[var(--brand-accent)]/5 to-transparent overflow-hidden group">
+          <div class="absolute top-3 right-3 z-10">
+            <span class="badge-pet badge-coral text-[10px] shadow-sm">Parent Recommended</span>
+          </div>
+
+          <div>
+            <div class="relative h-44 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-3xl">
+              <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=600&q=80" alt="Premium Stay Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <span class="badge-pet badge-image-overlay absolute bottom-3 left-3 text-[10px]">Window Suite & 24/7 Webcam</span>
+            </div>
+
+            <span class="badge-pet badge-coral text-[10px] mb-2">Complete Peace of Mind</span>
+            <h3 class="text-xl font-bold text-[var(--text-main)]">Premium Stay</h3>
+            <p class="text-xs text-[var(--text-muted)] mt-1 mb-6">Full live webcam access, splash pool, and spa brushout.</p>
+
+            <div class="mb-6">
+              <span class="text-3xl font-black text-[var(--brand-accent)] rate-val" data-nightly="79" data-weekly="470">$79</span>
+              <span class="text-xs text-[var(--text-muted)] rate-cycle">/ night</span>
+            </div>
+
+            <ul class="space-y-3 text-xs text-[var(--text-muted)] border-t border-[var(--border-color)] pt-6">
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Deluxe Glass Suite with Window</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> <strong>24/7 Live Encrypted Webcam</strong></li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Splash Pool & Agility Playgroups</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Daily Video Clips & Photo Feed</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Departure Spritz & Brushout</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Bedtime Story & Tuck-in</li>
+            </ul>
+          </div>
+
+          <div class="pt-8 mt-6 border-t border-[var(--border-color)]">
+            <button onclick="quickBookService('overnight-boarding')" class="btn-brand-accent w-full text-xs py-3 rounded-xl font-bold text-center shadow-lg">
+              Choose Premium Stay
+            </button>
+          </div>
+        </div>
+
+        <!-- Tier 4: Deluxe Penthouse Suite -->
+        <div class="card-paw p-8 flex flex-col justify-between overflow-hidden group">
+          <div>
+            <div class="relative h-44 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-3xl">
+              <img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9?auto=format&fit=crop&w=600&q=80" alt="Deluxe Penthouse VIP Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <span class="badge-pet badge-image-overlay absolute bottom-3 left-3 text-[10px]">100 sq ft VIP Penthouse</span>
+            </div>
+
+            <span class="badge-pet badge-amber text-[10px] mb-2">VIP Luxury Retreat</span>
+            <h3 class="text-xl font-bold text-[var(--text-main)]">Deluxe Penthouse</h3>
+            <p class="text-xs text-[var(--text-muted)] mt-1 mb-6">Massive 100 sq ft suite with private TV and custom menu.</p>
+
+            <div class="mb-6">
+              <span class="text-3xl font-black text-[var(--brand-primary)] dark:text-emerald-400 rate-val" data-nightly="119" data-weekly="708">$119</span>
+              <span class="text-xs text-[var(--text-muted)] rate-cycle">/ night</span>
+            </div>
+
+            <ul class="space-y-3 text-xs text-[var(--text-muted)] border-t border-[var(--border-color)] pt-6">
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> 100 sq ft Luxury Penthouse</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Personal DogTV™ Streaming Screen</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Unlimited 1-on-1 Caretaker TLC</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Free Departure Full Spa & Bath</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Complimentary Doorstep Taxi Shuttle</li>
+            </ul>
+          </div>
+
+          <div class="pt-8 mt-6 border-t border-[var(--border-color)]">
+            <button onclick="quickBookService('overnight-boarding')" class="btn-brand-outline w-full text-xs py-3 rounded-xl font-bold text-center">
+              Choose Penthouse
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Complete Feature Comparison Matrix -->
+  <section class="py-20 bg-[var(--bg-surface)] border-t border-[var(--border-color)]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12 space-y-2">
+        <span class="badge-pet badge-teal">Side-by-Side</span>
+        <h2 class="text-2xl sm:text-3xl font-black text-[var(--text-main)]">Complete Tier Feature Matrix</h2>
+      </div>
+
+      <div class="card-paw overflow-x-auto rounded-3xl border border-[var(--border-color)]">
+        <table class="w-full text-xs text-left">
+          <thead class="bg-[var(--bg-subtle)] border-b border-[var(--border-color)] font-bold text-[var(--text-main)]">
+            <tr>
+              <th class="p-4 w-1/3">Included Feature</th>
+              <th class="p-4 text-center">Basic ($39)</th>
+              <th class="p-4 text-center">Standard ($59)</th>
+              <th class="p-4 text-center bg-[var(--brand-accent)]/10 text-[var(--brand-accent)]">Premium ($79)</th>
+              <th class="p-4 text-center">Penthouse ($119)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--border-color)] text-[var(--text-muted)]">
+            <tr>
+              <td class="p-4 font-semibold text-[var(--text-main)]">Suite Dimensions</td>
+              <td class="p-4 text-center">35 sq ft</td>
+              <td class="p-4 text-center">60 sq ft</td>
+              <td class="p-4 text-center bg-[var(--brand-accent)]/5 font-bold text-[var(--brand-accent)]">75 sq ft</td>
+              <td class="p-4 text-center font-bold">100 sq ft</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-[var(--text-main)]">Daily Grass Play Outings</td>
+              <td class="p-4 text-center">2 Outings</td>
+              <td class="p-4 text-center">4 Outings</td>
+              <td class="p-4 text-center bg-[var(--brand-accent)]/5 font-bold text-[var(--brand-accent)]">6 Outings</td>
+              <td class="p-4 text-center font-bold">Unlimited</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-[var(--text-main)]">24/7 Mobile HD Webcam</td>
+              <td class="p-4 text-center"><i class="bi bi-x text-rose-500 text-base"></i></td>
+              <td class="p-4 text-center"><i class="bi bi-x text-rose-500 text-base"></i></td>
+              <td class="p-4 text-center bg-[var(--brand-accent)]/5"><i class="bi bi-check2 text-emerald-600 text-base font-bold"></i></td>
+              <td class="p-4 text-center"><i class="bi bi-check2 text-emerald-600 text-base font-bold"></i></td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-[var(--text-main)]">Daily Photo & Video Feed</td>
+              <td class="p-4 text-center">Text Only</td>
+              <td class="p-4 text-center">2 Photos</td>
+              <td class="p-4 text-center bg-[var(--brand-accent)]/5 font-bold text-[var(--brand-accent)]">Photos + Video</td>
+              <td class="p-4 text-center font-bold">Unlimited Live Feed</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-[var(--text-main)]">Departure Spa Bath</td>
+              <td class="p-4 text-center">+$45 Add-on</td>
+              <td class="p-4 text-center">+$45 Add-on</td>
+              <td class="p-4 text-center bg-[var(--brand-accent)]/5">Spritz & Brush</td>
+              <td class="p-4 text-center font-bold text-emerald-600"><i class="bi bi-check2"></i> Included Free</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="paws-footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script>
+    function setBillingCycle(cycle) {
+      const btnNightly = document.getElementById("toggleNightly");
+      const btnWeekly = document.getElementById("toggleWeekly");
+      const rateVals = document.querySelectorAll(".rate-val");
+      const rateCycles = document.querySelectorAll(".rate-cycle");
+
+      if (cycle === "weekly") {
+        btnWeekly.className = "px-5 py-2 rounded-full text-xs font-bold transition bg-[var(--brand-primary)] text-white shadow-sm flex items-center gap-1.5";
+        btnNightly.className = "px-5 py-2 rounded-full text-xs font-bold transition text-[var(--text-muted)] hover:text-[var(--text-main)]";
+        rateVals.forEach(el => el.textContent = `$${el.dataset.weekly}`);
+        rateCycles.forEach(el => el.textContent = "/ 7 nights (15% off)");
+      } else {
+        btnNightly.className = "px-5 py-2 rounded-full text-xs font-bold transition bg-[var(--brand-primary)] text-white shadow-sm";
+        btnWeekly.className = "px-5 py-2 rounded-full text-xs font-bold transition text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5";
+        rateVals.forEach(el => el.textContent = `$${el.dataset.nightly}`);
+        rateCycles.forEach(el => el.textContent = "/ night");
+      }
+    }
+  </script>
+</body>
+</html>

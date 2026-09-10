@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us & Resort Location - PawsHaven</title>
+  <meta name="description" content="Get in touch with PawsHaven Resort & Daycare. Find our facility address, operating hours, emergency vet hotline, directions, and send direct inquiries.">
+  
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Prevent Theme & Layout Flicker (Anti-FOUC) -->
+  <script>
+    (function() {
+      const t = localStorage.getItem('paws_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.documentElement.classList.add('dark');
+      const d = localStorage.getItem('paws_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', d);
+      if (d === 'rtl') document.documentElement.classList.add('rtl');
+
+      document.documentElement.classList.add('paws-loading');
+      function reveal() {
+        document.documentElement.classList.remove('paws-loading');
+      }
+      if (document.readyState === 'complete') {
+        reveal();
+      } else {
+        window.addEventListener('DOMContentLoaded', reveal);
+        setTimeout(reveal, 250);
+      }
+    })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#1B4D3E',
+              sage: '#2D6A4F',
+              coral: '#E07A5F',
+              amber: '#F4A261',
+              ivory: '#FAF8F5',
+              sand: '#F4EFEA',
+              charcoal: '#2C3E35'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-theme-base text-theme-main antialiased selection:bg-[#E07A5F] selection:text-white">
+
+  <!-- Navbar -->
+  <div id="paws-navbar"></div>
+
+  <!-- Header -->
+  <section class="pt-32 pb-12 lg:pt-36 lg:pb-16 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="badge-pet badge-teal mb-3">We Love Hearing From Pet Parents</span>
+      <h1 class="text-3xl sm:text-5xl font-black text-[var(--text-main)] max-w-2xl mx-auto leading-tight">
+        Visit or Contact PawsHaven
+      </h1>
+      <p class="text-xs sm:text-base text-[var(--text-muted)] max-w-xl mx-auto mt-3">
+        Located on 5 peaceful wooded acres in south Austin. Drop-ins for facility tours are welcomed 7 days a week!
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Body -->
+  <section class="pb-24 bg-[var(--bg-base)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Top Contact Info Cards: 4 Perfectly Aligned Equal-Height Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 items-stretch">
+        
+        <!-- Card 1: Address -->
+        <div class="card-paw p-6 bg-[var(--bg-surface)] rounded-3xl border border-[var(--border-color)] flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+          <div>
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 rounded-2xl bg-[var(--bg-subtle)] text-[var(--brand-accent)] flex items-center justify-center text-xl flex-shrink-0 shadow-sm">
+                <i class="bi bi-geo-alt-fill"></i>
+              </div>
+              <span class="badge-pet badge-teal text-[10px]">Austin, TX</span>
+            </div>
+            <h4 class="text-base font-bold text-[var(--text-main)] mb-1">Resort Location</h4>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+              4820 Paws Meadow Boulevard<br>Austin, TX 78704, United States
+            </p>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs">
+            <span class="text-[var(--text-muted)]">5 Wooded Acres</span>
+            <button type="button" onclick="showToast('Opening Google Maps navigation directions...', 'info')" class="font-bold text-[var(--brand-accent)] hover:underline inline-flex items-center gap-1">
+              Directions <i class="bi bi-arrow-right-short"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2: Concierge Phone -->
+        <div class="card-paw p-6 bg-[var(--bg-surface)] rounded-3xl border border-[var(--border-color)] flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+          <div>
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 rounded-2xl bg-[var(--bg-subtle)] text-[var(--brand-primary)] flex items-center justify-center text-xl flex-shrink-0 shadow-sm">
+                <i class="bi bi-telephone-fill"></i>
+              </div>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Open Now
+              </span>
+            </div>
+            <h4 class="text-base font-bold text-[var(--text-main)] mb-1">Front Concierge</h4>
+            <p class="text-xs font-semibold text-[var(--text-main)]">(555) 729-7428</p>
+            <p class="text-xs text-[var(--text-muted)]">Toll-free: (555) PAW-STAY</p>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs">
+            <span class="text-[var(--text-muted)]">Until 7:30 PM</span>
+            <a href="tel:5557297428" class="font-bold text-[var(--brand-primary)] hover:underline inline-flex items-center gap-1">
+              Call Desk <i class="bi bi-telephone-outbound"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: Email Inquiries -->
+        <div class="card-paw p-6 bg-[var(--bg-surface)] rounded-3xl border border-[var(--border-color)] flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+          <div>
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 rounded-2xl bg-[var(--bg-subtle)] text-amber-500 flex items-center justify-center text-xl flex-shrink-0 shadow-sm">
+                <i class="bi bi-envelope-paper-fill"></i>
+              </div>
+              <span class="badge-pet badge-amber text-[10px]">Fast Response</span>
+            </div>
+            <h4 class="text-base font-bold text-[var(--text-main)] mb-1">Direct Inquiries</h4>
+            <p class="text-xs font-semibold text-[var(--text-main)] break-all">concierge@pawshavenresort.com</p>
+            <p class="text-xs text-[var(--text-muted)]">Typical reply within 2 hours</p>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs">
+            <span class="text-[var(--text-muted)]">7 Days a Week</span>
+            <a href="mailto:concierge@pawshavenresort.com" class="font-bold text-amber-600 dark:text-amber-400 hover:underline inline-flex items-center gap-1">
+              Email Us <i class="bi bi-send"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 4: Emergency Vet -->
+        <div class="card-paw p-6 bg-[var(--bg-surface)] rounded-3xl border border-[var(--border-color)] flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+          <div>
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xl flex-shrink-0 shadow-sm border border-rose-500/20">
+                <i class="bi bi-heart-pulse-fill"></i>
+              </div>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
+                24/7 On-Call
+              </span>
+            </div>
+            <h4 class="text-base font-bold text-[var(--text-main)] mb-1">Veterinary Hotline</h4>
+            <p class="text-xs font-bold text-rose-600 dark:text-rose-400">(555) 911-PETS</p>
+            <p class="text-xs text-[var(--text-muted)]">Central TX Emergency Vet</p>
+          </div>
+          <div class="pt-4 mt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs">
+            <span class="text-[var(--text-muted)]">Dr. Marcus Vance</span>
+            <span class="font-bold text-rose-600 dark:text-rose-400">Boarder Priority</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Main Symmetrical Section: Equal-Height Form & Campus Map Containers -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-10">
+        
+        <!-- Left 7 Cols: Interactive Contact Form Container -->
+        <div class="lg:col-span-7 flex flex-col">
+          <div class="card-paw p-8 lg:p-10 bg-[var(--bg-surface)] rounded-3xl border border-[var(--border-color)] shadow-sm flex flex-col justify-between h-full">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="badge-pet badge-teal text-[11px]">Direct Concierge Dispatch</span>
+                <span class="text-xs text-[var(--text-muted)]">&bull; Replies within 2 hours</span>
+              </div>
+              <h3 class="text-2xl font-bold text-[var(--text-main)] mb-2">Send Front Desk a Message</h3>
+              <p class="text-xs sm:text-sm text-[var(--text-muted)] mb-6 leading-relaxed">
+                Have questions regarding suite upgrades, custom medications, vaccination records, or scheduling a private walking tour? Drop us a note below.
+              </p>
+
+              <form id="contactForm" onsubmit="event.preventDefault(); submitContactForm();" class="space-y-5 text-xs">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="contactName" class="block font-bold text-[var(--text-muted)] mb-1.5">Your Full Name <span class="text-rose-500">*</span></label>
+                    <input type="text" id="contactName" required placeholder="Sarah Jenkins" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
+                  </div>
+                  <div>
+                    <label for="contactEmail" class="block font-bold text-[var(--text-muted)] mb-1.5">Email Address <span class="text-rose-500">*</span></label>
+                    <input type="email" id="contactEmail" required placeholder="sarah@example.com" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="contactPhone" class="block font-bold text-[var(--text-muted)] mb-1.5">Phone Number</label>
+                    <input type="tel" id="contactPhone" placeholder="+1 (555) 000-0000" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
+                  </div>
+                  <div>
+                    <label for="contactTopic" class="block font-bold text-[var(--text-muted)] mb-1.5">Topic / Service Needed</label>
+                    <select id="contactTopic" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
+                      <option>Overnight Boarding Inquiry</option>
+                      <option>Daycare & Playgroup Trial</option>
+                      <option>Schedule Facility Tour</option>
+                      <option>Special Needs & Senior Care</option>
+                      <option>Grooming & Spa Consultation</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="contactMessage" class="block font-bold text-[var(--text-muted)] mb-1.5">How can our caretakers help? <span class="text-rose-500">*</span></label>
+                  <textarea id="contactMessage" required rows="5" placeholder="Tell us about your pet's breed, age, temperament, dietary requirements, or any questions..." class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] resize-none"></textarea>
+                </div>
+
+                <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <button type="submit" class="btn-brand-accent py-3.5 px-8 rounded-xl font-bold text-xs shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto hover:scale-[1.02] transition-transform">
+                    <i class="bi bi-send-fill"></i> Send Message to Front Desk
+                  </button>
+                  <div class="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
+                    <i class="bi bi-shield-lock-fill text-emerald-500"></i>
+                    <span>Your privacy is protected. No spam ever.</span>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: Resort Map & Campus Visitor Guide Container -->
+        <div class="lg:col-span-5 flex flex-col">
+          <div class="card-paw p-8 lg:p-10 bg-[var(--bg-surface)] rounded-3xl border border-[var(--border-color)] shadow-sm flex flex-col justify-between h-full">
+            
+            <!-- Campus Header -->
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="badge-pet badge-amber text-[11px]">Resort Campus</span>
+                <span class="text-xs text-[var(--text-muted)]">&bull; South Austin, TX</span>
+              </div>
+              <h3 class="text-2xl font-bold text-[var(--text-main)] mb-2">Visit Our Wooded Haven</h3>
+              <p class="text-xs sm:text-sm text-[var(--text-muted)] mb-5 leading-relaxed">
+                Nestled on 5 scenic acres just 10 minutes south of Austin-Bergstrom Airport (ABIA) with private, double-gated check-in lanes.
+              </p>
+
+              <!-- Stylized Interactive Map Container -->
+              <div class="rounded-2xl overflow-hidden border border-[var(--border-color)] relative mb-6 shadow-inner bg-[var(--bg-subtle)]">
+                <div class="relative aspect-[16/9] w-full flex items-center justify-center overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1000&q=70" alt="Resort aerial background" class="w-full h-full object-cover opacity-25 filter grayscale">
+                  <div class="absolute inset-0 bg-[radial-gradient(var(--brand-primary)_1px,transparent_1px)] [background-size:18px_18px] opacity-40"></div>
+                  
+                  <div class="relative z-10 text-center p-4">
+                    <div class="w-12 h-12 rounded-full bg-[var(--brand-accent)] text-white flex items-center justify-center text-xl mx-auto mb-2 shadow-2xl animate-bounce">
+                      <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-xs sm:text-sm text-[var(--text-main)]">4820 Paws Meadow Blvd, Austin, TX</h4>
+                    <p class="text-[11px] text-[var(--text-muted)] mb-2.5">Visitor Parking Bays 1–12 On Site</p>
+                    <button type="button" onclick="showToast('Opening Google Maps navigation directions...', 'info')" class="btn-brand-primary text-xs py-1.5 px-4 rounded-full font-bold shadow-sm inline-flex items-center gap-1.5">
+                      <i class="bi bi-map-fill"></i> Open Directions in Maps
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Campus Arrival Coordinates & Highlights -->
+            <div class="space-y-3.5 pt-2 border-t border-[var(--border-color)]">
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-lg bg-[var(--bg-subtle)] text-[var(--brand-primary)] flex items-center justify-center text-sm flex-shrink-0 mt-0.5">
+                  <i class="bi bi-shield-check"></i>
+                </div>
+                <div>
+                  <h5 class="font-bold text-xs text-[var(--text-main)]">Double-Gated Security</h5>
+                  <p class="text-[11px] text-[var(--text-muted)]">Airlock entryway ensures zero off-leash escape risk during arrivals.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-lg bg-[var(--bg-subtle)] text-[var(--brand-accent)] flex items-center justify-center text-sm flex-shrink-0 mt-0.5">
+                  <i class="bi bi-clock-history"></i>
+                </div>
+                <div>
+                  <h5 class="font-bold text-xs text-[var(--text-main)]">Operating Hours</h5>
+                  <p class="text-[11px] text-[var(--text-muted)]">Mon–Fri: 7:00 AM – 7:30 PM &bull; Sat–Sun: 8:00 AM – 6:30 PM</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-lg bg-[var(--bg-subtle)] text-emerald-500 flex items-center justify-center text-sm flex-shrink-0 mt-0.5">
+                  <i class="bi bi-car-front-fill"></i>
+                </div>
+                <div>
+                  <h5 class="font-bold text-xs text-[var(--text-main)]">Curbside & Express Drop-Off</h5>
+                  <p class="text-[11px] text-[var(--text-muted)]">Reserved express bays available for pre-registered morning drop-offs.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Balanced Guidelines / FAQ Grid: 3 Equal-Height Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        
+        <div class="card-paw p-6 bg-[var(--bg-surface)] rounded-3xl border border-[var(--border-color)] flex flex-col justify-between h-full">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-[var(--bg-subtle)] text-[var(--brand-primary)] flex items-center justify-center text-lg flex-shrink-0">
+                <i class="bi bi-compass-fill"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-[var(--text-main)]">Drop-In Tours</h4>
+                <span class="text-[11px] text-[var(--text-muted)]">No Appointment Needed</span>
+              </div>
+            </div>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-4">
+              Walk-in tours of our suites, splash pools, and training yards are hosted Monday through Friday between 10:00 AM and 4:00 PM.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-[var(--border-color)] text-[11px] text-[var(--brand-primary)] font-bold flex items-center gap-1">
+            <i class="bi bi-check-circle-fill text-emerald-500"></i> Free Resort Walkthroughs
+          </div>
+        </div>
+
+        <div class="card-paw p-6 bg-[var(--bg-surface)] rounded-3xl border border-[var(--border-color)] flex flex-col justify-between h-full">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-[var(--bg-subtle)] text-amber-500 flex items-center justify-center text-lg flex-shrink-0">
+                <i class="bi bi-file-earmark-medical-fill"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-[var(--text-main)]">Vaccine Protocol</h4>
+                <span class="text-[11px] text-[var(--text-muted)]">Prior to Boarding</span>
+              </div>
+            </div>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-4">
+              All canine guests must have active Rabies, DHPP, and Bordetella records on file. Records can be uploaded in your member dashboard.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-[var(--border-color)] text-[11px] text-amber-600 dark:text-amber-400 font-bold flex items-center gap-1">
+            <i class="bi bi-shield-fill-check text-amber-500"></i> Vet Verified Safety
+          </div>
+        </div>
+
+        <div class="card-paw p-6 bg-[var(--bg-surface)] rounded-3xl border border-[var(--border-color)] flex flex-col justify-between h-full">
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-[var(--bg-subtle)] text-[var(--brand-accent)] flex items-center justify-center text-lg flex-shrink-0">
+                <i class="bi bi-airplane-fill"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-[var(--text-main)]">Airport Proximity</h4>
+                <span class="text-[11px] text-[var(--text-muted)]">Austin-Bergstrom (ABIA)</span>
+              </div>
+            </div>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-4">
+              Flying out of Austin? Drop off your dog on your way to the terminal. Early check-in starts at 7:00 AM on weekdays.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-[var(--border-color)] text-[11px] text-[var(--brand-accent)] font-bold flex items-center gap-1">
+            <i class="bi bi-geo-fill text-[var(--brand-accent)]"></i> 10 Mins from Terminal
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="paws-footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script>
+    function submitContactForm() {
+      const name = document.getElementById("contactName").value.trim();
+      const email = document.getElementById("contactEmail").value.trim();
+      const phone = document.getElementById("contactPhone") ? document.getElementById("contactPhone").value.trim() : "";
+      const topic = document.getElementById("contactTopic").value;
+      const msg = document.getElementById("contactMessage").value.trim();
+
+      // Store in LocalStorage
+      let msgs = JSON.parse(localStorage.getItem("paws_messages") || "[]");
+      msgs.unshift({
+        id: "msg-" + Date.now(),
+        name,
+        email,
+        phone,
+        topic,
+        message: msg,
+        date: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + " Today"
+      });
+      localStorage.setItem("paws_messages", JSON.stringify(msgs));
+
+      showToast(`Thank you, ${name}! Your inquiry regarding "${topic}" was delivered to our concierge. We will reply to ${email} shortly.`, "success", 5000);
+      document.getElementById("contactForm").reset();
+    }
+  </script>
+</body>
+</html>

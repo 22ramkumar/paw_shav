@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - PawsHaven Resort & Daycare</title>
+  <meta name="description" content="Discover the story behind PawsHaven. Founded by veterinarians and pet parents to provide a loving, cage-free luxury retreat for dogs and cats.">
+  
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Prevent Theme & Layout Flicker (Anti-FOUC) -->
+  <script>
+    (function() {
+      const t = localStorage.getItem('paws_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.documentElement.classList.add('dark');
+      const d = localStorage.getItem('paws_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', d);
+      if (d === 'rtl') document.documentElement.classList.add('rtl');
+
+      document.documentElement.classList.add('paws-loading');
+      function reveal() {
+        document.documentElement.classList.remove('paws-loading');
+      }
+      if (document.readyState === 'complete') {
+        reveal();
+      } else {
+        window.addEventListener('DOMContentLoaded', reveal);
+        setTimeout(reveal, 250);
+      }
+    })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#1B4D3E',
+              sage: '#2D6A4F',
+              coral: '#E07A5F',
+              amber: '#F4A261',
+              ivory: '#FAF8F5',
+              sand: '#F4EFEA',
+              charcoal: '#2C3E35'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-theme-base text-theme-main antialiased selection:bg-[#E07A5F] selection:text-white">
+
+  <!-- Navbar -->
+  <div id="paws-navbar"></div>
+
+  <!-- Hero / Header -->
+  <section class="pt-32 pb-20 lg:pt-36 lg:pb-28 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="badge-pet badge-teal mb-4">Our Heart & Heritage</span>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-[var(--text-main)] max-w-3xl mx-auto leading-tight">
+        Built Out of Pure Love <br>
+        for <span class="text-[var(--brand-accent)]">Every Single Pet.</span>
+      </h1>
+      <p class="text-base sm:text-lg text-[var(--text-muted)] max-w-2xl mx-auto mt-4 leading-relaxed">
+        PawsHaven was founded to permanently replace cold metal cages and stressful kennels with warm, sunlit suites, joyful grass play yards, and 24/7 loving companionship.
+      </p>
+    </div>
+  </section>
+
+  <!-- Story & Vision Grid -->
+  <section class="py-16 lg:py-24 bg-[var(--bg-surface)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-6 relative">
+          <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/80 dark:border-white/10">
+            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80" alt="Caretakers playing with dogs" class="w-full h-full object-cover">
+          </div>
+          <div class="card-paw absolute -bottom-6 -right-6 p-6 bg-[var(--bg-surface)] rounded-2xl shadow-xl max-w-xs hidden sm:block">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-2xl font-bold">
+                <i class="bi bi-heart-pulse-fill"></i>
+              </div>
+              <div>
+                <p class="text-xs text-[var(--text-muted)] font-bold uppercase">Our Philosophy</p>
+                <p class="text-sm font-bold text-[var(--text-main)]">100% Fear-Free Certified Care</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 space-y-6">
+          <span class="badge-pet badge-coral">The PawsHaven Story</span>
+          <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-main)] leading-tight">
+            From One Family’s Search to a State-of-the-Art Resort
+          </h2>
+          <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+            In 2016, our founders Jessica Miller and Dr. Marcus Vance traveled for an emergency family trip. Looking for a kennel for their two Golden Retrievers, they were heartbroken by what they found: noisy concrete enclosures, concrete floors, and zero individual attention.
+          </p>
+          <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+            They knew pet parents deserved better. They purchased 5 scenic acres in Austin, Texas and built PawsHaven: a facility designed with veterinary-grade HVAC air sanitization, private sound-dampened suites, natural grass agility fields, and real-time parent webcams.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 pt-4 border-t border-[var(--border-color)]">
+            <div>
+              <h4 class="text-2xl font-black text-[var(--brand-primary)]">12,500+</h4>
+              <p class="text-xs text-[var(--text-muted)] mt-1">Stays hosted without incident</p>
+            </div>
+            <div>
+              <h4 class="text-2xl font-black text-[var(--brand-accent)]">1:5 Ratio</h4>
+              <p class="text-xs text-[var(--text-muted)] mt-1">Caregiver-to-pet supervision</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Company Timeline -->
+  <section class="py-20 bg-[var(--bg-base)]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-16 space-y-3">
+        <span class="badge-pet badge-teal">Our Milestones</span>
+        <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-main)]">
+          A Decade of Compassionate Innovation
+        </h2>
+      </div>
+
+      <div class="space-y-8 relative before:absolute before:inset-0 before:left-1/2 before:-translate-x-1/2 before:w-1 before:bg-[var(--border-color)] hidden sm:block">
+        
+        <!-- Timeline Item 1 -->
+        <div class="relative flex items-center justify-between gap-8">
+          <div class="w-1/2 text-right pr-8">
+            <span class="text-xs font-bold text-[var(--brand-accent)] uppercase">2016</span>
+            <h4 class="text-base font-bold text-[var(--text-main)] mt-1">Resort Founded in Austin</h4>
+            <p class="text-xs text-[var(--text-muted)] mt-1">Opened our first 15 luxury suites with grass yard access and on-site veterinary monitoring.</p>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-[var(--brand-primary)] text-white flex items-center justify-center font-bold text-xs shadow-md z-10">
+            <i class="bi bi-flag-fill text-[10px]"></i>
+          </div>
+          <div class="w-1/2 pl-8"></div>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="relative flex items-center justify-between gap-8">
+          <div class="w-1/2 pr-8"></div>
+          <div class="w-8 h-8 rounded-full bg-[var(--brand-accent)] text-white flex items-center justify-center font-bold text-xs shadow-md z-10">
+            <i class="bi bi-camera-video-fill text-[10px]"></i>
+          </div>
+          <div class="w-1/2 text-left pl-8">
+            <span class="text-xs font-bold text-[var(--brand-accent)] uppercase">2019</span>
+            <h4 class="text-base font-bold text-[var(--text-main)] mt-1">PawsLive™ Webcams Launched</h4>
+            <p class="text-xs text-[var(--text-muted)] mt-1">Became the first regional boarding facility offering 24/7 HD mobile streaming for every suite.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 3 -->
+        <div class="relative flex items-center justify-between gap-8">
+          <div class="w-1/2 text-right pr-8">
+            <span class="text-xs font-bold text-[var(--brand-accent)] uppercase">2022</span>
+            <h4 class="text-base font-bold text-[var(--text-main)] mt-1">Feline Sanctuary & Agility Arena</h4>
+            <p class="text-xs text-[var(--text-muted)] mt-1">Added our dedicated quiet Feline Wing and 10,000 sq ft climate-controlled indoor agility hall.</p>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shadow-md z-10">
+            <i class="bi bi-trophy-fill text-[10px]"></i>
+          </div>
+          <div class="w-1/2 pl-8"></div>
+        </div>
+
+        <!-- Timeline Item 4 -->
+        <div class="relative flex items-center justify-between gap-8">
+          <div class="w-1/2 pr-8"></div>
+          <div class="w-8 h-8 rounded-full bg-[var(--brand-primary)] text-white flex items-center justify-center font-bold text-xs shadow-md z-10">
+            <i class="bi bi-patch-check-fill text-[10px]"></i>
+          </div>
+          <div class="w-1/2 text-left pl-8">
+            <span class="text-xs font-bold text-[var(--brand-accent)] uppercase">2026</span>
+            <h4 class="text-base font-bold text-[var(--text-main)] mt-1">PACCC Gold Standard Accredited</h4>
+            <p class="text-xs text-[var(--text-muted)] mt-1">Honored as top-tier animal facility with 100% Fear Free and CPR certified staff.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Mobile Linear Timeline (Visible on screens < sm) -->
+      <div class="sm:hidden space-y-6 relative border-s-2 border-[var(--border-color)] ms-4 ps-6">
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1 w-6 h-6 rounded-full bg-[var(--brand-primary)] text-white flex items-center justify-center text-[10px]">
+            <i class="bi bi-flag-fill"></i>
+          </div>
+          <span class="text-xs font-bold text-[var(--brand-accent)] uppercase">2016</span>
+          <h4 class="text-base font-bold text-[var(--text-main)] mt-0.5">Resort Founded in Austin</h4>
+          <p class="text-xs text-[var(--text-muted)] mt-1">Opened our first 15 luxury suites with grass yard access and on-site veterinary monitoring.</p>
+        </div>
+
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1 w-6 h-6 rounded-full bg-[var(--brand-accent)] text-white flex items-center justify-center text-[10px]">
+            <i class="bi bi-camera-video-fill"></i>
+          </div>
+          <span class="text-xs font-bold text-[var(--brand-accent)] uppercase">2019</span>
+          <h4 class="text-base font-bold text-[var(--text-main)] mt-0.5">PawsLive™ Webcams Launched</h4>
+          <p class="text-xs text-[var(--text-muted)] mt-1">Became the first regional boarding facility offering 24/7 HD mobile streaming for every suite.</p>
+        </div>
+
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px]">
+            <i class="bi bi-trophy-fill"></i>
+          </div>
+          <span class="text-xs font-bold text-[var(--brand-accent)] uppercase">2022</span>
+          <h4 class="text-base font-bold text-[var(--text-main)] mt-0.5">Feline Sanctuary & Agility Arena</h4>
+          <p class="text-xs text-[var(--text-muted)] mt-1">Added our dedicated quiet Feline Wing and 10,000 sq ft climate-controlled indoor agility hall.</p>
+        </div>
+
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1 w-6 h-6 rounded-full bg-[var(--brand-primary)] text-white flex items-center justify-center text-[10px]">
+            <i class="bi bi-patch-check-fill"></i>
+          </div>
+          <span class="text-xs font-bold text-[var(--brand-accent)] uppercase">2026</span>
+          <h4 class="text-base font-bold text-[var(--text-main)] mt-0.5">PACCC Gold Standard Accredited</h4>
+          <p class="text-xs text-[var(--text-muted)] mt-1">Honored as top-tier animal facility with 100% Fear Free and CPR certified staff.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Certified Safety & Sanitation Protocols -->
+  <section class="py-20 bg-[var(--bg-surface)] border-y border-[var(--border-color)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <span class="badge-pet badge-coral">Health & Sanitation</span>
+        <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-main)]">
+          Hospital-Grade Safety Protocols
+        </h2>
+        <p class="text-sm text-[var(--text-muted)]">
+          Every inch of PawsHaven is engineered for physical safety, emotional calmness, and medical-grade cleanliness.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="card-paw p-8">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-2xl mb-4">
+            <i class="bi bi-wind"></i>
+          </div>
+          <h4 class="font-bold text-base text-[var(--text-main)] mb-2">Hospital-Grade UV-C HVAC</h4>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            Continuous air exchange system with UV-C scrubbers eliminates airborne bacteria, odors, and kennel cough viruses completely.
+          </p>
+        </div>
+
+        <div class="card-paw p-8">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-2xl mb-4">
+            <i class="bi bi-droplet-half"></i>
+          </div>
+          <h4 class="font-bold text-base text-[var(--text-main)] mb-2">Filtered Spring Hydration</h4>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            All drinking water is multi-stage filtered and served in sanitized stainless-steel bowls refreshed four times daily.
+          </p>
+        </div>
+
+        <div class="card-paw p-8">
+          <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-600 flex items-center justify-center text-2xl mb-4">
+            <i class="bi bi-shield-shaded"></i>
+          </div>
+          <h4 class="font-bold text-base text-[var(--text-main)] mb-2">Double-Gated Security</h4>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            Every play yard and suite zone has double airlock security gates, 8-foot perimeter fencing, and 24/7 security sensor alarms.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="paws-footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+</body>
+</html>

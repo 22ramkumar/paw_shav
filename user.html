@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Owner Portal - PawsHaven Resort</title>
+  <meta name="description" content="Manage your pet profiles, track active boarding stays, review daily feeding and activity logs, view daily photos, and download invoices.">
+  
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Prevent Theme & Layout Flicker (Anti-FOUC) -->
+  <script>
+    (function() {
+      const t = localStorage.getItem('paws_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.documentElement.classList.add('dark');
+      const d = localStorage.getItem('paws_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', d);
+      if (d === 'rtl') document.documentElement.classList.add('rtl');
+
+      document.documentElement.classList.add('paws-loading');
+      function reveal() {
+        document.documentElement.classList.remove('paws-loading');
+      }
+      if (document.readyState === 'complete') {
+        reveal();
+      } else {
+        window.addEventListener('DOMContentLoaded', reveal);
+        setTimeout(reveal, 250);
+      }
+    })();
+  </script>
+
+  <!-- Auth Route Protection: redirect to auth modal if not authenticated -->
+  <script>
+    (function() {
+      try {
+        const user = sessionStorage.getItem('paws_current_user') || localStorage.getItem('paws_current_user');
+        if (!user) {
+          window.location.replace('index.html?auth=login&redirect=' + encodeURIComponent(window.location.pathname.split('/').pop() || 'user.html'));
+        }
+      } catch (e) {
+        window.location.replace('index.html?auth=login&redirect=user.html');
+      }
+    })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#1B4D3E',
+              sage: '#2D6A4F',
+              coral: '#E07A5F',
+              amber: '#F4A261',
+              ivory: '#FAF8F5',
+              sand: '#F4EFEA',
+              charcoal: '#2C3E35'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[var(--bg-base)] text-[var(--text-main)] font-sans antialiased min-h-screen flex">
+
+  <!-- Mobile Sidebar Overlay -->
+  <div id="userSidebarOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-40 lg:hidden transition-all"></div>
+
+  <!-- Pet Owner Dashboard Sidebar -->
+  <aside id="userSidebar" class="fixed lg:static inset-y-0 left-0 w-72 bg-[var(--bg-surface)] border-r border-[var(--border-color)] flex flex-col transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out z-50 shadow-xl lg:shadow-none">
+    
+    <!-- Sidebar Brand -->
+    <div class="p-6 border-b border-[var(--border-color)] flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <div class="w-10 h-10 rounded-xl bg-[#F0F1EC] flex items-center justify-center shadow-sm overflow-hidden border border-[var(--border-color)] flex-shrink-0">
+          <img src="images/logo.png" alt="PawsHaven Logo" class="w-full h-full object-cover block">
+        </div>
+        <div>
+          <span class="font-extrabold text-base text-[var(--brand-primary)] dark:text-emerald-400 block leading-none">
+            Paws<span class="text-[var(--brand-accent)]">Haven</span>
+          </span>
+          <span class="text-[10px] uppercase font-bold text-[var(--text-muted)] tracking-wider block mt-0.5">
+            Pet Parent Portal
+          </span>
+        </div>
+      </a>
+      <button id="closeUserSidebar" class="lg:hidden text-lg text-[var(--text-muted)] hover:text-[var(--brand-accent)] transition">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <!-- User Profile Header in Sidebar -->
+    <div class="p-5 border-b border-[var(--border-color)] bg-[var(--bg-subtle)]/50 flex items-center gap-3">
+      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80" alt="Sarah Jenkins" class="w-11 h-11 rounded-2xl object-cover border-2 border-white shadow-sm">
+      <div class="flex-1 min-w-0">
+        <h4 class="font-bold text-xs text-[var(--text-main)] truncate">Sarah Jenkins</h4>
+        <span class="badge-pet badge-teal text-[9px]">VIP Pet Parent</span>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="flex-1 p-4 space-y-1.5 text-xs overflow-y-auto">
+      <button onclick="switchUserTab('overview')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl bg-[var(--brand-primary)] text-white font-bold transition shadow-sm w-full text-left" data-tab="overview">
+        <i class="bi bi-speedometer2 text-base"></i> Overview
+      </button>
+
+      <button onclick="switchUserTab('pets')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="pets">
+        <i class="bi bi-heart-fill text-base text-rose-500"></i> My Pets
+      </button>
+
+      <button onclick="switchUserTab('tracking')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="tracking">
+        <i class="bi bi-radar text-base text-amber-500"></i> Live Stay Tracking
+      </button>
+
+      <button onclick="switchUserTab('reminders')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="reminders">
+        <i class="bi bi-bell-fill text-base text-amber-600"></i> Reminders & Vaccines
+      </button>
+
+      <button onclick="switchUserTab('logs')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="logs">
+        <i class="bi bi-journal-check text-base text-emerald-600"></i> Daily Activity Logs
+      </button>
+
+      <button onclick="switchUserTab('health')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="health">
+        <i class="bi bi-heart-pulse-fill text-base text-indigo-600"></i> Health Reports
+      </button>
+
+      <button onclick="switchUserTab('photos')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="photos">
+        <i class="bi bi-camera-fill text-base text-teal-600"></i> Photo & Video Updates
+      </button>
+
+      <button onclick="switchUserTab('payments')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="payments">
+        <i class="bi bi-receipt-cutoff text-base text-purple-600"></i> Invoices & Payments
+      </button>
+
+      <div class="pt-4 border-t border-[var(--border-color)]">
+        <a href="booking.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-[var(--brand-accent)] text-white font-bold transition shadow-md w-full text-left">
+          <i class="bi bi-calendar2-plus-fill text-base"></i> Book New Stay
+        </a>
+      </div>
+    </nav>
+
+    <!-- Sidebar Bottom Controls -->
+    <div class="p-4 border-t border-[var(--border-color)]">
+      <button onclick="logout()" class="flex items-center justify-center gap-2.5 px-3 py-2.5 rounded-xl text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/20 font-bold text-xs w-full transition border border-rose-200 dark:border-rose-900/30 cursor-pointer">
+        <i class="bi bi-box-arrow-left"></i> Sign Out
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+    
+    <!-- Topbar Header with Theme & RTL in Top Layer -->
+    <header class="h-20 paws-navbar-header bg-[var(--bg-surface)] border-b border-[var(--border-color)] px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 shadow-sm" style="background-color: var(--bg-surface);">
+      <div class="flex items-center gap-3">
+        <button id="openUserSidebar" class="lg:hidden text-2xl text-[var(--text-main)] cursor-pointer" aria-label="Open navigation sidebar">
+          <i class="bi bi-list"></i>
+        </button>
+        <h2 class="font-black text-lg text-[var(--text-main)] hidden sm:block">Pet Parent Portal</h2>
+      </div>
+
+      <!-- Topbar Action Cluster (Theme, RTL, Main Site, Book Stay) -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Theme Mode Toggle -->
+        <button onclick="toggleTheme()" class="btn-theme-toggle p-2 sm:px-3 sm:py-2 rounded-xl bg-[var(--bg-subtle)] hover:bg-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-main)] transition text-xs font-semibold flex items-center gap-1.5 border border-[var(--border-color)] shadow-xs cursor-pointer" title="Toggle Light / Dark theme">
+          <i class="theme-toggle-icon bi bi-moon-stars-fill text-amber-500"></i>
+          <span class="hidden md:inline">Theme</span>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button onclick="toggleRTL()" class="btn-rtl-toggle p-2 sm:px-3 sm:py-2 rounded-xl bg-[var(--bg-subtle)] hover:bg-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-main)] transition text-xs font-bold flex items-center gap-1.5 border border-[var(--border-color)] shadow-xs cursor-pointer" title="Toggle RTL / LTR layout">
+          <span>⇄ RTL</span>
+        </button>
+
+        <a href="index.html" class="btn-brand-outline text-xs py-2 px-3 sm:px-3.5 rounded-xl font-bold hidden sm:inline-flex items-center gap-1.5">
+          <i class="bi bi-house"></i> <span class="hidden md:inline">Main Site</span>
+        </a>
+
+        <a href="booking.html" class="btn-brand-accent text-xs py-2 px-3.5 sm:px-4 rounded-xl font-bold flex items-center gap-1.5 shadow-sm">
+          <i class="bi bi-calendar-heart"></i> <span>Book Stay</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Dashboard Content Container -->
+    <main class="flex-1 p-6 sm:p-8 lg:p-10 max-w-7xl w-full mx-auto space-y-8">
+      
+      <!-- ===================================================================
+           TAB 1: OVERVIEW
+           =================================================================== -->
+      <div id="tab-overview" class="user-tab-content space-y-8">
+        
+        <!-- Welcome Banner -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-black text-[var(--text-main)]">Welcome back, Sarah! 👋</h1>
+            <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Here is how Max and Charlie are doing at PawsHaven Resort.</p>
+          </div>
+          <button onclick="openAddPetModal()" class="btn-brand-primary text-xs py-2.5 px-4 rounded-xl font-bold">
+            <i class="bi bi-plus-circle-fill"></i> Register New Pet
+          </button>
+        </div>
+
+        <!-- Active Stay Snapshot -->
+        <div id="overviewActiveStayCard">
+          <!-- Populated by user-dashboard.js -->
+        </div>
+
+        <!-- KPI Metrics Grid -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div class="card-paw p-5">
+            <span class="text-xs font-bold text-[var(--text-muted)] uppercase">Registered Pets</span>
+            <div id="statTotalPets" class="text-2xl sm:text-3xl font-black text-[var(--brand-primary)] dark:text-emerald-400 mt-1">2</div>
+            <p class="text-[11px] text-emerald-600 font-semibold mt-1"><i class="bi bi-check-circle"></i> Profiles active</p>
+          </div>
+
+          <div class="card-paw p-5">
+            <span class="text-xs font-bold text-[var(--text-muted)] uppercase">Total Stays Booked</span>
+            <div id="statTotalStays" class="text-2xl sm:text-3xl font-black text-[var(--brand-accent)] mt-1">5</div>
+            <p class="text-[11px] text-[var(--text-muted)] mt-1">Overnight & Daycare</p>
+          </div>
+
+          <div class="card-paw p-5">
+            <span class="text-xs font-bold text-[var(--text-muted)] uppercase">Lifetime Spend</span>
+            <div id="statTotalSpent" class="text-2xl sm:text-3xl font-black text-[var(--brand-sunny)] mt-1">$814</div>
+            <p class="text-[11px] text-[var(--text-muted)] mt-1">Receipts & Invoices</p>
+          </div>
+
+          <div class="card-paw p-5">
+            <span class="text-xs font-bold text-[var(--text-muted)] uppercase">Active Stay Date</span>
+            <div id="statNextStay" class="text-sm font-black text-[var(--brand-primary)] dark:text-emerald-400 mt-2 truncate">Sep 06, 2026</div>
+            <p class="text-[11px] text-emerald-600 font-semibold mt-1">Currently in care</p>
+          </div>
+        </div>
+
+        <!-- Overview Dashboard Feature Highlights: Live Tracker & Upcoming Reminders -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Live Stay Progress Snapshot Card -->
+          <div class="card-paw p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="badge-pet badge-coral text-xs flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Live Stay Tracker
+                </span>
+                <span class="text-xs font-bold text-[var(--brand-primary)]">Max • Golden Retriever</span>
+              </div>
+              <h3 class="text-lg font-bold text-[var(--text-main)] mb-1">Active Stay Progress: Stage 3/5</h3>
+              <p class="text-xs text-[var(--text-muted)] mb-3">Play yards, meals & midday enrichment • Room: Glass Garden Suite 04</p>
+              
+              <div class="p-3.5 rounded-xl bg-[var(--bg-subtle)] text-xs text-[var(--text-main)] flex items-center gap-3 mb-4">
+                <i class="bi bi-chat-quote-fill text-lg text-emerald-600 flex-shrink-0"></i>
+                <span class="italic text-[11px]">"Max is having a blast in the afternoon splash pool with his play buddies!"</span>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-[var(--border-color)] flex items-center gap-3">
+              <button onclick="switchUserTab('tracking')" class="btn-brand-primary text-xs py-2 px-4 rounded-xl font-bold flex-1 flex items-center justify-center gap-2">
+                <i class="bi bi-radar"></i> Open Live Tracker
+              </button>
+              <a href="stay-tracking.html?id=STAY-9041" class="btn-brand-outline text-xs py-2 px-3 rounded-xl font-bold">
+                <i class="bi bi-camera-video"></i> Webcams
+              </a>
+            </div>
+          </div>
+
+          <!-- Upcoming Health & Vaccine Reminders Card -->
+          <div class="card-paw p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="badge-pet badge-amber text-xs flex items-center gap-1.5">
+                  <i class="bi bi-bell-fill"></i> Health Reminders
+                </span>
+                <span class="text-xs font-bold text-amber-600">Action Recommended</span>
+              </div>
+              <h3 class="text-lg font-bold text-[var(--text-main)] mb-1">Upcoming Preventative Care</h3>
+              <p class="text-xs text-[var(--text-muted)] mb-3">Keep your pet's vaccination renewals and parasite treatments current for boarding.</p>
+
+              <div id="overviewRemindersMiniList" class="space-y-2 mb-4">
+                <!-- Populated dynamically by user-dashboard.js -->
+              </div>
+            </div>
+            <div class="pt-3 border-t border-[var(--border-color)] flex items-center gap-3">
+              <button onclick="switchUserTab('reminders')" class="btn-brand-accent text-xs py-2 px-4 rounded-xl font-bold flex-1 flex items-center justify-center gap-2">
+                <i class="bi bi-calendar-check"></i> View All Reminders
+              </button>
+              <button onclick="openAddReminderModal()" class="btn-brand-outline text-xs py-2 px-3 rounded-xl font-bold">
+                <i class="bi bi-plus-lg"></i> Log Record
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ===================================================================
+           TAB 2: MY PETS (CRUD)
+           =================================================================== -->
+      <div id="tab-pets" class="user-tab-content space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-2xl font-black text-[var(--text-main)]">My Registered Pets</h2>
+            <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Add, edit, or manage veterinary certificates and dietary instructions.</p>
+          </div>
+          <button onclick="openAddPetModal()" class="btn-brand-accent text-xs py-2.5 px-4 rounded-xl font-bold shadow-md">
+            <i class="bi bi-plus-circle-fill"></i> Add Another Pet
+          </button>
+        </div>
+
+        <div id="userPetsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Rendered by user-dashboard.js -->
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           TAB 3: STAY TRACKING
+           =================================================================== -->
+      <div id="tab-tracking" class="user-tab-content space-y-6 hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-2xl font-black text-[var(--text-main)]">Real-Time Stay Progress Tracker</h2>
+            <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Follow every step of your pet's current boarding stay.</p>
+          </div>
+          <a href="stay-tracking.html" class="btn-brand-outline text-xs py-2 px-4 rounded-xl font-bold">
+            <i class="bi bi-arrows-fullscreen"></i> Fullscreen Tracker
+          </a>
+        </div>
+
+        <div id="userTrackingContainer">
+          <!-- Rendered by user-dashboard.js -->
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           TAB: VACCINE & HEALTH REMINDERS
+           =================================================================== -->
+      <div id="tab-reminders" class="user-tab-content space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-2xl font-black text-[var(--text-main)]">Vaccine & Health Reminders</h2>
+            <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">
+              Automated reminders for vaccine renewals, medication refills, flea preventatives, and grooming appointments.
+            </p>
+          </div>
+          <button onclick="openAddReminderModal()" class="btn-brand-accent text-xs font-bold py-2.5 px-4 rounded-xl shadow-md flex items-center gap-2">
+            <i class="bi bi-plus-circle-fill"></i>
+            <span>Log New Vaccine / Record</span>
+          </button>
+        </div>
+
+        <!-- Filter Badges -->
+        <div class="flex flex-wrap items-center gap-2 border-b border-[var(--border-color)] pb-4 text-xs font-bold">
+          <button onclick="filterUserReminders('all')" class="rem-filter-btn px-4 py-2 rounded-xl bg-[var(--brand-primary)] text-white shadow-sm" data-filter="all">All Reminders</button>
+          <button onclick="filterUserReminders('due')" class="rem-filter-btn px-4 py-2 rounded-xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)]" data-filter="due">Due Soon (&le; 14 days)</button>
+          <button onclick="filterUserReminders('valid')" class="rem-filter-btn px-4 py-2 rounded-xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)]" data-filter="valid">Up to Date</button>
+        </div>
+
+        <!-- Reminders Grid Container -->
+        <div id="userRemindersGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Populated by user-dashboard.js -->
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           TAB 4: DAILY LOGS
+           =================================================================== -->
+      <div id="tab-logs" class="user-tab-content space-y-6 hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-2xl font-black text-[var(--text-main)]">Daily Activity & Feeding Log</h2>
+            <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Time-stamped reports logged by your assigned caretakers.</p>
+          </div>
+        </div>
+
+        <div id="userDailyLogsContainer" class="space-y-4">
+          <!-- Rendered by user-dashboard.js -->
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           TAB 5: HEALTH REPORTS
+           =================================================================== -->
+      <div id="tab-health" class="user-tab-content space-y-6 hidden">
+        <div>
+          <h2 class="text-2xl font-black text-[var(--text-main)]">Health, Vitals & Medication Log</h2>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Monitored daily by Dr. Marcus Vance, DVM and licensed vet techs.</p>
+        </div>
+
+        <div id="userHealthReportsContainer">
+          <!-- Rendered by user-dashboard.js -->
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           TAB 6: PHOTO & VIDEO FEED
+           =================================================================== -->
+      <div id="tab-photos" class="user-tab-content space-y-6 hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-2xl font-black text-[var(--text-main)]">Daily Photo & Video Updates</h2>
+            <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Captured during yard play, agility training, and suite rest.</p>
+          </div>
+        </div>
+
+        <div id="userPhotosGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Rendered by user-dashboard.js -->
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           TAB 7: PAYMENTS & INVOICES
+           =================================================================== -->
+      <div id="tab-payments" class="user-tab-content space-y-6 hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-2xl font-black text-[var(--text-main)]">Stay Receipts & Payment Invoices</h2>
+            <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">View itemized billing records or download printable PDF invoices.</p>
+          </div>
+        </div>
+
+        <div class="card-paw overflow-x-auto rounded-3xl border border-[var(--border-color)]">
+          <table class="w-full text-xs text-left">
+            <thead class="bg-[var(--bg-subtle)] border-b border-[var(--border-color)] font-bold text-[var(--text-main)]">
+              <tr>
+                <th class="p-4">Invoice ID</th>
+                <th class="p-4">Pet</th>
+                <th class="p-4">Service Description</th>
+                <th class="p-4">Date</th>
+                <th class="p-4">Amount</th>
+                <th class="p-4">Status</th>
+                <th class="p-4 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="userInvoicesTableBody" class="divide-y divide-[var(--border-color)]">
+              <!-- Rendered by user-dashboard.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Pet Add / Edit Modal -->
+  <div id="petEditModal" class="modal-overlay">
+    <div class="modal-dialog max-w-lg p-6 bg-[var(--bg-surface)]">
+      <div class="flex items-center justify-between pb-4 border-b border-[var(--border-color)] mb-4">
+        <h3 id="petModalTitle" class="text-lg font-bold text-[var(--text-main)]">Edit Pet Profile</h3>
+        <button onclick="closeModal('petEditModal')" class="text-xl text-[var(--text-muted)] hover:text-[var(--brand-accent)] transition">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <form id="petForm" onsubmit="event.preventDefault(); savePetProfile();" class="space-y-4 text-xs">
+        <input type="hidden" id="petFormId">
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold text-[var(--text-muted)] mb-1">Pet Name *</label>
+            <input type="text" id="petFormName" required class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+          </div>
+          <div>
+            <label class="block font-bold text-[var(--text-muted)] mb-1">Species</label>
+            <select id="petFormSpecies" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+              <option value="Dog">Dog</option>
+              <option value="Cat">Cat</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold text-[var(--text-muted)] mb-1">Breed *</label>
+            <input type="text" id="petFormBreed" required class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+          </div>
+          <div>
+            <label class="block font-bold text-[var(--text-muted)] mb-1">Pet Age *</label>
+            <input type="text" id="petFormAge" required placeholder="e.g. 3 years" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold text-[var(--text-muted)] mb-1">Pet Weight *</label>
+            <input type="text" id="petFormWeight" required placeholder="e.g. 68 lbs" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+          </div>
+          <div>
+            <label class="block font-bold text-[var(--text-muted)] mb-1">Vaccination Status</label>
+            <select id="petFormVaccine" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+              <option value="Up to Date">Up to Date</option>
+              <option value="Renewal Due Soon">Renewal Due Soon</option>
+              <option value="Overdue">Overdue</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-[var(--text-muted)] mb-1">Special Care Notes / Allergies</label>
+          <textarea id="petFormNotes" rows="2" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)]"></textarea>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-4 border-t border-[var(--border-color)]">
+          <button type="button" onclick="closeModal('petEditModal')" class="btn-brand-outline text-xs py-2 px-4 rounded-xl">
+            Cancel
+          </button>
+          <button type="submit" class="btn-brand-accent text-xs py-2 px-5 rounded-xl font-bold">
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Invoice View & Print Modal -->
+  <div id="invoiceViewModal" class="modal-overlay">
+    <div class="modal-dialog max-w-3xl p-6 sm:p-7 bg-[var(--bg-surface)]">
+      <div class="flex items-center justify-between pb-4 border-b border-[var(--border-color)] mb-4">
+        <div class="flex items-center gap-2.5">
+          <span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 flex items-center justify-center font-bold text-lg">
+            <i class="bi bi-receipt"></i>
+          </span>
+          <div>
+            <h3 class="text-base font-bold text-[var(--text-main)] leading-tight">Official Stay Invoice & Receipt</h3>
+            <p class="text-[11px] text-[var(--text-muted)]">Verified digital record for pet boarding & daycare</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button type="button" onclick="openCurrentInvoiceInNewTab()" class="text-xs font-semibold text-[var(--brand-primary)] dark:text-emerald-400 hover:underline flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--bg-subtle)] border border-[var(--border-color)] shadow-xs transition" title="Open complete invoice in a new window">
+            <i class="bi bi-box-arrow-up-right"></i> <span class="hidden sm:inline">Open Full View</span>
+          </button>
+          <button type="button" onclick="closeModal('invoiceViewModal')" class="text-xl text-[var(--text-muted)] hover:text-[var(--brand-accent)] transition">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div id="invoiceModalContent">
+        <!-- Rendered by user-dashboard.js -->
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[var(--border-color)] mt-4 no-print">
+        <button type="button" onclick="closeModal('invoiceViewModal')" class="btn-brand-outline text-xs py-2 px-4 rounded-xl">
+          Close
+        </button>
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" onclick="downloadCurrentInvoiceTxt()" class="btn-brand-outline text-xs py-2 px-3.5 rounded-xl font-bold flex items-center gap-1.5 shadow-sm" title="Download formatted plain-text receipt">
+            <i class="bi bi-file-earmark-text text-emerald-600"></i> Text (.txt)
+          </button>
+          <button type="button" onclick="downloadCurrentInvoiceHtml()" class="btn-brand-outline text-xs py-2 px-3.5 rounded-xl font-bold flex items-center gap-1.5 shadow-sm" title="Download permanent standalone HTML invoice">
+            <i class="bi bi-filetype-html text-amber-600"></i> Complete (.html)
+          </button>
+          <button type="button" onclick="printCurrentInvoice()" class="btn-brand-primary text-xs py-2 px-4 rounded-xl font-bold flex items-center gap-1.5 shadow-md" title="Print full invoice or save as PDF">
+            <i class="bi bi-printer-fill"></i> Print / Save as PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Reminder Modal -->
+  <div id="addReminderModal" class="modal-overlay">
+    <div class="modal-dialog max-w-lg p-6 bg-[var(--bg-surface)]">
+      <div class="flex items-center justify-between pb-4 border-b border-[var(--border-color)] mb-4">
+        <h3 class="text-base font-bold text-[var(--text-main)]">Log Health / Vaccine Record</h3>
+        <button onclick="closeModal('addReminderModal')" class="text-xl text-[var(--text-muted)] hover:text-[var(--brand-accent)] transition">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <form id="newReminderForm" onsubmit="event.preventDefault(); saveNewReminder();" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-[var(--text-muted)] mb-1">Select Pet *</label>
+          <select id="remPetSelect" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+            <option value="Max">Max (Golden Retriever)</option>
+            <option value="Bella">Bella (French Bulldog)</option>
+            <option value="Charlie">Charlie (Labrador)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-bold text-[var(--text-muted)] mb-1">Treatment / Vaccine Type *</label>
+          <select id="remTypeSelect" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+            <option value="Bordetella (Kennel Cough)">Bordetella (Kennel Cough)</option>
+            <option value="Rabies (1 or 3 yr)">Rabies (1 or 3 yr)</option>
+            <option value="DHPP Core Vaccine">DHPP Core Vaccine</option>
+            <option value="Flea & Tick Treatment">Flea & Tick Treatment</option>
+            <option value="Full Grooming Due">Full Grooming Due</option>
+            <option value="Annual Wellness Exam">Annual Wellness Exam</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold text-[var(--text-muted)] mb-1">Due Date *</label>
+            <input type="date" id="remDueDate" required class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)]">
+          </div>
+          <div>
+            <label class="block font-bold text-[var(--text-muted)] mb-1">Veterinary Clinic</label>
+            <input type="text" id="remClinic" value="Dr. Marcus Vance (Resort Clinic)" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)]">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-[var(--text-muted)] mb-1">Notes / Certificate ID</label>
+          <input type="text" id="remCertId" placeholder="e.g. Cert #VET-98214" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)]">
+        </div>
+
+        <div class="flex justify-end gap-2 pt-4 border-t border-[var(--border-color)]">
+          <button type="button" onclick="closeModal('addReminderModal')" class="btn-brand-outline text-xs py-2 px-4 rounded-xl">
+            Cancel
+          </button>
+          <button type="submit" class="btn-brand-accent text-xs py-2 px-5 rounded-xl font-bold">
+            Save Record
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/user-dashboard.js"></script>
+  <script>
+    // Mobile Sidebar Toggle
+    const openBtn = document.getElementById("openUserSidebar");
+    const closeBtn = document.getElementById("closeUserSidebar");
+    const sidebar = document.getElementById("userSidebar");
+    const overlay = document.getElementById("userSidebarOverlay");
+
+    openBtn?.addEventListener("click", () => {
+      sidebar.classList.remove("-translate-x-full");
+      overlay.classList.remove("hidden");
+    });
+    closeBtn?.addEventListener("click", () => {
+      sidebar.classList.add("-translate-x-full");
+      overlay.classList.add("hidden");
+    });
+    overlay?.addEventListener("click", () => {
+      sidebar.classList.add("-translate-x-full");
+      overlay.classList.add("hidden");
+    });
+  </script>
+</body>
+</html>

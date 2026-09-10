@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Pet Profile - PawsHaven Resort</title>
+  <meta name="description" content="Create your free PawsHaven Pet Parent account to register your pets, schedule boarding stays, and access private live streaming webcams.">
+  
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Prevent Theme & Layout Flicker (Anti-FOUC) -->
+  <script>
+    (function() {
+      const t = localStorage.getItem('paws_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.documentElement.classList.add('dark');
+      const d = localStorage.getItem('paws_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', d);
+      if (d === 'rtl') document.documentElement.classList.add('rtl');
+
+      document.documentElement.classList.add('paws-loading');
+      function reveal() {
+        document.documentElement.classList.remove('paws-loading');
+      }
+      if (document.readyState === 'complete') {
+        reveal();
+      } else {
+        window.addEventListener('DOMContentLoaded', reveal);
+        setTimeout(reveal, 250);
+      }
+    })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#1B4D3E',
+              sage: '#2D6A4F',
+              coral: '#E07A5F',
+              amber: '#F4A261',
+              ivory: '#FAF8F5',
+              sand: '#F4EFEA',
+              charcoal: '#2C3E35'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-theme-base text-theme-main antialiased selection:bg-[#E07A5F] selection:text-white min-h-screen flex flex-col justify-between">
+
+  <!-- Navbar -->
+  <div id="paws-navbar"></div>
+
+  <!-- Register Card Section with Blurred Resort Backdrop -->
+  <section class="relative pt-32 pb-20 flex-1 flex items-center justify-center px-4 overflow-hidden">
+    <!-- Blurred Resort Background -->
+    <div class="absolute inset-0 bg-cover bg-center filter blur-xl scale-110 opacity-40 dark:opacity-20 pointer-events-none" style="background-image: url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-md pointer-events-none"></div>
+
+    <div class="relative z-10 card-paw p-8 sm:p-10 bg-[var(--bg-surface)] max-w-xl w-full rounded-3xl shadow-[0_30px_90px_rgba(0,0,0,0.6)] border-2 border-[var(--border-color)]">
+      
+      <div class="text-center mb-8">
+        <div class="w-12 h-12 rounded-2xl bg-[var(--brand-accent)] text-white flex items-center justify-center text-2xl mx-auto mb-3 shadow-md">
+          <i class="bi bi-heart-fill"></i>
+        </div>
+        <h1 class="text-2xl font-black text-[var(--text-main)]">Join the PawsHaven Family</h1>
+        <p class="text-xs text-[var(--text-muted)] mt-1">Create your pet parent profile in under 2 minutes</p>
+      </div>
+
+      <form id="registerForm" onsubmit="event.preventDefault(); handleRegister();" class="space-y-4 text-xs">
+        <div class="space-y-3 pb-4 border-b border-[var(--border-color)]">
+          <span class="block font-bold text-xs uppercase tracking-wider text-[var(--brand-primary)]">1. Pet Parent Information</span>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block font-bold text-[var(--text-muted)] mb-1">Your Full Name *</label>
+              <input type="text" id="regName" required placeholder="e.g. Rachel Adams" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+            </div>
+            <div>
+              <label class="block font-bold text-[var(--text-muted)] mb-1">Phone Number *</label>
+              <input type="tel" id="regPhone" required placeholder="+1 (555) 000-0000" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block font-bold text-[var(--text-muted)] mb-1">Email Address *</label>
+              <input type="email" id="regEmail" required placeholder="rachel@example.com" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+            </div>
+            <div>
+              <label class="block font-bold text-[var(--text-muted)] mb-1">Password *</label>
+              <input type="password" id="regPassword" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3 pt-2">
+          <span class="block font-bold text-xs uppercase tracking-wider text-[var(--brand-accent)]">2. Primary Pet Details</span>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block font-bold text-[var(--text-muted)] mb-1">Pet's Name *</label>
+              <input type="text" id="regPetName" required placeholder="e.g. Toby" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+            </div>
+            <div>
+              <label class="block font-bold text-[var(--text-muted)] mb-1">Species *</label>
+              <select id="regPetSpecies" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block font-bold text-[var(--text-muted)] mb-1">Breed *</label>
+              <input type="text" id="regPetBreed" required placeholder="e.g. Corgi" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+            </div>
+            <div>
+              <label class="block font-bold text-[var(--text-muted)] mb-1">Pet Age *</label>
+              <input type="text" id="regPetAge" required placeholder="e.g. 2 years" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+            </div>
+            <div>
+              <label class="block font-bold text-[var(--text-muted)] mb-1">Pet Weight *</label>
+              <input type="text" id="regPetWeight" required placeholder="e.g. 28 lbs" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" required checked class="rounded text-[var(--brand-primary)] focus:ring-0">
+            <span class="text-xs text-[var(--text-muted)]">I agree to PawsHaven Resort Terms & Vaccination Safety Standards.</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-brand-accent w-full py-3.5 rounded-xl font-bold text-sm shadow-xl mt-4">
+          Create Account & Pet Profile
+        </button>
+      </form>
+
+      <div class="text-center pt-6 mt-6 border-t border-[var(--border-color)] text-xs text-[var(--text-muted)]">
+        Already registered? <button type="button" onclick="openAuthModal('login')" class="font-bold text-[var(--brand-primary)] hover:underline">Log In to Portal</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="paws-footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script>
+    function handleRegister() {
+      const name = document.getElementById("regName").value.trim();
+      const phone = document.getElementById("regPhone").value.trim();
+      const email = document.getElementById("regEmail").value.trim().toLowerCase();
+      const password = document.getElementById("regPassword").value;
+      const petName = document.getElementById("regPetName").value.trim();
+      const species = document.getElementById("regPetSpecies").value;
+      const breed = document.getElementById("regPetBreed").value.trim();
+      const age = document.getElementById("regPetAge").value.trim() || "Adult";
+      const weight = document.getElementById("regPetWeight").value.trim() || "Medium";
+
+      const newUser = {
+        id: "usr-" + Date.now().toString().slice(-4),
+        name,
+        email,
+        password,
+        phone,
+        role: "owner",
+        avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
+        joinedDate: "Today"
+      };
+
+      const newPet = {
+        id: "pet-" + Date.now().toString().slice(-4),
+        name: petName,
+        species,
+        breed,
+        gender: "Friendly",
+        age,
+        weight,
+        avatar: species === "Cat"
+          ? "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=400&q=80"
+          : "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=400&q=80",
+        ownerId: newUser.id,
+        ownerName: name,
+        ownerEmail: email,
+        ownerPhone: phone,
+        vaccinationStatus: "Pending Verification",
+        vaccinationExpiry: "2027-04-01",
+        specialNotes: "New registration.",
+        emergencyContact: `${name} (${phone})`
+      };
+
+      let users = JSON.parse(localStorage.getItem("paws_users") || "[]");
+      users.push(newUser);
+      localStorage.setItem("paws_users", JSON.stringify(users));
+
+      let pets = JSON.parse(localStorage.getItem("paws_pets") || "[]");
+      pets.push(newPet);
+      localStorage.setItem("paws_pets", JSON.stringify(pets));
+
+      setCurrentUser(newUser);
+      showToast(`🎉 Welcome to PawsHaven, ${name}! Profile created for ${petName}.`, "success", 4000);
+      setTimeout(() => {
+        window.location.href = "user.html";
+      }, 900);
+    }
+  </script>
+</body>
+</html>

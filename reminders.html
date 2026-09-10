@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vaccination & Wellness Reminders - PawsHaven</title>
+  <meta name="description" content="Stay on top of your pet's vaccination renewal deadlines, flea/tick preventatives, grooming appointments, and vet wellness exams with automated reminders.">
+  
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Prevent Theme & Layout Flicker (Anti-FOUC) -->
+  <script>
+    (function() {
+      const t = localStorage.getItem('paws_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.documentElement.classList.add('dark');
+      const d = localStorage.getItem('paws_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', d);
+      if (d === 'rtl') document.documentElement.classList.add('rtl');
+
+      document.documentElement.classList.add('paws-loading');
+      function reveal() {
+        document.documentElement.classList.remove('paws-loading');
+      }
+      if (document.readyState === 'complete') {
+        reveal();
+      } else {
+        window.addEventListener('DOMContentLoaded', reveal);
+        setTimeout(reveal, 250);
+      }
+    })();
+  </script>
+
+  <!-- Auth Route Protection Guard (Login Required) -->
+  <script>
+    (function() {
+      const activeSession = sessionStorage.getItem('paws_logged_in_this_session');
+      const currentUser = localStorage.getItem('paws_current_user');
+      if (!activeSession || !currentUser) {
+        window.location.replace('index.html?auth=login&redirect=' + encodeURIComponent('user.html#reminders'));
+      }
+    })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#1B4D3E',
+              sage: '#2D6A4F',
+              coral: '#E07A5F',
+              amber: '#F4A261',
+              ivory: '#FAF8F5',
+              sand: '#F4EFEA',
+              charcoal: '#2C3E35'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-theme-base text-theme-main antialiased selection:bg-[#E07A5F] selection:text-white">
+
+  <!-- Navbar -->
+  <div id="paws-navbar"></div>
+
+  <!-- Header -->
+  <section class="pt-32 pb-12 lg:pt-36 lg:pb-16 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="badge-pet badge-teal text-xs mb-2">Preventative Health Hub</span>
+          <h1 class="text-3xl sm:text-4xl font-black text-[var(--text-main)]">
+            Vaccination & Wellness Reminders
+          </h1>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">
+            Never miss a vaccination renewal or flea preventative treatment. All records sync automatically with your boarding profile.
+          </p>
+        </div>
+
+        <button onclick="openModal('addReminderModal')" class="btn-brand-accent text-xs font-bold py-3 px-5 rounded-xl shadow-md">
+          <i class="bi bi-plus-circle-fill"></i> Log New Vaccine or Record
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Reminders Grid -->
+  <section class="pb-24 bg-[var(--bg-base)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="remindersContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Add Reminder Modal -->
+  <div id="addReminderModal" class="modal-overlay">
+    <div class="modal-dialog max-w-lg p-6 bg-[var(--bg-surface)]">
+      <div class="flex items-center justify-between pb-4 border-b border-[var(--border-color)] mb-4">
+        <h3 class="text-lg font-bold text-[var(--text-main)]">Log Health / Vaccine Record</h3>
+        <button onclick="closeModal('addReminderModal')" class="text-xl text-[var(--text-muted)] hover:text-[var(--brand-accent)] transition">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <form id="newReminderForm" onsubmit="event.preventDefault(); saveReminder();" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-[var(--text-muted)] mb-1">Select Pet *</label>
+          <select id="remPetSelect" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+            <option value="Max">Max (Golden Retriever)</option>
+            <option value="Bella">Bella (French Bulldog)</option>
+            <option value="Luna">Luna (Siamese Cat)</option>
+            <option value="Charlie">Charlie (Labrador)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-bold text-[var(--text-muted)] mb-1">Treatment / Vaccine Type *</label>
+          <select id="remTypeSelect" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+            <option value="Bordetella (Kennel Cough)">Bordetella (Kennel Cough)</option>
+            <option value="Rabies (1 or 3 yr)">Rabies (1 or 3 yr)</option>
+            <option value="DHPP Core Vaccine">DHPP Core Vaccine</option>
+            <option value="Flea & Tick Treatment">Flea & Tick Treatment</option>
+            <option value="Full Grooming Due">Full Grooming Due</option>
+            <option value="Annual Wellness Exam">Annual Wellness Exam</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold text-[var(--text-muted)] mb-1">Due Date *</label>
+            <input type="date" id="remDueDate" required class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)]">
+          </div>
+          <div>
+            <label class="block font-bold text-[var(--text-muted)] mb-1">Veterinary Clinic</label>
+            <input type="text" id="remClinic" value="Dr. Marcus Vance (Resort Clinic)" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)]">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-[var(--text-muted)] mb-1">Notes / Certificate ID</label>
+          <input type="text" id="remCertId" placeholder="e.g. Cert #VET-98214" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)]">
+        </div>
+
+        <div class="flex justify-end gap-2 pt-4 border-t border-[var(--border-color)]">
+          <button type="button" onclick="closeModal('addReminderModal')" class="btn-brand-outline text-xs py-2 px-4 rounded-xl">
+            Cancel
+          </button>
+          <button type="submit" class="btn-brand-accent text-xs py-2 px-5 rounded-xl font-bold">
+            Save Record
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="paws-footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script>
+    let reminders = [
+      { id: "rem-1", pet: "Max", type: "Bordetella (Kennel Cough)", dueDate: "2026-09-21", daysLeft: 14, status: "Due Soon", badgeClass: "badge-amber", icon: "bi-shield-exclamation" },
+      { id: "rem-2", pet: "Max", type: "Flea & Tick Preventative", dueDate: "2026-09-12", daysLeft: 5, status: "Due Soon", badgeClass: "badge-coral", icon: "bi-bug-fill" },
+      { id: "rem-3", pet: "Max", type: "Full Grooming & Pawdicure", dueDate: "2026-09-15", daysLeft: 8, status: "Due Soon", badgeClass: "badge-teal", icon: "bi-scissors" },
+      { id: "rem-4", pet: "Max", type: "DHPP Core Vaccine", dueDate: "2026-10-22", daysLeft: 45, status: "Valid", badgeClass: "badge-teal", icon: "bi-shield-check" },
+      { id: "rem-5", pet: "Max", type: "Rabies Vaccine", dueDate: "2027-03-10", daysLeft: 184, status: "Valid", badgeClass: "badge-teal", icon: "bi-patch-check-fill" },
+      { id: "rem-6", pet: "Bella", type: "Eye Medication Refill", dueDate: "2026-09-10", daysLeft: 3, status: "Due Soon", badgeClass: "badge-coral", icon: "bi-capsule" }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Set default modal date to 30 days ahead
+      const d = new Date();
+      d.setDate(d.getDate() + 30);
+      document.getElementById("remDueDate").value = d.toISOString().split("T")[0];
+
+      const savedReminders = localStorage.getItem("paws_reminders");
+      if (savedReminders) {
+        reminders = JSON.parse(savedReminders);
+      }
+      renderReminders();
+    });
+
+    function renderReminders() {
+      const container = document.getElementById("remindersContainer");
+      container.innerHTML = reminders.map(r => `
+        <div class="card-paw p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-start justify-between gap-2 mb-4">
+              <div class="w-12 h-12 rounded-2xl bg-[var(--bg-subtle)] flex items-center justify-center text-xl text-[var(--brand-primary)]">
+                <i class="bi ${r.icon}"></i>
+              </div>
+              <span class="badge-pet ${r.badgeClass} text-[10px]">${r.status}</span>
+            </div>
+
+            <span class="text-xs font-semibold text-[var(--text-muted)] block">For Pet: <strong>${r.pet}</strong></span>
+            <h3 class="text-base font-bold text-[var(--text-main)] mt-0.5 mb-2">${r.type}</h3>
+
+            <div class="p-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-xs space-y-1 mb-4">
+              <div class="flex justify-between">
+                <span class="text-[var(--text-muted)]">Renewal Due:</span>
+                <span class="font-bold text-[var(--text-main)]">${r.dueDate}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--text-muted)]">Remaining Time:</span>
+                <span class="font-bold ${r.daysLeft <= 7 ? 'text-rose-600' : 'text-emerald-600'}">${r.daysLeft} Days Left</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 pt-2 border-t border-[var(--border-color)]">
+            <button onclick="showToast('Reminder updated for ${r.type}', 'success')" class="btn-brand-primary text-xs py-2 px-3 rounded-xl flex-1 text-center font-bold">
+              Mark Completed
+            </button>
+            <button onclick="quickBookService('bathing-grooming')" class="btn-brand-outline text-xs py-2 px-3 rounded-xl">
+              Book
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function saveReminder() {
+      const pet = document.getElementById("remPetSelect").value;
+      const type = document.getElementById("remTypeSelect").value;
+      const dueDate = document.getElementById("remDueDate").value;
+
+      const d1 = new Date();
+      const d2 = new Date(dueDate);
+      const diffDays = Math.ceil((d2 - d1) / (1000 * 60 * 60 * 24));
+
+      let badgeClass = "badge-teal";
+      let status = "Valid";
+      if (diffDays <= 7) {
+        badgeClass = "badge-coral";
+        status = "Due Soon";
+      } else if (diffDays <= 14) {
+        badgeClass = "badge-amber";
+        status = "Due Soon";
+      }
+
+      reminders.unshift({
+        id: "rem-" + Date.now(),
+        pet,
+        type,
+        dueDate,
+        daysLeft: diffDays > 0 ? diffDays : 0,
+        status,
+        badgeClass,
+        icon: "bi-shield-check"
+      });
+
+      localStorage.setItem("paws_reminders", JSON.stringify(reminders));
+      closeModal("addReminderModal");
+      showToast(`Logged reminder for ${pet} (${type})!`, "success");
+      renderReminders();
+    }
+  </script>
+</body>
+</html>

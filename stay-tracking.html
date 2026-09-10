@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Stay Progress Tracker - PawsHaven Resort</title>
+  <meta name="description" content="Track your pet's boarding or daycare stay in real time. Follow the 5 stages from arrival to ready for pickup with caretaker updates and webcam feeds.">
+  
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Prevent Theme & Layout Flicker (Anti-FOUC) -->
+  <script>
+    (function() {
+      const t = localStorage.getItem('paws_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.documentElement.classList.add('dark');
+      const d = localStorage.getItem('paws_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', d);
+      if (d === 'rtl') document.documentElement.classList.add('rtl');
+
+      document.documentElement.classList.add('paws-loading');
+      function reveal() {
+        document.documentElement.classList.remove('paws-loading');
+      }
+      if (document.readyState === 'complete') {
+        reveal();
+      } else {
+        window.addEventListener('DOMContentLoaded', reveal);
+        setTimeout(reveal, 250);
+      }
+    })();
+  </script>
+
+  <!-- Auth Route Protection Guard (Login Required) -->
+  <script>
+    (function() {
+      const activeSession = sessionStorage.getItem('paws_logged_in_this_session');
+      const currentUser = localStorage.getItem('paws_current_user');
+      if (!activeSession || !currentUser) {
+        window.location.replace('index.html?auth=login&redirect=' + encodeURIComponent('user.html#tracking'));
+      }
+    })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#1B4D3E',
+              sage: '#2D6A4F',
+              coral: '#E07A5F',
+              amber: '#F4A261',
+              ivory: '#FAF8F5',
+              sand: '#F4EFEA',
+              charcoal: '#2C3E35'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-theme-base text-theme-main antialiased selection:bg-[#E07A5F] selection:text-white">
+
+  <!-- Navbar -->
+  <div id="paws-navbar"></div>
+
+  <!-- Header -->
+  <section class="pt-32 pb-12 lg:pt-36 lg:pb-16 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-pet badge-coral text-xs"><span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span> Live Tracking</span>
+            <span class="text-xs text-[var(--text-muted)] font-semibold">Stay ID: <strong id="trackStayId" class="text-[var(--text-main)]">STAY-9041</strong></span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-black text-[var(--text-main)]">
+            <span id="trackPetName">Max</span>'s Resort Journey
+          </h1>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-1">
+            Real-time status updates, live webcams, and caretaker notes for this stay.
+          </p>
+        </div>
+
+        <!-- Quick Contact Front Desk -->
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+          <button onclick="showToast('Calling Concierge Front Desk: (555) PAW-STAY', 'info')" class="btn-brand-outline text-xs py-2.5 px-4 rounded-xl font-bold flex-1 sm:flex-initial text-center justify-center whitespace-nowrap">
+            <i class="bi bi-telephone-fill"></i> Call Front Desk
+          </button>
+          <button onclick="showToast('Message sent to assigned caretaker Jessica M.', 'success')" class="btn-brand-accent text-xs py-2.5 px-4 rounded-xl font-bold flex-1 sm:flex-initial text-center justify-center whitespace-nowrap">
+            <i class="bi bi-chat-text-fill"></i> Message Caretaker
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Tracker Main Body -->
+  <section class="pb-24 bg-[var(--bg-base)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      
+      <!-- 5-Stage Interactive Progress Bar Card -->
+      <div class="card-paw p-6 sm:p-10 bg-[var(--bg-surface)] shadow-xl border-2 border-[var(--border-color)]">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[var(--border-color)] mb-8">
+          <div>
+            <span class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Current Boarding Status</span>
+            <div class="flex items-center gap-3 mt-1 flex-wrap">
+              <span id="trackStatusBadge" class="text-xl sm:text-2xl font-black text-[var(--brand-accent)]">Daily Activities</span>
+              <span id="trackPercentBadge" class="badge-pet badge-teal text-xs">60% Completed</span>
+            </div>
+          </div>
+
+          <div class="text-left sm:text-right pt-3 sm:pt-0 border-t sm:border-t-0 border-[var(--border-color)]/60">
+            <span class="text-xs text-[var(--text-muted)] block">Estimated Pickup Time</span>
+            <span id="trackPickupTime" class="text-sm font-bold text-[var(--text-main)]">Sep 10, 2026 • 04:30 PM</span>
+          </div>
+        </div>
+
+        <!-- 5 Steps Nodes -->
+        <div id="trackerStepsContainer" class="flex flex-col md:flex-row items-start md:items-center justify-between gap-0 md:gap-4 mb-8 relative">
+          <!-- Rendered by JavaScript -->
+        </div>
+
+        <!-- Interactive Simulator Buttons for Demo -->
+        <div class="p-4 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <span class="text-xs font-bold text-[var(--text-muted)] flex items-center gap-1.5">
+            <i class="bi bi-sliders text-[var(--brand-accent)]"></i> Interactive Demo Simulator: Click to advance stage
+          </span>
+          <div class="flex flex-wrap gap-1.5 w-full sm:w-auto">
+            <button onclick="simulateStage(1)" class="sim-btn px-2.5 py-1.5 rounded-lg text-xs font-bold bg-[var(--bg-surface)] border hover:bg-[var(--brand-primary)] hover:text-white transition flex-1 sm:flex-initial text-center whitespace-nowrap">1. Checked In</button>
+            <button onclick="simulateStage(2)" class="sim-btn px-2.5 py-1.5 rounded-lg text-xs font-bold bg-[var(--bg-surface)] border hover:bg-[var(--brand-primary)] hover:text-white transition flex-1 sm:flex-initial text-center whitespace-nowrap">2. Settling In</button>
+            <button onclick="simulateStage(3)" class="sim-btn px-2.5 py-1.5 rounded-lg text-xs font-bold bg-[var(--brand-accent)] text-white shadow-sm font-bold flex-1 sm:flex-initial text-center whitespace-nowrap">3. Activities</button>
+            <button onclick="simulateStage(4)" class="sim-btn px-2.5 py-1.5 rounded-lg text-xs font-bold bg-[var(--bg-surface)] border hover:bg-[var(--brand-primary)] hover:text-white transition flex-1 sm:flex-initial text-center whitespace-nowrap">4. Health Check</button>
+            <button onclick="simulateStage(5)" class="sim-btn px-2.5 py-1.5 rounded-lg text-xs font-bold bg-[var(--bg-surface)] border hover:bg-[var(--brand-primary)] hover:text-white transition flex-1 sm:flex-initial text-center whitespace-nowrap">5. Ready for Pickup</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Two Column Details: Left Cam + Notes, Right Caretaker & Details -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Column 1: Live Webcam Stream & Recent Activity Snapshot -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="card-paw p-6 bg-[var(--bg-surface)] space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-base text-[var(--text-main)] flex items-center gap-2">
+                <i class="bi bi-camera-video-fill text-rose-500 animate-pulse"></i>
+                <span>Private Suite Webcam Feed</span>
+              </h3>
+              <span class="badge-pet badge-teal text-[10px]"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Streaming Live</span>
+            </div>
+
+            <div class="relative rounded-2xl overflow-hidden aspect-video bg-black shadow-lg">
+              <img id="trackerWebcamImg" src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=800&q=80" alt="Live Camera" class="w-full h-full object-cover">
+              <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-white text-[11px] font-bold flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                <span>CAM 07: Deluxe Glass Suite</span>
+              </div>
+              <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg text-white text-[10px]">
+                1080p Full HD • Night Vision Active
+              </div>
+            </div>
+
+            <p class="text-xs text-[var(--text-muted)] italic text-center">
+              Webcam is continuous 24/7. Protected by private TLS parent encryption.
+            </p>
+          </div>
+
+          <!-- Latest Caretaker Observation Log -->
+          <div class="card-paw p-6 bg-[var(--bg-surface)] space-y-3">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-sm text-[var(--text-main)] flex items-center gap-2">
+                <i class="bi bi-journal-text text-[var(--brand-accent)]"></i>
+                <span>Caretaker Shift Observation</span>
+              </h4>
+              <span class="text-[11px] text-[var(--text-muted)]">Logged 15 mins ago</span>
+            </div>
+            <div class="p-4 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)]">
+              <p id="trackNoteText" class="text-xs sm:text-sm text-[var(--text-main)] font-medium leading-relaxed">
+                "Max had a blast in the afternoon splash pool and ate his whole salmon dinner with enthusiasm! Paws inspected and cleaned."
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Assigned Caretaker & Pet Info -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Assigned Caretaker Profile -->
+          <div class="card-paw p-4 sm:p-6 bg-[var(--bg-surface)] space-y-3 sm:space-y-4">
+            <h4 class="font-bold text-sm text-[var(--text-main)] uppercase tracking-wider text-xs">
+              Assigned Lead Caretaker
+            </h4>
+            
+            <div class="flex items-center gap-3 sm:gap-4">
+              <img id="caretakerAvatar" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&h=400&q=80" alt="Caretaker" class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl object-cover shadow-md border-2 border-[var(--border-color)] flex-shrink-0">
+              <div>
+                <h3 id="caretakerName" class="font-bold text-sm sm:text-base text-[var(--text-main)]">Jessica Miller</h3>
+                <p class="text-xs text-[var(--brand-accent)] font-semibold">Resort Director & Certified Vet Tech</p>
+                <div class="flex flex-wrap gap-1 mt-1.5">
+                  <span class="badge-pet badge-teal text-[9px]">CPR Certified</span>
+                  <span class="badge-pet badge-teal text-[9px]">Fear Free</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed pt-2 border-t border-[var(--border-color)]">
+              Jessica oversees daily feeding schedules, yard play matches, and nighttime health checks for this suite.
+            </p>
+          </div>
+
+          <!-- Pet & Stay Parameters -->
+          <div class="card-paw p-6 bg-[var(--bg-surface)] space-y-4">
+            <h4 class="font-bold text-sm text-[var(--text-main)] uppercase tracking-wider text-xs">
+              Stay Details
+            </h4>
+
+            <div class="space-y-2.5 text-xs">
+              <div class="flex justify-between border-b border-[var(--border-color)] pb-2">
+                <span class="text-[var(--text-muted)]">Pet Guest:</span>
+                <strong id="petNameVal" class="text-[var(--text-main)]">Max (Golden Retriever)</strong>
+              </div>
+              <div class="flex justify-between border-b border-[var(--border-color)] pb-2">
+                <span class="text-[var(--text-muted)]">Suite Accommodation:</span>
+                <span id="suiteVal" class="font-bold text-[var(--brand-primary)]">Deluxe Glass Suite #07</span>
+              </div>
+              <div class="flex justify-between border-b border-[var(--border-color)] pb-2">
+                <span class="text-[var(--text-muted)]">Check-in Date:</span>
+                <span id="checkInVal" class="text-[var(--text-main)]">Sep 06, 2026</span>
+              </div>
+              <div class="flex justify-between border-b border-[var(--border-color)] pb-2">
+                <span class="text-[var(--text-muted)]">Check-out Date:</span>
+                <span id="checkOutVal" class="text-[var(--text-main)]">Sep 10, 2026</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[var(--text-muted)]">Special Diet / Allergy:</span>
+                <span class="text-rose-600 font-semibold">Salmon kibble only (No chicken)</span>
+              </div>
+            </div>
+
+            <a href="user.html" class="btn-brand-outline w-full text-xs py-2.5 rounded-xl font-bold text-center block">
+              <i class="bi bi-speedometer2"></i> Open Full Dashboard
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="paws-footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script>
+    let currentStage = 3;
+
+    const stagesData = [
+      { num: 1, title: "Checked In", desc: "Arrival & VIP welcome", icon: "bi-box-arrow-in-right", status: "Checked In", percent: "20%", note: "Arrival complete! Max settled into Deluxe Suite #07 with fresh filtered water and plush bed." },
+      { num: 2, title: "Settling In", desc: "Scent acclimation & nap", icon: "bi-house-check", status: "Settling In", percent: "40%", note: "Max sniffed the suite happily and enjoyed his welcome organic peanut butter treat." },
+      { num: 3, title: "Daily Activities", desc: "Meadows, play & meals", icon: "bi-tree-fill", status: "In Care", percent: "60%", note: "Max had a blast in the afternoon splash pool and ate his whole salmon dinner with enthusiasm!" },
+      { num: 4, title: "Health Check", desc: "Vitals, coat brush & spritz", icon: "bi-heart-pulse-fill", status: "Health Check", percent: "80%", note: "Vitals: 101.3°F normal. Coat brushed silky smooth, paws moisturized with organic balm." },
+      { num: 5, title: "Ready for Pickup", desc: "Packed & awaiting reunion", icon: "bi-emoji-smile-fill", status: "Ready for Pickup", percent: "100%", note: "Max is freshly groomed, luggage packed, and excited to see his family at the front desk!" }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Check query param for stay id
+      const params = new URLSearchParams(window.location.search);
+      const stayId = params.get("id");
+      if (stayId) {
+        const stays = JSON.parse(localStorage.getItem("paws_stays") || "[]");
+        const match = stays.find(s => s.id === stayId);
+        if (match) {
+          document.getElementById("trackStayId").textContent = match.id;
+          document.getElementById("trackPetName").textContent = match.petName;
+          document.getElementById("petNameVal").textContent = `${match.petName} (${match.breed})`;
+          document.getElementById("suiteVal").textContent = match.suite;
+          document.getElementById("checkInVal").textContent = match.checkInDate;
+          document.getElementById("checkOutVal").textContent = match.checkOutDate;
+          currentStage = match.stageIndex || 3;
+        }
+      }
+      renderTracker();
+    });
+
+    function renderTracker() {
+      const stageObj = stagesData[currentStage - 1];
+      document.getElementById("trackStatusBadge").textContent = stageObj.title;
+      document.getElementById("trackPercentBadge").textContent = `${stageObj.percent} Completed`;
+      document.getElementById("trackNoteText").textContent = `"${stageObj.note}"`;
+
+      const container = document.getElementById("trackerStepsContainer");
+      container.innerHTML = stagesData.map((st, idx) => {
+        let stateClass = "";
+        let badgeHtml = "";
+        if (st.num < currentStage) {
+          stateClass = "completed";
+          badgeHtml = `<span class="badge-pet badge-teal text-[9px] py-0.5 px-2 md:hidden">Completed</span>`;
+        } else if (st.num === currentStage) {
+          stateClass = "active";
+          badgeHtml = `<span class="badge-pet badge-coral text-[9px] py-0.5 px-2 md:hidden animate-pulse">In Progress</span>`;
+        } else {
+          badgeHtml = `<span class="text-[10px] text-[var(--text-muted)] md:hidden">Upcoming</span>`;
+        }
+
+        const isLast = idx === stagesData.length - 1;
+        return `
+          <div class="tracker-step ${stateClass} flex md:flex-col items-start md:items-center gap-3.5 md:gap-2 w-full ${isLast ? '' : 'pb-6 md:pb-0'}">
+            <div class="tracker-node flex-shrink-0">
+              <i class="bi ${st.num < currentStage ? 'bi-check-lg text-lg' : st.icon}"></i>
+            </div>
+            <div class="tracker-content flex-1 min-w-0 text-left md:text-center pt-0.5 md:pt-0">
+              <div class="flex items-center gap-2 flex-wrap md:justify-center">
+                <h5 class="font-bold text-xs sm:text-sm text-[var(--text-main)]">${st.title}</h5>
+                ${badgeHtml}
+              </div>
+              <p class="text-[11px] text-[var(--text-muted)] mt-0.5 leading-relaxed">${st.desc}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Update simulator buttons
+      document.querySelectorAll(".sim-btn").forEach((btn, idx) => {
+        if (idx + 1 === currentStage) {
+          btn.className = "sim-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-[var(--brand-accent)] text-white shadow-sm";
+        } else {
+          btn.className = "sim-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-[var(--bg-surface)] border hover:bg-[var(--brand-primary)] hover:text-white transition";
+        }
+      });
+    }
+
+    function simulateStage(stageNum) {
+      currentStage = stageNum;
+      renderTracker();
+      showToast(`Simulated status change to: ${stagesData[stageNum - 1].title}`, "info");
+
+      // Sync with active stay in LocalStorage
+      let stays = JSON.parse(localStorage.getItem("paws_stays") || "[]");
+      if (stays.length) {
+        stays[0].stageIndex = stageNum;
+        stays[0].status = stagesData[stageNum - 1].status;
+        stays[0].latestNote = stagesData[stageNum - 1].note;
+        localStorage.setItem("paws_stays", JSON.stringify(stays));
+      }
+    }
+  </script>
+</body>
+</html>

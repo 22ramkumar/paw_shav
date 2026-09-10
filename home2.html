@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PawsHaven Platform - Modern Pet Care & Boarding SaaS</title>
+  <meta name="description" content="Next-generation pet boarding and daycare software platform. Track live stays, view streaming webcams, check-in pets, and receive real-time veterinary updates.">
+  
+  <link rel="icon" type="image/png" href="images/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Prevent Theme & Layout Flicker (Anti-FOUC) -->
+  <script>
+    (function() {
+      const t = localStorage.getItem('paws_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'dark') document.documentElement.classList.add('dark');
+      const d = localStorage.getItem('paws_dir') || 'ltr';
+      document.documentElement.setAttribute('dir', d);
+      if (d === 'rtl') document.documentElement.classList.add('rtl');
+
+      document.documentElement.classList.add('paws-loading');
+      function reveal() {
+        document.documentElement.classList.remove('paws-loading');
+      }
+      if (document.readyState === 'complete') {
+        reveal();
+      } else {
+        window.addEventListener('DOMContentLoaded', reveal);
+        setTimeout(reveal, 250);
+      }
+    })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#1B4D3E',
+              sage: '#2D6A4F',
+              coral: '#E07A5F',
+              amber: '#F4A261',
+              ivory: '#FAF8F5',
+              sand: '#F4EFEA',
+              charcoal: '#2C3E35'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-theme-base text-theme-main antialiased selection:bg-[#E07A5F] selection:text-white">
+
+  <!-- Navbar -->
+  <div id="paws-navbar"></div>
+
+  <!-- =========================================================================
+       HERO: SaaS Style Platform Interface
+       ========================================================================= -->
+  <section class="pt-32 pb-16 lg:pt-36 lg:pb-24 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs font-bold text-[var(--brand-primary)] uppercase tracking-wider shadow-sm">
+          <i class="bi bi-cpu-fill text-[var(--brand-accent)]"></i> The Next-Gen Pet Care Platform
+        </span>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-[var(--text-main)] tracking-tight">
+          Smart Pet Boarding & Daycare, <br>
+          <span class="text-[var(--brand-primary)] dark:text-emerald-400">Streamlined in Real-Time.</span>
+        </h1>
+        <p class="text-base text-[var(--text-muted)] max-w-2xl mx-auto leading-relaxed">
+          Monitor your best friend's wellness, livestream play yards, schedule customized feeding, and review veterinary checks from our unified parent portal.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+          <a href="booking.html" class="btn-brand-accent py-3.5 px-6 rounded-xl font-bold text-sm">
+            <i class="bi bi-calendar-check"></i> Book a Stay in 60 Seconds
+          </a>
+          <a href="user.html" class="btn-brand-outline py-3.5 px-6 rounded-xl font-bold text-sm">
+            <i class="bi bi-speedometer2"></i> Launch Pet Parent Portal
+          </a>
+        </div>
+      </div>
+
+      <!-- SaaS Live Dashboard Mockup Component -->
+      <div class="card-paw p-4 sm:p-6 lg:p-8 bg-[var(--bg-surface)] rounded-3xl shadow-2xl border border-[var(--border-color)] overflow-hidden">
+        
+        <!-- Dashboard Mockup Header -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-[var(--border-color)] gap-4 mb-6">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-[var(--brand-primary)] text-white flex items-center justify-center text-xl shadow-md">
+              <i class="bi bi-radar"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-xl font-extrabold text-[var(--text-main)]">PawsLive™ Monitor</h3>
+                <span class="badge-pet badge-coral text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping"></span> Live</span>
+              </div>
+              <p class="text-xs text-[var(--text-muted)]">Facility Capacity: <strong>78% Booked</strong> • All 4 Yard Cameras Active</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 w-full sm:w-auto">
+            <a href="stay-tracking.html" class="btn-brand-primary text-xs py-2 px-4 rounded-xl flex-1 sm:flex-initial">
+              <i class="bi bi-broadcast"></i> Fullscreen Tracking
+            </a>
+            <button onclick="showToast('Webcam feed refreshed in 4K stream', 'info')" class="w-9 h-9 rounded-xl bg-[var(--bg-subtle)] hover:bg-[var(--border-color)] transition flex items-center justify-center text-xs">
+              <i class="bi bi-arrow-clockwise"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3-Column SaaS Snapshot Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Column 1: Live Video Feed Simulation -->
+          <div class="lg:col-span-5 space-y-4">
+            <div class="relative rounded-2xl overflow-hidden aspect-video bg-black shadow-md border-2 border-[var(--border-color)]">
+              <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80" alt="Live Camera 01" class="w-full h-full object-cover">
+              <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-white text-[11px] font-bold flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>CAM 01: Grass Agility Field</span>
+              </div>
+              <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg text-white text-[10px]">
+                HD 60 FPS • 1080p
+              </div>
+            </div>
+
+            <!-- Cam Switcher Tabs -->
+            <div class="grid grid-cols-3 gap-2 text-center text-xs font-bold">
+              <button class="py-2 px-3 rounded-xl bg-[var(--brand-primary)] text-white shadow-sm">
+                Yard Agility
+              </button>
+              <button onclick="showToast('Switched to Indoor Play Area Cam', 'info')" class="py-2 px-3 rounded-xl bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:bg-[var(--border-color)] transition">
+                Indoor Play
+              </button>
+              <button onclick="showToast('Switched to Splash Pool Cam', 'info')" class="py-2 px-3 rounded-xl bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:bg-[var(--border-color)] transition">
+                Splash Pool
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 2: Pet Wellness Overview Snapshot -->
+          <div class="lg:col-span-4 p-5 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)] flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2.5">
+                  <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=100&q=80" alt="Max" class="w-10 h-10 rounded-xl object-cover">
+                  <div>
+                    <h4 class="font-bold text-sm text-[var(--text-main)]">Max (Golden Retriever)</h4>
+                    <p class="text-[11px] text-[var(--text-muted)]">Active Stay: #STAY-9041</p>
+                  </div>
+                </div>
+                <span class="badge-pet badge-teal text-[9px]">In Care</span>
+              </div>
+
+              <div class="space-y-3 text-xs mb-4">
+                <div>
+                  <div class="flex justify-between font-bold mb-1">
+                    <span class="text-[var(--text-muted)]">Daily Activity Goal</span>
+                    <span class="text-[var(--brand-primary)]">85% (3.2 hrs playtime)</span>
+                  </div>
+                  <div class="w-full bg-[var(--border-color)] h-2 rounded-full overflow-hidden">
+                    <div class="bg-[var(--brand-primary)] h-full rounded-full w-[85%]"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between font-bold mb-1">
+                    <span class="text-[var(--text-muted)]">Hydration & Appetite</span>
+                    <span class="text-emerald-600">100% Completed</span>
+                  </div>
+                  <div class="w-full bg-[var(--border-color)] h-2 rounded-full overflow-hidden">
+                    <div class="bg-emerald-500 h-full rounded-full w-[100%]"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-3 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs">
+                <p class="font-bold text-[var(--text-main)]">Assigned Caretaker:</p>
+                <p class="text-[var(--text-muted)] mt-0.5">Jessica Miller (CPCT Certified)</p>
+                <p class="text-[11px] text-emerald-600 mt-1 font-semibold">"Max is playful, ate full lunch, napping comfortably."</p>
+              </div>
+            </div>
+
+            <a href="user.html" class="btn-brand-accent text-xs py-2 px-3 rounded-xl w-full text-center mt-4 font-bold">
+              View Health Report Details →
+            </a>
+          </div>
+
+          <!-- Column 3: Live Feed Activity Stream -->
+          <div class="lg:col-span-3 p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-xs uppercase tracking-wider text-[var(--text-muted)] mb-3">
+                Live Activity Timeline
+              </h4>
+              <div class="space-y-3 text-xs">
+                <div class="flex items-start gap-2.5">
+                  <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5">
+                    <i class="bi bi-cup-hot-fill"></i>
+                  </div>
+                  <div>
+                    <span class="font-bold text-[var(--text-main)] block">Dinner Fed (Salmon Kibble)</span>
+                    <span class="text-[10px] text-[var(--text-muted)]">05:45 PM • Clean Bowl</span>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-2.5">
+                  <div class="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5">
+                    <i class="bi bi-heart-pulse-fill"></i>
+                  </div>
+                  <div>
+                    <span class="font-bold text-[var(--text-main)] block">Vitals Check Passed</span>
+                    <span class="text-[10px] text-[var(--text-muted)]">04:30 PM • Temp 101.3°F</span>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-2.5">
+                  <div class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5">
+                    <i class="bi bi-droplet-fill"></i>
+                  </div>
+                  <div>
+                    <span class="font-bold text-[var(--text-main)] block">Splash Pool Session</span>
+                    <span class="text-[10px] text-[var(--text-muted)]">02:30 PM • 45 min play</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <a href="stay-tracking.html" class="text-xs font-bold text-[var(--brand-accent)] hover:underline pt-3 border-t border-[var(--border-color)] block text-center">
+              Open Real-Time Tracker →
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       STAFF AVAILABILITY & CAPACITY RADAR
+       ========================================================================= -->
+  <section class="py-16 bg-[var(--bg-surface)] border-y border-[var(--border-color)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <div>
+          <span class="badge-pet badge-coral text-xs mb-2">Live Availability</span>
+          <h3 class="text-2xl sm:text-3xl font-black text-[var(--text-main)]">
+            Resort Occupancy & Staff on Duty
+          </h3>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-2 leading-relaxed">
+            We maintain a strict 1-to-5 caretaker ratio for boarding and 1-to-8 for group play to guarantee undivided attention.
+          </p>
+        </div>
+
+        <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="p-5 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)]">
+            <div class="text-xs text-[var(--text-muted)] font-bold uppercase">Glass Luxury Suites</div>
+            <div class="text-2xl font-black text-[var(--brand-primary)] mt-1">4 Available</div>
+            <p class="text-[11px] text-emerald-600 font-semibold mt-1">Ready for tonight check-in</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)]">
+            <div class="text-xs text-[var(--text-muted)] font-bold uppercase">Daycare Playgroup</div>
+            <div class="text-2xl font-black text-[var(--brand-accent)] mt-1">Open Slots</div>
+            <p class="text-[11px] text-emerald-600 font-semibold mt-1">Small & Large groups open</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)]">
+            <div class="text-xs text-[var(--text-muted)] font-bold uppercase">Grooming Salon</div>
+            <div class="text-2xl font-black text-[var(--brand-sunny)] mt-1">2 Slots Today</div>
+            <p class="text-[11px] text-[var(--text-muted)] mt-1">Book before 2:00 PM</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       BOOK-A-STAY QUICK ACTION CALLOUT
+       ========================================================================= -->
+  <section class="py-20 bg-[var(--bg-base)]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+      <div class="w-16 h-16 rounded-3xl bg-[var(--brand-primary)] text-white flex items-center justify-center text-3xl mx-auto shadow-xl">
+        <i class="bi bi-house-heart-fill"></i>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-main)]">
+        Experience Modern Pet Boarding Built for Trust
+      </h2>
+      <p class="text-sm text-[var(--text-muted)] max-w-xl mx-auto leading-relaxed">
+        Join over 12,500 pet parents who travel with complete confidence knowing their best friends are safe, active, and loved.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+        <a href="booking.html" class="btn-brand-accent py-4 px-8 rounded-2xl font-bold text-base shadow-xl">
+          <i class="bi bi-calendar-heart"></i> Reserve Your Pet's Suite
+        </a>
+        <a href="services.html" class="btn-brand-outline py-4 px-8 rounded-2xl font-bold text-base">
+          Explore All Services
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="paws-footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+</body>
+</html>
