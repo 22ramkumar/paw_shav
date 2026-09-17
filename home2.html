@@ -92,10 +92,10 @@
         </div>
       </div>
 
-      <!-- SaaS Live Dashboard Mockup Component -->
+      <!-- SaaS Live Dashboard Monitor Component -->
       <div class="card-paw p-4 sm:p-6 lg:p-8 bg-[var(--bg-surface)] rounded-3xl shadow-2xl border border-[var(--border-color)] overflow-hidden">
         
-        <!-- Dashboard Mockup Header -->
+        <!-- Dashboard Header -->
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-[var(--border-color)] gap-4 mb-6">
           <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-[var(--brand-primary)] text-white flex items-center justify-center text-xl shadow-md">
@@ -104,141 +104,296 @@
             <div>
               <div class="flex items-center gap-2">
                 <h3 class="text-xl font-extrabold text-[var(--text-main)]">PawsLive™ Monitor</h3>
-                <span class="badge-pet badge-coral text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping"></span> Live</span>
+                <span class="badge-pet badge-coral text-[10px] animate-pulse">
+                  <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping"></span> Live
+                </span>
               </div>
-              <p class="text-xs text-[var(--text-muted)]">Facility Capacity: <strong>78% Booked</strong> • All 4 Yard Cameras Active</p>
+              <p class="text-xs text-[var(--text-muted)]">Facility Capacity: <strong>78% Booked</strong> • All 4 Yard Cameras Active • Real-Time Encrypted Stream</p>
             </div>
           </div>
           <div class="flex items-center gap-3 w-full sm:w-auto">
-            <a href="stay-tracking.html" class="btn-brand-primary text-xs py-2 px-4 rounded-xl flex-1 sm:flex-initial">
+            <a href="stay-tracking.html" class="btn-brand-primary text-xs py-2 px-4 rounded-xl flex-1 sm:flex-initial flex items-center justify-center gap-1.5 shadow-sm">
               <i class="bi bi-broadcast"></i> Fullscreen Tracking
             </a>
-            <button onclick="showToast('Webcam feed refreshed in 4K stream', 'info')" class="w-9 h-9 rounded-xl bg-[var(--bg-subtle)] hover:bg-[var(--border-color)] transition flex items-center justify-center text-xs">
-              <i class="bi bi-arrow-clockwise"></i>
+            <button onclick="refreshPawsLiveStream()" title="Re-sync Video Feed" class="w-9 h-9 rounded-xl bg-[var(--bg-subtle)] hover:bg-[var(--border-color)] transition flex items-center justify-center text-xs text-[var(--text-main)]">
+              <i id="pawsLiveRefreshIcon" class="bi bi-arrow-clockwise"></i>
             </button>
           </div>
         </div>
 
-        <!-- 3-Column SaaS Snapshot Grid -->
+        <!-- 3-Column SaaS Live Monitor Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
           
-          <!-- Column 1: Live Video Feed Simulation -->
-          <div class="lg:col-span-5 space-y-4">
-            <div class="relative rounded-2xl overflow-hidden aspect-video bg-black shadow-md border-2 border-[var(--border-color)]">
-              <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80" alt="Live Camera 01" class="w-full h-full object-cover">
-              <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-white text-[11px] font-bold flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>CAM 01: Grass Agility Field</span>
+          <!-- Column 1: Live Video Feed & Camera Switcher -->
+          <div class="lg:col-span-5 space-y-3">
+            <div id="pawsLiveVideoContainer" class="relative rounded-2xl overflow-hidden aspect-video bg-black shadow-lg border-2 border-[var(--border-color)] group select-none">
+              
+              <!-- HTML5 Video Player with Autoplay & Loop -->
+              <video id="pawsLiveVideo" class="w-full h-full object-cover transition-transform duration-300" autoplay loop muted playsinline preload="auto" poster="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80">
+                <source src="videos/dog-agility.mp4" type="video/mp4">
+                Your browser does not support HTML5 video playback.
+              </video>
+
+              <!-- Night Vision IR Overlay -->
+              <div id="pawsLiveNightVisionBadge" class="hidden absolute inset-0 pointer-events-none bg-emerald-950/20 mix-blend-color-dodge [background:repeating-linear-gradient(0deg,rgba(0,255,100,0.06)_0px,rgba(0,255,100,0.06)_1px,transparent_1px,transparent_3px)]">
+                <div class="absolute top-11 left-3 text-[9px] font-mono text-emerald-400 font-bold bg-black/75 px-2 py-0.5 rounded border border-emerald-500/40">
+                  <i class="bi bi-moon-stars-fill text-emerald-400"></i> IR ILLUMINATOR ACTIVE • 850nm
+                </div>
               </div>
-              <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg text-white text-[10px]">
-                HD 60 FPS • 1080p
+
+              <!-- Two-Way Audio Wave Overlay -->
+              <div id="pawsLiveAudioWave" class="hidden absolute inset-x-0 bottom-12 bg-black/80 backdrop-blur-xs p-2 flex items-center justify-center gap-2 border-y border-rose-500/50 z-20">
+                <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                <span class="text-xs font-bold text-rose-400 uppercase tracking-wider">Speaking to Yard Speaker</span>
+                <div class="flex items-center gap-1 h-3">
+                  <span class="w-1 bg-rose-400 h-2 animate-pulse"></span>
+                  <span class="w-1 bg-rose-400 h-3 animate-pulse delay-75"></span>
+                  <span class="w-1 bg-rose-400 h-1.5 animate-pulse delay-150"></span>
+                  <span class="w-1 bg-rose-400 h-2.5 animate-pulse delay-100"></span>
+                </div>
               </div>
+
+              <!-- Feed Transition Overlay -->
+              <div id="pawsLiveTransitionOverlay" class="hidden absolute inset-0 bg-black/80 backdrop-blur-xs flex-col items-center justify-center text-white z-20 transition-opacity">
+                <div class="w-8 h-8 rounded-full border-2 border-white/20 border-t-[var(--brand-accent)] animate-spin mb-2"></div>
+                <span class="text-[11px] font-mono tracking-widest text-emerald-400 font-bold uppercase">CONNECTING FEED...</span>
+              </div>
+
+              <!-- Camera Shutter Flash Animation -->
+              <div id="pawsLiveFlash" class="hidden absolute inset-0 bg-white z-30 transition-opacity duration-300 pointer-events-none"></div>
+
+              <!-- Top Left HUD: Cam Name, Live REC, Live Clock -->
+              <div class="absolute top-3 left-3 z-10 flex flex-wrap items-center gap-1.5 pointer-events-none">
+                <div id="pawsLiveIndicatorPill" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-600/90 text-white backdrop-blur-md shadow-xs border border-red-400/30">
+                  <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping"></span>
+                  <span class="font-bold text-[10px] uppercase tracking-wider">LIVE</span>
+                </div>
+                <span id="pawsLiveCamBadge" class="px-2.5 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-[11px] font-bold shadow-xs">
+                  CAM 01: Grass Agility Field
+                </span>
+                <span id="pawsLiveClock" class="font-mono text-[9px] sm:text-[10px] text-white/90 bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded-md border border-white/10 hidden sm:inline-block">
+                  --:--:--
+                </span>
+              </div>
+
+              <!-- Top Right HUD: Telemetry -->
+              <div class="absolute top-3 right-3 z-10 pointer-events-none">
+                <span id="pawsLiveTelemetry" class="px-2.5 py-0.5 rounded-full bg-black/70 backdrop-blur-md text-emerald-400 text-[10px] font-mono font-bold border border-emerald-500/30 flex items-center gap-1.5 shadow-xs">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  60 FPS • 1080p • 2.8 Mb/s
+                </span>
+              </div>
+
+              <!-- Bottom Right Location Watermark -->
+              <div class="absolute bottom-11 right-3 z-10 pointer-events-none">
+                <span id="pawsLiveLocationBadge" class="px-2 py-0.5 rounded-md bg-black/55 backdrop-blur-xs text-white/80 text-[10px] font-medium hidden sm:inline-block">
+                  Outdoor Agility Meadows C
+                </span>
+              </div>
+
+              <!-- Bottom Interactive HUD Control Bar -->
+              <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent p-2.5 flex items-center justify-between z-10">
+                <div class="flex items-center gap-1.5">
+                  <!-- Play/Pause -->
+                  <button id="pawsLivePlayBtn" onclick="togglePawsLivePlay()" class="w-7 h-7 rounded-lg bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition border border-white/20 shadow-xs" title="Pause Stream">
+                    <i class="bi bi-pause-fill text-sm"></i>
+                  </button>
+                  <!-- Audio Mute/Unmute -->
+                  <button id="pawsLiveMuteBtn" onclick="togglePawsLiveMute()" class="w-7 h-7 rounded-lg bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition border border-white/20 shadow-xs" title="Unmute Audio">
+                    <i class="bi bi-volume-mute-fill text-sm"></i>
+                  </button>
+                  <!-- Snapshot Capture -->
+                  <button onclick="capturePawsLiveSnapshot()" class="w-7 h-7 rounded-lg bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition border border-white/20 shadow-xs" title="Capture Snapshot">
+                    <i class="bi bi-camera-fill text-xs"></i>
+                  </button>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <!-- Zoom PTZ -->
+                  <button id="pawsLiveZoomBtn" onclick="togglePawsLiveZoom()" class="w-7 h-7 rounded-lg bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition border border-white/20 shadow-xs" title="Digital Zoom">
+                    <span class="text-[9px] font-black font-mono">1x</span>
+                  </button>
+                  <!-- Night Vision IR Filter -->
+                  <button id="pawsLiveNightVisionBtn" onclick="togglePawsLiveNightVision()" class="w-7 h-7 rounded-lg bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition border border-white/20 shadow-xs" title="Toggle Night Vision">
+                    <i class="bi bi-moon-stars-fill text-xs"></i>
+                  </button>
+                  <!-- Fullscreen -->
+                  <button onclick="togglePawsLiveFullscreen()" class="w-7 h-7 rounded-lg bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition border border-white/20 shadow-xs" title="Fullscreen">
+                    <i class="bi bi-arrows-fullscreen text-xs"></i>
+                  </button>
+                </div>
+              </div>
+
             </div>
 
             <!-- Cam Switcher Tabs -->
-            <div class="grid grid-cols-3 gap-2 text-center text-xs font-bold">
-              <button class="py-2 px-3 rounded-xl bg-[var(--brand-primary)] text-white shadow-sm">
-                Yard Agility
+            <div class="grid grid-cols-3 gap-2 text-center text-xs">
+              <button id="tabCam1" onclick="switchPawsLiveCam(0)" class="cam-tab-btn py-2.5 px-3 rounded-xl bg-[var(--brand-primary)] text-white shadow-md font-bold text-xs transition transform scale-[1.02] flex items-center justify-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Yard Agility</span>
               </button>
-              <button onclick="showToast('Switched to Indoor Play Area Cam', 'info')" class="py-2 px-3 rounded-xl bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:bg-[var(--border-color)] transition">
-                Indoor Play
+              <button id="tabCam2" onclick="switchPawsLiveCam(1)" class="cam-tab-btn py-2.5 px-3 rounded-xl bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:bg-[var(--border-color)] hover:text-[var(--text-main)] font-semibold text-xs transition flex items-center justify-center gap-1.5">
+                <span>Indoor Play</span>
               </button>
-              <button onclick="showToast('Switched to Splash Pool Cam', 'info')" class="py-2 px-3 rounded-xl bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:bg-[var(--border-color)] transition">
-                Splash Pool
+              <button id="tabCam3" onclick="switchPawsLiveCam(2)" class="cam-tab-btn py-2.5 px-3 rounded-xl bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:bg-[var(--border-color)] hover:text-[var(--text-main)] font-semibold text-xs transition flex items-center justify-center gap-1.5">
+                <span>Splash Pool</span>
               </button>
             </div>
           </div>
 
-          <!-- Column 2: Pet Wellness Overview Snapshot -->
-          <div class="lg:col-span-4 p-5 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)] flex flex-col justify-between">
+          <!-- Column 2: Pet Wellness Overview & Remote Care Actions -->
+          <div class="lg:col-span-4 p-5 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)] flex flex-col justify-between space-y-4">
             <div>
               <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center gap-2.5">
-                  <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=100&q=80" alt="Max" class="w-10 h-10 rounded-xl object-cover">
+                  <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=100&q=80" alt="Max" class="w-10 h-10 rounded-xl object-cover ring-2 ring-[var(--brand-primary)]/20 shadow-xs">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 absolute -bottom-0.5 -right-0.5 border-2 border-white animate-pulse"></span>
+                  </div>
                   <div>
                     <h4 class="font-bold text-sm text-[var(--text-main)]">Max (Golden Retriever)</h4>
                     <p class="text-[11px] text-[var(--text-muted)]">Active Stay: #STAY-9041</p>
                   </div>
                 </div>
-                <span class="badge-pet badge-teal text-[9px]">In Care</span>
+                <span id="pawsLivePetStatusBadge" class="badge-pet badge-teal text-[9px] whitespace-nowrap">Active in Playgroup</span>
               </div>
 
+              <!-- Animated Vitals & Activity Progress -->
               <div class="space-y-3 text-xs mb-4">
                 <div>
                   <div class="flex justify-between font-bold mb-1">
                     <span class="text-[var(--text-muted)]">Daily Activity Goal</span>
-                    <span class="text-[var(--brand-primary)]">85% (3.2 hrs playtime)</span>
+                    <span class="text-[var(--brand-primary)] dark:text-emerald-400">85% (3.2 hrs playtime)</span>
                   </div>
                   <div class="w-full bg-[var(--border-color)] h-2 rounded-full overflow-hidden">
-                    <div class="bg-[var(--brand-primary)] h-full rounded-full w-[85%]"></div>
+                    <div class="bg-[var(--brand-primary)] dark:bg-emerald-500 h-full rounded-full w-[85%] transition-all duration-500"></div>
                   </div>
                 </div>
 
                 <div>
                   <div class="flex justify-between font-bold mb-1">
-                    <span class="text-[var(--text-muted)]">Hydration & Appetite</span>
-                    <span class="text-emerald-600">100% Completed</span>
+                    <span class="text-[var(--text-muted)]">Hydration &amp; Appetite</span>
+                    <span class="text-emerald-600 dark:text-emerald-400 font-bold">100% Completed</span>
                   </div>
                   <div class="w-full bg-[var(--border-color)] h-2 rounded-full overflow-hidden">
-                    <div class="bg-emerald-500 h-full rounded-full w-[100%]"></div>
+                    <div class="bg-emerald-500 h-full rounded-full w-[100%] transition-all duration-500"></div>
+                  </div>
+                </div>
+
+                <!-- Real-time Live Sensor Row -->
+                <div class="grid grid-cols-2 gap-2 pt-1 border-t border-[var(--border-color)]/60">
+                  <div class="flex items-center gap-1.5 text-[11px] font-semibold text-[var(--text-main)]">
+                    <i class="bi bi-heart-pulse-fill text-rose-500 animate-pulse text-xs"></i>
+                    <span>Heart Rate:</span>
+                    <span id="pawsLiveHeartRate" class="font-mono font-bold text-rose-500">82 BPM</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 text-[11px] font-semibold text-[var(--text-main)] justify-end">
+                    <i class="bi bi-thermometer-half text-amber-500 text-xs"></i>
+                    <span>Yard:</span>
+                    <span class="font-mono font-bold text-amber-600 dark:text-amber-400">72.4°F</span>
                   </div>
                 </div>
               </div>
 
-              <div class="p-3 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs">
-                <p class="font-bold text-[var(--text-main)]">Assigned Caretaker:</p>
-                <p class="text-[var(--text-muted)] mt-0.5">Jessica Miller (CPCT Certified)</p>
-                <p class="text-[11px] text-emerald-600 mt-1 font-semibold">"Max is playful, ate full lunch, napping comfortably."</p>
+              <!-- Caretaker Quote -->
+              <div class="p-3 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs shadow-xs">
+                <div class="flex items-center justify-between">
+                  <p class="font-bold text-[var(--text-main)]">Assigned Caretaker:</p>
+                  <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1"><i class="bi bi-patch-check-fill text-[10px]"></i> Verified</span>
+                </div>
+                <p class="text-[var(--text-muted)] mt-0.5 font-medium">Jessica Miller (CPCT Certified)</p>
+                <p id="pawsLiveCaretakerQuote" class="text-[11px] text-emerald-700 dark:text-emerald-300 mt-1 font-semibold italic leading-snug">"Max is energetic, clearing agility ramps and chasing balls with play buddies."</p>
               </div>
             </div>
 
-            <a href="user.html" class="btn-brand-accent text-xs py-2 px-3 rounded-xl w-full text-center mt-4 font-bold">
-              View Health Report Details →
-            </a>
+            <!-- Remote Interactive Care Controls -->
+            <div class="space-y-2 pt-2 border-t border-[var(--border-color)]/70">
+              <!-- Dispense Treat Button -->
+              <div>
+                <button id="pawsLiveTreatBtn" onclick="dispenseLiveTreat()" class="btn-brand-accent text-xs py-2.5 px-3 rounded-xl w-full text-center font-bold flex items-center justify-center gap-1.5 shadow-sm hover:shadow-md transition">
+                  <i class="bi bi-gift-fill"></i>
+                  <span>Dispense Remote Treat</span>
+                </button>
+                <div class="flex items-center justify-between text-[10px] text-[var(--text-muted)] mt-1 px-1">
+                  <span id="pawsLiveTreatsCount">3 treats remaining today</span>
+                  <span>Chime Dispenser C-1</span>
+                </div>
+              </div>
+
+              <!-- Two-Way Voice Speaker Button -->
+              <button id="pawsLiveSpeakerBtn" onclick="toggleTwoWayAudio()" class="btn-brand-outline py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition w-full">
+                <i class="bi bi-mic-fill text-[var(--brand-primary)] dark:text-emerald-400"></i>
+                <span>Two-Way Yard Speaker</span>
+              </button>
+            </div>
           </div>
 
-          <!-- Column 3: Live Feed Activity Stream -->
+          <!-- Column 3: Live Feed Activity Timeline -->
           <div class="lg:col-span-3 p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] flex flex-col justify-between">
             <div>
-              <h4 class="font-bold text-xs uppercase tracking-wider text-[var(--text-muted)] mb-3">
-                Live Activity Timeline
-              </h4>
-              <div class="space-y-3 text-xs">
+              <div class="flex items-center justify-between mb-3.5 pb-2 border-b border-[var(--border-color)]">
+                <h4 class="font-bold text-xs uppercase tracking-wider text-[var(--text-main)] flex items-center gap-1.5">
+                  <i class="bi bi-activity text-[var(--brand-accent)]"></i> Live Activity
+                </h4>
+                <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> AUTO-SYNC
+                </span>
+              </div>
+              
+              <!-- Dynamic Event List -->
+              <div id="pawsLiveTimelineList" class="space-y-3.5 text-xs">
+                
                 <div class="flex items-start gap-2.5">
-                  <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5">
+                  <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5 shadow-xs">
                     <i class="bi bi-cup-hot-fill"></i>
                   </div>
                   <div>
-                    <span class="font-bold text-[var(--text-main)] block">Dinner Fed (Salmon Kibble)</span>
-                    <span class="text-[10px] text-[var(--text-muted)]">05:45 PM • Clean Bowl</span>
+                    <span class="font-bold text-[var(--text-main)] block text-xs leading-snug">Dinner Fed (Salmon Kibble)</span>
+                    <span class="text-[10px] text-[var(--text-muted)]">05:45 PM • Clean Bowl Verified</span>
                   </div>
                 </div>
 
                 <div class="flex items-start gap-2.5">
-                  <div class="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5">
+                  <div class="w-6 h-6 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5 shadow-xs">
                     <i class="bi bi-heart-pulse-fill"></i>
                   </div>
                   <div>
-                    <span class="font-bold text-[var(--text-main)] block">Vitals Check Passed</span>
-                    <span class="text-[10px] text-[var(--text-muted)]">04:30 PM • Temp 101.3°F</span>
+                    <span class="font-bold text-[var(--text-main)] block text-xs leading-snug">Vitals Check Passed</span>
+                    <span class="text-[10px] text-[var(--text-muted)]">04:30 PM • Temp 101.3°F Normal</span>
                   </div>
                 </div>
 
                 <div class="flex items-start gap-2.5">
-                  <div class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5">
+                  <div class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 dark:bg-teal-950/60 dark:text-teal-400 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5 shadow-xs">
                     <i class="bi bi-droplet-fill"></i>
                   </div>
                   <div>
-                    <span class="font-bold text-[var(--text-main)] block">Splash Pool Session</span>
-                    <span class="text-[10px] text-[var(--text-muted)]">02:30 PM • 45 min play</span>
+                    <span class="font-bold text-[var(--text-main)] block text-xs leading-snug">Splash Pool Session</span>
+                    <span class="text-[10px] text-[var(--text-muted)]">02:30 PM • 45 min playgroup</span>
                   </div>
                 </div>
+
+                <div class="flex items-start gap-2.5">
+                  <div class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-950/60 dark:text-purple-400 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5 shadow-xs">
+                    <i class="bi bi-camera-video-fill"></i>
+                  </div>
+                  <div>
+                    <span class="font-bold text-[var(--text-main)] block text-xs leading-snug">Webcam Feed Connected</span>
+                    <span class="text-[10px] text-[var(--text-muted)]">01:15 PM • Yard Camera 01</span>
+                  </div>
+                </div>
+
               </div>
             </div>
 
-            <a href="stay-tracking.html" class="text-xs font-bold text-[var(--brand-accent)] hover:underline pt-3 border-t border-[var(--border-color)] block text-center">
-              Open Real-Time Tracker →
-            </a>
+            <div class="pt-4 border-t border-[var(--border-color)] mt-4 space-y-2">
+              <a href="stay-tracking.html" class="btn-brand-accent text-xs py-2.5 px-3 rounded-xl w-full text-center font-bold block shadow-xs hover:shadow-md transition">
+                Open Full Real-Time Tracker →
+              </a>
+              <a href="user.html" class="text-[11px] font-semibold text-[var(--text-muted)] hover:text-[var(--brand-primary)] text-center block transition">
+                View Medical &amp; Diet Card
+              </a>
+            </div>
           </div>
 
         </div>
@@ -322,5 +477,6 @@
   <script src="js/app.js"></script>
   <script src="js/navbar.js"></script>
   <script src="js/footer.js"></script>
+  <script src="js/paws-live.js"></script>
 </body>
 </html>

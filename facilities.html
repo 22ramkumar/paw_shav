@@ -211,14 +211,16 @@
       <!-- 360 Video Player Box -->
       <div id="virtualTourPlayerBox" class="aspect-video rounded-2xl overflow-hidden bg-black relative mb-4 shadow-xl border border-[var(--border-color)]">
         
-        <!-- Live 360 Iframe (plays actual 360 VR video with click & drag pan) -->
-        <iframe id="virtualTourIframe"
-          class="w-full h-full border-0 hidden"
-          src=""
-          title="PawsHaven 360 Virtual Tour"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; xr-spatial-tracking"
-          allowfullscreen>
-        </iframe>
+        <!-- HTML5 Video Player with Sample Videos -->
+        <video id="virtualTourVideo"
+          class="w-full h-full object-cover hidden"
+          controls
+          playsinline
+          preload="metadata">
+          <source id="virtualTourSource" src="videos/dog-agility.mp4" type="video/mp4">
+          <source id="virtualTourFallbackSource" src="https://res.cloudinary.com/demo/video/upload/dog.mp4" type="video/mp4">
+          Your browser does not support HTML5 video playback.
+        </video>
 
         <!-- Preview Cover / Play Trigger Overlay -->
         <div id="virtualTourPoster" onclick="startTourVideo()" class="absolute inset-0 cursor-pointer group bg-black transition-opacity duration-300">
@@ -250,15 +252,15 @@
           <span class="text-emerald-600 font-semibold text-[10px] sm:text-xs"><i class="bi bi-compass"></i> Full Gyroscope & Drag</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
-          <button type="button" onclick="switchTourScene('J_f5o1p4_2k', this)" class="tour-scene-btn active p-2.5 rounded-xl border-2 border-[var(--brand-accent)] bg-[var(--brand-accent)]/10 font-bold text-[var(--text-main)] text-left flex items-center gap-2 transition">
+          <button type="button" onclick="switchTourScene('agility', this)" class="tour-scene-btn active p-2.5 rounded-xl border-2 border-[var(--brand-accent)] bg-[var(--brand-accent)]/10 font-bold text-[var(--text-main)] text-left flex items-center gap-2 transition">
             <span class="w-2 h-2 rounded-full bg-[var(--brand-accent)] flex-shrink-0"></span>
             <span class="truncate">Agility Meadows B</span>
           </button>
-          <button type="button" onclick="switchTourScene('cM0Zl8M6-sE', this)" class="tour-scene-btn p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] text-left flex items-center gap-2 transition">
+          <button type="button" onclick="switchTourScene('yard', this)" class="tour-scene-btn p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] text-left flex items-center gap-2 transition">
             <span class="w-2 h-2 rounded-full bg-gray-400 flex-shrink-0"></span>
             <span class="truncate">Pack Play Yard</span>
           </button>
-          <button type="button" onclick="switchTourScene('Xh07T2pT8eA', this)" class="tour-scene-btn p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] text-left flex items-center gap-2 transition">
+          <button type="button" onclick="switchTourScene('resort', this)" class="tour-scene-btn p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] text-left flex items-center gap-2 transition">
             <span class="w-2 h-2 rounded-full bg-gray-400 flex-shrink-0"></span>
             <span class="truncate">Resort Walkthrough</span>
           </button>
@@ -361,7 +363,31 @@
       renderGallery(tag);
     }
 
-    let currentTourVideoId = "J_f5o1p4_2k";
+    const TOUR_SCENES = {
+      agility: {
+        title: "Agility Meadows B",
+        subtitle: "Touring Deluxe Agility Yard, fetch runway, and splash pool play zone.",
+        src: "videos/dog-agility.mp4",
+        fallbackSrc: "https://res.cloudinary.com/demo/video/upload/dog.mp4",
+        poster: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=85"
+      },
+      yard: {
+        title: "Indoor Play Haven",
+        subtitle: "High-energy climate-controlled indoor playtime with puzzle toys and canine body language supervisors.",
+        src: "videos/indoor-play-toys.mp4",
+        fallbackSrc: "videos/play-yard.mp4",
+        poster: "images/indoor-play-101218.jpg"
+      },
+      resort: {
+        title: "Splash Pool & Suites",
+        subtitle: "Filtered hydro-jet splash pool, private tempered-glass suites, and orthopedic bedding.",
+        src: "videos/splash-pool.mp4",
+        fallbackSrc: "videos/resort-walkthrough.mp4",
+        poster: "https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?auto=format&fit=crop&w=1200&q=85"
+      }
+    };
+
+    let currentTourSceneKey = "agility";
 
     function openVirtualTourModal() {
       openModal("virtualTourModal");
@@ -369,14 +395,14 @@
     }
 
     function closeVirtualTourModal() {
-      const iframe = document.getElementById("virtualTourIframe");
+      const video = document.getElementById("virtualTourVideo");
       const poster = document.getElementById("virtualTourPoster");
       const hint = document.getElementById("virtualTourHint");
 
-      // Stop video immediately so audio does not continue playing
-      if (iframe) {
-        iframe.src = "";
-        iframe.classList.add("hidden");
+      // Pause and reset video so audio stops
+      if (video) {
+        try { video.pause(); } catch(err) {}
+        video.classList.add("hidden");
       }
       if (poster) poster.classList.remove("hidden");
       if (hint) {
@@ -387,25 +413,40 @@
       closeModal("virtualTourModal");
     }
 
-    function startTourVideo(videoId) {
-      if (videoId) currentTourVideoId = videoId;
-      const iframe = document.getElementById("virtualTourIframe");
+    function startTourVideo(sceneKey) {
+      if (sceneKey) currentTourSceneKey = sceneKey;
+      const scene = TOUR_SCENES[currentTourSceneKey] || TOUR_SCENES.agility;
+      const video = document.getElementById("virtualTourVideo");
+      const source = document.getElementById("virtualTourSource");
+      const fallback = document.getElementById("virtualTourFallbackSource");
       const poster = document.getElementById("virtualTourPoster");
       const hint = document.getElementById("virtualTourHint");
+      const label = document.getElementById("virtualTourActiveLabel");
 
-      if (iframe) {
-        iframe.src = `https://www.youtube-nocookie.com/embed/${currentTourVideoId}?autoplay=1&enablejsapi=1&rel=0`;
-        iframe.classList.remove("hidden");
+      if (video && source) {
+        source.src = scene.src;
+        if (fallback) fallback.src = scene.fallbackSrc;
+        video.load();
+        video.classList.remove("hidden");
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            video.controls = true;
+          });
+        }
       }
       if (poster) poster.classList.add("hidden");
       if (hint) {
         hint.classList.remove("hidden");
         hint.classList.add("flex");
       }
+      if (label) {
+        label.innerHTML = `<i class="bi bi-play-circle-fill"></i> Playing: ${scene.title}`;
+      }
     }
 
-    function switchTourScene(videoId, btnEl) {
-      currentTourVideoId = videoId;
+    function switchTourScene(sceneKey, btnEl) {
+      currentTourSceneKey = sceneKey;
       document.querySelectorAll(".tour-scene-btn").forEach(btn => {
         btn.className = "tour-scene-btn p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] text-left flex items-center gap-2 transition";
         const dot = btn.querySelector("span:first-child");
@@ -418,7 +459,7 @@
         if (dot) dot.className = "w-2 h-2 rounded-full bg-[var(--brand-accent)] flex-shrink-0";
       }
 
-      startTourVideo(videoId);
+      startTourVideo(sceneKey);
     }
 
     // Stop video when closing via backdrop overlay click or Escape key

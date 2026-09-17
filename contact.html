@@ -255,18 +255,28 @@
 
               <!-- Stylized Interactive Map Container -->
               <div class="rounded-2xl overflow-hidden border border-[var(--border-color)] relative mb-6 shadow-inner bg-[var(--bg-subtle)]">
-                <div class="relative aspect-[16/9] w-full flex items-center justify-center overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1000&q=70" alt="Resort aerial background" class="w-full h-full object-cover opacity-25 filter grayscale">
-                  <div class="absolute inset-0 bg-[radial-gradient(var(--brand-primary)_1px,transparent_1px)] [background-size:18px_18px] opacity-40"></div>
+                <div class="relative min-h-[230px] w-full flex items-center justify-center overflow-hidden p-5">
+                  <!-- Background Image (Absolute to prevent flex-flow disruption) -->
+                  <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1000&q=70" alt="Resort aerial background" class="absolute inset-0 w-full h-full object-cover opacity-20 filter grayscale dark:opacity-10 pointer-events-none">
                   
-                  <div class="relative z-10 text-center p-4">
-                    <div class="w-12 h-12 rounded-full bg-[var(--brand-accent)] text-white flex items-center justify-center text-xl mx-auto mb-2 shadow-2xl animate-bounce">
+                  <!-- Texture Overlay & Vignette -->
+                  <div class="absolute inset-0 bg-[radial-gradient(var(--brand-primary)_1px,transparent_1px)] [background-size:18px_18px] opacity-35 dark:opacity-20 pointer-events-none"></div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-subtle)]/80 via-transparent to-[var(--bg-subtle)]/50 pointer-events-none"></div>
+                  
+                  <!-- Centered Interactive Navigation Info -->
+                  <div class="relative z-10 text-center w-full max-w-sm mx-auto flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 rounded-full bg-[var(--brand-accent)] text-white flex items-center justify-center text-xl mb-2.5 shadow-lg animate-bounce">
                       <i class="bi bi-geo-alt-fill"></i>
                     </div>
-                    <h4 class="font-bold text-xs sm:text-sm text-[var(--text-main)]">4820 Paws Meadow Blvd, Austin, TX</h4>
-                    <p class="text-[11px] text-[var(--text-muted)] mb-2.5">Visitor Parking Bays 1–12 On Site</p>
-                    <button type="button" onclick="showToast('Opening Google Maps navigation directions...', 'info')" class="btn-brand-primary text-xs py-1.5 px-4 rounded-full font-bold shadow-sm inline-flex items-center gap-1.5">
-                      <i class="bi bi-map-fill"></i> Open Directions in Maps
+                    <h4 class="font-bold text-xs sm:text-sm text-[var(--text-main)] mb-1 leading-snug">
+                      4820 Paws Meadow Blvd, Austin, TX
+                    </h4>
+                    <p class="text-[11px] text-[var(--text-muted)] mb-3">
+                      Visitor Parking Bays 1–12 On Site
+                    </p>
+                    <button type="button" onclick="window.open('https://maps.google.com/?q=4820+Paws+Meadow+Blvd+Austin+TX', '_blank'); if (typeof showToast === 'function') showToast('Opening Google Maps navigation directions...', 'info');" class="btn-brand-primary text-xs py-2 px-5 rounded-full font-bold shadow-md inline-flex items-center justify-center gap-2 hover:scale-105 transition-all">
+                      <i class="bi bi-map-fill"></i>
+                      <span>Open Directions in Maps</span>
                     </button>
                   </div>
                 </div>

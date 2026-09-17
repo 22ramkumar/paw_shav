@@ -143,34 +143,37 @@ function renderPawsFooter() {
           <div class="space-y-4">
             <div class="h-10 flex items-center">
               <h4 class="text-xs font-bold text-[var(--text-main)] uppercase tracking-wider flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+                <span class="w-2 h-2 rounded-full bg-[var(--brand-accent)] inline-block"></span>
                 <span>VIP Community</span>
               </h4>
             </div>
-            <div class="bg-[var(--brand-primary)] text-white rounded-2xl p-5 shadow-lg relative overflow-hidden flex flex-col justify-between">
-              <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-white/5 rounded-full blur-xl pointer-events-none"></div>
+            <div class="bg-gradient-to-br from-[#FAF5EE] via-[var(--bg-surface)] to-[#F4EFEA] dark:from-[#1E2B24] dark:via-[#18231D] dark:to-[#141C18] text-[var(--text-main)] rounded-2xl p-5 shadow-md hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between border border-[var(--border-color)] dark:border-[#2D3E35]">
+              <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-[var(--brand-accent)]/10 dark:bg-[var(--brand-accent)]/10 rounded-full blur-xl pointer-events-none"></div>
+              <div class="absolute -top-8 -left-8 w-24 h-24 bg-[var(--brand-primary)]/5 dark:bg-emerald-500/10 rounded-full blur-lg pointer-events-none"></div>
               <div class="relative z-10 space-y-3">
                 <div class="flex items-center justify-between gap-1">
-                  <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/10 text-emerald-300 text-[10px] font-bold uppercase tracking-wider">
-                    <i class="bi bi-shield-heart-fill"></i> Safe Stay Promise
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100/80 text-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300 text-[10px] font-bold uppercase tracking-wider border border-emerald-200 dark:border-emerald-800/50">
+                    <i class="bi bi-shield-heart-fill text-emerald-600 dark:text-emerald-400"></i> Safe Stay Promise
                   </span>
-                  <span class="text-[10px] font-bold text-emerald-200/90">$25 Welcome Gift</span>
+                  <span class="inline-flex items-center gap-1 text-[11px] font-black text-[var(--brand-accent)] dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 px-2 py-0.5 rounded-md border border-amber-200/60 dark:border-amber-800/40">
+                    $25 Welcome Gift
+                  </span>
                 </div>
-                <h4 class="text-sm sm:text-base font-extrabold text-white leading-snug">
+                <h4 class="text-sm sm:text-base font-extrabold text-[var(--text-main)] leading-snug">
                   Join our VIP Community
                 </h4>
-                <p class="text-emerald-100/80 text-xs leading-relaxed">
+                <p class="text-[var(--text-muted)] text-xs leading-relaxed">
                   Weekly vet wellness advice, holiday priority, and special member perks.
                 </p>
                 <form id="footerNewsletterForm" class="flex flex-col gap-2">
-                  <input type="email" id="footerEmailInput" required placeholder="Enter your email address..." class="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/60 text-xs focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] transition">
-                  <button type="submit" class="btn-brand-accent py-2 px-4 text-xs font-bold rounded-xl whitespace-nowrap flex items-center justify-center gap-1.5 shadow-md hover:shadow-lg transition">
+                  <input type="email" id="footerEmailInput" required placeholder="Enter your email address..." class="w-full px-3.5 py-2.5 rounded-xl bg-[var(--bg-surface)] dark:bg-[#121A16] border border-[var(--border-color)] dark:border-[#2D3E35] text-[var(--text-main)] placeholder:text-[var(--text-muted)]/70 text-xs focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] focus:border-transparent transition shadow-xs">
+                  <button type="submit" class="btn-brand-accent py-2.5 px-4 text-xs font-bold rounded-xl whitespace-nowrap flex items-center justify-center gap-1.5 shadow-md hover:shadow-lg transition">
                     <span>Subscribe Free</span>
                     <i class="bi bi-arrow-right text-[11px]"></i>
                   </button>
                 </form>
-                <p class="text-white/60 text-[10px] flex items-center gap-1 pt-0.5">
-                  <i class="bi bi-lock-fill text-[9px]"></i> We cherish your privacy. Zero spam.
+                <p class="text-[var(--text-muted)] text-[10px] flex items-center gap-1.5 pt-0.5">
+                  <i class="bi bi-shield-check text-emerald-600 dark:text-emerald-400 text-xs"></i> We cherish your privacy. Zero spam.
                 </p>
               </div>
             </div>
