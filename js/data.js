@@ -609,7 +609,7 @@ const PawsData = {
   blogPosts: [
     {
       id: "post-1",
-      title: "First Time Boarding? 7 Steps to Prepare Your Dog for a Stress-Free Stay",
+      title: "First Time Boarding?\u200E 7 Steps to Prepare Your Dog for a Stress-Free Stay",
       slug: "first-time-boarding-preparation",
       category: "Boarding Tips",
       author: "Jessica Miller",

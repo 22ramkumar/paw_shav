@@ -14,7 +14,7 @@
   <!-- Google Fonts: Plus Jakarta Sans & Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&family=Quicksand:wght@600;700&family=Fraunces:opsz,wght@9..144,700;9..144,800&display=swap" rel="stylesheet">
 
   <!-- Prevent Theme & Layout Flicker (Anti-FOUC) -->
   <script>
@@ -199,41 +199,41 @@
 
       <!-- Quick Stay Booking Bar / Availability Checker -->
       <div class="mt-14 card-paw p-6 sm:p-8 bg-[var(--bg-surface)] rounded-3xl shadow-xl border border-[var(--border-color)]">
-        <form onsubmit="event.preventDefault(); quickBookService('overnight-boarding');" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+        <form id="heroQuickBookForm" onsubmit="event.preventDefault(); submitHeroQuickBooking();" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
           
           <div>
-            <label class="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">Pet Guest</label>
-            <select class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-sm font-semibold text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
-              <option>Dog (Small &lt; 25 lbs)</option>
-              <option selected>Dog (Medium 25–60 lbs)</option>
-              <option>Dog (Large 60+ lbs)</option>
-              <option>Cat (Feline Guest)</option>
-              <option>Multiple Pets (Family Stay)</option>
+            <label for="heroQuickPetGuest" class="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">Pet Guest</label>
+            <select id="heroQuickPetGuest" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-sm font-semibold text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
+              <option value="Dog (Small < 25 lbs)">Dog (Small &lt; 25 lbs)</option>
+              <option value="Dog (Medium 25–60 lbs)" selected>Dog (Medium 25–60 lbs)</option>
+              <option value="Dog (Large 60+ lbs)">Dog (Large 60+ lbs)</option>
+              <option value="Cat (Feline Guest)">Cat (Feline Guest)</option>
+              <option value="Multiple Pets (Family Stay)">Multiple Pets (Family Stay)</option>
             </select>
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">Service Needed</label>
-            <select class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-sm font-semibold text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
-              <option>Overnight Boarding Stay</option>
-              <option>Daytime Playgroup Daycare</option>
-              <option>Puppy / Kitten Day Nursery</option>
-              <option>Full-Service Spa & Grooming</option>
+            <label for="heroQuickService" class="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">Service Needed</label>
+            <select id="heroQuickService" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-sm font-semibold text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
+              <option value="overnight-boarding" selected>Overnight Boarding Stay</option>
+              <option value="daytime-daycare">Daytime Playgroup Daycare</option>
+              <option value="puppy-day-nursery">Puppy / Kitten Day Nursery</option>
+              <option value="spa-grooming">Full-Service Spa & Grooming</option>
             </select>
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">Check-in Date</label>
-            <input type="date" value="2026-09-08" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-sm font-semibold text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
+            <label for="heroQuickCheckIn" class="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">Check-in Date</label>
+            <input type="date" id="heroQuickCheckIn" name="checkInDate" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-sm font-semibold text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">Check-out Date</label>
-            <input type="date" value="2026-09-12" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-sm font-semibold text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
+            <label for="heroQuickCheckOut" class="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">Check-out Date</label>
+            <input type="date" id="heroQuickCheckOut" name="checkOutDate" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-sm font-semibold text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]">
           </div>
 
           <div>
-            <button type="submit" class="btn-brand-accent w-full py-3.5 px-4 rounded-xl text-sm font-bold flex items-center justify-center gap-2">
+            <button type="submit" id="btnHeroCheckRates" class="btn-brand-accent w-full py-3.5 px-4 rounded-xl text-sm font-bold flex items-center justify-center gap-2">
               <i class="bi bi-search"></i>
               <span>Check Rates</span>
             </button>
@@ -300,7 +300,7 @@
           Why Pet Parents Trust Us Over Any Other Kennel
         </h2>
         <p class="text-sm text-[var(--text-muted)] leading-relaxed">
-          We designed our resort around one guiding question: <em>"Would we leave our own beloved animals here?"</em> That meant eliminating cages, providing round-the-clock enrichment, and complete transparency.
+          We designed our resort around one guiding question: <em>"Would we leave our own beloved animals here?&lrm;"</em> That meant eliminating cages, providing round-the-clock enrichment, and complete transparency.&lrm;
         </p>
       </div>
 
@@ -834,7 +834,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center mb-16 space-y-3">
-        <span class="badge-pet badge-teal">ANY QUESTIONS ?</span>
+        <span class="badge-pet badge-teal">ANY QUESTIONS ?&lrm;</span>
         <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-main)]">
           Frequently Asked Questions
         </h2>
@@ -848,7 +848,7 @@
         <!-- FAQ 1 -->
         <details name="faq-accordion" class="card-paw p-5 rounded-2xl group" open>
           <summary class="font-bold text-base text-[var(--text-main)] cursor-pointer flex items-center justify-between list-none">
-            <span>What vaccinations are required before boarding or daycare?</span>
+            <span>What vaccinations are required before boarding or daycare?&lrm;</span>
             <i class="bi bi-chevron-down group-open:rotate-180 transition-transform text-sm text-[var(--text-muted)]"></i>
           </summary>
           <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mt-4 pt-3 border-t border-[var(--border-color)]">
@@ -859,7 +859,7 @@
         <!-- FAQ 2 -->
         <details name="faq-accordion" class="card-paw p-5 rounded-2xl group">
           <summary class="font-bold text-base text-[var(--text-main)] cursor-pointer flex items-center justify-between list-none">
-            <span>Can I access the live webcams at any time of day?</span>
+            <span>Can I access the live webcams at any time of day?&lrm;</span>
             <i class="bi bi-chevron-down group-open:rotate-180 transition-transform text-sm text-[var(--text-muted)]"></i>
           </summary>
           <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mt-4 pt-3 border-t border-[var(--border-color)]">
@@ -870,7 +870,7 @@
         <!-- FAQ 3 -->
         <details name="faq-accordion" class="card-paw p-5 rounded-2xl group">
           <summary class="font-bold text-base text-[var(--text-main)] cursor-pointer flex items-center justify-between list-none">
-            <span>What should I pack for my pet's overnight stay?</span>
+            <span>What should I pack for my pet's overnight stay?&lrm;</span>
             <i class="bi bi-chevron-down group-open:rotate-180 transition-transform text-sm text-[var(--text-muted)]"></i>
           </summary>
           <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mt-4 pt-3 border-t border-[var(--border-color)]">
@@ -881,7 +881,7 @@
         <!-- FAQ 4 -->
         <details name="faq-accordion" class="card-paw p-5 rounded-2xl group">
           <summary class="font-bold text-base text-[var(--text-main)] cursor-pointer flex items-center justify-between list-none">
-            <span>How do you handle medical emergencies or special diets?</span>
+            <span>How do you handle medical emergencies or special diets?&lrm;</span>
             <i class="bi bi-chevron-down group-open:rotate-180 transition-transform text-sm text-[var(--text-muted)]"></i>
           </summary>
           <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mt-4 pt-3 border-t border-[var(--border-color)]">

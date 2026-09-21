@@ -87,21 +87,21 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label class="block font-bold text-[var(--text-muted)] mb-1">Your Full Name *</label>
-              <input type="text" id="regName" required placeholder="e.g. Rachel Adams" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+              <input type="text" id="regName" required placeholder="e.g. Rachel Adams" onkeydown="preventDisallowedSpaces(event, this, 'single')" oninput="sanitizeNameInput(this)" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
             </div>
             <div>
               <label class="block font-bold text-[var(--text-muted)] mb-1">Phone Number *</label>
-              <input type="tel" id="regPhone" required placeholder="+1 (555) 000-0000" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+              <input type="tel" id="regPhone" required placeholder="+1(555)000-0000" onkeydown="preventDisallowedSpaces(event, this, 'none')" oninput="this.value = this.value.replace(/[^0-9+\-()]/g, '')" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
             </div>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label class="block font-bold text-[var(--text-muted)] mb-1">Email Address *</label>
-              <input type="email" id="regEmail" required placeholder="rachel@example.com" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+              <input type="email" id="regEmail" required placeholder="rachel@example.com" onkeydown="preventDisallowedSpaces(event, this, 'none')" oninput="sanitizeNoSpace(this)" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
             </div>
             <div>
               <label class="block font-bold text-[var(--text-muted)] mb-1">Password *</label>
-              <input type="password" id="regPassword" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+              <input type="password" id="regPassword" required placeholder="••••••••" onkeydown="preventDisallowedSpaces(event, this, 'none')" oninput="sanitizeNoSpace(this)" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
             </div>
           </div>
         </div>
@@ -111,7 +111,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label class="block font-bold text-[var(--text-muted)] mb-1">Pet's Name *</label>
-              <input type="text" id="regPetName" required placeholder="e.g. Toby" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+              <input type="text" id="regPetName" required placeholder="e.g. Toby" onkeydown="preventDisallowedSpaces(event, this, 'single')" oninput="sanitizeNameInput(this)" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
             </div>
             <div>
               <label class="block font-bold text-[var(--text-muted)] mb-1">Species *</label>
@@ -124,15 +124,15 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label class="block font-bold text-[var(--text-muted)] mb-1">Breed *</label>
-              <input type="text" id="regPetBreed" required placeholder="e.g. Corgi" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+              <input type="text" id="regPetBreed" required placeholder="e.g. Corgi" onkeydown="preventDisallowedSpaces(event, this, 'single')" oninput="sanitizeNameInput(this)" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
             </div>
             <div>
               <label class="block font-bold text-[var(--text-muted)] mb-1">Pet Age *</label>
-              <input type="text" id="regPetAge" required placeholder="e.g. 2 years" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+              <input type="text" id="regPetAge" required inputmode="numeric" placeholder="e.g. 2" onkeydown="preventDisallowedSpaces(event, this, 'none')" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
             </div>
             <div>
               <label class="block font-bold text-[var(--text-muted)] mb-1">Pet Weight *</label>
-              <input type="text" id="regPetWeight" required placeholder="e.g. 28 lbs" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+              <input type="text" id="regPetWeight" required inputmode="numeric" placeholder="e.g. 28" onkeydown="preventDisallowedSpaces(event, this, 'none')" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
             </div>
           </div>
         </div>

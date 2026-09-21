@@ -2,6 +2,7 @@
    PawsHaven - Pet Boarding & Daycare Kennel Platform CSS
    ThemeForest Ready, Modern, Warm & Reassuring UI
    ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Quicksand:wght@600;700&family=Outfit:wght@600;700;800;900&family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap');
 
 /* --------------------------------------------------------------------------
    Design Tokens & CSS Variables
@@ -9,6 +10,7 @@
 :root {
   --font-primary: 'Plus Jakarta Sans', 'Poppins', system-ui, -apple-system, sans-serif;
   --font-display: 'Poppins', system-ui, sans-serif;
+  --font-logo: 'Outfit', sans-serif;
 
   /* Primary Light Theme Palette */
   --bg-base: #FAF8F5;          /* Warm Ivory / Cream */
@@ -180,11 +182,99 @@ tbody td {
 }
 
 /* --------------------------------------------------------------------------
-   RTL Compatibility (CSS Logical Properties)
+   LTR & RTL Compatibility (CSS Logical Properties & Alignment)
    -------------------------------------------------------------------------- */
-[dir="rtl"] {
+[dir="ltr"],
+html[dir="ltr"],
+body[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+}
+
+[dir="rtl"],
+html[dir="rtl"],
+body[dir="rtl"] {
   direction: rtl;
   text-align: right;
+}
+
+/* BiDi Text Direction and Neutral Punctuation Stabilization in RTL Mode:
+   Ensures question marks (?), full stops (.), and exclamation marks (!) stay
+   at the right end of English/Latin sentences and headings when switching to RTL. */
+[dir="rtl"] p,
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6,
+[dir="rtl"] li,
+[dir="rtl"] dt,
+[dir="rtl"] dd,
+[dir="rtl"] blockquote,
+[dir="rtl"] figcaption,
+[dir="rtl"] label,
+[dir="rtl"] .card-paw p,
+[dir="rtl"] .card-paw h3,
+[dir="rtl"] .card-paw h4,
+[dir="rtl"] .card-title,
+[dir="rtl"] .bidi-text {
+  unicode-bidi: plaintext;
+  text-align: right;
+}
+
+/* FAQ accordion question titles in RTL layout */
+[dir="rtl"] .faq-accordion summary span,
+[dir="rtl"] summary span {
+  display: inline-block;
+  direction: ltr;
+  text-align: right;
+  unicode-bidi: isolate;
+}
+
+/* Badges with trailing punctuation (e.g. ANY QUESTIONS ?) */
+[dir="rtl"] .badge-pet {
+  display: inline-flex;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Centered elements must remain center-aligned in RTL */
+[dir="rtl"] .text-center,
+[dir="rtl"] .text-center p,
+[dir="rtl"] .text-center h1,
+[dir="rtl"] .text-center h2,
+[dir="rtl"] .text-center h3,
+[dir="rtl"] .text-center h4,
+[dir="rtl"] .text-center h5,
+[dir="rtl"] .text-center h6,
+[dir="rtl"] .text-center .badge-pet {
+  text-align: center !important;
+  justify-content: center;
+}
+
+[dir="ltr"] .text-start {
+  text-align: left;
+}
+
+[dir="ltr"] .text-end {
+  text-align: right;
+}
+
+[dir="ltr"] .bi-chevron-right::before {
+  content: "\f285"; /* chevron-right */
+}
+
+[dir="ltr"] .bi-chevron-left::before {
+  content: "\f284"; /* chevron-left */
+}
+
+[dir="ltr"] .bi-arrow-right::before {
+  content: "\f138"; /* arrow-right */
+}
+
+[dir="ltr"] .bi-arrow-left::before {
+  content: "\f12f"; /* arrow-left */
 }
 
 [dir="rtl"] .bi-chevron-right::before {
@@ -201,6 +291,26 @@ tbody td {
 
 [dir="rtl"] .bi-arrow-left::before {
   content: "\f138"; /* arrow-right */
+}
+
+/* LTR Resets for Toasts, Dropdowns & Trackers */
+[dir="ltr"] #toast-container {
+  right: 1.5rem;
+  left: auto;
+}
+
+[dir="ltr"] .toast-item {
+  transform: translateX(100%);
+}
+
+[dir="ltr"] .paws-dropdown-menu {
+  left: 0;
+  right: auto;
+}
+
+[dir="rtl"] .paws-dropdown-menu {
+  right: 0;
+  left: auto;
 }
 
 /* --------------------------------------------------------------------------
@@ -628,6 +738,12 @@ html.dark .badge-image-overlay {
   transition: background-color 0.4s ease;
 }
 
+[dir="ltr"] .tracker-step::after {
+  left: 1.375rem;
+  right: auto;
+  transform: translateX(-50%);
+}
+
 [dir="rtl"] .tracker-step::after {
   left: auto;
   right: 1.375rem;
@@ -686,6 +802,12 @@ html.dark .badge-image-overlay {
     width: 100%;
     height: 4px;
     bottom: auto;
+  }
+
+  [dir="ltr"] .tracker-step::after {
+    left: 50%;
+    right: auto;
+    transform: none;
   }
 
   [dir="rtl"] .tracker-step::after {
@@ -1000,6 +1122,22 @@ body {
 }
 
 /* --------------------------------------------------------------------------
+   Definitive Hidden State Rule (Always overrides responsive utility flex/block)
+   -------------------------------------------------------------------------- */
+.hidden,
+[hidden],
+div.hidden,
+aside.hidden,
+header.hidden,
+main.hidden,
+section.hidden,
+span.hidden,
+button.hidden,
+p.hidden {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
    Standard Solid Navbar Header
    -------------------------------------------------------------------------- */
 .paws-navbar-header {
@@ -1021,6 +1159,28 @@ html.dark .paws-navbar-header {
   background-color: var(--bg-surface) !important;
   border-bottom: 1px solid var(--border-color) !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Pet Parent Portal Sticky Header (In-flow sticky, avoids fixed overlay)
+   -------------------------------------------------------------------------- */
+.paws-portal-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 30 !important;
+  height: 5rem !important;
+  width: 100% !important;
+  flex-shrink: 0 !important;
+  background-color: var(--bg-surface) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03) !important;
+}
+
+[data-theme="dark"] .paws-portal-header,
+html.dark .paws-portal-header {
+  background-color: var(--bg-surface) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25) !important;
 }
 
 /* Inner Container: Balanced 3-Column Architecture */
@@ -1065,6 +1225,52 @@ html.dark .paws-navbar-header {
   text-decoration: none;
   flex-shrink: 0;
 }
+
+.paws-brand-title {
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 1.45rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.15 !important;
+  display: block !important;
+}
+
+.paws-brand-title .brand-paws {
+  color: var(--brand-primary) !important;
+  font-family: inherit !important;
+  transition: color 0.2s ease;
+}
+
+[data-theme="dark"] .paws-brand-title .brand-paws {
+  color: #388E6E !important;
+}
+
+.paws-brand-title .brand-haven {
+  color: var(--brand-accent) !important;
+  font-family: inherit !important;
+  transition: color 0.2s ease;
+}
+
+.paws-brand-subtitle {
+  font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  font-size: 0.625rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.28em !important;
+  text-transform: uppercase !important;
+  color: var(--text-muted) !important;
+  line-height: 1 !important;
+  margin-top: 0.16rem !important;
+  display: block !important;
+  opacity: 0.95 !important;
+}
+
+/* Optional Logo Font Presets */
+.logo-font-fredoka { --font-logo: 'Fredoka', cursive, sans-serif; }
+.logo-font-outfit { --font-logo: 'Outfit', sans-serif; }
+.logo-font-fraunces { --font-logo: 'Fraunces', Georgia, serif; }
+.logo-font-quicksand { --font-logo: 'Quicksand', sans-serif; }
+.logo-font-poppins { --font-logo: 'Poppins', sans-serif; }
+
 
 /* 2. Center Column: Symmetrically Centered Navigation Links */
 .paws-desktop-nav {

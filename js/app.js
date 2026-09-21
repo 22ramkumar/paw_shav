@@ -3,6 +3,37 @@
  */
 
 // ---------------------------------------------------------------------------
+// 0. Input Sanitization & Keydown Prevention Helpers (S-letter safe)
+// ---------------------------------------------------------------------------
+function sanitizeNoSpace(el) {
+  if (!el) return;
+  el.value = el.value.replace(/\s+/g, '');
+}
+
+function sanitizeNameInput(el) {
+  if (!el) return;
+  el.value = el.value.replace(/^\s+/, '').replace(/\s{2,}/g, ' ');
+}
+
+function preventDisallowedSpaces(event, el, mode) {
+  const isSpace = event.key === ' ' || event.code === 'Space' || event.keyCode === 32;
+  if (!isSpace) return;
+  if (mode === 'none') {
+    event.preventDefault();
+  } else if (mode === 'single') {
+    if (el.selectionStart === 0 || el.value.charAt(el.selectionStart - 1) === ' ') {
+      event.preventDefault();
+    }
+  }
+}
+
+if (typeof window !== 'undefined') {
+  window.sanitizeNoSpace = sanitizeNoSpace;
+  window.sanitizeNameInput = sanitizeNameInput;
+  window.preventDisallowedSpaces = preventDisallowedSpaces;
+}
+
+// ---------------------------------------------------------------------------
 // 1. Toast Notification System
 // ---------------------------------------------------------------------------
 function showToast(message, type = 'success', duration = 3500) {
@@ -82,12 +113,17 @@ function updateThemeIcons(theme) {
 // 3. RTL Mode Controller
 // ---------------------------------------------------------------------------
 function initRTL() {
-  const savedDir = localStorage.getItem('paws_dir') || 'ltr';
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlDir = urlParams.get('dir');
+  const savedDir = urlDir || localStorage.getItem('paws_dir') || 'ltr';
   document.documentElement.setAttribute('dir', savedDir);
   if (savedDir === 'rtl') {
     document.documentElement.classList.add('rtl');
+    document.documentElement.classList.remove('ltr');
+    stabilizeRTLPunctuation();
   } else {
     document.documentElement.classList.remove('rtl');
+    document.documentElement.classList.add('ltr');
   }
 }
 
@@ -103,10 +139,44 @@ function toggleRTL() {
   localStorage.setItem('paws_dir', newDir);
   if (newDir === 'rtl') {
     document.documentElement.classList.add('rtl');
+    document.documentElement.classList.remove('ltr');
+    stabilizeRTLPunctuation();
   } else {
     document.documentElement.classList.remove('rtl');
+    document.documentElement.classList.add('ltr');
   }
   showToast(`Switched layout to ${newDir.toUpperCase()}`, 'info', 2000);
+}
+
+/**
+ * Ensures trailing neutral punctuation (?, ., !, :, ;) and mid-sentence question marks
+ * consistently anchor at the right end of English/Latin sentences in RTL mode.
+ */
+function stabilizeRTLPunctuation() {
+  const dir = document.documentElement.getAttribute('dir') || 'ltr';
+  if (dir !== 'rtl') return;
+
+  const selectors = 'h1, h2, h3, h4, h5, h6, summary, .faq-accordion summary span, p, li, label, .badge-pet, dt, dd, figcaption, blockquote, .bidi-text';
+  const elements = document.querySelectorAll(selectors);
+
+  elements.forEach(el => {
+    if (el.closest('input, textarea, select, script, style')) return;
+
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+    let node;
+    while ((node = walker.nextNode())) {
+      let val = node.nodeValue;
+      if (!val || !val.trim()) continue;
+
+      if (!val.includes('\u200E')) {
+        let updated = val.replace(/([?.!:;])(\s*)$/, '$1\u200E$2');
+        updated = updated.replace(/\?(\s*\d)/g, '?\u200E$1');
+        if (updated !== val) {
+          node.nodeValue = updated;
+        }
+      }
+    }
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -248,8 +318,103 @@ function initCounters() {
 }
 
 // ---------------------------------------------------------------------------
-// 8. Global Quick Book Modal Trigger
+// 8. Global Quick Book Modal Trigger & Hero Quick Booking
 // ---------------------------------------------------------------------------
+function formatLocalDate(d) {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function getNextDayDate(dateOrStr) {
+  let d;
+  if (typeof dateOrStr === 'string' && dateOrStr.includes('-')) {
+    const parts = dateOrStr.split('-').map(Number);
+    d = new Date(parts[0], parts[1] - 1, parts[2]);
+  } else if (dateOrStr instanceof Date) {
+    d = new Date(dateOrStr.getFullYear(), dateOrStr.getMonth(), dateOrStr.getDate());
+  } else {
+    d = new Date();
+  }
+  d.setDate(d.getDate() + 1);
+  return d;
+}
+
+function initHeroQuickBookingDates() {
+  const checkInInput = document.getElementById('heroQuickCheckIn');
+  const checkOutInput = document.getElementById('heroQuickCheckOut');
+  
+  if (!checkInInput || !checkOutInput) return;
+
+  // 1. Live system/device date for check-in
+  const now = new Date();
+  const todayStr = formatLocalDate(now);
+  
+  // 2. Next day date for check-out
+  const tomorrow = getNextDayDate(now);
+  const tomorrowStr = formatLocalDate(tomorrow);
+
+  // Set initial live values and min constraints
+  checkInInput.value = todayStr;
+  checkInInput.min = todayStr;
+
+  checkOutInput.value = tomorrowStr;
+  checkOutInput.min = tomorrowStr;
+
+  // 3. When Check-in date changes, automatically set Check-out date to next day of check-in
+  const handleCheckInChange = () => {
+    if (!checkInInput.value) return;
+    
+    const nextDay = getNextDayDate(checkInInput.value);
+    const nextDayStr = formatLocalDate(nextDay);
+    
+    // Set check-out minimum allowed date to the next day of check-in
+    checkOutInput.min = nextDayStr;
+    
+    // Give the next day date in check-out date
+    checkOutInput.value = nextDayStr;
+  };
+
+  checkInInput.addEventListener('change', handleCheckInChange);
+  checkInInput.addEventListener('input', handleCheckInChange);
+
+  // 4. Ensure Check-out date cannot be on or before check-in date
+  checkOutInput.addEventListener('change', () => {
+    if (!checkInInput.value || !checkOutInput.value) return;
+    
+    if (checkOutInput.value <= checkInInput.value) {
+      const nextDay = getNextDayDate(checkInInput.value);
+      const nextDayStr = formatLocalDate(nextDay);
+      checkOutInput.value = nextDayStr;
+      if (typeof showToast === 'function') {
+        showToast('Check-out date must be at least one day after check-in.', 'info');
+      }
+    }
+  });
+}
+
+function submitHeroQuickBooking() {
+  const serviceEl = document.getElementById('heroQuickService');
+  const petEl = document.getElementById('heroQuickPetGuest');
+  const checkInEl = document.getElementById('heroQuickCheckIn');
+  const checkOutEl = document.getElementById('heroQuickCheckOut');
+
+  const serviceSlug = serviceEl ? serviceEl.value : 'overnight-boarding';
+  
+  if (checkInEl && checkInEl.value) {
+    sessionStorage.setItem('paws_booking_checkin', checkInEl.value);
+  }
+  if (checkOutEl && checkOutEl.value) {
+    sessionStorage.setItem('paws_booking_checkout', checkOutEl.value);
+  }
+  if (petEl && petEl.value) {
+    sessionStorage.setItem('paws_booking_pet_guest', petEl.value);
+  }
+
+  quickBookService(serviceSlug);
+}
+
 function quickBookService(serviceSlug) {
   // Store selected service in sessionStorage for prefill
   if (serviceSlug) {
@@ -274,8 +439,19 @@ function quickBookService(serviceSlug) {
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initRTL();
+  setTimeout(() => {
+    if (document.documentElement.getAttribute('dir') === 'rtl') {
+      stabilizeRTLPunctuation();
+    }
+  }, 300);
   initCounters();
+  initHeroQuickBookingDates();
 });
+
+// Also initialize immediately if DOM is already ready
+if (document.readyState === 'interactive' || document.readyState === 'complete') {
+  initHeroQuickBookingDates();
+}
 
 
 // ---------------------------------------------------------------------------

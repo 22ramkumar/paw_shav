@@ -3,6 +3,33 @@
  * Renders consistent header, dropdowns, mobile drawer, theme/RTL toggles, and auth state.
  */
 
+// ---------------------------------------------------------------------------
+// Input Sanitization & Keydown Prevention Helpers (S-letter safe)
+// ---------------------------------------------------------------------------
+if (typeof window !== 'undefined') {
+  window.sanitizeNoSpace = window.sanitizeNoSpace || function(el) {
+    if (!el) return;
+    el.value = el.value.replace(/\s+/g, '');
+  };
+
+  window.sanitizeNameInput = window.sanitizeNameInput || function(el) {
+    if (!el) return;
+    el.value = el.value.replace(/^\s+/, '').replace(/\s{2,}/g, ' ');
+  };
+
+  window.preventDisallowedSpaces = window.preventDisallowedSpaces || function(event, el, mode) {
+    const isSpace = event.key === ' ' || event.code === 'Space' || event.keyCode === 32;
+    if (!isSpace) return;
+    if (mode === 'none') {
+      event.preventDefault();
+    } else if (mode === 'single') {
+      if (el.selectionStart === 0 || el.value.charAt(el.selectionStart - 1) === ' ') {
+        event.preventDefault();
+      }
+    }
+  };
+}
+
 const PAW_LOGO_SVG = (sizeClass = "w-6 h-6") => `
   <svg class="${sizeClass} fill-current text-white flex-shrink-0" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-label="PawsHaven Logo">
     <path d="M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c7.3 19.4-.5 40.7-17.4 50.1l-14.7 8.2c-15.1 8.5-34.1 3.5-42.6-11.6l-50.5-88.8-50.5 88.8c-8.5 15.1-27.5 20.1-42.6 11.6l-14.7-8.2c-16.9-9.4-24.7-30.7-17.4-50.1zM344.2 198.6c-18.9 32.4-14.3 70.1 10.2 84.1s59.7-.9 78.5-33.3 14.3-70.1-10.2-84.1-59.7.9-78.5 33.3zM448.2 92.9c-14.3 42.9.3 86.2 32.6 96.8s70.1-15.6 84.4-58.5-.3-86.2-32.6-96.8-70.1 15.6-84.4 58.5z"/>
@@ -13,6 +40,15 @@ function renderPawsNavbar() {
   const mount = document.getElementById("paws-navbar");
   if (!mount || mount.dataset.rendered === "true") return;
   mount.dataset.rendered = "true";
+
+  // Guarantee Google Fonts for brand are loaded into <head>
+  if (!document.getElementById('paws-brand-fonts')) {
+    const fontLink = document.createElement('link');
+    fontLink.id = 'paws-brand-fonts';
+    fontLink.rel = 'stylesheet';
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Quicksand:wght@600;700&family=Outfit:wght@600;700;800&family=Fraunces:opsz,wght@9..144,700;9..144,800&display=swap';
+    document.head.appendChild(fontLink);
+  }
 
   const currentUser = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
   const currentPath = window.location.pathname.toLowerCase();
@@ -85,11 +121,11 @@ function renderPawsNavbar() {
               <img src="images/logo.png" alt="PawsHaven Resort Logo" class="w-full h-full object-cover block">
             </div>
             <div class="flex flex-col justify-center">
-              <span class="text-xl font-black tracking-tight text-[var(--brand-primary)] dark:text-emerald-400 leading-tight whitespace-nowrap">
-                Paws<span class="text-[var(--brand-accent)]">Haven</span>
+              <span class="paws-brand-title whitespace-nowrap" style="font-family: 'Outfit', -apple-system, sans-serif !important; font-size: 1.45rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15;">
+                <span class="brand-paws text-[var(--brand-primary)] dark:text-emerald-400">Paws</span><span class="brand-haven text-[var(--brand-accent)]">Haven</span>
               </span>
-              <span class="text-[10px] uppercase font-bold tracking-widest text-[var(--text-muted)] -mt-0.5 whitespace-nowrap">
-                Resort & Daycare
+              <span class="paws-brand-subtitle whitespace-nowrap" style="font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif !important; font-size: 0.625rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.16rem;">
+                Resort &amp; Daycare
               </span>
             </div>
           </a>
@@ -187,7 +223,14 @@ function renderPawsNavbar() {
           <div class="w-9 h-9 rounded-xl bg-[#F0F1EC] flex items-center justify-center shadow-xs overflow-hidden border border-[var(--border-color)] flex-shrink-0">
             <img src="images/logo.png" alt="PawsHaven Logo" class="w-full h-full object-cover block">
           </div>
-          <span class="font-bold text-base text-[var(--brand-primary)]">Paws<span class="text-[var(--brand-accent)]">Haven</span></span>
+          <div class="flex flex-col justify-center">
+            <span class="paws-brand-title text-lg whitespace-nowrap" style="font-family: 'Outfit', -apple-system, sans-serif !important; font-size: 1.25rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15;">
+              <span class="brand-paws text-[var(--brand-primary)] dark:text-emerald-400">Paws</span><span class="brand-haven text-[var(--brand-accent)]">Haven</span>
+            </span>
+            <span class="paws-brand-subtitle text-[9px] whitespace-nowrap" style="font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif !important; font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.16rem;">
+              Resort &amp; Daycare
+            </span>
+          </div>
         </div>
         <button id="closeDrawerBtn" class="w-8 h-8 rounded-lg flex items-center justify-center text-lg hover:bg-[var(--bg-subtle)] transition">
           <i class="bi bi-x-lg"></i>
@@ -297,7 +340,7 @@ function renderPawsNavbar() {
               <label for="modalLoginId" class="block font-bold text-[var(--text-muted)] mb-1">Email or Username <span class="text-rose-500">*</span></label>
               <div class="relative">
                 <i class="bi bi-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)] text-sm"></i>
-                <input type="text" id="modalLoginId" required placeholder="user@gmail.com" class="w-full ps-10 pe-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
+                <input type="text" id="modalLoginId" required placeholder="user@gmail.com" onkeydown="preventDisallowedSpaces(event, this, 'none')" oninput="sanitizeNoSpace(this)" class="w-full ps-10 pe-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
               </div>
             </div>
 
@@ -305,7 +348,7 @@ function renderPawsNavbar() {
               <label for="modalLoginPassword" class="block font-bold text-[var(--text-muted)] mb-1">Password <span class="text-rose-500">*</span></label>
               <div class="relative">
                 <i class="bi bi-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)] text-sm"></i>
-                <input type="password" id="modalLoginPassword" required placeholder="••••••••" class="w-full ps-10 pe-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
+                <input type="password" id="modalLoginPassword" required placeholder="••••••••" onkeydown="preventDisallowedSpaces(event, this, 'none')" oninput="sanitizeNoSpace(this)" class="w-full ps-10 pe-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
               </div>
             </div>
 
@@ -322,29 +365,29 @@ function renderPawsNavbar() {
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label for="modalRegName" class="block font-bold text-[var(--text-muted)] mb-1">Your Full Name <span class="text-rose-500">*</span></label>
-                <input type="text" id="modalRegName" required placeholder="Rachel Adams" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
+                <input type="text" id="modalRegName" required placeholder="Rachel Adams" onkeydown="preventDisallowedSpaces(event, this, 'single')" oninput="sanitizeNameInput(this)" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
               </div>
               <div>
                 <label for="modalRegPhone" class="block font-bold text-[var(--text-muted)] mb-1">Phone Number <span class="text-rose-500">*</span></label>
-                <input type="tel" id="modalRegPhone" required placeholder="+1 (555) 000-0000" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
+                <input type="tel" id="modalRegPhone" required placeholder="+1(555)000-0000" onkeydown="preventDisallowedSpaces(event, this, 'none')" oninput="this.value = this.value.replace(/[^0-9+\-()]/g, '')" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
               </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label for="modalRegEmail" class="block font-bold text-[var(--text-muted)] mb-1">Email Address <span class="text-rose-500">*</span></label>
-                <input type="email" id="modalRegEmail" required placeholder="rachel@example.com" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
+                <input type="email" id="modalRegEmail" required placeholder="rachel@example.com" onkeydown="preventDisallowedSpaces(event, this, 'none')" oninput="sanitizeNoSpace(this)" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
               </div>
               <div>
                 <label for="modalRegPassword" class="block font-bold text-[var(--text-muted)] mb-1">Password <span class="text-rose-500">*</span></label>
-                <input type="password" id="modalRegPassword" required placeholder="••••••••" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
+                <input type="password" id="modalRegPassword" required placeholder="••••••••" onkeydown="preventDisallowedSpaces(event, this, 'none')" oninput="sanitizeNoSpace(this)" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
               </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 border-t border-[var(--border-color)]">
               <div>
                 <label for="modalRegPetName" class="block font-bold text-[var(--text-muted)] mb-1">Pet's Name <span class="text-rose-500">*</span></label>
-                <input type="text" id="modalRegPetName" required placeholder="Toby" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
+                <input type="text" id="modalRegPetName" required placeholder="Toby" onkeydown="preventDisallowedSpaces(event, this, 'single')" oninput="sanitizeNameInput(this)" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
               </div>
               <div>
                 <label for="modalRegPetSpecies" class="block font-bold text-[var(--text-muted)] mb-1">Species</label>
@@ -359,15 +402,15 @@ function renderPawsNavbar() {
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label for="modalRegPetBreed" class="block font-bold text-[var(--text-muted)] mb-1">Pet Breed</label>
-                <input type="text" id="modalRegPetBreed" placeholder="e.g. Golden Retriever" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
+                <input type="text" id="modalRegPetBreed" placeholder="e.g. Golden Retriever" onkeydown="preventDisallowedSpaces(event, this, 'single')" oninput="sanitizeNameInput(this)" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
               </div>
               <div>
                 <label for="modalRegPetAge" class="block font-bold text-[var(--text-muted)] mb-1">Pet Age</label>
-                <input type="text" id="modalRegPetAge" placeholder="e.g. 2 years" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
+                <input type="text" id="modalRegPetAge" inputmode="numeric" placeholder="e.g. 2" onkeydown="preventDisallowedSpaces(event, this, 'none')" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
               </div>
               <div>
                 <label for="modalRegPetWeight" class="block font-bold text-[var(--text-muted)] mb-1">Pet Weight</label>
-                <input type="text" id="modalRegPetWeight" placeholder="e.g. 28 lbs" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
+                <input type="text" id="modalRegPetWeight" inputmode="numeric" placeholder="e.g. 28" onkeydown="preventDisallowedSpaces(event, this, 'none')" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full px-3 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:ring-2 focus:ring-[var(--brand-primary)] focus:outline-none">
               </div>
             </div>
 
@@ -378,7 +421,7 @@ function renderPawsNavbar() {
           </form>
 
           <div class="text-center pt-4 mt-4 border-t border-[var(--border-color)] text-xs text-[var(--text-muted)]">
-            Already have an account? <button type="button" onclick="switchAuthTab('login')" class="font-bold text-[var(--brand-primary)] hover:underline">Log In to Portal</button>
+            Already have an account?&lrm; <button type="button" onclick="switchAuthTab('login')" class="font-bold text-[var(--brand-primary)] hover:underline">Log In to Portal</button>
           </div>
         </div>
 
@@ -593,6 +636,38 @@ function handleModalRegister() {
 
   if (!name || !phone || !email || !password || !petName) {
     if (typeof showToast === 'function') showToast('Please fill out all required fields.', 'error');
+    return;
+  }
+
+  if (phone.includes(' ')) {
+    if (typeof showToast === 'function') showToast('Phone number cannot contain spaces.', 'error');
+    const phoneInput = document.getElementById('modalRegPhone');
+    if (phoneInput) phoneInput.focus();
+    return;
+  }
+
+  if (email.includes(' ')) {
+    if (typeof showToast === 'function') showToast('Email address cannot contain spaces.', 'error');
+    const emailInput = document.getElementById('modalRegEmail');
+    if (emailInput) emailInput.focus();
+    return;
+  }
+
+  if (password.includes(' ')) {
+    if (typeof showToast === 'function') showToast('Password cannot contain spaces.', 'error');
+    const passInput = document.getElementById('modalRegPassword');
+    if (passInput) passInput.focus();
+    return;
+  }
+
+  // Validate phone: must contain digits, cannot contain letters or invalid characters, minimum 7 digits
+  const digitsOnly = phone.replace(/\D/g, '');
+  if (digitsOnly.length < 7 || /[a-zA-Z]/.test(phone)) {
+    if (typeof showToast === 'function') {
+      showToast('Please enter a valid phone number (minimum 7 digits, numbers only).', 'error');
+    }
+    const phoneInput = document.getElementById('modalRegPhone');
+    if (phoneInput) phoneInput.focus();
     return;
   }
 

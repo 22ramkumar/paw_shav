@@ -54,6 +54,10 @@ function switchUserTab(tabId) {
     overlay.classList.add("hidden");
   }
 
+  const scrollArea = document.getElementById("userMainScrollArea");
+  if (scrollArea) {
+    scrollArea.scrollTo({ top: 0, behavior: 'smooth' });
+  }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -561,14 +565,34 @@ function renderInvoicesTable() {
 
 let currentViewedInvoiceId = null;
 
+function getLogoDataUrlSync() {
+  try {
+    const img = document.querySelector("#userSidebar img, img[src*='logo']");
+    if (img && img.complete && img.naturalWidth > 0) {
+      const canvas = document.createElement("canvas");
+      canvas.width = 96;
+      canvas.height = 96;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, 96, 96);
+      return canvas.toDataURL("image/png");
+    }
+  } catch (e) {
+    console.warn("Could not extract logo canvas data URL:", e);
+  }
+  return "";
+}
+
 function getInvoiceCardMarkup(inv) {
+  const logoDataUrl = getLogoDataUrlSync();
+  const logoSrc = logoDataUrl || "images/logo.png";
+
   return `
     <div id="printable-invoice" class="p-6 sm:p-8 bg-white dark:bg-[var(--bg-surface)] text-gray-900 dark:text-[var(--text-main)] rounded-3xl border border-gray-200 dark:border-[var(--border-color)] shadow-sm space-y-6">
       <!-- Invoice Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-gray-200 dark:border-[var(--border-color)] gap-4">
         <div class="flex items-center gap-3.5">
           <div class="w-12 h-12 rounded-2xl bg-[#F0F1EC] flex items-center justify-center shadow-sm overflow-hidden border border-gray-200 dark:border-[var(--border-color)] flex-shrink-0">
-            <img src="images/logo.png" alt="PawsHaven Logo" class="w-full h-full object-cover block">
+            <img src="${logoSrc}" alt="PawsHaven Logo" class="w-full h-full object-cover block" onerror="this.onerror=null;this.parentElement.innerHTML='<span class=\\'text-2xl\\'>🐶</span>';">
           </div>
           <div>
             <h2 class="text-xl sm:text-2xl font-black text-[var(--brand-primary)] dark:text-emerald-400 leading-tight">PawsHaven Resort & Daycare</h2>
@@ -677,12 +701,17 @@ function getInvoiceCardMarkup(inv) {
 }
 
 function getStandaloneInvoicePageHTML(inv, isAutoPrint = false) {
+  const logoDataUrl = getLogoDataUrlSync();
+  const baseHref = typeof window !== 'undefined' ? (window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1)) : '';
+  const logoSrc = logoDataUrl || "images/logo.png";
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Official Invoice ${inv.id} - PawsHaven Resort</title>
+  ${baseHref ? `<base href="${baseHref}">` : ''}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style>
     @page {
@@ -918,8 +947,8 @@ function getStandaloneInvoicePageHTML(inv, isAutoPrint = false) {
     <!-- Header -->
     <div class="header-row">
       <div class="brand-group">
-        <div class="brand-icon" style="width:40px;height:40px;overflow:hidden;border-radius:10px;border:1px solid #e5e7eb;background:#F0F1EC;display:flex;align-items:center;justify-content:center;">
-          <img src="images/logo.png" alt="PawsHaven Logo" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="brand-icon" style="width:44px;height:44px;overflow:hidden;border-radius:12px;border:1px solid #e5e7eb;background:#F0F1EC;display:flex;align-items:center;justify-content:center;">
+          <img src="${logoSrc}" alt="PawsHaven Logo" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.onerror=null;this.parentElement.innerHTML='<span style=\\'font-size:24px;\\'>🐶</span>';">
         </div>
         <div>
           <h1 class="brand-title">PawsHaven Resort & Daycare</h1>

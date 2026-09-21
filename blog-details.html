@@ -10,7 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800;900&family=Quicksand:wght@600;700&family=Fraunces:opsz,wght@9..144,700;9..144,800&display=swap" rel="stylesheet">
 
   <!-- Prevent Theme & Layout Flicker (Anti-FOUC) -->
   <script>
@@ -79,7 +79,7 @@
 
       <span id="articleCategoryBadge" class="badge-pet badge-coral text-xs mb-3">Boarding Tips & Wellness</span>
       <h1 id="articleMainTitle" class="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--text-main)] leading-tight">
-        First Time Boarding? 7 Steps to Prepare Your Dog for a Stress-Free Stay
+        First Time Boarding?&lrm; 7 Steps to Prepare Your Dog for a Stress-Free Stay
       </h1>
 
       <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-[var(--border-color)] mt-6 text-xs text-[var(--text-muted)]">
@@ -96,10 +96,10 @@
           <span id="articleReadTime"><i class="bi bi-clock"></i> 5 min read</span>
           <!-- Social Share -->
           <div class="flex items-center gap-2">
-            <button onclick="shareArticle('twitter')" class="w-7 h-7 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-primary)] hover:text-white transition flex items-center justify-center border border-[var(--border-color)]">
+            <button onclick="shareArticle('twitter')" class="w-7 h-7 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-primary)] hover:text-white transition flex items-center justify-center border border-[var(--border-color)]" title="Share on X">
               <i class="bi bi-twitter-x"></i>
             </button>
-            <button onclick="shareArticle('facebook')" class="w-7 h-7 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-primary)] hover:text-white transition flex items-center justify-center border border-[var(--border-color)]">
+            <button onclick="shareArticle('facebook')" class="w-7 h-7 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-primary)] hover:text-white transition flex items-center justify-center border border-[var(--border-color)]" title="Share on Facebook">
               <i class="bi bi-facebook"></i>
             </button>
             <button onclick="copyArticleLink()" class="w-7 h-7 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-primary)] hover:text-white transition flex items-center justify-center border border-[var(--border-color)]" title="Copy Link">
@@ -182,34 +182,37 @@
 
       <!-- Comments Section -->
       <div class="pt-8 border-t border-[var(--border-color)] space-y-6">
-        <h3 class="text-xl font-black text-[var(--text-main)]">Discussion & Community Comments</h3>
+        <div class="flex items-center justify-between">
+          <h3 class="text-xl font-black text-[var(--text-main)] flex items-center gap-2">
+            <span>Discussion & Community Comments</span>
+            <span id="commentsCountBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)] font-bold border border-[var(--border-color)]">1</span>
+          </h3>
+        </div>
 
+        <!-- Comments List Container -->
         <div id="commentsList" class="space-y-4">
-          <div class="p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-2">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="font-bold text-xs text-[var(--text-main)]">David Kim</span>
-                <span class="badge-pet badge-teal text-[9px]">Verified Parent</span>
-              </div>
-              <span class="text-[10px] text-[var(--text-muted)]">Yesterday</span>
-            </div>
-            <p class="text-xs text-[var(--text-muted)]">
-              The tip about bringing an unwashed t-shirt worked like magic for Milo! Jessica even sent us a photo of him resting his nose on it while snoozing.
-            </p>
-          </div>
+          <!-- Dynamically populated -->
         </div>
 
         <!-- Add Comment Form -->
-        <form onsubmit="event.preventDefault(); postComment();" class="card-paw p-6 bg-[var(--bg-surface)] space-y-3">
-          <h4 class="font-bold text-xs uppercase tracking-wider text-[var(--text-muted)]">Leave a Reply</h4>
+        <form id="commentForm" onsubmit="event.preventDefault(); postComment();" class="card-paw p-6 bg-[var(--bg-surface)] space-y-4 border border-[var(--border-color)] rounded-2xl">
+          <h4 class="font-bold text-xs uppercase tracking-wider text-[var(--text-muted)] flex items-center gap-2">
+            <i class="bi bi-chat-dots-fill text-[var(--brand-accent)]"></i> Leave a Reply
+          </h4>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-            <input type="text" id="commentAuthor" required placeholder="Your Name *" class="px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)]">
-            <input type="email" id="commentEmail" required placeholder="Your Email Address *" class="px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)]">
+            <input type="text" id="commentAuthor" required placeholder="Your Name *" class="px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] transition">
+            <input type="email" id="commentEmail" required placeholder="Your Email Address *" class="px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] transition">
           </div>
-          <textarea id="commentText" required rows="3" placeholder="Share your experience or question..." class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-xs"></textarea>
-          <button type="submit" class="btn-brand-accent text-xs py-2.5 px-5 rounded-xl font-bold">
-            Post Comment
-          </button>
+          <textarea id="commentText" required rows="3" placeholder="Share your experience or question..." class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-xs text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] transition"></textarea>
+          <div class="flex items-center justify-between pt-1">
+            <p class="text-[11px] text-[var(--text-muted)] flex items-center gap-1">
+              <i class="bi bi-shield-check text-emerald-500"></i> Be respectful to fellow pet parents
+            </p>
+            <button type="submit" class="btn-brand-accent text-xs py-2.5 px-6 rounded-xl font-bold flex items-center gap-1.5 shadow-sm hover:shadow-md transition">
+              <i class="bi bi-send-fill text-[11px]"></i>
+              <span>Post Comment</span>
+            </button>
+          </div>
         </form>
       </div>
 
@@ -225,6 +228,7 @@
   <script src="js/navbar.js"></script>
   <script src="js/footer.js"></script>
   <script>
+    // Blog Article Dynamic Hydration
     document.addEventListener("DOMContentLoaded", () => {
       const urlParams = new URLSearchParams(window.location.search);
       const postId = urlParams.get("id");
@@ -256,6 +260,20 @@
           }
         }
       }
+
+      // Pre-fill user profile if logged in
+      if (typeof getCurrentUser === "function") {
+        const user = getCurrentUser();
+        if (user) {
+          const authorEl = document.getElementById("commentAuthor");
+          const emailEl = document.getElementById("commentEmail");
+          if (authorEl && !authorEl.value) authorEl.value = user.name || user.username || "";
+          if (emailEl && !emailEl.value) emailEl.value = user.email || "";
+        }
+      }
+
+      // Render community comments
+      renderComments();
     });
 
     function copyArticleLink() {
@@ -275,29 +293,256 @@
       }
     }
 
-    function postComment() {
-      const name = document.getElementById("commentAuthor").value.trim();
-      const text = document.getElementById("commentText").value.trim();
-      if (!name || !text) return;
+    // ---------------------------------------------------------------------------
+    // Comment Management System (Edit, Delete, Persist)
+    // ---------------------------------------------------------------------------
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentPostId = urlParams.get("id") || "post-1";
+    const COMMENTS_STORAGE_KEY = `paws_blog_comments_${currentPostId}`;
 
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function getComments() {
+      const stored = localStorage.getItem(COMMENTS_STORAGE_KEY);
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch (e) {
+          console.error("Error parsing stored comments:", e);
+        }
+      }
+      // Initial Seed comment
+      const seed = [
+        {
+          id: "seed-david-kim",
+          author: "David Kim",
+          email: "david.kim@example.com",
+          badge: "Verified Parent",
+          badgeClass: "badge-teal",
+          time: "Yesterday",
+          text: "The tip about bringing an unwashed t-shirt worked like magic for Milo! Jessica even sent us a photo of him resting his nose on it while snoozing.",
+          canEdit: false,
+          isEdited: false,
+          timestamp: Date.now() - 86400000
+        }
+      ];
+      localStorage.setItem(COMMENTS_STORAGE_KEY, JSON.stringify(seed));
+      return seed;
+    }
+
+    function saveComments(comments) {
+      localStorage.setItem(COMMENTS_STORAGE_KEY, JSON.stringify(comments));
+    }
+
+    function renderComments() {
       const list = document.getElementById("commentsList");
-      const newComment = document.createElement("div");
-      newComment.className = "p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-2";
-      newComment.innerHTML = `
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="font-bold text-xs text-[var(--text-main)]">${name}</span>
-            <span class="badge-pet badge-coral text-[9px]">New Comment</span>
+      if (!list) return;
+
+      const comments = getComments();
+      const countBadge = document.getElementById("commentsCountBadge");
+      if (countBadge) {
+        countBadge.textContent = comments.length;
+      }
+
+      if (comments.length === 0) {
+        list.innerHTML = `
+          <div class="p-8 text-center rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)]">
+            <i class="bi bi-chat-heart text-3xl text-[var(--brand-accent)] mb-2 block"></i>
+            <p class="text-xs font-bold text-[var(--text-main)]">No comments yet</p>
+            <p class="text-[11px] text-[var(--text-muted)] mt-0.5">Be the first to share your thoughts with our pet community!</p>
           </div>
-          <span class="text-[10px] text-[var(--text-muted)]">Just now</span>
+        `;
+        return;
+      }
+
+      list.innerHTML = comments.map(c => `
+        <div id="comment-card-${c.id}" class="p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-3 transition-all duration-300">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
+              <div class="w-7 h-7 rounded-full bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] dark:text-emerald-400 flex items-center justify-center font-bold text-xs uppercase">
+                ${escapeHtml((c.author || 'U').charAt(0))}
+              </div>
+              <span class="font-bold text-xs text-[var(--text-main)]">${escapeHtml(c.author)}</span>
+              <span class="badge-pet ${c.badgeClass || 'badge-coral'} text-[9px]">${escapeHtml(c.badge || 'New Comment')}</span>
+              ${c.isEdited ? '<span class="text-[10px] text-[var(--text-muted)] italic font-medium">(edited)</span>' : ''}
+            </div>
+
+            <div class="flex items-center gap-2.5">
+              <span class="text-[10px] text-[var(--text-muted)]">${c.time || 'Just now'}</span>
+              ${c.canEdit ? `
+                <div class="flex items-center gap-1 border-s border-[var(--border-color)] ps-2.5">
+                  <button type="button" onclick="startEditComment('${c.id}')" class="text-[11px] font-semibold text-[var(--brand-primary)] dark:text-emerald-400 hover:text-[var(--brand-accent)] px-2 py-1 rounded-lg hover:bg-[var(--bg-subtle)] transition inline-flex items-center gap-1" title="Edit your comment">
+                    <i class="bi bi-pencil-square"></i>
+                    <span>Edit</span>
+                  </button>
+                  <button type="button" onclick="deleteComment('${c.id}')" class="text-[11px] font-semibold text-rose-500 hover:text-rose-700 px-2 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/40 transition inline-flex items-center gap-1" title="Delete your comment">
+                    <i class="bi bi-trash3"></i>
+                    <span>Delete</span>
+                  </button>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+
+          <!-- Normal display text -->
+          <div id="comment-view-${c.id}">
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed whitespace-pre-wrap">${escapeHtml(c.text)}</p>
+          </div>
+
+          <!-- Inline Edit Form (Hidden by default) -->
+          <div id="comment-edit-box-${c.id}" class="hidden space-y-2 pt-1">
+            <label class="block text-[10px] font-bold uppercase tracking-wider text-[var(--brand-accent)]">Edit your comment</label>
+            <textarea id="comment-edit-input-${c.id}" rows="3" class="w-full px-3.5 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--brand-accent)] text-xs text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] transition resize-y"></textarea>
+            <div class="flex items-center justify-end gap-2 pt-1">
+              <button type="button" onclick="cancelEditComment('${c.id}')" class="px-3.5 py-1.5 text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--text-main)] rounded-lg hover:bg-[var(--bg-subtle)] transition">
+                Cancel
+              </button>
+              <button type="button" onclick="saveEditComment('${c.id}')" class="btn-brand-accent px-4 py-1.5 text-xs font-bold rounded-lg shadow-sm hover:shadow transition inline-flex items-center gap-1.5">
+                <i class="bi bi-check2"></i>
+                <span>Save Changes</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <p class="text-xs text-[var(--text-muted)]">${text}</p>
-      `;
-      list.prepend(newComment);
+      `).join("");
+    }
+
+    function postComment() {
+      const nameInput = document.getElementById("commentAuthor");
+      const emailInput = document.getElementById("commentEmail");
+      const textInput = document.getElementById("commentText");
+
+      if (!nameInput || !textInput) {
+        console.error("Comment inputs not found in DOM.");
+        return;
+      }
+
+      const name = nameInput.value ? nameInput.value.trim() : "";
+      const email = emailInput ? emailInput.value.trim() : "";
+      const text = textInput.value ? textInput.value.trim() : "";
+
+      if (!name) {
+        showToast("Please enter your name.", "error");
+        nameInput.focus();
+        return;
+      }
+      if (!text) {
+        showToast("Please enter your comment.", "error");
+        textInput.focus();
+        return;
+      }
+
+      const comments = getComments();
+      const newComment = {
+        id: "cmt-" + Date.now(),
+        author: name,
+        email: email,
+        badge: "New Comment",
+        badgeClass: "badge-coral",
+        time: "Just now",
+        text: text,
+        canEdit: true, // Enables Edit and Delete buttons for this comment
+        isEdited: false,
+        timestamp: Date.now()
+      };
+
+      comments.unshift(newComment);
+      saveComments(comments);
+      renderComments();
+
+      // Clear text input
+      textInput.value = "";
+
       showToast("Thank you! Your comment has been posted.", "success");
-      document.getElementById("commentAuthor").value = "";
-      document.getElementById("commentEmail").value = "";
-      document.getElementById("commentText").value = "";
+
+      // Highlight the posted comment
+      const newCard = document.getElementById(`comment-card-${newComment.id}`);
+      if (newCard) {
+        newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        newCard.classList.add("ring-2", "ring-[var(--brand-accent)]");
+        setTimeout(() => newCard.classList.remove("ring-2", "ring-[var(--brand-accent)]"), 2500);
+      }
+    }
+
+    function startEditComment(commentId) {
+      const comments = getComments();
+      const comment = comments.find(c => c.id === commentId);
+      if (!comment) return;
+
+      const viewEl = document.getElementById(`comment-view-${commentId}`);
+      const editBoxEl = document.getElementById(`comment-edit-box-${commentId}`);
+      const inputEl = document.getElementById(`comment-edit-input-${commentId}`);
+
+      if (viewEl && editBoxEl && inputEl) {
+        inputEl.value = comment.text;
+        viewEl.classList.add("hidden");
+        editBoxEl.classList.remove("hidden");
+        inputEl.focus();
+      }
+    }
+
+    function cancelEditComment(commentId) {
+      const viewEl = document.getElementById(`comment-view-${commentId}`);
+      const editBoxEl = document.getElementById(`comment-edit-box-${commentId}`);
+      if (viewEl && editBoxEl) {
+        editBoxEl.classList.add("hidden");
+        viewEl.classList.remove("hidden");
+      }
+    }
+
+    function saveEditComment(commentId) {
+      const inputEl = document.getElementById(`comment-edit-input-${commentId}`);
+      if (!inputEl) return;
+
+      const newText = inputEl.value.trim();
+      if (!newText) {
+        showToast("Comment text cannot be empty.", "error");
+        inputEl.focus();
+        return;
+      }
+
+      const comments = getComments();
+      const idx = comments.findIndex(c => c.id === commentId);
+      if (idx !== -1) {
+        comments[idx].text = newText;
+        comments[idx].isEdited = true;
+        saveComments(comments);
+        renderComments();
+        showToast("Comment updated successfully!", "success");
+      }
+    }
+
+    function deleteComment(commentId) {
+      if (!confirm("Are you sure you want to delete this comment?")) {
+        return;
+      }
+
+      const card = document.getElementById(`comment-card-${commentId}`);
+      if (card) {
+        card.style.transition = 'all 0.3s ease';
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.95)';
+        card.style.maxHeight = '0';
+        card.style.padding = '0';
+        card.style.margin = '0';
+        card.style.overflow = 'hidden';
+      }
+
+      setTimeout(() => {
+        let comments = getComments();
+        comments = comments.filter(c => c.id !== commentId);
+        saveComments(comments);
+        renderComments();
+        showToast("Comment deleted successfully.", "info");
+      }, 300);
     }
   </script>
 </body>

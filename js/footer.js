@@ -22,12 +22,12 @@ function renderPawsFooter() {
                 <div class="w-11 h-11 rounded-2xl bg-[#F0F1EC] flex items-center justify-center shadow-md group-hover:scale-105 transition-transform overflow-hidden border border-[var(--border-color)] flex-shrink-0">
                   <img src="images/logo.png" alt="PawsHaven Logo" class="w-full h-full object-cover block">
                 </div>
-                <div>
-                  <span class="text-xl font-black tracking-tight text-[var(--brand-primary)] dark:text-emerald-400 block leading-none">
-                    Paws<span class="text-[var(--brand-accent)]">Haven</span>
+                <div class="flex flex-col justify-center">
+                  <span class="paws-brand-title block leading-none" style="font-family: 'Outfit', -apple-system, sans-serif !important; font-size: 1.45rem; font-weight: 800; letter-spacing: -0.03em;">
+                    <span class="brand-paws text-[var(--brand-primary)] dark:text-emerald-400">Paws</span><span class="brand-haven text-[var(--brand-accent)]">Haven</span>
                   </span>
-                  <span class="text-[10px] uppercase font-bold tracking-widest text-[var(--text-muted)] block mt-0.5">
-                    Resort & Daycare
+                  <span class="paws-brand-subtitle block mt-1" style="font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif !important; font-size: 0.625rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted);">
+                    Resort &amp; Daycare
                   </span>
                 </div>
               </a>
