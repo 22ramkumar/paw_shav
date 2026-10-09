@@ -60,24 +60,38 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-theme-base text-theme-main antialiased selection:bg-[#E07A5F] selection:text-white min-h-screen flex flex-col justify-between">
+<body class="bg-theme-base text-theme-main antialiased selection:bg-[#E07A5F] selection:text-white min-h-screen flex flex-col justify-center relative">
 
-  <!-- Navbar -->
-  <div id="paws-navbar"></div>
+  <!-- Quick Floating Controls: Back to Home & Theme Toggle -->
+  <div class="absolute top-4 sm:top-6 left-4 sm:left-6 z-20">
+    <a href="index.html" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[var(--bg-surface)]/90 backdrop-blur border border-[var(--border-color)] text-xs font-bold text-[var(--text-main)] hover:text-[var(--brand-primary)] hover:border-[var(--brand-primary)] shadow-sm transition">
+      <i class="bi bi-arrow-left"></i>
+      <span>Back to Home</span>
+    </a>
+  </div>
+
 
   <!-- Register Card Section with Blurred Resort Backdrop -->
-  <section class="relative pt-32 pb-20 flex-1 flex items-center justify-center px-4 overflow-hidden">
+  <section class="relative py-12 sm:py-16 flex-1 flex items-center justify-center px-4 overflow-hidden">
     <!-- Blurred Resort Background -->
     <div class="absolute inset-0 bg-cover bg-center filter blur-xl scale-110 opacity-40 dark:opacity-20 pointer-events-none" style="background-image: url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=1600&q=80');"></div>
     <div class="absolute inset-0 bg-black/40 backdrop-blur-md pointer-events-none"></div>
 
     <div class="relative z-10 card-paw p-8 sm:p-10 bg-[var(--bg-surface)] max-w-xl w-full rounded-3xl shadow-[0_30px_90px_rgba(0,0,0,0.6)] border-2 border-[var(--border-color)]">
       
-      <div class="text-center mb-8">
-        <div class="w-12 h-12 rounded-2xl bg-[var(--brand-accent)] text-white flex items-center justify-center text-2xl mx-auto mb-3 shadow-md">
-          <i class="bi bi-heart-fill"></i>
-        </div>
-        <h1 class="text-2xl font-black text-[var(--text-main)]">Join the PawsHaven Family</h1>
+      <div class="text-center mb-6">
+        <a href="index.html" class="inline-flex flex-col items-center group mb-2">
+          <div class="w-16 h-16 rounded-2xl bg-[#F0F1EC] dark:bg-[#1a2e26] flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300 overflow-hidden border border-[var(--border-color)] mb-2">
+            <img src="images/logo.png" alt="PawsHaven Resort Logo" class="w-full h-full object-cover block">
+          </div>
+          <span class="paws-brand-title whitespace-nowrap" style="font-family: 'Outfit', -apple-system, sans-serif !important; font-size: 1.55rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15;">
+            <span class="brand-paws text-[var(--brand-primary)] dark:text-emerald-400">Paws</span><span class="brand-haven text-[var(--brand-accent)]">Haven</span>
+          </span>
+          <span class="paws-brand-subtitle whitespace-nowrap" style="font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif !important; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.16rem;">
+            Resort &amp; Daycare
+          </span>
+        </a>
+        <h1 class="text-2xl font-black text-[var(--text-main)] mt-1">Join the PawsHaven Family</h1>
         <p class="text-xs text-[var(--text-muted)] mt-1">Create your pet parent profile in under 2 minutes</p>
       </div>
 
@@ -149,21 +163,18 @@
         </button>
       </form>
 
-      <div class="text-center pt-6 mt-6 border-t border-[var(--border-color)] text-xs text-[var(--text-muted)]">
-        Already registered? <button type="button" onclick="openAuthModal('login')" class="font-bold text-[var(--brand-primary)] hover:underline">Log In to Portal</button>
+      <div class="text-center pt-6 mt-6 border-t border-[var(--border-color)] text-xs text-[var(--text-muted)] flex items-center justify-center gap-3">
+        <span>Already registered? <a href="login.html" class="font-bold text-[var(--brand-primary)] hover:underline cursor-pointer">Log In to Portal</a></span>
+        <span class="opacity-40">•</span>
+        <a href="login.html?tab=forgot" class="font-bold text-[var(--brand-accent)] hover:underline cursor-pointer">Forgot Password?</a>
       </div>
 
     </div>
   </section>
 
-  <!-- Footer -->
-  <div id="paws-footer"></div>
-
   <!-- Scripts -->
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/navbar.js"></script>
-  <script src="js/footer.js"></script>
   <script>
     function handleRegister() {
       const name = document.getElementById("regName").value.trim();
@@ -219,7 +230,7 @@
       setCurrentUser(newUser);
       showToast(`🎉 Welcome to PawsHaven, ${name}! Profile created for ${petName}.`, "success", 4000);
       setTimeout(() => {
-        window.location.href = "user.html";
+        window.location.href = "index.html";
       }, 900);
     }
   </script>

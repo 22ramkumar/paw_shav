@@ -76,7 +76,7 @@
   <!-- =========================================================================
        HERO SECTION: A Second Home for Your Best Friend
        ========================================================================= -->
-  <section class="relative pt-32 pb-20 lg:pt-36 lg:pb-28 overflow-hidden bg-[var(--bg-base)]">
+  <section class="relative pt-6 sm:pt-10 pb-12 sm:pb-16 overflow-hidden bg-[var(--bg-base)]">
     <!-- Desktop Hero Background (lg+): Full-bleed 16:9 panoramic resort meadow showcase -->
     <div class="hidden lg:block absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
       <div class="absolute inset-0 w-full h-full bg-cover bg-center hero-bg-kenburns opacity-45 dark:opacity-25 filter contrast-[1.05] brightness-100 dark:brightness-75"
@@ -248,37 +248,37 @@
   <!-- =========================================================================
        ANIMATED STATISTICS SECTION
        ========================================================================= -->
-  <section class="py-12 bg-[var(--bg-surface)] border-y border-[var(--border-color)]">
+  <section id="statsSection" class="py-8 sm:py-10 bg-[var(--bg-surface)] border-y border-[var(--border-color)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
         
-        <div class="space-y-1">
+        <div class="stat-card space-y-1 p-2 sm:p-3 rounded-2xl transition hover:bg-[var(--bg-subtle)]/50 cursor-pointer" title="Click to replay animation">
           <div class="text-3xl sm:text-4xl font-black text-[var(--brand-primary)] dark:text-emerald-400">
-            <span class="stat-counter" data-target="12500">0</span>+
+            <span class="stat-counter" data-target="12500" data-duration="2000">0</span>+
           </div>
           <p class="text-xs sm:text-sm font-bold text-[var(--text-main)]">Happy Stays Hosted</p>
           <p class="text-[11px] text-[var(--text-muted)]">Since our resort opening</p>
         </div>
 
-        <div class="space-y-1">
+        <div class="stat-card space-y-1 p-2 sm:p-3 rounded-2xl transition hover:bg-[var(--bg-subtle)]/50 cursor-pointer" title="Click to replay animation">
           <div class="text-3xl sm:text-4xl font-black text-[var(--brand-accent)]">
-            <span class="stat-counter" data-target="99">0</span>.8%
+            <span class="stat-counter" data-target="99.8" data-decimals="1" data-duration="2000">0.0</span>%
           </div>
           <p class="text-xs sm:text-sm font-bold text-[var(--text-main)]">Parent Satisfaction Rate</p>
           <p class="text-[11px] text-[var(--text-muted)]">Verified customer reviews</p>
         </div>
 
-        <div class="space-y-1">
+        <div class="stat-card space-y-1 p-2 sm:p-3 rounded-2xl transition hover:bg-[var(--bg-subtle)]/50 cursor-pointer" title="Click to replay animation">
           <div class="text-3xl sm:text-4xl font-black text-[var(--brand-sunny)]">
-            <span class="stat-counter" data-target="100">0</span>%
+            <span class="stat-counter" data-target="100" data-duration="1800">0</span>%
           </div>
           <p class="text-xs sm:text-sm font-bold text-[var(--text-main)]">CPR & First Aid Certified</p>
           <p class="text-[11px] text-[var(--text-muted)]">Every single caregiver</p>
         </div>
 
-        <div class="space-y-1">
+        <div class="stat-card space-y-1 p-2 sm:p-3 rounded-2xl transition hover:bg-[var(--bg-subtle)]/50 cursor-pointer" title="Click to replay animation">
           <div class="text-3xl sm:text-4xl font-black text-[var(--brand-primary)] dark:text-emerald-400">
-            24/7
+            <span class="stat-counter" data-target="24" data-duration="1600">0</span>/<span class="stat-counter" data-target="7" data-duration="1600">0</span>
           </div>
           <p class="text-xs sm:text-sm font-bold text-[var(--text-main)]">On-Call Resident Vet</p>
           <p class="text-[11px] text-[var(--text-muted)]">365 Days non-stop care</p>
@@ -309,7 +309,7 @@
         <!-- Feature 1 -->
         <div class="card-paw p-8 flex flex-col justify-between group">
           <div>
-            <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+            <div class="w-14 h-14 rounded-2xl bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
               <i class="bi bi-camera-video"></i>
             </div>
             <h3 class="text-lg font-bold text-[var(--text-main)] mb-2">Live HD Webcams</h3>
@@ -325,7 +325,7 @@
         <!-- Feature 2 -->
         <div class="card-paw p-8 flex flex-col justify-between group">
           <div>
-            <div class="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-700 dark:text-amber-400 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+            <div class="w-14 h-14 rounded-2xl bg-[var(--brand-accent)]/10 text-[var(--brand-accent)] flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
               <i class="bi bi-house-heart"></i>
             </div>
             <h3 class="text-lg font-bold text-[var(--text-main)] mb-2">Private Glass Suites</h3>
@@ -341,7 +341,7 @@
         <!-- Feature 3 -->
         <div class="card-paw p-8 flex flex-col justify-between group">
           <div>
-            <div class="w-14 h-14 rounded-2xl bg-rose-500/10 text-rose-700 dark:text-rose-400 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+            <div class="w-14 h-14 rounded-2xl bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
               <i class="bi bi-tree"></i>
             </div>
             <h3 class="text-lg font-bold text-[var(--text-main)] mb-2">Real Grass Yards</h3>
@@ -357,7 +357,7 @@
         <!-- Feature 4 -->
         <div class="card-paw p-8 flex flex-col justify-between group">
           <div>
-            <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+            <div class="w-14 h-14 rounded-2xl bg-[var(--brand-accent)]/10 text-[var(--brand-accent)] flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
               <i class="bi bi-journal-check"></i>
             </div>
             <h3 class="text-lg font-bold text-[var(--text-main)] mb-2">Daily Photo & Feeding Logs</h3>
@@ -400,9 +400,10 @@
         
         <!-- Service Card 1 -->
         <div class="card-paw flex flex-col justify-between overflow-hidden group">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?auto=format&fit=crop&w=600&q=80" alt="Overnight Luxury Boarding Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <span class="badge-pet badge-image-overlay absolute top-3 left-3 text-[10px]">Overnight Stay</span>
+          <div class="relative h-52 sm:h-56 overflow-hidden bg-[var(--bg-subtle)]">
+            <img src="images/pricing-tier-2.jpg" alt="Overnight Luxury Boarding Suite" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+            <span class="badge-pet badge-image-overlay absolute top-3 left-3 text-[10px] font-bold shadow-sm backdrop-blur-md">Overnight Stay</span>
           </div>
           <div class="p-6 flex-1 flex flex-col justify-between">
             <div>
@@ -415,11 +416,11 @@
                 Climate-controlled private glass suite with plush orthopedic bed, 4 yard exercise sessions, bedtime tuck-in, and webcam streaming.
               </p>
             </div>
-            <div class="pt-4 border-t border-[var(--border-color)] flex items-center gap-2">
-              <a href="service-details.html" class="btn-brand-outline text-xs py-2 px-3 rounded-lg flex-1 text-center">
+            <div class="service-card-actions pt-4 border-t border-[var(--border-color)] flex items-center gap-2.5 w-full">
+              <a href="service-details.html" class="btn-brand-outline text-xs h-10 px-2 sm:px-3 rounded-xl flex-1 text-center font-bold whitespace-nowrap inline-flex items-center justify-center leading-none">
                 Details
               </a>
-              <a href="booking.html" class="btn-brand-accent text-xs py-2 px-3 rounded-lg flex-1 text-center font-bold">
+              <a href="booking.html" class="btn-brand-accent text-xs h-10 px-2 sm:px-3 rounded-xl flex-1 text-center font-bold whitespace-nowrap inline-flex items-center justify-center leading-none">
                 Book Now
               </a>
             </div>
@@ -428,9 +429,10 @@
 
         <!-- Service Card 2 -->
         <div class="card-paw flex flex-col justify-between overflow-hidden group">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=600&q=80" alt="Daytime Daycare Playgroup" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <span class="badge-pet badge-image-overlay absolute top-3 left-3 text-[10px]">Daycare</span>
+          <div class="relative h-52 sm:h-56 overflow-hidden bg-[var(--bg-subtle)]">
+            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&h=550&q=80" alt="Daytime Daycare Playgroup" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+            <span class="badge-pet badge-image-overlay absolute top-3 left-3 text-[10px] font-bold shadow-sm backdrop-blur-md">Daycare</span>
           </div>
           <div class="p-6 flex-1 flex flex-col justify-between">
             <div>
@@ -443,11 +445,11 @@
                 Structured playgroups supervised by canine behaviorists, splash pool fun, midday quiet nap time, and daily digital activity reports.
               </p>
             </div>
-            <div class="pt-4 border-t border-[var(--border-color)] flex items-center gap-2">
-              <a href="services.html#daycare" class="btn-brand-outline text-xs py-2 px-3 rounded-lg flex-1 text-center">
+            <div class="service-card-actions pt-4 border-t border-[var(--border-color)] flex items-center gap-2.5 w-full">
+              <a href="services.html#daycare" class="btn-brand-outline text-xs h-10 px-2 sm:px-3 rounded-xl flex-1 text-center font-bold whitespace-nowrap inline-flex items-center justify-center leading-none">
                 Details
               </a>
-              <a href="booking.html" class="btn-brand-accent text-xs py-2 px-3 rounded-lg flex-1 text-center font-bold">
+              <a href="booking.html" class="btn-brand-accent text-xs h-10 px-2 sm:px-3 rounded-xl flex-1 text-center font-bold whitespace-nowrap inline-flex items-center justify-center leading-none">
                 Book Now
               </a>
             </div>
@@ -456,9 +458,10 @@
 
         <!-- Service Card 3 -->
         <div class="card-paw flex flex-col justify-between overflow-hidden group">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=600&q=80" alt="Spa & Grooming" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <span class="badge-pet badge-image-overlay absolute top-3 left-3 text-[10px]">Spa & Bath</span>
+          <div class="relative h-52 sm:h-56 overflow-hidden bg-[var(--bg-subtle)]">
+            <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=800&h=550&q=80" alt="Spa & Grooming" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+            <span class="badge-pet badge-image-overlay absolute top-3 left-3 text-[10px] font-bold shadow-sm backdrop-blur-md">Spa & Bath</span>
           </div>
           <div class="p-6 flex-1 flex flex-col justify-between">
             <div>
@@ -471,11 +474,11 @@
                 Hypoallergenic bubble bath, blueberry facial, gentle claw trim & buff, ear cleansing, and silky de-shedding blowout by certified stylists.
               </p>
             </div>
-            <div class="pt-4 border-t border-[var(--border-color)] flex items-center gap-2">
-              <a href="services.html#grooming" class="btn-brand-outline text-xs py-2 px-3 rounded-lg flex-1 text-center">
+            <div class="service-card-actions pt-4 border-t border-[var(--border-color)] flex items-center gap-2.5 w-full">
+              <a href="services.html#grooming" class="btn-brand-outline text-xs h-10 px-2 sm:px-3 rounded-xl flex-1 text-center font-bold whitespace-nowrap inline-flex items-center justify-center leading-none">
                 Details
               </a>
-              <a href="booking.html" class="btn-brand-accent text-xs py-2 px-3 rounded-lg flex-1 text-center font-bold">
+              <a href="booking.html" class="btn-brand-accent text-xs h-10 px-2 sm:px-3 rounded-xl flex-1 text-center font-bold whitespace-nowrap inline-flex items-center justify-center leading-none">
                 Book Now
               </a>
             </div>
@@ -484,9 +487,10 @@
 
         <!-- Service Card 4 -->
         <div class="card-paw flex flex-col justify-between overflow-hidden group">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80" alt="Puppy & Kitten Nursery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <span class="badge-pet badge-image-overlay absolute top-3 left-3 text-[10px]">Nursery Care</span>
+          <div class="relative h-52 sm:h-56 overflow-hidden bg-[var(--bg-subtle)]">
+            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&crop=focalpoint&fp-y=0.35&w=800&h=550&q=80" alt="Puppy & Kitten Nursery" class="w-full h-full object-cover object-[center_25%] group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+            <span class="badge-pet badge-image-overlay absolute top-3 left-3 text-[10px] font-bold shadow-sm backdrop-blur-md">Nursery Care</span>
           </div>
           <div class="p-6 flex-1 flex flex-col justify-between">
             <div>
@@ -499,11 +503,11 @@
                 Specialized early developmental care with 2-hour potty intervals, positive socialization, padded rubber flooring, and warm cuddle sessions.
               </p>
             </div>
-            <div class="pt-4 border-t border-[var(--border-color)] flex items-center gap-2">
-              <a href="services.html#puppy" class="btn-brand-outline text-xs py-2 px-3 rounded-lg flex-1 text-center">
+            <div class="service-card-actions pt-4 border-t border-[var(--border-color)] flex items-center gap-2.5 w-full">
+              <a href="services.html#puppy" class="btn-brand-outline text-xs h-10 px-2 sm:px-3 rounded-xl flex-1 text-center font-bold whitespace-nowrap inline-flex items-center justify-center leading-none">
                 Details
               </a>
-              <a href="booking.html" class="btn-brand-accent text-xs py-2 px-3 rounded-lg flex-1 text-center font-bold">
+              <a href="booking.html" class="btn-brand-accent text-xs h-10 px-2 sm:px-3 rounded-xl flex-1 text-center font-bold whitespace-nowrap inline-flex items-center justify-center leading-none">
                 Book Now
               </a>
             </div>
@@ -600,7 +604,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Warm Sand Showcase Container Panel -->
-      <div class="relative bg-gradient-to-br from-[#F6F1EA] via-[#FAF7F2] to-[#EFE7DE] dark:from-[#1C2822] dark:via-[#16211C] dark:to-[#121A15] rounded-3xl p-6 sm:p-10 lg:p-14 border border-[var(--border-color)] shadow-lg overflow-hidden">
+      <div class="relative bg-gradient-to-br from-[#F6F1EA] via-[#FAF7F2] to-[#EFE7DE] dark:from-[#1C2822] dark:via-[#16211C] dark:to-[#121A15] rounded-3xl p-4 sm:p-8 lg:p-12 border border-[var(--border-color)] shadow-lg overflow-hidden max-w-full">
         
         <!-- Decorative Ambient Background Glows & Pattern -->
         <div class="absolute -top-24 -right-24 w-80 h-80 bg-[var(--brand-primary)]/10 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -608,7 +612,7 @@
         <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(27,77,62,0.04)_1.2px,transparent_1.2px)] dark:bg-[radial-gradient(circle,rgba(255,255,255,0.04)_1.2px,transparent_1.2px)] [background-size:24px_24px] pointer-events-none"></div>
 
         <!-- Relative Content Layer -->
-        <div class="relative z-10">
+        <div class="relative z-10 w-full max-w-full">
           <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12 lg:mb-14 space-y-2 sm:space-y-3">
             <span class="badge-pet badge-teal shadow-xs">Our Compassionate Guardians</span>
             <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-[var(--text-main)]">
@@ -619,75 +623,75 @@
             </p>
           </div>
 
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-6 items-stretch">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-6 items-stretch w-full max-w-full">
             
             <!-- Staff 1 -->
-            <div class="card-paw p-4 sm:p-5 lg:p-6 text-center flex flex-col items-center h-full group bg-white dark:bg-[var(--bg-surface)] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 border border-[var(--border-color)]">
+            <div class="card-paw p-4 sm:p-5 lg:p-6 text-center flex flex-col items-center h-full group bg-white dark:bg-[var(--bg-surface)] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 border border-[var(--border-color)] w-full max-w-full overflow-hidden">
               <div class="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full p-1 bg-white ring-2 ring-[var(--brand-primary)]/20 shadow-sm mb-3 sm:mb-4 group-hover:scale-105 transition-transform flex-shrink-0 mx-auto">
                 <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&crop=top&w=400&h=400&q=80" alt="Jessica Miller" class="w-full h-full rounded-full object-cover object-top">
               </div>
               <div class="w-full flex flex-col flex-1 items-center">
-                <h4 class="font-bold text-xs sm:text-sm lg:text-base text-[var(--text-main)] mb-1 leading-snug min-h-[1.5rem] flex items-center justify-center">Jessica Miller</h4>
-                <p class="text-[10px] sm:text-xs text-[var(--brand-accent)] font-semibold mb-2 sm:mb-2.5 leading-tight min-h-[1.25rem] flex items-center justify-center">Head of Resort Care</p>
-                <div class="flex items-center justify-center gap-1 sm:gap-1.5 mb-2.5 sm:mb-3 min-h-[26px] w-full">
+                <h4 class="font-bold text-sm sm:text-base text-[var(--text-main)] mb-1 leading-snug min-h-[1.5rem] flex items-center justify-center">Jessica Miller</h4>
+                <p class="text-xs text-[var(--brand-accent)] font-semibold mb-2 sm:mb-2.5 leading-tight min-h-[1.25rem] flex items-center justify-center">Head of Resort Care</p>
+                <div class="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 mb-2.5 sm:mb-3 min-h-[26px] w-full">
                   <span class="badge-pet badge-teal text-[8px] sm:text-[9px] px-2 py-0.5 whitespace-nowrap">CPR Certified</span>
                   <span class="badge-pet badge-teal text-[8px] sm:text-[9px] px-2 py-0.5 whitespace-nowrap">Fear Free</span>
                 </div>
-                <p class="text-[10px] sm:text-xs text-[var(--text-muted)] leading-snug sm:leading-relaxed flex-1">
+                <p class="text-xs text-[var(--text-muted)] leading-relaxed flex-1">
                   9+ years leading veterinary animal care. Specializes in canine comfort and stress reduction.
                 </p>
               </div>
             </div>
 
             <!-- Staff 2 -->
-            <div class="card-paw p-4 sm:p-5 lg:p-6 text-center flex flex-col items-center h-full group bg-white dark:bg-[var(--bg-surface)] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 border border-[var(--border-color)]">
+            <div class="card-paw p-4 sm:p-5 lg:p-6 text-center flex flex-col items-center h-full group bg-white dark:bg-[var(--bg-surface)] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 border border-[var(--border-color)] w-full max-w-full overflow-hidden">
               <div class="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full p-1 bg-white ring-2 ring-[var(--brand-primary)]/20 shadow-sm mb-3 sm:mb-4 group-hover:scale-105 transition-transform flex-shrink-0 mx-auto">
                 <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&crop=top&w=400&h=400&q=80" alt="Dr. Marcus Vance" class="w-full h-full rounded-full object-cover object-top">
               </div>
               <div class="w-full flex flex-col flex-1 items-center">
-                <h4 class="font-bold text-xs sm:text-sm lg:text-base text-[var(--text-main)] mb-1 leading-snug min-h-[1.5rem] flex items-center justify-center">Dr. Marcus Vance, DVM</h4>
-                <p class="text-[10px] sm:text-xs text-[var(--brand-accent)] font-semibold mb-2 sm:mb-2.5 leading-tight min-h-[1.25rem] flex items-center justify-center">Resident Vet Partner</p>
-                <div class="flex items-center justify-center gap-1 sm:gap-1.5 mb-2.5 sm:mb-3 min-h-[26px] w-full">
+                <h4 class="font-bold text-sm sm:text-base text-[var(--text-main)] mb-1 leading-snug min-h-[1.5rem] flex items-center justify-center">Dr. Marcus Vance, DVM</h4>
+                <p class="text-xs text-[var(--brand-accent)] font-semibold mb-2 sm:mb-2.5 leading-tight min-h-[1.25rem] flex items-center justify-center">Resident Vet Partner</p>
+                <div class="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 mb-2.5 sm:mb-3 min-h-[26px] w-full">
                   <span class="badge-pet badge-teal text-[8px] sm:text-[9px] px-2 py-0.5 whitespace-nowrap">DVM Certified</span>
                   <span class="badge-pet badge-teal text-[8px] sm:text-[9px] px-2 py-0.5 whitespace-nowrap">24/7 On-Call</span>
                 </div>
-                <p class="text-[10px] sm:text-xs text-[var(--text-muted)] leading-snug sm:leading-relaxed flex-1">
+                <p class="text-xs text-[var(--text-muted)] leading-relaxed flex-1">
                   14 years in clinical veterinary practice. Oversees resort sanitization and medicine schedules.
                 </p>
               </div>
             </div>
 
             <!-- Staff 3 -->
-            <div class="card-paw p-4 sm:p-5 lg:p-6 text-center flex flex-col items-center h-full group bg-white dark:bg-[var(--bg-surface)] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 border border-[var(--border-color)]">
+            <div class="card-paw p-4 sm:p-5 lg:p-6 text-center flex flex-col items-center h-full group bg-white dark:bg-[var(--bg-surface)] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 border border-[var(--border-color)] w-full max-w-full overflow-hidden">
               <div class="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full p-1 bg-white ring-2 ring-[var(--brand-primary)]/20 shadow-sm mb-3 sm:mb-4 group-hover:scale-105 transition-transform flex-shrink-0 mx-auto">
                 <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&crop=top&w=400&h=400&q=80" alt="Chloe Bennett" class="w-full h-full rounded-full object-cover object-top">
               </div>
               <div class="w-full flex flex-col flex-1 items-center">
-                <h4 class="font-bold text-xs sm:text-sm lg:text-base text-[var(--text-main)] mb-1 leading-snug min-h-[1.5rem] flex items-center justify-center">Chloe Bennett</h4>
-                <p class="text-[10px] sm:text-xs text-[var(--brand-accent)] font-semibold mb-2 sm:mb-2.5 leading-tight min-h-[1.25rem] flex items-center justify-center">Master Stylist &amp; Spa Lead</p>
-                <div class="flex items-center justify-center gap-1 sm:gap-1.5 mb-2.5 sm:mb-3 min-h-[26px] w-full">
+                <h4 class="font-bold text-sm sm:text-base text-[var(--text-main)] mb-1 leading-snug min-h-[1.5rem] flex items-center justify-center">Chloe Bennett</h4>
+                <p class="text-xs text-[var(--brand-accent)] font-semibold mb-2 sm:mb-2.5 leading-tight min-h-[1.25rem] flex items-center justify-center">Master Stylist &amp; Spa Lead</p>
+                <div class="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 mb-2.5 sm:mb-3 min-h-[26px] w-full">
                   <span class="badge-pet badge-teal text-[8px] sm:text-[9px] px-2 py-0.5 whitespace-nowrap">Master Groomer</span>
                   <span class="badge-pet badge-teal text-[8px] sm:text-[9px] px-2 py-0.5 whitespace-nowrap">Coat Care</span>
                 </div>
-                <p class="text-[10px] sm:text-xs text-[var(--text-muted)] leading-snug sm:leading-relaxed flex-1">
+                <p class="text-xs text-[var(--text-muted)] leading-relaxed flex-1">
                   Gentle hands and soothing energy. Specializes in anxious dogs and breed-standard luxury styling.
                 </p>
               </div>
             </div>
 
             <!-- Staff 4 -->
-            <div class="card-paw p-4 sm:p-5 lg:p-6 text-center flex flex-col items-center h-full group bg-white dark:bg-[var(--bg-surface)] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 border border-[var(--border-color)]">
+            <div class="card-paw p-4 sm:p-5 lg:p-6 text-center flex flex-col items-center h-full group bg-white dark:bg-[var(--bg-surface)] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 border border-[var(--border-color)] w-full max-w-full overflow-hidden">
               <div class="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full p-1 bg-white ring-2 ring-[var(--brand-primary)]/20 shadow-sm mb-3 sm:mb-4 group-hover:scale-105 transition-transform flex-shrink-0 mx-auto">
                 <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&crop=top&w=400&h=400&q=80" alt="Liam O'Connor" class="w-full h-full rounded-full object-cover object-top">
               </div>
               <div class="w-full flex flex-col flex-1 items-center">
-                <h4 class="font-bold text-xs sm:text-sm lg:text-base text-[var(--text-main)] mb-1 leading-snug min-h-[1.5rem] flex items-center justify-center">Liam O'Connor</h4>
-                <p class="text-[10px] sm:text-xs text-[var(--brand-accent)] font-semibold mb-2 sm:mb-2.5 leading-tight min-h-[1.25rem] flex items-center justify-center">Canine Play Yard Lead</p>
-                <div class="flex items-center justify-center gap-1 sm:gap-1.5 mb-2.5 sm:mb-3 min-h-[26px] w-full">
+                <h4 class="font-bold text-sm sm:text-base text-[var(--text-main)] mb-1 leading-snug min-h-[1.5rem] flex items-center justify-center">Liam O'Connor</h4>
+                <p class="text-xs text-[var(--brand-accent)] font-semibold mb-2 sm:mb-2.5 leading-tight min-h-[1.25rem] flex items-center justify-center">Canine Play Yard Lead</p>
+                <div class="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 mb-2.5 sm:mb-3 min-h-[26px] w-full">
                   <span class="badge-pet badge-teal text-[8px] sm:text-[9px] px-2 py-0.5 whitespace-nowrap">CPDT Trainer</span>
                   <span class="badge-pet badge-teal text-[8px] sm:text-[9px] px-2 py-0.5 whitespace-nowrap">Agility Pro</span>
                 </div>
-                <p class="text-[10px] sm:text-xs text-[var(--text-muted)] leading-snug sm:leading-relaxed flex-1">
+                <p class="text-xs text-[var(--text-muted)] leading-relaxed flex-1">
                   Master of canine body language. Keeps playgroups balanced, joyful, and completely safe.
                 </p>
               </div>
@@ -696,18 +700,18 @@
           </div>
 
           <!-- Bottom Trust Badges Bar -->
-          <div class="mt-8 sm:mt-10 pt-6 border-t border-[var(--border-color)]/70 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs font-semibold text-[var(--text-muted)]">
+          <div class="mt-8 sm:mt-10 pt-6 border-t border-[var(--border-color)]/70 flex flex-wrap items-center justify-center gap-3 sm:gap-6 lg:gap-10 text-[11px] sm:text-xs font-semibold text-[var(--text-muted)] text-center">
             <div class="flex items-center gap-2">
               <i class="bi bi-shield-check text-emerald-600 dark:text-emerald-400 text-base"></i>
-              <span>100% Background Checked & Vetted</span>
+              <span>100% Background Checked &amp; Vetted</span>
             </div>
             <div class="flex items-center gap-2">
               <i class="bi bi-heart-pulse-fill text-[var(--brand-accent)] text-base"></i>
-              <span>Fear Free & Pet CPR Certified</span>
+              <span>Fear Free &amp; Pet CPR Certified</span>
             </div>
             <div class="flex items-center gap-2">
               <i class="bi bi-camera-video-fill text-[var(--brand-primary)] dark:text-emerald-400 text-base"></i>
-              <span>Daily Photo Updates & Live Cam Access</span>
+              <span>Daily Photo Updates &amp; Live Cam Access</span>
             </div>
           </div>
 
@@ -931,10 +935,10 @@
             </a>
           </div>
 
-          <!-- Trust Badges Row -->
+          <!-- Trust Badges Row (Consistent Brand Colors) -->
           <div class="mt-8 sm:mt-10 pt-6 border-t border-[var(--border-color)]/70 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs font-semibold text-[var(--text-muted)]">
             <div class="flex items-center gap-2">
-              <i class="bi bi-shield-check text-emerald-600 dark:text-emerald-400 text-base"></i>
+              <i class="bi bi-shield-check text-[var(--brand-primary)] text-base"></i>
               <span>Instant Confirmation</span>
             </div>
             <div class="flex items-center gap-2">
@@ -942,7 +946,7 @@
               <span>Free Cancellation Up to 48h</span>
             </div>
             <div class="flex items-center gap-2">
-              <i class="bi bi-camera-video text-amber-500 text-base"></i>
+              <i class="bi bi-camera-video text-[var(--brand-primary)] text-base"></i>
               <span>24/7 Mobile Cam Access</span>
             </div>
           </div>

@@ -229,7 +229,7 @@ function capturePawsLiveSnapshot() {
   // Add event to live timeline
   prependLiveTimelineItem({
     icon: "bi-camera-fill",
-    iconBg: "bg-indigo-100 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-400",
+    iconBg: "bg-[var(--brand-primary)]/10 text-[var(--brand-primary)]",
     title: "Parent Photo Snapshot Captured",
     subtitle: `${timeStr} • High-Res 1080p Frame Saved to Album`,
     isNew: true

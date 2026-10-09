@@ -125,17 +125,17 @@ function renderPetSelection() {
   }
 
   container.innerHTML = pets.map(pet => `
-    <div onclick="selectExistingPet('${pet.id}')" class="p-4 rounded-2xl border-2 transition cursor-pointer flex items-center gap-4 ${bookingState.petId === pet.id ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)]/5' : 'border-[var(--border-color)] bg-[var(--bg-surface)] hover:border-[var(--brand-primary)]/40'}">
-      <img src="${pet.avatar}" alt="${pet.name}" class="w-14 h-14 rounded-2xl object-cover border border-black/10">
-      <div class="flex-1">
-        <div class="flex items-center justify-between">
-          <h4 class="font-bold text-base text-[var(--text-main)]">${pet.name}</h4>
-          <span class="badge-pet badge-teal text-[10px]">${pet.species}</span>
+    <div onclick="selectExistingPet('${pet.id}')" class="p-3.5 sm:p-4 rounded-2xl border-2 transition cursor-pointer flex items-center gap-3 sm:gap-4 ${bookingState.petId === pet.id ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)]/5' : 'border-[var(--border-color)] bg-[var(--bg-surface)] hover:border-[var(--brand-primary)]/40'}">
+      <img src="${pet.avatar}" alt="${pet.name}" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl object-cover border border-black/10 flex-shrink-0">
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center justify-between gap-1">
+          <h4 class="font-bold text-sm sm:text-base text-[var(--text-main)] truncate">${pet.name}</h4>
+          <span class="badge-pet badge-teal text-[10px] flex-shrink-0">${pet.species}</span>
         </div>
-        <p class="text-xs text-[var(--text-muted)]">${pet.breed} • ${pet.age} • ${pet.weight}</p>
-        <p class="text-[11px] text-emerald-600 font-semibold mt-1"><i class="bi bi-shield-check"></i> Vaccines ${pet.vaccinationStatus}</p>
+        <p class="text-xs text-[var(--text-muted)] truncate">${pet.breed} • ${pet.age} • ${pet.weight}</p>
+        <p class="text-[11px] text-emerald-600 font-semibold mt-1 truncate"><i class="bi bi-shield-check"></i> Vaccines ${pet.vaccinationStatus}</p>
       </div>
-      <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center ${bookingState.petId === pet.id ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white' : 'border-[var(--border-color)]'}">
+      <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${bookingState.petId === pet.id ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white' : 'border-[var(--border-color)]'}">
         ${bookingState.petId === pet.id ? '<i class="bi bi-check text-sm"></i>' : ''}
       </div>
     </div>

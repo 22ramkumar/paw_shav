@@ -859,7 +859,7 @@ function initializePawsDatabase() {
       const parsed = JSON.parse(existingServices);
       const updated = PawsData.services.map(s => {
         const found = parsed.find(p => p.id === s.id);
-        return found ? { ...found, image: s.image, icon: s.icon } : s;
+        return found ? { ...found, image: s.image, icon: s.icon, title: s.title } : s;
       });
       localStorage.setItem("paws_services", JSON.stringify(updated));
     } catch(e) {

@@ -90,25 +90,50 @@ function renderUserOverview() {
   const stayCard = document.getElementById("overviewActiveStayCard");
   if (stayCard && activeStay) {
     stayCard.innerHTML = `
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 bg-gradient-to-br from-[var(--brand-primary)]/10 to-[var(--brand-accent)]/10 rounded-3xl border border-[var(--brand-primary)]/20 mb-8">
-        <div class="flex items-center gap-4">
-          <img src="${activeStay.petPhoto}" alt="${activeStay.petName}" class="w-16 h-16 rounded-2xl object-cover border-2 border-white shadow-md">
-          <div>
-            <div class="flex items-center gap-2">
-              <h3 class="text-xl font-black text-[var(--text-main)]">${activeStay.petName}'s Current Stay</h3>
-              <span class="badge-pet badge-coral text-[10px]">${activeStay.status}</span>
+      <div class="p-5 sm:p-7 bg-gradient-to-br from-[var(--brand-primary)]/10 via-[var(--bg-surface)] to-[var(--brand-accent)]/10 rounded-3xl border border-[var(--brand-primary)]/20 shadow-sm mb-8">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6">
+          
+          <!-- Pet Image & Information Block -->
+          <div class="flex items-center gap-4 sm:gap-6 min-w-0 flex-1">
+            <div class="relative shrink-0">
+              <img src="${activeStay.petPhoto}" alt="${activeStay.petName}" class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-2xl object-cover border-2 border-white dark:border-[var(--border-color)] shadow-md">
+              <span class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-500 border-2 border-white dark:border-[var(--border-color)] flex items-center justify-center text-white text-[11px] shadow-sm" title="Active Stay In Progress">
+                <i class="bi bi-activity"></i>
+              </span>
             </div>
-            <p class="text-xs text-[var(--text-muted)] mt-0.5">${activeStay.serviceName} • ${activeStay.suite}</p>
-            <p class="text-xs font-semibold text-[var(--brand-primary)] mt-1"><i class="bi bi-person-check-fill"></i> Caretaker: ${activeStay.assignedCaretaker}</p>
+
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-wrap items-center gap-2 sm:gap-2.5 mb-1.5">
+                <h3 class="text-xl sm:text-2xl font-black text-[var(--text-main)] leading-snug tracking-tight">
+                  ${activeStay.petName}'s Current Stay
+                </h3>
+                <span class="badge-pet badge-coral text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 shadow-xs">
+                  ${activeStay.status}
+                </span>
+              </div>
+              <p class="text-xs sm:text-sm text-[var(--text-muted)] font-medium flex items-center gap-1.5 mb-1.5 leading-normal">
+                <i class="bi bi-house-heart-fill text-[var(--brand-accent)] text-xs sm:text-sm shrink-0"></i>
+                <span class="truncate">${activeStay.serviceName} &bull; ${activeStay.suite}</span>
+              </p>
+              <p class="text-xs sm:text-sm font-semibold text-[var(--brand-primary)] dark:text-emerald-400 flex items-center gap-1.5 leading-normal">
+                <i class="bi bi-person-badge-fill text-xs sm:text-sm shrink-0"></i>
+                <span class="truncate">Caretaker: ${activeStay.assignedCaretaker}</span>
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="flex items-center gap-3 w-full sm:w-auto">
-          <button onclick="switchUserTab('tracking')" class="btn-brand-primary text-xs py-2.5 px-4 rounded-xl flex-1 sm:flex-initial">
-            <i class="bi bi-radar"></i> View Live Progress
-          </button>
-          <a href="stay-tracking.html?id=${activeStay.id}" class="btn-brand-outline text-xs py-2.5 px-4 rounded-xl flex-1 sm:flex-initial">
-            <i class="bi bi-camera-video"></i> Webcams
-          </a>
+
+          <!-- Action Buttons Container: EXACT SAME SIZE -->
+          <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0 pt-3 lg:pt-0 border-t lg:border-t-0 border-[var(--border-color)]/60">
+            <button onclick="switchUserTab('tracking')" class="btn-brand-primary h-11 px-5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap inline-flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all w-full sm:w-auto sm:min-w-[175px]">
+              <i class="bi bi-radar text-sm"></i>
+              <span>View Live Progress</span>
+            </button>
+            <a href="stay-tracking.html?id=${activeStay.id}" class="btn-brand-outline h-11 px-5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap inline-flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all w-full sm:w-auto sm:min-w-[175px]">
+              <i class="bi bi-camera-video text-sm"></i>
+              <span>Webcams</span>
+            </a>
+          </div>
+
         </div>
       </div>
     `;
@@ -120,15 +145,17 @@ function renderUserOverview() {
     const reminders = getSavedReminders();
     const topReminders = reminders.slice(0, 2);
     miniRemList.innerHTML = topReminders.map(r => `
-      <div class="flex items-center justify-between p-2.5 rounded-xl bg-[var(--bg-subtle)] text-xs">
-        <div class="flex items-center gap-2.5">
-          <i class="bi ${r.icon || 'bi-shield-check'} ${r.daysLeft <= 14 ? 'text-amber-500' : 'text-emerald-500'} text-base"></i>
-          <div>
-            <span class="font-bold text-[var(--text-main)]">${r.type}</span>
-            <span class="text-[10px] text-[var(--text-muted)] block">${r.pet} • Due: ${r.dueDate}</span>
+      <div class="flex items-center justify-between gap-3 p-3 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)]/70 text-xs hover:border-[var(--brand-primary)]/40 transition">
+        <div class="flex items-center gap-3 min-w-0 flex-1">
+          <div class="w-9 h-9 rounded-xl ${r.daysLeft <= 14 ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'} flex items-center justify-center text-base shrink-0 shadow-xs">
+            <i class="bi ${r.icon || 'bi-shield-check'}"></i>
+          </div>
+          <div class="min-w-0 flex-1">
+            <span class="font-bold text-[var(--text-main)] text-xs sm:text-sm block truncate">${r.type}</span>
+            <span class="text-[11px] text-[var(--text-muted)] block truncate mt-0.5">${r.pet} &bull; Due: ${r.dueDate}</span>
           </div>
         </div>
-        <span class="badge-pet ${r.badgeClass || (r.daysLeft <= 14 ? 'badge-amber' : 'badge-teal')} text-[10px]">
+        <span class="badge-pet ${r.badgeClass || (r.daysLeft <= 14 ? 'badge-amber' : 'badge-teal')} text-[11px] font-bold whitespace-nowrap shrink-0 px-2.5 py-1">
           ${r.daysLeft <= 14 ? `In ${r.daysLeft}d` : 'Valid'}
         </span>
       </div>
@@ -446,28 +473,28 @@ function renderHealthReports() {
       <div class="p-6 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)]">
         <div class="flex items-center justify-between mb-4">
           <span class="text-xs font-bold text-[var(--text-muted)] uppercase">Current Weight</span>
-          <i class="bi bi-speedometer2 text-emerald-600 text-lg"></i>
+          <i class="bi bi-speedometer2 text-[var(--brand-primary)] text-lg"></i>
         </div>
         <div class="text-3xl font-black text-[var(--text-main)]">68.2 <span class="text-sm font-normal text-[var(--text-muted)]">lbs</span></div>
-        <p class="text-xs text-emerald-600 font-semibold mt-2"><i class="bi bi-arrow-up-right"></i> Stable & Healthy BMI</p>
+        <p class="text-xs text-[var(--brand-primary)] font-semibold mt-2"><i class="bi bi-arrow-up-right"></i> Stable & Healthy BMI</p>
       </div>
 
       <div class="p-6 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)]">
         <div class="flex items-center justify-between mb-4">
           <span class="text-xs font-bold text-[var(--text-muted)] uppercase">Body Temperature</span>
-          <i class="bi bi-thermometer-half text-amber-500 text-lg"></i>
+          <i class="bi bi-thermometer-half text-[var(--brand-accent)] text-lg"></i>
         </div>
         <div class="text-3xl font-black text-[var(--text-main)]">101.4 <span class="text-sm font-normal text-[var(--text-muted)]">°F</span></div>
-        <p class="text-xs text-emerald-600 font-semibold mt-2"><i class="bi bi-check-circle"></i> Optimal canine vitals</p>
+        <p class="text-xs text-[var(--brand-primary)] font-semibold mt-2"><i class="bi bi-check-circle"></i> Optimal canine vitals</p>
       </div>
 
       <div class="p-6 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)]">
         <div class="flex items-center justify-between mb-4">
           <span class="text-xs font-bold text-[var(--text-muted)] uppercase">Hydration Level</span>
-          <i class="bi bi-droplet-fill text-sky-500 text-lg"></i>
+          <i class="bi bi-droplet-fill text-[var(--brand-secondary)] text-lg"></i>
         </div>
         <div class="text-3xl font-black text-[var(--text-main)]">100% <span class="text-sm font-normal text-[var(--text-muted)]">Hydrated</span></div>
-        <p class="text-xs text-emerald-600 font-semibold mt-2"><i class="bi bi-check-all"></i> Fresh spring water bowl</p>
+        <p class="text-xs text-[var(--brand-primary)] font-semibold mt-2"><i class="bi bi-check-all"></i> Fresh spring water bowl</p>
       </div>
     </div>
 

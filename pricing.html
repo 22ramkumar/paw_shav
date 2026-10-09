@@ -66,7 +66,7 @@
   <div id="paws-navbar"></div>
 
   <!-- Header & Billing Toggle -->
-  <section class="pt-32 pb-16 lg:pt-36 lg:pb-20 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+  <section class="pt-6 sm:pt-10 pb-8 sm:pb-10 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <span class="badge-pet badge-teal mb-4">Transparent & All-Inclusive</span>
       <h1 class="text-4xl sm:text-5xl font-black text-[var(--text-main)] max-w-2xl mx-auto leading-tight">
@@ -91,17 +91,17 @@
   </section>
 
   <!-- 4 Pricing Tiers Cards -->
-  <section class="py-16 bg-[var(--bg-base)]">
+  <section class="pt-8 sm:pt-10 pb-16 lg:pb-20 bg-[var(--bg-base)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         
         <!-- Tier 1: Basic Stay -->
         <div class="card-paw p-8 flex flex-col justify-between overflow-hidden group">
           <div>
-            <div class="relative h-44 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-3xl">
-              <img src="https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&w=600&q=80" alt="Basic Stay Cozy Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-              <span class="badge-pet badge-image-overlay absolute top-3 left-3 text-[10px]">Cozy Suite (35 sq ft)</span>
+            <div class="relative h-56 sm:h-60 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-3xl bg-[var(--bg-subtle)]">
+              <img src="images/pricing-tier-1.jpg" alt="Basic Stay Cozy Suite" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none"></div>
+              <span class="badge-pet badge-image-overlay absolute bottom-3.5 left-3.5 text-[10px] font-bold shadow-md backdrop-blur-md">Cozy Suite (35 sq ft)</span>
             </div>
 
             <span class="badge-pet badge-gray text-[10px] mb-2">Essential Care</span>
@@ -114,10 +114,10 @@
             </div>
 
             <ul class="space-y-3 text-xs text-[var(--text-muted)] border-t border-[var(--border-color)] pt-6">
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Cozy Standard Suite (35 sq ft)</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> 2 Outdoor Yard Breaks</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Stainless Steel Food & Water</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Daily Text Status Update</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Cozy Standard Suite (35 sq ft)</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> 2 Outdoor Yard Breaks</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Stainless Steel Food & Water</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Daily Text Status Update</li>
               <li class="flex items-center gap-2 opacity-40"><i class="bi bi-x text-rose-500 font-bold"></i> Live Webcam Access</li>
               <li class="flex items-center gap-2 opacity-40"><i class="bi bi-x text-rose-500 font-bold"></i> Bedtime Biscuit Tuck-in</li>
             </ul>
@@ -132,15 +132,14 @@
 
         <!-- Tier 2: Standard Stay (Popular) -->
         <div class="card-paw p-8 flex flex-col justify-between border-2 border-[var(--brand-primary)]/40 relative overflow-hidden group shadow-lg">
-          <div class="absolute top-3 right-3 z-10">
-            <span class="badge-pet badge-teal text-[10px] shadow-sm">Most Popular</span>
-          </div>
-
           <div>
-            <div class="relative h-44 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-3xl">
-              <img src="https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?auto=format&fit=crop&w=600&q=80" alt="Standard Stay Deluxe Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-              <span class="badge-pet badge-image-overlay absolute bottom-3 left-3 text-[10px]">Deluxe Glass Suite (60 sq ft)</span>
+            <div class="relative h-56 sm:h-60 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-3xl bg-[var(--bg-subtle)]">
+              <img src="images/pricing-tier-2.jpg" alt="Standard Stay Deluxe Suite" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none"></div>
+              <div class="absolute top-3.5 right-3.5 z-10">
+                <span class="badge-pet badge-teal text-[10px] shadow-md font-bold backdrop-blur-md">Most Popular</span>
+              </div>
+              <span class="badge-pet badge-image-overlay absolute bottom-3.5 left-3.5 text-[10px] font-bold shadow-md backdrop-blur-md">Deluxe Suite (60 sq ft)</span>
             </div>
 
             <span class="badge-pet badge-teal text-[10px] mb-2">Balanced Care</span>
@@ -153,11 +152,11 @@
             </div>
 
             <ul class="space-y-3 text-xs text-[var(--text-muted)] border-t border-[var(--border-color)] pt-6">
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Deluxe Glass Suite (60 sq ft)</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> 4 Outdoor Grass Play Sessions</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Orthopedic Foam Bedding</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Daily Action Photo Feed</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Bedtime Organic Treat</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Deluxe Glass Suite (60 sq ft)</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> 4 Outdoor Grass Play Sessions</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Orthopedic Foam Bedding</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Daily Action Photo Feed</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Bedtime Organic Treat</li>
               <li class="flex items-center gap-2 opacity-40"><i class="bi bi-x text-rose-500 font-bold"></i> 24/7 Private Suite Webcam</li>
             </ul>
           </div>
@@ -171,15 +170,14 @@
 
         <!-- Tier 3: Premium Stay (Recommended) -->
         <div class="card-paw p-8 flex flex-col justify-between border-2 border-[var(--brand-accent)] shadow-xl relative bg-gradient-to-b from-[var(--brand-accent)]/5 to-transparent overflow-hidden group">
-          <div class="absolute top-3 right-3 z-10">
-            <span class="badge-pet badge-coral text-[10px] shadow-sm">Parent Recommended</span>
-          </div>
-
           <div>
-            <div class="relative h-44 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-3xl">
-              <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=600&q=80" alt="Premium Stay Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-              <span class="badge-pet badge-image-overlay absolute bottom-3 left-3 text-[10px]">Window Suite & 24/7 Webcam</span>
+            <div class="relative h-56 sm:h-60 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-3xl bg-[var(--bg-subtle)]">
+              <img src="images/pricing-tier-3.jpg" alt="Premium Stay Suite" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none"></div>
+              <div class="absolute top-3.5 right-3.5 z-10">
+                <span class="badge-pet badge-coral text-[10px] shadow-md font-bold backdrop-blur-md">Parent Recommended</span>
+              </div>
+              <span class="badge-pet badge-image-overlay absolute bottom-3.5 left-3.5 text-[10px] font-bold shadow-md backdrop-blur-md">Window Suite (75 sq ft)</span>
             </div>
 
             <span class="badge-pet badge-coral text-[10px] mb-2">Complete Peace of Mind</span>
@@ -192,12 +190,12 @@
             </div>
 
             <ul class="space-y-3 text-xs text-[var(--text-muted)] border-t border-[var(--border-color)] pt-6">
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Deluxe Glass Suite with Window</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> <strong>24/7 Live Encrypted Webcam</strong></li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Splash Pool & Agility Playgroups</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Daily Video Clips & Photo Feed</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Departure Spritz & Brushout</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Bedtime Story & Tuck-in</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Deluxe Glass Suite with Window</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> <strong>24/7 Live Encrypted Webcam</strong></li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Splash Pool & Agility Playgroups</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Daily Video Clips & Photo Feed</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Departure Spritz & Brushout</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Bedtime Story & Tuck-in</li>
             </ul>
           </div>
 
@@ -211,10 +209,13 @@
         <!-- Tier 4: Deluxe Penthouse Suite -->
         <div class="card-paw p-8 flex flex-col justify-between overflow-hidden group">
           <div>
-            <div class="relative h-44 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-3xl">
-              <img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9?auto=format&fit=crop&w=600&q=80" alt="Deluxe Penthouse VIP Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-              <span class="badge-pet badge-image-overlay absolute bottom-3 left-3 text-[10px]">100 sq ft VIP Penthouse</span>
+            <div class="relative h-56 sm:h-60 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-3xl bg-[var(--bg-subtle)]">
+              <img src="images/pricing-tier-4.jpg" alt="Deluxe Penthouse VIP Suite" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none"></div>
+              <div class="absolute top-3.5 right-3.5 z-10">
+                <span class="badge-pet badge-amber text-[10px] shadow-md font-bold backdrop-blur-md">VIP Luxury</span>
+              </div>
+              <span class="badge-pet badge-image-overlay absolute bottom-3.5 left-3.5 text-[10px] font-bold shadow-md backdrop-blur-md">VIP Penthouse (100 sq ft)</span>
             </div>
 
             <span class="badge-pet badge-amber text-[10px] mb-2">VIP Luxury Retreat</span>
@@ -227,11 +228,11 @@
             </div>
 
             <ul class="space-y-3 text-xs text-[var(--text-muted)] border-t border-[var(--border-color)] pt-6">
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> 100 sq ft Luxury Penthouse</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Personal DogTV™ Streaming Screen</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Unlimited 1-on-1 Caretaker TLC</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Free Departure Full Spa & Bath</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check2 text-emerald-600 font-bold"></i> Complimentary Doorstep Taxi Shuttle</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> 100 sq ft Luxury Penthouse</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Personal DogTV™ Streaming Screen</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Unlimited 1-on-1 Caretaker TLC</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Free Departure Full Spa & Bath</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check2 text-[var(--brand-primary)] font-bold"></i> Complimentary Doorstep Taxi Shuttle</li>
             </ul>
           </div>
 
@@ -247,8 +248,8 @@
   </section>
 
   <!-- Complete Feature Comparison Matrix -->
-  <section class="py-20 bg-[var(--bg-surface)] border-t border-[var(--border-color)]">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-16 lg:py-20 bg-[var(--bg-surface)] border-t border-[var(--border-color)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center mb-12 space-y-2">
         <span class="badge-pet badge-teal">Side-by-Side</span>
@@ -285,8 +286,8 @@
               <td class="p-4 font-semibold text-[var(--text-main)]">24/7 Mobile HD Webcam</td>
               <td class="p-4 text-center"><i class="bi bi-x text-rose-500 text-base"></i></td>
               <td class="p-4 text-center"><i class="bi bi-x text-rose-500 text-base"></i></td>
-              <td class="p-4 text-center bg-[var(--brand-accent)]/5"><i class="bi bi-check2 text-emerald-600 text-base font-bold"></i></td>
-              <td class="p-4 text-center"><i class="bi bi-check2 text-emerald-600 text-base font-bold"></i></td>
+              <td class="p-4 text-center bg-[var(--brand-accent)]/5"><i class="bi bi-check2 text-[var(--brand-primary)] text-base font-bold"></i></td>
+              <td class="p-4 text-center"><i class="bi bi-check2 text-[var(--brand-primary)] text-base font-bold"></i></td>
             </tr>
             <tr>
               <td class="p-4 font-semibold text-[var(--text-main)]">Daily Photo & Video Feed</td>
@@ -300,7 +301,7 @@
               <td class="p-4 text-center">+$45 Add-on</td>
               <td class="p-4 text-center">+$45 Add-on</td>
               <td class="p-4 text-center bg-[var(--brand-accent)]/5">Spritz & Brush</td>
-              <td class="p-4 text-center font-bold text-emerald-600"><i class="bi bi-check2"></i> Included Free</td>
+              <td class="p-4 text-center font-bold text-[var(--brand-primary)]"><i class="bi bi-check2"></i> Included Free</td>
             </tr>
           </tbody>
         </table>

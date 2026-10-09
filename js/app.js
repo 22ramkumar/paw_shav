@@ -234,12 +234,18 @@ function setCurrentUser(user) {
   sessionStorage.setItem('paws_logged_in_this_session', 'true');
   sessionStorage.setItem('paws_current_user', JSON.stringify(user));
   localStorage.setItem('paws_current_user', JSON.stringify(user));
+  if (typeof renderPawsNavbar === 'function') {
+    renderPawsNavbar(true);
+  }
 }
 
 function logout() {
   sessionStorage.removeItem('paws_logged_in_this_session');
   sessionStorage.removeItem('paws_current_user');
   localStorage.removeItem('paws_current_user');
+  if (typeof renderPawsNavbar === 'function') {
+    renderPawsNavbar(true);
+  }
   showToast('Logged out successfully', 'info');
   setTimeout(() => {
     window.location.href = 'index.html';
@@ -282,39 +288,136 @@ function closeLightbox() {
 }
 
 // ---------------------------------------------------------------------------
-// 7. Interactive Number Counter Animation
+// 7. Interactive Running Number Counter Animation
 // ---------------------------------------------------------------------------
 function initCounters() {
   const counters = document.querySelectorAll('.stat-counter');
   if (!counters.length) return;
 
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const counter = entry.target;
-        const target = parseInt(counter.getAttribute('data-target'), 10) || 0;
-        const duration = 1800;
-        const stepTime = 25;
-        const steps = duration / stepTime;
-        const increment = target / steps;
-        let current = 0;
+  function runCounterAnimation(counter) {
+    if (counter._rafId) {
+      cancelAnimationFrame(counter._rafId);
+      counter._rafId = null;
+    }
 
-        const timer = setInterval(() => {
-          current += increment;
-          if (current >= target) {
-            counter.innerText = target.toLocaleString();
-            clearInterval(timer);
-          } else {
-            counter.innerText = Math.floor(current).toLocaleString();
-          }
-        }, stepTime);
+    const targetStr = (counter.getAttribute('data-target') || '0').trim();
+    const target = parseFloat(targetStr) || 0;
+    const decimalsAttr = counter.getAttribute('data-decimals');
+    const decimals = decimalsAttr !== null ? parseInt(decimalsAttr, 10) : (targetStr.includes('.') ? (targetStr.split('.')[1] || '').length : 0);
+    const duration = parseInt(counter.getAttribute('data-duration'), 10) || 1800;
+    const startVal = parseFloat(counter.getAttribute('data-start')) || 0;
+    const startTime = performance.now();
 
-        obs.unobserve(counter);
+    counter.classList.add('is-running');
+
+    // Smooth easeOutExpo for high-energy start and silky deceleration
+    const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+
+    function step(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOutExpo(progress);
+      const current = startVal + (target - startVal) * eased;
+
+      if (decimals > 0) {
+        counter.textContent = current.toFixed(decimals);
+      } else {
+        counter.textContent = Math.round(current).toLocaleString();
+      }
+
+      if (progress < 1) {
+        counter._rafId = requestAnimationFrame(step);
+      } else {
+        if (decimals > 0) {
+          counter.textContent = target.toFixed(decimals);
+        } else {
+          counter.textContent = Math.round(target).toLocaleString();
+        }
+        counter.classList.remove('is-running');
+        counter._rafId = null;
+      }
+    }
+
+    counter._rafId = requestAnimationFrame(step);
+  }
+
+  // Setup click-to-replay listeners on parent stat cards or counter elements
+  const statCards = document.querySelectorAll('.stat-card');
+  statCards.forEach(card => {
+    if (!card._hasCounterClickListener) {
+      card._hasCounterClickListener = true;
+      card.addEventListener('click', () => {
+        card.querySelectorAll('.stat-counter').forEach(c => runCounterAnimation(c));
+      });
+    }
+  });
+
+  // Check if element is currently visible in viewport
+  function isVisibleInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    return rect.top < windowHeight * 0.95 && rect.bottom > 0;
+  }
+
+  // Use IntersectionObserver to trigger animation when scrolled into view
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          runCounterAnimation(entry.target);
+        } else {
+          // Reset to 0 when scrolled well out of view so next scroll into view runs again smoothly
+          const targetStr = (entry.target.getAttribute('data-target') || '0').trim();
+          const isDecimal = targetStr.includes('.');
+          entry.target.textContent = isDecimal ? '0.0' : '0';
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -20px 0px'
+    });
+
+    counters.forEach(counter => {
+      observer.observe(counter);
+      if (isVisibleInViewport(counter)) {
+        setTimeout(() => runCounterAnimation(counter), 100);
       }
     });
-  }, { threshold: 0.2 });
+  } else {
+    // Fallback without IntersectionObserver
+    counters.forEach(counter => runCounterAnimation(counter));
+  }
+}
 
-  counters.forEach(c => observer.observe(c));
+if (typeof window !== 'undefined') {
+  window.initCounters = initCounters;
+  window.reRunAllCounters = function() {
+    document.querySelectorAll('.stat-counter').forEach(c => {
+      if (c._rafId) cancelAnimationFrame(c._rafId);
+      const targetStr = (c.getAttribute('data-target') || '0').trim();
+      const target = parseFloat(targetStr) || 0;
+      const decimals = targetStr.includes('.') ? (targetStr.split('.')[1] || '').length : 0;
+      const duration = parseInt(c.getAttribute('data-duration'), 10) || 1800;
+      const startTime = performance.now();
+      c.classList.add('is-running');
+      const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+      function step(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeOutExpo(progress);
+        const current = target * eased;
+        c.textContent = decimals > 0 ? current.toFixed(decimals) : Math.round(current).toLocaleString();
+        if (progress < 1) {
+          c._rafId = requestAnimationFrame(step);
+        } else {
+          c.textContent = decimals > 0 ? target.toFixed(decimals) : Math.round(target).toLocaleString();
+          c.classList.remove('is-running');
+          c._rafId = null;
+        }
+      }
+      c._rafId = requestAnimationFrame(step);
+    });
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -418,16 +521,16 @@ function submitHeroQuickBooking() {
 function quickBookService(serviceSlug) {
   // Store selected service in sessionStorage for prefill
   if (serviceSlug) {
-    sessionStorage.setItem('paws_booking_preset', serviceSlug);
+    try { sessionStorage.setItem('paws_booking_preset', serviceSlug); } catch (e) {}
   }
-  const activeSession = sessionStorage.getItem('paws_logged_in_this_session');
-  const currentUser = localStorage.getItem('paws_current_user');
+  let activeSession = null;
+  let currentUser = null;
+  try {
+    activeSession = sessionStorage.getItem('paws_logged_in_this_session');
+    currentUser = localStorage.getItem('paws_current_user');
+  } catch (e) {}
   if (!activeSession || !currentUser) {
-    if (typeof openAuthModal === 'function') {
-      openAuthModal('login', 'booking.html');
-      return;
-    }
-    window.location.href = 'index.html?auth=login&redirect=booking.html';
+    window.location.href = 'login.html?redirect=booking.html';
   } else {
     window.location.href = 'booking.html';
   }
@@ -451,6 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Also initialize immediately if DOM is already ready
 if (document.readyState === 'interactive' || document.readyState === 'complete') {
   initHeroQuickBookingDates();
+  initCounters();
 }
 
 

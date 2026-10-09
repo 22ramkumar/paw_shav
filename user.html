@@ -127,38 +127,32 @@
       </button>
 
       <button onclick="switchUserTab('pets')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="pets">
-        <i class="bi bi-heart-fill text-base text-rose-500"></i> My Pets
+        <i class="bi bi-heart-fill text-base text-[var(--brand-accent)]"></i> My Pets
       </button>
 
       <button onclick="switchUserTab('tracking')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="tracking">
-        <i class="bi bi-radar text-base text-amber-500"></i> Live Stay Tracking
+        <i class="bi bi-radar text-base text-[var(--brand-primary)]"></i> Live Stay Tracking
       </button>
 
       <button onclick="switchUserTab('reminders')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="reminders">
-        <i class="bi bi-bell-fill text-base text-amber-600"></i> Reminders & Vaccines
+        <i class="bi bi-bell-fill text-base text-[var(--brand-sunny)]"></i> Reminders & Vaccines
       </button>
 
       <button onclick="switchUserTab('logs')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="logs">
-        <i class="bi bi-journal-check text-base text-emerald-600"></i> Daily Activity Logs
+        <i class="bi bi-journal-check text-base text-[var(--brand-primary)]"></i> Daily Activity Logs
       </button>
 
       <button onclick="switchUserTab('health')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="health">
-        <i class="bi bi-heart-pulse-fill text-base text-indigo-600"></i> Health Reports
+        <i class="bi bi-heart-pulse-fill text-base text-[var(--brand-accent)]"></i> Health Reports
       </button>
 
       <button onclick="switchUserTab('photos')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="photos">
-        <i class="bi bi-camera-fill text-base text-teal-600"></i> Photo & Video Updates
+        <i class="bi bi-camera-fill text-base text-[var(--brand-primary)]"></i> Photo & Video Updates
       </button>
 
       <button onclick="switchUserTab('payments')" class="user-nav-link flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)] font-semibold transition w-full text-left" data-tab="payments">
-        <i class="bi bi-receipt-cutoff text-base text-purple-600"></i> Invoices & Payments
+        <i class="bi bi-receipt-cutoff text-base text-[var(--brand-secondary)]"></i> Invoices & Payments
       </button>
-
-      <div class="pt-4 border-t border-[var(--border-color)]">
-        <a href="booking.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-[var(--brand-accent)] text-white font-bold transition shadow-md w-full text-left">
-          <i class="bi bi-calendar2-plus-fill text-base"></i> Book New Stay
-        </a>
-      </div>
     </nav>
 
     <!-- Sidebar Bottom Controls -->
@@ -174,16 +168,16 @@
   <div id="userMainScrollArea" class="flex-1 flex flex-col min-w-0 h-full overflow-y-auto overflow-x-hidden relative">
     
     <!-- Topbar Header with Theme & RTL in Top Layer -->
-    <header class="h-20 paws-portal-header bg-[var(--bg-surface)] border-b border-[var(--border-color)] px-4 sm:px-6 lg:px-8 flex items-center justify-between sticky top-0 z-30 flex-shrink-0 shadow-xs">
-      <div class="flex items-center gap-3">
-        <button id="openUserSidebar" class="lg:hidden text-2xl text-[var(--text-main)] cursor-pointer" aria-label="Open navigation sidebar">
+    <header class="h-20 paws-portal-header bg-[var(--bg-surface)] border-b border-[var(--border-color)] px-3 sm:px-6 lg:px-8 flex items-center justify-between sticky top-0 z-30 flex-shrink-0 shadow-xs">
+      <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+        <button id="openUserSidebar" class="lg:hidden text-2xl text-[var(--text-main)] cursor-pointer flex-shrink-0" aria-label="Open navigation sidebar">
           <i class="bi bi-list"></i>
         </button>
-        <h2 class="font-black text-base sm:text-lg text-[var(--text-main)] block truncate">Pet Parent Portal</h2>
+        <h2 class="font-black text-xs sm:text-base lg:text-lg text-[var(--text-main)] block truncate max-w-[120px] sm:max-w-none">Pet Parent Portal</h2>
       </div>
 
       <!-- Topbar Action Cluster (Theme, RTL, Main Site, Book Stay) -->
-      <div class="flex items-center gap-2 sm:gap-3">
+      <div class="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
         <!-- Theme Mode Toggle -->
         <button onclick="toggleTheme()" class="btn-theme-toggle p-2 sm:px-3 sm:py-2 rounded-xl bg-[var(--bg-subtle)] hover:bg-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-main)] transition text-xs font-semibold flex items-center gap-1.5 border border-[var(--border-color)] shadow-xs cursor-pointer" title="Toggle Light / Dark theme">
           <i class="theme-toggle-icon bi bi-moon-stars-fill text-amber-500"></i>
@@ -192,15 +186,19 @@
 
         <!-- RTL Toggle -->
         <button onclick="toggleRTL()" class="btn-rtl-toggle p-2 sm:px-3 sm:py-2 rounded-xl bg-[var(--bg-subtle)] hover:bg-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-main)] transition text-xs font-bold flex items-center gap-1.5 border border-[var(--border-color)] shadow-xs cursor-pointer" title="Toggle RTL / LTR layout">
-          <span>⇄ RTL</span>
+          <span class="font-bold">⇄</span><span class="hidden md:inline"> RTL</span>
         </button>
 
-        <a href="index.html" class="btn-brand-outline text-xs py-2 px-3 sm:px-3.5 rounded-xl font-bold hidden sm:inline-flex items-center gap-1.5">
+        <a href="index.html" class="btn-brand-outline text-xs py-2 px-2.5 sm:px-3.5 rounded-xl font-bold hidden sm:inline-flex items-center gap-1.5">
           <i class="bi bi-house"></i> <span class="hidden md:inline">Main Site</span>
         </a>
 
-        <a href="booking.html" class="btn-brand-accent text-xs py-2 px-3.5 sm:px-4 rounded-xl font-bold flex items-center gap-1.5 shadow-sm">
-          <i class="bi bi-calendar-heart"></i> <span>Book Stay</span>
+        <a href="contact.html" class="btn-brand-primary text-xs py-2 px-2.5 sm:px-4 rounded-xl font-bold flex items-center gap-1.5 shadow-sm" title="Contact Us">
+          <i class="bi bi-chat-dots-fill"></i> <span class="hidden sm:inline">Contact</span>
+        </a>
+
+        <a href="booking.html" class="btn-brand-accent text-xs py-2 px-2.5 sm:px-4 rounded-xl font-bold flex items-center gap-1.5 shadow-sm" title="Book Stay">
+          <i class="bi bi-calendar-heart"></i> <span class="hidden xs:inline sm:inline">Book Stay</span>
         </a>
       </div>
     </header>
@@ -230,29 +228,29 @@
         </div>
 
         <!-- KPI Metrics Grid -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          <div class="card-paw p-5">
-            <span class="text-xs font-bold text-[var(--text-muted)] uppercase">Registered Pets</span>
-            <div id="statTotalPets" class="text-2xl sm:text-3xl font-black text-[var(--brand-primary)] dark:text-emerald-400 mt-1">2</div>
-            <p class="text-[11px] text-emerald-600 font-semibold mt-1"><i class="bi bi-check-circle"></i> Profiles active</p>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+          <div class="card-paw p-3.5 sm:p-5">
+            <span class="text-[11px] sm:text-xs font-bold text-[var(--text-muted)] uppercase">Registered Pets</span>
+            <div id="statTotalPets" class="text-xl sm:text-3xl font-black text-[var(--brand-primary)] dark:text-emerald-400 mt-1">2</div>
+            <p class="text-[10px] sm:text-[11px] text-emerald-600 font-semibold mt-1 truncate"><i class="bi bi-check-circle"></i> Profiles active</p>
           </div>
 
-          <div class="card-paw p-5">
-            <span class="text-xs font-bold text-[var(--text-muted)] uppercase">Total Stays Booked</span>
-            <div id="statTotalStays" class="text-2xl sm:text-3xl font-black text-[var(--brand-accent)] mt-1">5</div>
-            <p class="text-[11px] text-[var(--text-muted)] mt-1">Overnight & Daycare</p>
+          <div class="card-paw p-3.5 sm:p-5">
+            <span class="text-[11px] sm:text-xs font-bold text-[var(--text-muted)] uppercase">Total Stays</span>
+            <div id="statTotalStays" class="text-xl sm:text-3xl font-black text-[var(--brand-accent)] mt-1">5</div>
+            <p class="text-[10px] sm:text-[11px] text-[var(--text-muted)] mt-1 truncate">Overnight & Daycare</p>
           </div>
 
-          <div class="card-paw p-5">
-            <span class="text-xs font-bold text-[var(--text-muted)] uppercase">Lifetime Spend</span>
-            <div id="statTotalSpent" class="text-2xl sm:text-3xl font-black text-[var(--brand-sunny)] mt-1">$814</div>
-            <p class="text-[11px] text-[var(--text-muted)] mt-1">Receipts & Invoices</p>
+          <div class="card-paw p-3.5 sm:p-5">
+            <span class="text-[11px] sm:text-xs font-bold text-[var(--text-muted)] uppercase">Lifetime Spend</span>
+            <div id="statTotalSpent" class="text-xl sm:text-3xl font-black text-[var(--brand-sunny)] mt-1">$814</div>
+            <p class="text-[10px] sm:text-[11px] text-[var(--text-muted)] mt-1 truncate">Receipts & Invoices</p>
           </div>
 
-          <div class="card-paw p-5">
-            <span class="text-xs font-bold text-[var(--text-muted)] uppercase">Active Stay Date</span>
-            <div id="statNextStay" class="text-sm font-black text-[var(--brand-primary)] dark:text-emerald-400 mt-2 truncate">Sep 06, 2026</div>
-            <p class="text-[11px] text-emerald-600 font-semibold mt-1">Currently in care</p>
+          <div class="card-paw p-3.5 sm:p-5">
+            <span class="text-[11px] sm:text-xs font-bold text-[var(--text-muted)] uppercase">Active Stay Date</span>
+            <div id="statNextStay" class="text-xs sm:text-sm font-black text-[var(--brand-primary)] dark:text-emerald-400 mt-2 truncate">Sep 06, 2026</div>
+            <p class="text-[10px] sm:text-[11px] text-emerald-600 font-semibold mt-1 truncate">Currently in care</p>
           </div>
         </div>
 
@@ -260,54 +258,58 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           
           <!-- Live Stay Progress Snapshot Card -->
-          <div class="card-paw p-6 flex flex-col justify-between">
+          <div class="card-paw p-4 sm:p-6 flex flex-col justify-between">
             <div>
-              <div class="flex items-center justify-between mb-3">
-                <span class="badge-pet badge-coral text-xs flex items-center gap-1.5">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <span class="badge-pet badge-coral text-xs whitespace-nowrap inline-flex items-center gap-1.5 font-bold">
                   <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Live Stay Tracker
                 </span>
-                <span class="text-xs font-bold text-[var(--brand-primary)]">Max • Golden Retriever</span>
+                <span class="text-xs font-bold text-[var(--brand-primary)] whitespace-nowrap">Max &bull; Golden Retriever</span>
               </div>
-              <h3 class="text-lg font-bold text-[var(--text-main)] mb-1">Active Stay Progress: Stage 3/5</h3>
-              <p class="text-xs text-[var(--text-muted)] mb-3">Play yards, meals & midday enrichment • Room: Glass Garden Suite 04</p>
+              <h3 class="text-lg font-bold text-[var(--text-main)] mb-1 leading-snug tracking-tight">Active Stay Progress: Stage 3/5</h3>
+              <p class="text-xs text-[var(--text-muted)] mb-3 leading-normal">Play yards, meals & midday enrichment &bull; Room: Glass Garden Suite 04</p>
               
-              <div class="p-3.5 rounded-xl bg-[var(--bg-subtle)] text-xs text-[var(--text-main)] flex items-center gap-3 mb-4">
+              <div class="p-3.5 rounded-xl bg-[var(--bg-subtle)] text-xs text-[var(--text-main)] flex items-center gap-3 mb-4 border border-[var(--border-color)]/50">
                 <i class="bi bi-chat-quote-fill text-lg text-emerald-600 flex-shrink-0"></i>
-                <span class="italic text-[11px]">"Max is having a blast in the afternoon splash pool with his play buddies!"</span>
+                <span class="italic text-[11px] leading-relaxed">"Max is having a blast in the afternoon splash pool with his play buddies!"</span>
               </div>
             </div>
-            <div class="pt-3 border-t border-[var(--border-color)] flex items-center gap-3">
-              <button onclick="switchUserTab('tracking')" class="btn-brand-primary text-xs py-2 px-4 rounded-xl font-bold flex-1 flex items-center justify-center gap-2">
-                <i class="bi bi-radar"></i> Open Live Tracker
+            <div class="pt-3 border-t border-[var(--border-color)] flex flex-col min-[380px]:flex-row items-stretch min-[380px]:items-center gap-2.5">
+              <button onclick="switchUserTab('tracking')" class="btn-brand-primary h-10 sm:h-11 px-3 rounded-xl font-bold text-xs whitespace-nowrap flex-1 min-w-0 inline-flex items-center justify-center gap-1.5 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all" title="Open Live Tracker">
+                <i class="bi bi-radar text-sm shrink-0"></i>
+                <span class="truncate">Live Tracker</span>
               </button>
-              <a href="stay-tracking.html?id=STAY-9041" class="btn-brand-outline text-xs py-2 px-3 rounded-xl font-bold">
-                <i class="bi bi-camera-video"></i> Webcams
+              <a href="stay-tracking.html?id=STAY-9041" class="btn-brand-outline h-10 sm:h-11 px-3 rounded-xl font-bold text-xs whitespace-nowrap flex-1 min-w-0 inline-flex items-center justify-center gap-1.5 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all" title="View Live Webcams">
+                <i class="bi bi-camera-video text-sm shrink-0"></i>
+                <span class="truncate">Webcams</span>
               </a>
             </div>
           </div>
 
           <!-- Upcoming Health & Vaccine Reminders Card -->
-          <div class="card-paw p-6 flex flex-col justify-between">
+          <div class="card-paw p-4 sm:p-6 flex flex-col justify-between">
             <div>
-              <div class="flex items-center justify-between mb-3">
-                <span class="badge-pet badge-amber text-xs flex items-center gap-1.5">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <span class="badge-pet badge-amber text-xs whitespace-nowrap inline-flex items-center gap-1.5 font-bold">
                   <i class="bi bi-bell-fill"></i> Health Reminders
                 </span>
-                <span class="text-xs font-bold text-amber-600">Action Recommended</span>
+                <span class="text-xs font-bold text-amber-600 dark:text-amber-400 whitespace-nowrap">Action Recommended</span>
               </div>
-              <h3 class="text-lg font-bold text-[var(--text-main)] mb-1">Upcoming Preventative Care</h3>
-              <p class="text-xs text-[var(--text-muted)] mb-3">Keep your pet's vaccination renewals and parasite treatments current for boarding.</p>
+              <h3 class="text-lg font-bold text-[var(--text-main)] mb-1 leading-snug tracking-tight">Upcoming Preventative Care</h3>
+              <p class="text-xs text-[var(--text-muted)] mb-3 leading-normal">Keep your pet's vaccination renewals and parasite treatments current for boarding.</p>
 
-              <div id="overviewRemindersMiniList" class="space-y-2 mb-4">
+              <div id="overviewRemindersMiniList" class="space-y-2.5 mb-4">
                 <!-- Populated dynamically by user-dashboard.js -->
               </div>
             </div>
-            <div class="pt-3 border-t border-[var(--border-color)] flex items-center gap-3">
-              <button onclick="switchUserTab('reminders')" class="btn-brand-accent text-xs py-2 px-4 rounded-xl font-bold flex-1 flex items-center justify-center gap-2">
-                <i class="bi bi-calendar-check"></i> View All Reminders
+            <div class="pt-3 border-t border-[var(--border-color)] flex flex-col min-[380px]:flex-row items-stretch min-[380px]:items-center gap-2.5">
+              <button onclick="switchUserTab('reminders')" class="btn-brand-accent h-10 sm:h-11 px-3 rounded-xl font-bold text-xs whitespace-nowrap flex-1 min-w-0 inline-flex items-center justify-center gap-1.5 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all" title="View All Health Reminders">
+                <i class="bi bi-calendar-check text-sm shrink-0"></i>
+                <span class="truncate">View All</span>
               </button>
-              <button onclick="openAddReminderModal()" class="btn-brand-outline text-xs py-2 px-3 rounded-xl font-bold">
-                <i class="bi bi-plus-lg"></i> Log Record
+              <button onclick="openAddReminderModal()" class="btn-brand-outline h-10 sm:h-11 px-3 rounded-xl font-bold text-xs whitespace-nowrap flex-1 min-w-0 inline-flex items-center justify-center gap-1.5 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all" title="Log New Health Record">
+                <i class="bi bi-plus-lg text-sm shrink-0"></i>
+                <span class="truncate">Log Record</span>
               </button>
             </div>
           </div>
@@ -491,7 +493,7 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label class="block font-bold text-[var(--text-muted)] mb-1">Breed *</label>
             <input type="text" id="petFormBreed" required class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
@@ -502,7 +504,7 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label class="block font-bold text-[var(--text-muted)] mb-1">Pet Weight *</label>
             <input type="text" id="petFormWeight" required placeholder="e.g. 68 lbs" class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
@@ -567,10 +569,10 @@
         </button>
         <div class="flex flex-wrap items-center gap-2">
           <button type="button" onclick="downloadCurrentInvoiceTxt()" class="btn-brand-outline text-xs py-2 px-3.5 rounded-xl font-bold flex items-center gap-1.5 shadow-sm" title="Download formatted plain-text receipt">
-            <i class="bi bi-file-earmark-text text-emerald-600"></i> Text (.txt)
+            <i class="bi bi-file-earmark-text text-[var(--brand-primary)]"></i> Text (.txt)
           </button>
           <button type="button" onclick="downloadCurrentInvoiceHtml()" class="btn-brand-outline text-xs py-2 px-3.5 rounded-xl font-bold flex items-center gap-1.5 shadow-sm" title="Download permanent standalone HTML invoice">
-            <i class="bi bi-filetype-html text-amber-600"></i> Complete (.html)
+            <i class="bi bi-filetype-html text-[var(--brand-accent)]"></i> Complete (.html)
           </button>
           <button type="button" onclick="printCurrentInvoice()" class="btn-brand-primary text-xs py-2 px-4 rounded-xl font-bold flex items-center gap-1.5 shadow-md" title="Print full invoice or save as PDF">
             <i class="bi bi-printer-fill"></i> Print / Save as PDF
@@ -612,7 +614,7 @@
           </select>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label class="block font-bold text-[var(--text-muted)] mb-1">Due Date *</label>
             <input type="date" id="remDueDate" required class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)]">

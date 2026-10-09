@@ -152,10 +152,10 @@ function renderPawsFooter() {
               <div class="absolute -top-8 -left-8 w-24 h-24 bg-[var(--brand-primary)]/5 dark:bg-emerald-500/10 rounded-full blur-lg pointer-events-none"></div>
               <div class="relative z-10 space-y-3">
                 <div class="flex items-center justify-between gap-1">
-                  <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100/80 text-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300 text-[10px] font-bold uppercase tracking-wider border border-emerald-200 dark:border-emerald-800/50">
-                    <i class="bi bi-shield-heart-fill text-emerald-600 dark:text-emerald-400"></i> Safe Stay Promise
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] text-[10px] font-bold uppercase tracking-wider border border-[var(--brand-primary)]/20">
+                    <i class="bi bi-shield-heart-fill text-[var(--brand-primary)]"></i> Safe Stay Promise
                   </span>
-                  <span class="inline-flex items-center gap-1 text-[11px] font-black text-[var(--brand-accent)] dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 px-2 py-0.5 rounded-md border border-amber-200/60 dark:border-amber-800/40">
+                  <span class="inline-flex items-center gap-1 text-[11px] font-black text-[var(--brand-accent)] bg-[var(--brand-accent)]/10 px-2 py-0.5 rounded-md border border-[var(--brand-accent)]/20">
                     $25 Welcome Gift
                   </span>
                 </div>
@@ -173,7 +173,7 @@ function renderPawsFooter() {
                   </button>
                 </form>
                 <p class="text-[var(--text-muted)] text-[10px] flex items-center gap-1.5 pt-0.5">
-                  <i class="bi bi-shield-check text-emerald-600 dark:text-emerald-400 text-xs"></i> We cherish your privacy. Zero spam.
+                  <i class="bi bi-shield-check text-[var(--brand-primary)] text-xs"></i> We cherish your privacy. Zero spam.
                 </p>
               </div>
             </div>
@@ -181,30 +181,30 @@ function renderPawsFooter() {
 
         </div>
 
-        <!-- Accreditations & Trust Seals -->
+        <!-- Accreditations & Trust Seals (Brand Colors) -->
         <div class="py-6 border-y border-[var(--border-color)] flex flex-wrap items-center justify-center md:justify-between gap-6 text-xs text-[var(--text-muted)]">
           <div class="flex items-center gap-2">
-            <i class="bi bi-patch-check-fill text-emerald-600 text-lg"></i>
+            <i class="bi bi-patch-check-fill text-[var(--brand-primary)] text-lg"></i>
             <span class="font-semibold">Fear Free Certified Facility</span>
           </div>
           <div class="flex items-center gap-2">
-            <i class="bi bi-award-fill text-amber-500 text-lg"></i>
+            <i class="bi bi-award-fill text-[var(--brand-accent)] text-lg"></i>
             <span class="font-semibold">PACCC Professional Accredited</span>
           </div>
           <div class="flex items-center gap-2">
-            <i class="bi bi-heart-pulse-fill text-rose-500 text-lg"></i>
+            <i class="bi bi-heart-pulse-fill text-[var(--brand-accent)] text-lg"></i>
             <span class="font-semibold">100% Pet First-Aid & CPR Certified</span>
           </div>
           <div class="flex items-center gap-2">
-            <i class="bi bi-shield-fill-check text-indigo-600 text-lg"></i>
+            <i class="bi bi-shield-fill-check text-[var(--brand-primary)] text-lg"></i>
             <span class="font-semibold">Veterinary Partner Network</span>
           </div>
         </div>
 
         <!-- Bottom Copyright Row -->
-        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--text-muted)]">
-          <p>© 2026 PawsHaven Resort & Daycare, LLC. All rights reserved. Crafted with care for pet lovers worldwide.</p>
-          <div class="flex items-center gap-6">
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--text-muted)] text-center sm:text-left">
+          <p class="leading-relaxed">© 2026 PawsHaven Resort & Daycare, LLC. All rights reserved. Crafted with care for pet lovers worldwide.</p>
+          <div class="flex items-center justify-center sm:justify-end gap-6 flex-wrap">
             <a href="javascript:void(0)" onclick="showToast('Privacy Policy: Pet health records and video streams are strictly confidential.', 'info')" class="hover:text-[var(--brand-primary)] transition">Privacy Policy</a>
             <a href="javascript:void(0)" onclick="showToast('Terms of Service: Full vaccination verification required prior to check-in.', 'info')" class="hover:text-[var(--brand-primary)] transition">Terms of Service</a>
           </div>

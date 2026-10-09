@@ -66,7 +66,7 @@
   <div id="paws-navbar"></div>
 
   <!-- Header -->
-  <section class="pt-32 pb-12 lg:pt-36 lg:pb-16 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+  <section class="pt-6 sm:pt-10 pb-6 sm:pb-8 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <span class="badge-pet badge-teal mb-3">We Love Hearing From Pet Parents</span>
       <h1 class="text-3xl sm:text-5xl font-black text-[var(--text-main)] max-w-2xl mx-auto leading-tight">
@@ -79,7 +79,7 @@
   </section>
 
   <!-- Contact Body -->
-  <section class="pb-24 bg-[var(--bg-base)]">
+  <section class="pt-6 sm:pt-8 pb-16 sm:pb-20 bg-[var(--bg-base)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <!-- Top Contact Info Cards: 4 Perfectly Aligned Equal-Height Cards -->
@@ -224,11 +224,12 @@
                   <textarea id="contactMessage" required rows="5" placeholder="Tell us about your pet's breed, age, temperament, dietary requirements, or any questions..." class="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] font-medium focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] resize-none"></textarea>
                 </div>
 
-                <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <button type="submit" class="btn-brand-accent py-3.5 px-8 rounded-xl font-bold text-xs shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto hover:scale-[1.02] transition-transform">
-                    <i class="bi bi-send-fill"></i> Send Message to Front Desk
+                <div class="pt-3 flex flex-col items-center justify-center gap-2.5 text-center">
+                  <button type="submit" class="btn-brand-accent h-10 px-8 rounded-xl font-bold text-xs shadow-md whitespace-nowrap inline-flex items-center justify-center gap-2 hover:shadow-lg transition">
+                    <i class="bi bi-send-fill text-[11px]"></i>
+                    <span>Send Message</span>
                   </button>
-                  <div class="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
+                  <div class="flex items-center justify-center gap-1.5 text-xs text-[var(--text-muted)]">
                     <i class="bi bi-shield-lock-fill text-emerald-500"></i>
                     <span>Your privacy is protected. No spam ever.&lrm;</span>
                   </div>
@@ -253,31 +254,35 @@
                 Nestled on 5 scenic acres just 10 minutes south of Austin-Bergstrom Airport (ABIA) with private, double-gated check-in lanes.
               </p>
 
-              <!-- Stylized Interactive Map Container -->
-              <div class="rounded-2xl overflow-hidden border border-[var(--border-color)] relative mb-6 shadow-inner bg-[var(--bg-subtle)]">
-                <div class="relative min-h-[230px] w-full flex items-center justify-center overflow-hidden p-5">
-                  <!-- Background Image (Absolute to prevent flex-flow disruption) -->
-                  <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1000&q=70" alt="Resort aerial background" class="absolute inset-0 w-full h-full object-cover opacity-20 filter grayscale dark:opacity-10 pointer-events-none">
-                  
-                  <!-- Texture Overlay & Vignette -->
-                  <div class="absolute inset-0 bg-[radial-gradient(var(--brand-primary)_1px,transparent_1px)] [background-size:18px_18px] opacity-35 dark:opacity-20 pointer-events-none"></div>
-                  <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-subtle)]/80 via-transparent to-[var(--bg-subtle)]/50 pointer-events-none"></div>
-                  
-                  <!-- Centered Interactive Navigation Info -->
-                  <div class="relative z-10 text-center w-full max-w-sm mx-auto flex flex-col items-center justify-center">
-                    <div class="w-12 h-12 rounded-full bg-[var(--brand-accent)] text-white flex items-center justify-center text-xl mb-2.5 shadow-lg animate-bounce">
-                      <i class="bi bi-geo-alt-fill"></i>
+              <!-- Interactive Live Map Container -->
+              <div class="rounded-2xl overflow-hidden border border-[var(--border-color)] relative mb-6 shadow-sm bg-[var(--bg-subtle)]">
+                <div class="relative h-[270px] sm:h-[300px] w-full">
+                  <iframe 
+                    title="PawsHaven Resort Location Map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110271.86872583803!2d-97.8200!3d30.2600!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b599a0cc032f%3A0x5d9b464bd469d57a!2sAustin%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                    class="w-full h-full border-0" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                  </iframe>
+
+                  <!-- Floating Compact Glassmorphic Location Badge -->
+                  <div class="absolute bottom-2.5 left-2.5 right-2.5 z-10 pointer-events-none flex justify-center">
+                    <div class="bg-[var(--bg-surface)]/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-[var(--border-color)]/80 shadow-md flex items-center justify-between gap-2.5 w-full max-w-sm pointer-events-auto">
+                      <div class="flex items-center gap-2 min-w-0">
+                        <div class="w-6 h-6 rounded-md bg-[var(--brand-accent)] text-white flex items-center justify-center text-xs shrink-0 shadow-xs">
+                          <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div class="min-w-0 leading-tight">
+                          <h4 class="font-bold text-[11px] text-[var(--text-main)] truncate">4820 Paws Meadow Blvd</h4>
+                          <p class="text-[9.5px] text-[var(--text-muted)] truncate">Austin, TX &bull; Bays 1–12</p>
+                        </div>
+                      </div>
+                      <a href="https://maps.google.com/?q=4820+Paws+Meadow+Blvd+Austin+TX" target="_blank" rel="noopener noreferrer" onclick="if (typeof showToast === 'function') showToast('Opening Google Maps navigation directions...', 'info');" class="btn-brand-primary text-[10.5px] h-6 px-2.5 rounded-md font-semibold whitespace-nowrap inline-flex items-center justify-center gap-1 shadow-xs hover:scale-105 transition-transform shrink-0" title="Open Directions in Google Maps">
+                        <i class="bi bi-compass text-[10px]"></i>
+                        <span>Directions</span>
+                      </a>
                     </div>
-                    <h4 class="font-bold text-xs sm:text-sm text-[var(--text-main)] mb-1 leading-snug">
-                      4820 Paws Meadow Blvd, Austin, TX
-                    </h4>
-                    <p class="text-[11px] text-[var(--text-muted)] mb-3">
-                      Visitor Parking Bays 1–12 On Site
-                    </p>
-                    <button type="button" onclick="window.open('https://maps.google.com/?q=4820+Paws+Meadow+Blvd+Austin+TX', '_blank'); if (typeof showToast === 'function') showToast('Opening Google Maps navigation directions...', 'info');" class="btn-brand-primary text-xs py-2 px-5 rounded-full font-bold shadow-md inline-flex items-center justify-center gap-2 hover:scale-105 transition-all">
-                      <i class="bi bi-map-fill"></i>
-                      <span>Open Directions in Maps</span>
-                    </button>
                   </div>
                 </div>
               </div>

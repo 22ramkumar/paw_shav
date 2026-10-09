@@ -66,7 +66,7 @@
   <div id="paws-navbar"></div>
 
   <!-- Article Header -->
-  <section class="pt-32 pb-12 lg:pt-36 lg:pb-16 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+  <section class="pt-6 sm:pt-10 pb-6 sm:pb-8 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="flex items-center gap-2 text-xs font-semibold text-[var(--text-muted)] mb-4">
@@ -113,7 +113,7 @@
   </section>
 
   <!-- Article Body & Sidebar -->
-  <section class="pb-24 bg-[var(--bg-base)]">
+  <section class="pt-6 sm:pt-8 pb-16 sm:pb-20 bg-[var(--bg-base)]">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
       
       <!-- Featured Banner Image -->
@@ -204,12 +204,12 @@
             <input type="email" id="commentEmail" required placeholder="Your Email Address *" class="px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] transition">
           </div>
           <textarea id="commentText" required rows="3" placeholder="Share your experience or question..." class="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-xs text-[var(--text-main)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] transition"></textarea>
-          <div class="flex items-center justify-between pt-1">
-            <p class="text-[11px] text-[var(--text-muted)] flex items-center gap-1">
-              <i class="bi bi-shield-check text-emerald-500"></i> Be respectful to fellow pet parents
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+            <p class="text-[11px] text-[var(--text-muted)] flex items-center gap-1.5">
+              <i class="bi bi-shield-check text-emerald-500 text-xs"></i> Be respectful to fellow pet parents
             </p>
-            <button type="submit" class="btn-brand-accent text-xs py-2.5 px-6 rounded-xl font-bold flex items-center gap-1.5 shadow-sm hover:shadow-md transition">
-              <i class="bi bi-send-fill text-[11px]"></i>
+            <button type="submit" class="btn-brand-accent text-xs h-9 px-4 py-1.5 rounded-xl font-bold whitespace-nowrap inline-flex items-center justify-center gap-1.5 shrink-0 self-start sm:self-auto shadow-sm hover:shadow-md transition">
+              <i class="bi bi-send-fill text-[10px]"></i>
               <span>Post Comment</span>
             </button>
           </div>

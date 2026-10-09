@@ -46,7 +46,7 @@ pawshaven/
 ├── blog.html             # Journal Listing with Live Search and Category Filter
 ├── blog-details.html     # Single Article with Interactive Table of Contents & Comments
 ├── contact.html          # Contact info, Live "Open Now" badge, Validated Form, Directions
-├── login.html            # Auto-redirect to unified Auth Modal
+├── login.html            # Dedicated Authentication Page (Sign In, Register, Forgot Password)
 ├── register.html         # Pet Owner Registration with Pet Onboarding Fields
 ├── 404.html              # Playful Pet-Themed 404 Error Page
 ├── coming-soon.html      # Maintenance / New Expansion Page with Live Countdown Timer

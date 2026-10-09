@@ -68,7 +68,7 @@
   <!-- =========================================================================
        HERO: SaaS Style Platform Interface
        ========================================================================= -->
-  <section class="pt-32 pb-16 lg:pt-36 lg:pb-24 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+  <section class="pt-6 sm:pt-10 pb-10 sm:pb-12 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
@@ -177,7 +177,7 @@
               </div>
 
               <!-- Top Right HUD: Telemetry -->
-              <div class="absolute top-3 right-3 z-10 pointer-events-none">
+              <div class="absolute top-3 right-3 z-10 pointer-events-none hidden sm:block">
                 <span id="pawsLiveTelemetry" class="px-2.5 py-0.5 rounded-full bg-black/70 backdrop-blur-md text-emerald-400 text-[10px] font-mono font-bold border border-emerald-500/30 flex items-center gap-1.5 shadow-xs">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                   60 FPS • 1080p • 2.8 Mb/s
@@ -227,7 +227,7 @@
             </div>
 
             <!-- Cam Switcher Tabs -->
-            <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-center text-xs">
               <button id="tabCam1" onclick="switchPawsLiveCam(0)" class="cam-tab-btn py-2.5 px-3 rounded-xl bg-[var(--brand-primary)] text-white shadow-md font-bold text-xs transition transform scale-[1.02] flex items-center justify-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span>Yard Agility</span>
@@ -364,7 +364,7 @@
                 </div>
 
                 <div class="flex items-start gap-2.5">
-                  <div class="w-6 h-6 rounded-full bg-teal-100 text-teal-700 dark:bg-teal-950/60 dark:text-teal-400 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5 shadow-xs">
+                  <div class="w-6 h-6 rounded-full bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5 shadow-xs">
                     <i class="bi bi-droplet-fill"></i>
                   </div>
                   <div>
@@ -374,7 +374,7 @@
                 </div>
 
                 <div class="flex items-start gap-2.5">
-                  <div class="w-6 h-6 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-950/60 dark:text-purple-400 flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5 shadow-xs">
+                  <div class="w-6 h-6 rounded-full bg-[var(--brand-accent)]/10 text-[var(--brand-accent)] flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5 shadow-xs">
                     <i class="bi bi-camera-video-fill"></i>
                   </div>
                   <div>
@@ -406,7 +406,7 @@
   <!-- =========================================================================
        STAFF AVAILABILITY & CAPACITY RADAR
        ========================================================================= -->
-  <section class="py-16 bg-[var(--bg-surface)] border-y border-[var(--border-color)]">
+  <section class="py-8 sm:py-10 bg-[var(--bg-surface)] border-y border-[var(--border-color)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
@@ -445,9 +445,1261 @@
   </section>
 
   <!-- =========================================================================
-       BOOK-A-STAY QUICK ACTION CALLOUT
+       SECTION 3: PAWSOS™ SMART PLATFORM ARCHITECTURE & TECH PILLARS
        ========================================================================= -->
-  <section class="py-20 bg-[var(--bg-base)]">
+  <section id="platform-architecture" class="py-20 lg:py-24 bg-[var(--bg-base)] border-b border-[var(--border-color)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs font-bold text-[var(--brand-primary)] uppercase tracking-wider shadow-sm">
+          <i class="bi bi-cpu-fill text-[var(--brand-accent)]"></i> Smart Resort Architecture
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--text-main)] tracking-tight">
+          Engineered for Safety, Precision & Total Peace of Mind
+        </h2>
+        <p class="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
+          Traditional kennels rely on paper logs and guesswork. PawsHaven integrates real-time telemetry, medical-grade monitoring, and contactless smart hardware into every minute of your pet's stay.
+        </p>
+      </div>
+
+      <!-- 6 Smart Pillars Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Pillar 1: AI Activity & Gait Telemetry -->
+        <div class="p-7 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+          <div class="w-14 h-14 rounded-2xl bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+            <i class="bi bi-activity"></i>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-lg font-black text-[var(--text-main)]">AI Activity & Gait Telemetry</h3>
+            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[var(--brand-primary)]/10 text-[var(--brand-primary)]">Real-Time</span>
+          </div>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mb-4">
+            Smart beacon collars automatically track daily step counts, sprint speed, active play minutes, and resting sleep duration without uncomfortable wearables.
+          </p>
+          <div class="pt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs text-[var(--text-muted)]">
+            <span class="flex items-center gap-1.5"><i class="bi bi-check2-circle text-[var(--brand-primary)]"></i> Calibrated by breed</span>
+            <span class="font-bold text-[var(--brand-primary)]">99.4% Sync</span>
+          </div>
+        </div>
+
+        <!-- Pillar 2: Ultra HD 60FPS Video Streaming -->
+        <div class="p-7 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+          <div class="w-14 h-14 rounded-2xl bg-[var(--brand-secondary)]/10 text-[var(--brand-secondary)] flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+            <i class="bi bi-camera-video-fill"></i>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-lg font-black text-[var(--text-main)]">Ultra HD 60FPS Streaming</h3>
+            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[var(--brand-secondary)]/10 text-[var(--brand-secondary)]">WebRTC</span>
+          </div>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mb-4">
+            Stream your pet's private suite and the open agility field directly to your smartphone browser or client portal. Zero plugins, zero latency, 256-bit encrypted.
+          </p>
+          <div class="pt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs text-[var(--text-muted)]">
+            <span class="flex items-center gap-1.5"><i class="bi bi-shield-lock-fill text-[var(--brand-secondary)]"></i> Private Room Feed</span>
+            <span class="font-bold text-[var(--brand-primary)]">1080p Crystal</span>
+          </div>
+        </div>
+
+        <!-- Pillar 3: Touchless Smart Check-In -->
+        <div class="p-7 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+          <div class="w-14 h-14 rounded-2xl bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+            <i class="bi bi-qr-code-scan"></i>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-lg font-black text-[var(--text-main)]">Touchless QR & Microchip</h3>
+            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[var(--brand-primary)]/10 text-[var(--brand-primary)]">&lt; 45 Sec</span>
+          </div>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mb-4">
+            Arrive, scan your reservation QR code at the resort kiosk, and our digital concierges instantly assign a suite and notify your pet's designated handler.
+          </p>
+          <div class="pt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs text-[var(--text-muted)]">
+            <span class="flex items-center gap-1.5"><i class="bi bi-lightning-charge-fill text-[var(--brand-sunny)]"></i> Zero Lobby Wait</span>
+            <span class="font-bold text-[var(--brand-primary)]">Instant Suite ID</span>
+          </div>
+        </div>
+
+        <!-- Pillar 4: Precision Dietary Portioner -->
+        <div class="p-7 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+          <div class="w-14 h-14 rounded-2xl bg-[var(--brand-sunny)]/10 text-[var(--brand-sunny)] flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+            <i class="bi bi-egg-fried"></i>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-lg font-black text-[var(--text-main)]">Precision Dietary Stations</h3>
+            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[var(--brand-sunny)]/10 text-[var(--brand-sunny)]">Gram-Accurate</span>
+          </div>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mb-4">
+            All feeding routines adhere to gram-level digital scales with barcode verification against custom dietary notes, food allergies, and supplement schedules.
+          </p>
+          <div class="pt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs text-[var(--text-muted)]">
+            <span class="flex items-center gap-1.5"><i class="bi bi-check2-circle text-[var(--brand-primary)]"></i> Allergy Cross-Check</span>
+            <span class="font-bold text-[var(--brand-primary)]">100% Verified</span>
+          </div>
+        </div>
+
+        <!-- Pillar 5: Daily Evening PawPrint™ Digest -->
+        <div class="p-7 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+          <div class="w-14 h-14 rounded-2xl bg-[var(--brand-accent)]/10 text-[var(--brand-accent)] flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+            <i class="bi bi-file-earmark-medical-fill"></i>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-lg font-black text-[var(--text-main)]">Daily Evening "PawPrint™"</h3>
+            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[var(--brand-accent)]/10 text-[var(--brand-accent)]">6:30 PM</span>
+          </div>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mb-4">
+            Every evening, receive a curated digital card highlighting potty logs, meal consumption percentages, high-resolution playtime photos, and caretaker notes.
+          </p>
+          <div class="pt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs text-[var(--text-muted)]">
+            <span class="flex items-center gap-1.5"><i class="bi bi-camera-fill text-[var(--brand-accent)]"></i> HD Photo Gallery</span>
+            <span class="font-bold text-[var(--brand-primary)]">Direct to Phone</span>
+          </div>
+        </div>
+
+        <!-- Pillar 6: 24/7 TeleVet Clinical Triage -->
+        <div class="p-7 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+          <div class="w-14 h-14 rounded-2xl bg-[var(--brand-accent)]/10 text-[var(--brand-accent)] flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+            <i class="bi bi-heart-pulse-fill"></i>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-lg font-black text-[var(--text-main)]">24/7 TeleVet Clinical Triage</h3>
+            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[var(--brand-accent)]/10 text-[var(--brand-accent)]">Certified Techs</span>
+          </div>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mb-4">
+            On-site licensed veterinary technicians continuously monitor body temperature, appetite, hydration, and administer any prescription regimens seamlessly.
+          </p>
+          <div class="pt-4 border-t border-[var(--border-color)] flex items-center justify-between text-xs text-[var(--text-muted)]">
+            <span class="flex items-center gap-1.5"><i class="bi bi-hospital-fill text-[var(--brand-accent)]"></i> Partner Vet 1.2mi</span>
+            <span class="font-bold text-[var(--brand-primary)]">Zero Delays</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 4: INTERACTIVE 360° FACILITY YARD & HABITAT EXPLORER
+       ========================================================================= -->
+  <section id="facility-explorer" class="py-20 lg:py-24 bg-[var(--bg-surface)] border-b border-[var(--border-color)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+        <div class="max-w-2xl space-y-3">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-subtle)] border border-[var(--border-color)] text-xs font-bold text-[var(--brand-accent)] uppercase tracking-wider">
+            <i class="bi bi-compass-fill"></i> Facility Telemetry & Habitats
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-main)] tracking-tight">
+            Explore Our Resort Play Yards & Suites
+          </h2>
+          <p class="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
+            Switch between play zones to view real-time climate controls, sanitized turf status, and guest capacity.
+          </p>
+        </div>
+
+        <!-- Facility Tab Buttons -->
+        <div class="flex flex-wrap gap-1.5 sm:gap-2 p-1 sm:p-1.5 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)] self-start lg:self-auto">
+          <button type="button" onclick="switchFacilityTab(0)" id="facTabBtn-0" class="fac-tab-btn px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-bold transition shadow-sm bg-[var(--brand-primary)] text-white">
+            <i class="bi bi-tree-fill mr-1"></i> Agility Meadows
+          </button>
+          <button type="button" onclick="switchFacilityTab(1)" id="facTabBtn-1" class="fac-tab-btn px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-bold transition text-[var(--text-muted)] hover:text-[var(--text-main)]">
+            <i class="bi bi-house-door-fill mr-1"></i> Luxury Suites
+          </button>
+          <button type="button" onclick="switchFacilityTab(2)" id="facTabBtn-2" class="fac-tab-btn px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-bold transition text-[var(--text-muted)] hover:text-[var(--text-main)]">
+            <i class="bi bi-water mr-1"></i> Splash Lagoon
+          </button>
+          <button type="button" onclick="switchFacilityTab(3)" id="facTabBtn-3" class="fac-tab-btn px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-bold transition text-[var(--text-muted)] hover:text-[var(--text-main)]">
+            <i class="bi bi-heart mr-1"></i> Cat Penthouse
+          </button>
+        </div>
+      </div>
+
+      <!-- Facility Tab Panes -->
+      <div id="facilityTabPanes">
+        
+        <!-- Tab 0: Grass Agility Meadows -->
+        <div id="facPane-0" class="fac-pane block">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border-color)] p-4 sm:p-8 overflow-hidden shadow-sm">
+            
+            <!-- Video Showcase Container -->
+            <div class="lg:col-span-7 relative rounded-2xl overflow-hidden shadow-lg group bg-black fac-video-container h-72 xs:h-80 sm:h-96 min-h-[280px]">
+              <video id="facVideo-0" class="w-full h-full object-cover" poster="images/hero-puppies-running.jpg" playsinline loop preload="metadata" muted onplay="updateFacilityVideoUI(0, true)" onpause="updateFacilityVideoUI(0, false)">
+                <source src="videos/dog-agility.mp4" type="video/mp4">
+                <source src="videos/play-yard.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30 pointer-events-none"></div>
+
+              <!-- Floating Live Camera Badge -->
+              <div class="absolute top-3 sm:top-4 left-3 sm:left-4 inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/70 backdrop-blur-md text-white text-[10px] sm:text-xs font-bold border border-white/20 z-10 pointer-events-none">
+                <span id="facLiveDot-0" class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-red-500 animate-ping"></span>
+                <span id="facLiveLabel-0">CAM 01: North Meadow</span>
+              </div>
+
+              <!-- Quick Audio Mute & Fullscreen Controls -->
+              <div class="absolute top-3 sm:top-4 right-3 sm:right-4 flex items-center gap-1.5 sm:gap-2 z-20">
+                <button type="button" onclick="toggleFacilityAudio(0)" id="facAudioBtn-0" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center text-xs backdrop-blur-md border border-white/20 transition cursor-pointer" title="Toggle Sound">
+                  <i id="facAudioIcon-0" class="bi bi-volume-mute-fill"></i>
+                </button>
+                <button type="button" onclick="toggleFacilityFullscreen(0)" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center text-xs backdrop-blur-md border border-white/20 transition cursor-pointer" title="Fullscreen View">
+                  <i class="bi bi-fullscreen"></i>
+                </button>
+              </div>
+
+              <!-- Big Center Play Button Overlay -->
+              <button type="button" id="facCenterPlay-0" onclick="toggleFacilityVideo(0)" class="absolute top-[40%] sm:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[var(--brand-accent)] hover:bg-[#C9684F] text-white flex items-center justify-center text-lg sm:text-2xl shadow-2xl backdrop-blur-sm transition-all duration-300 transform group-hover:scale-110 z-20 cursor-pointer" title="Stream Live Agility Video">
+                <i id="facCenterIcon-0" class="bi bi-play-fill ml-1"></i>
+              </button>
+
+              <!-- Environmental Telemetry Bar -->
+              <div class="absolute bottom-2 sm:bottom-4 inset-x-2 sm:inset-x-4 grid grid-cols-3 gap-1 sm:gap-2 p-2 sm:p-3 py-1.5 sm:py-2.5 rounded-xl bg-black/80 backdrop-blur-md text-white text-center text-[10px] sm:text-xs z-10 border border-white/10 pointer-events-none leading-tight">
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-300 uppercase font-semibold">Turf Temp</div>
+                  <div class="font-black text-emerald-400 text-xs sm:text-sm">69°F (Cooled)</div>
+                </div>
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-300 uppercase font-semibold">Air Quality</div>
+                  <div class="font-black text-emerald-400 text-xs sm:text-sm">AQI 14 (Pristine)</div>
+                </div>
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-300 uppercase font-semibold">Active Dogs</div>
+                  <div class="font-black text-amber-300 text-xs sm:text-sm">18 Playing</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Info Column -->
+            <div class="lg:col-span-5 space-y-5">
+              <div class="inline-flex items-center gap-1.5 text-xs font-black text-emerald-600 bg-emerald-500/10 px-3 py-1 rounded-full">
+                <i class="bi bi-shield-check"></i> Antimicrobial K9 Grass™ System
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-black text-[var(--text-main)]">
+                Sun-Soaked Grass Agility Meadows
+              </h3>
+              <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+                Over 2.5 acres of professionally engineered pet turf with continuous sub-surface drainage, shade canopies, A-frame agility obstacles, and continuous fresh-water fountains.
+              </p>
+              
+              <ul class="space-y-2.5 text-xs text-[var(--text-main)] font-semibold">
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Strict size-and-play-temperament group matching
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Double safety air-lock gates with magnetic latching
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Triple-daily enzymatic turf sanitization cycle
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Continuous supervisor ratio of 1 caretaker per 6 dogs
+                </li>
+              </ul>
+
+              <div class="pt-4 flex flex-wrap items-center gap-4">
+                <a href="booking.html?service=daycare" class="btn-brand-accent py-3 px-6 rounded-xl font-bold text-xs shadow-md">
+                  Book Meadow Daycare
+                </a>
+                <button type="button" id="facLiveBtn-0" onclick="toggleFacilityVideo(0)" class="btn-brand-outline py-3 px-5 rounded-xl font-bold text-xs flex items-center gap-2 cursor-pointer shadow-sm hover:bg-[var(--brand-primary)] hover:text-white transition">
+                  <i id="facBtnIcon-0" class="bi bi-play-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  <span id="facBtnText-0">View Live Video</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 1: Climate-Controlled Suites -->
+        <div id="facPane-1" class="fac-pane hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border-color)] p-4 sm:p-8 overflow-hidden shadow-sm">
+            
+            <!-- Video Showcase Container -->
+            <div class="lg:col-span-7 relative rounded-2xl overflow-hidden shadow-lg group bg-black fac-video-container h-72 xs:h-80 sm:h-96 min-h-[280px]">
+              <video id="facVideo-1" class="w-full h-full object-cover" poster="https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?auto=format&fit=crop&w=1000&q=80" playsinline loop preload="metadata" muted onplay="updateFacilityVideoUI(1, true)" onpause="updateFacilityVideoUI(1, false)">
+                <source src="videos/indoor-play-toys.mp4" type="video/mp4">
+                <source src="videos/resort-walkthrough.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30 pointer-events-none"></div>
+
+              <!-- Floating Live Camera Badge -->
+              <div class="absolute top-3 sm:top-4 left-3 sm:left-4 inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/70 backdrop-blur-md text-white text-[10px] sm:text-xs font-bold border border-white/20 z-10 pointer-events-none">
+                <span id="facLiveDot-1" class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                <span id="facLiveLabel-1">CAM 04: Glass Suite Lodge</span>
+              </div>
+
+              <!-- Quick Audio Mute & Fullscreen Controls -->
+              <div class="absolute top-3 sm:top-4 right-3 sm:right-4 flex items-center gap-1.5 sm:gap-2 z-20">
+                <button type="button" onclick="toggleFacilityAudio(1)" id="facAudioBtn-1" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center text-xs backdrop-blur-md border border-white/20 transition cursor-pointer" title="Toggle Sound">
+                  <i id="facAudioIcon-1" class="bi bi-volume-mute-fill"></i>
+                </button>
+                <button type="button" onclick="toggleFacilityFullscreen(1)" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center text-xs backdrop-blur-md border border-white/20 transition cursor-pointer" title="Fullscreen View">
+                  <i class="bi bi-fullscreen"></i>
+                </button>
+              </div>
+
+              <!-- Big Center Play Button Overlay -->
+              <button type="button" id="facCenterPlay-1" onclick="toggleFacilityVideo(1)" class="absolute top-[40%] sm:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[var(--brand-accent)] hover:bg-[#C9684F] text-white flex items-center justify-center text-lg sm:text-2xl shadow-2xl backdrop-blur-sm transition-all duration-300 transform group-hover:scale-110 z-20 cursor-pointer" title="Stream Live Suite Video">
+                <i id="facCenterIcon-1" class="bi bi-play-fill ml-1"></i>
+              </button>
+
+              <!-- Environmental Telemetry Bar -->
+              <div class="absolute bottom-2 sm:bottom-4 inset-x-2 sm:inset-x-4 grid grid-cols-3 gap-1 sm:gap-2 p-2 sm:p-3 py-1.5 sm:py-2.5 rounded-xl bg-black/80 backdrop-blur-md text-white text-center text-[10px] sm:text-xs z-10 border border-white/10 pointer-events-none leading-tight">
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-300 uppercase font-semibold">Climate</div>
+                  <div class="font-black text-emerald-400 text-xs sm:text-sm">70.5°F Auto</div>
+                </div>
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-300 uppercase font-semibold">HEPA Cycles</div>
+                  <div class="font-black text-emerald-400 text-xs sm:text-sm">15 / hr</div>
+                </div>
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-300 uppercase font-semibold">Acoustic Shield</div>
+                  <div class="font-black text-amber-300 text-xs sm:text-sm">48 dB Quiet</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Info Column -->
+            <div class="lg:col-span-5 space-y-5">
+              <div class="inline-flex items-center gap-1.5 text-xs font-black text-[var(--brand-primary)] bg-[var(--brand-primary)]/10 px-3 py-1 rounded-full">
+                <i class="bi bi-soundwave"></i> Sound-Dampened Tempered Glass
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-black text-[var(--text-main)]">
+                Climate-Controlled Luxury Suites
+              </h3>
+              <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+                Zero chain-link bars. Every suite features floor-to-ceiling tempered glass, Kuranda™ orthotic raised bedding, calming aromatherapy, and private 24/7 HD webcams.
+              </p>
+              
+              <ul class="space-y-2.5 text-xs text-[var(--text-main)] font-semibold">
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Continuous fresh air exchange every 4 minutes (HEPA-14)
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Lullaby audio acoustics scientifically tuned for pets
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Private bedtime tuck-in with lavender mist & treat
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Multi-pet family suite options up to 120 sq.ft
+                </li>
+              </ul>
+
+              <div class="pt-4 flex flex-wrap items-center gap-4">
+                <a href="booking.html?service=boarding" class="btn-brand-accent py-3 px-6 rounded-xl font-bold text-xs shadow-md">
+                  Reserve a Suite
+                </a>
+                <button type="button" id="facLiveBtn-1" onclick="toggleFacilityVideo(1)" class="btn-brand-outline py-3 px-5 rounded-xl font-bold text-xs flex items-center gap-2 cursor-pointer shadow-sm hover:bg-[var(--brand-primary)] hover:text-white transition">
+                  <i id="facBtnIcon-1" class="bi bi-play-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  <span id="facBtnText-1">View Suite Cam</span>
+                </button>
+                <a href="pricing.html" class="text-xs text-[var(--text-muted)] hover:text-[var(--brand-primary)] font-bold underline">
+                  Compare Sizes
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Splash Lagoon -->
+        <div id="facPane-2" class="fac-pane hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border-color)] p-4 sm:p-8 overflow-hidden shadow-sm">
+            
+            <!-- Video Showcase Container -->
+            <div class="lg:col-span-7 relative rounded-2xl overflow-hidden shadow-lg group bg-black fac-video-container h-72 xs:h-80 sm:h-96 min-h-[280px]">
+              <video id="facVideo-2" class="w-full h-full object-cover" poster="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1000&q=80" playsinline loop preload="metadata" muted onplay="updateFacilityVideoUI(2, true)" onpause="updateFacilityVideoUI(2, false)">
+                <source src="videos/splash-pool.mp4" type="video/mp4">
+                <source src="videos/dog-agility.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30 pointer-events-none"></div>
+
+              <!-- Floating Live Camera Badge -->
+              <div class="absolute top-3 sm:top-4 left-3 sm:left-4 inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/70 backdrop-blur-md text-white text-[10px] sm:text-xs font-bold border border-white/20 z-10 pointer-events-none">
+                <span id="facLiveDot-2" class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[var(--brand-primary)] animate-pulse"></span>
+                <span id="facLiveLabel-2">CAM 02: Hydro Splash Lagoon</span>
+              </div>
+
+              <!-- Quick Audio Mute & Fullscreen Controls -->
+              <div class="absolute top-3 sm:top-4 right-3 sm:right-4 flex items-center gap-1.5 sm:gap-2 z-20">
+                <button type="button" onclick="toggleFacilityAudio(2)" id="facAudioBtn-2" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center text-xs backdrop-blur-md border border-white/20 transition cursor-pointer" title="Toggle Sound">
+                  <i id="facAudioIcon-2" class="bi bi-volume-mute-fill"></i>
+                </button>
+                <button type="button" onclick="toggleFacilityFullscreen(2)" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center text-xs backdrop-blur-md border border-white/20 transition cursor-pointer" title="Fullscreen View">
+                  <i class="bi bi-fullscreen"></i>
+                </button>
+              </div>
+
+              <!-- Big Center Play Button Overlay -->
+              <button type="button" id="facCenterPlay-2" onclick="toggleFacilityVideo(2)" class="absolute top-[40%] sm:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[var(--brand-accent)] hover:bg-[#C9684F] text-white flex items-center justify-center text-lg sm:text-2xl shadow-2xl backdrop-blur-sm transition-all duration-300 transform group-hover:scale-110 z-20 cursor-pointer" title="Stream Live Pool Video">
+                <i id="facCenterIcon-2" class="bi bi-play-fill ml-1"></i>
+              </button>
+
+              <!-- Environmental Telemetry Bar -->
+              <div class="absolute bottom-2 sm:bottom-4 inset-x-2 sm:inset-x-4 grid grid-cols-3 gap-1 sm:gap-2 p-2 sm:p-3 py-1.5 sm:py-2.5 rounded-xl bg-black/80 backdrop-blur-md text-white text-center text-[10px] sm:text-xs z-10 border border-white/10 pointer-events-none leading-tight">
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-300 uppercase font-semibold">Water Salinity</div>
+                  <div class="font-black text-[var(--brand-sunny)] text-xs sm:text-sm">Gentle Salt</div>
+                </div>
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-300 uppercase font-semibold">Filtration</div>
+                  <div class="font-black text-[var(--brand-sunny)] text-xs sm:text-sm">Dual UV-C</div>
+                </div>
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-300 uppercase font-semibold">Entry Depth</div>
+                  <div class="font-black text-emerald-400 text-xs sm:text-sm">0" – 18" Beach</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Info Column -->
+            <div class="lg:col-span-5 space-y-5">
+              <div class="inline-flex items-center gap-1.5 text-xs font-black text-[var(--brand-primary)] bg-[var(--brand-primary)]/10 px-3 py-1 rounded-full">
+                <i class="bi bi-droplet-half"></i> Chemical-Free Salt Filtration
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-black text-[var(--text-main)]">
+                Hydro-Jet Splash Pool & Lagoon
+              </h3>
+              <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+                Gentle beach-style sloping entry that lets cautious swimmers wade in gradually, while water-loving retrievers splash freely through jumping fountains and shallow jets.
+              </p>
+              
+              <ul class="space-y-2.5 text-xs text-[var(--text-main)] font-semibold">
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Zero harsh chlorine: organic saltwater mineral sanitization
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Custom buoyant safety life vests provided for all sizes
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Dedicated certified canine swim lifeguards on duty
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Warm blow-dry station immediately after swimming
+                </li>
+              </ul>
+
+              <div class="pt-4 flex flex-wrap items-center gap-4">
+                <a href="booking.html" class="btn-brand-accent py-3 px-6 rounded-xl font-bold text-xs shadow-md">
+                  Add Swim Session
+                </a>
+                <button type="button" id="facLiveBtn-2" onclick="toggleFacilityVideo(2)" class="btn-brand-outline py-3 px-5 rounded-xl font-bold text-xs flex items-center gap-2 cursor-pointer shadow-sm hover:bg-[var(--brand-primary)] hover:text-white transition">
+                  <i id="facBtnIcon-2" class="bi bi-play-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  <span id="facBtnText-2">View Splash Cam</span>
+                </button>
+                <a href="services.html" class="text-xs text-[var(--text-muted)] hover:text-[var(--brand-primary)] font-bold underline">
+                  Safety Protocol
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Cat Penthouse Sanctuary -->
+        <div id="facPane-3" class="fac-pane hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border-color)] p-4 sm:p-8 overflow-hidden shadow-sm">
+            
+            <!-- Video Showcase Container -->
+            <div class="lg:col-span-7 relative rounded-2xl overflow-hidden shadow-lg group bg-black fac-video-container h-72 xs:h-80 sm:h-96 min-h-[280px]">
+              <video id="facVideo-3" class="w-full h-full object-cover" poster="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1000&q=80" playsinline loop preload="metadata" muted onplay="updateFacilityVideoUI(3, true)" onpause="updateFacilityVideoUI(3, false)">
+                <source src="videos/resort-walkthrough.mp4" type="video/mp4">
+                <source src="videos/indoor-play-toys.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30 pointer-events-none"></div>
+
+              <!-- Floating Live Camera Badge -->
+              <div class="absolute top-3 sm:top-4 left-3 sm:left-4 inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/70 backdrop-blur-md text-white text-[10px] sm:text-xs font-bold border border-white/20 z-10 pointer-events-none">
+                <span id="facLiveDot-3" class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[var(--brand-accent)] animate-pulse"></span>
+                <span id="facLiveLabel-3">CAM 05: Feline Aviary</span>
+              </div>
+
+              <!-- Quick Audio Mute & Fullscreen Controls -->
+              <div class="absolute top-3 sm:top-4 right-3 sm:right-4 flex items-center gap-1.5 sm:gap-2 z-20">
+                <button type="button" onclick="toggleFacilityAudio(3)" id="facAudioBtn-3" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center text-xs backdrop-blur-md border border-white/20 transition cursor-pointer" title="Toggle Sound">
+                  <i id="facAudioIcon-3" class="bi bi-volume-mute-fill"></i>
+                </button>
+                <button type="button" onclick="toggleFacilityFullscreen(3)" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center text-xs backdrop-blur-md border border-white/20 transition cursor-pointer" title="Fullscreen View">
+                  <i class="bi bi-fullscreen"></i>
+                </button>
+              </div>
+
+              <!-- Big Center Play Button Overlay -->
+              <button type="button" id="facCenterPlay-3" onclick="toggleFacilityVideo(3)" class="absolute top-[40%] sm:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[var(--brand-accent)] hover:bg-[#C9684F] text-white flex items-center justify-center text-lg sm:text-2xl shadow-2xl backdrop-blur-sm transition-all duration-300 transform group-hover:scale-110 z-20 cursor-pointer" title="Stream Live Sanctuary Video">
+                <i id="facCenterIcon-3" class="bi bi-play-fill ml-1"></i>
+              </button>
+
+              <!-- Environmental Telemetry Bar -->
+              <div class="absolute bottom-2 sm:bottom-4 inset-x-2 sm:inset-x-4 grid grid-cols-3 gap-1 sm:gap-2 p-2 sm:p-3 py-1.5 sm:py-2.5 rounded-xl bg-black/80 backdrop-blur-md text-white text-center text-[10px] sm:text-xs z-10 border border-white/10 pointer-events-none leading-tight">
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-300 uppercase font-semibold">Sound Zone</div>
+                  <div class="font-black text-[var(--brand-accent)] text-xs sm:text-sm">100% Dog-Free</div>
+                </div>
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-300 uppercase font-semibold">Pheromones</div>
+                  <div class="font-black text-[var(--brand-accent)] text-xs sm:text-sm">Feliway Active</div>
+                </div>
+                <div>
+                  <div class="text-[9px] sm:text-[10px] text-gray-300 uppercase font-semibold">Vertical Play</div>
+                  <div class="font-black text-emerald-400 text-xs sm:text-sm">8-Tier Condos</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Info Column -->
+            <div class="lg:col-span-5 space-y-5">
+              <div class="inline-flex items-center gap-1.5 text-xs font-black text-[var(--brand-accent)] bg-[var(--brand-accent)]/10 px-3 py-1 rounded-full">
+                <i class="bi bi-shield-heart-fill"></i> Soundproof Feline Isolation Wing
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-black text-[var(--text-main)]">
+                The Cat Penthouse Sanctuary
+              </h3>
+              <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+                Completely isolated from all dog odors and barking. Featuring multi-level climbing ledges, real organic bird feeders outside panoramic sun windows, and plush velvet hammocks.
+              </p>
+              
+              <ul class="space-y-2.5 text-xs text-[var(--text-main)] font-semibold">
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Zero canine acoustics: dedicated separate ventilation
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Live bird-watching picture windows with sunbeds
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Daily brush-outs and individual laser play sessions
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="bi bi-check-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  Micro-filtered ceramic cat water fountains
+                </li>
+              </ul>
+
+              <div class="pt-4 flex flex-wrap items-center gap-4">
+                <a href="booking.html" class="btn-brand-accent py-3 px-6 rounded-xl font-bold text-xs shadow-md">
+                  Book Cat Suite
+                </a>
+                <button type="button" id="facLiveBtn-3" onclick="toggleFacilityVideo(3)" class="btn-brand-outline py-3 px-5 rounded-xl font-bold text-xs flex items-center gap-2 cursor-pointer shadow-sm hover:bg-[var(--brand-primary)] hover:text-white transition">
+                  <i id="facBtnIcon-3" class="bi bi-play-circle-fill text-[var(--brand-accent)] text-sm"></i>
+                  <span id="facBtnText-3">View Sanctuary Cam</span>
+                </button>
+                <a href="contact.html" class="text-xs text-[var(--text-muted)] hover:text-[var(--brand-primary)] font-bold underline">
+                  Schedule Tour
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 5: LIVE STAY COST & WELLNESS CALCULATOR
+       ========================================================================= -->
+  <section id="stay-calculator" class="py-20 lg:py-24 bg-[var(--bg-subtle)] border-b border-[var(--border-color)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs font-bold text-[var(--brand-sunny)] uppercase tracking-wider shadow-sm">
+          <i class="bi bi-calculator-fill text-[var(--brand-accent)]"></i> Instant Transparent Quote
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--text-main)] tracking-tight">
+          Custom Stay Cost & Wellness Calculator
+        </h2>
+        <p class="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
+          Select your pet type, length of stay, and tailor daily enrichment add-ons. See an itemized, guaranteed estimate with automatic long-stay savings.
+        </p>
+      </div>
+
+      <!-- Calculator Card Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Controls Column -->
+        <div class="lg:col-span-7 bg-[var(--bg-surface)] rounded-3xl p-6 sm:p-8 border border-[var(--border-color)] shadow-sm space-y-6">
+          
+          <!-- Control 1: Pet Type Selection -->
+          <div>
+            <label class="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2.5">
+              1. Guest Type
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
+              <label class="flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-[var(--brand-primary)] bg-[var(--bg-subtle)] cursor-pointer text-center calc-pet-option" id="labelPetDogMed">
+                <input type="radio" name="calcPetType" value="dog" checked class="hidden" onchange="updateStayCalculator()">
+                <i class="bi bi-heart-pulse-fill text-xl text-[var(--brand-primary)] mb-1"></i>
+                <span class="text-xs font-black text-[var(--text-main)]">Dog (Standard)</span>
+                <span class="text-[10px] text-[var(--text-muted)]">Up to 60 lbs</span>
+              </label>
+
+              <label class="flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-[var(--border-color)] bg-[var(--bg-surface)] cursor-pointer text-center calc-pet-option" id="labelPetDogLg">
+                <input type="radio" name="calcPetType" value="dog-large" class="hidden" onchange="updateStayCalculator()">
+                <i class="bi bi-trophy-fill text-xl text-[var(--brand-accent)] mb-1"></i>
+                <span class="text-xs font-black text-[var(--text-main)]">Dog (Large)</span>
+                <span class="text-[10px] text-[var(--text-muted)]">60+ lbs</span>
+              </label>
+
+              <label class="flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-[var(--border-color)] bg-[var(--bg-surface)] cursor-pointer text-center calc-pet-option" id="labelPetCat">
+                <input type="radio" name="calcPetType" value="cat" class="hidden" onchange="updateStayCalculator()">
+                <i class="bi bi-sun-fill text-xl text-[var(--brand-sunny)] mb-1"></i>
+                <span class="text-xs font-black text-[var(--text-main)]">Feline Cat</span>
+                <span class="text-[10px] text-[var(--text-muted)]">Cat Penthouse</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Control 2: Service Type Selection -->
+          <div>
+            <label class="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2.5">
+              2. Service Plan
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <label class="flex items-center gap-3 p-3.5 rounded-2xl border-2 border-[var(--brand-primary)] bg-[var(--bg-subtle)] cursor-pointer calc-service-option" id="labelServiceBoarding">
+                <input type="radio" name="calcService" value="boarding" checked class="hidden" onchange="updateStayCalculator()">
+                <div class="w-10 h-10 rounded-xl bg-[var(--brand-primary)] text-white flex items-center justify-center text-lg flex-shrink-0">
+                  <i class="bi bi-moon-stars-fill"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-black text-[var(--text-main)]">Luxury Overnight Boarding</div>
+                  <div class="text-[11px] text-[var(--text-muted)]">$59 / night (24h full care)</div>
+                </div>
+              </label>
+
+              <label class="flex items-center gap-3 p-3.5 rounded-2xl border-2 border-[var(--border-color)] bg-[var(--bg-surface)] cursor-pointer calc-service-option" id="labelServiceDaycare">
+                <input type="radio" name="calcService" value="daycare" class="hidden" onchange="updateStayCalculator()">
+                <div class="w-10 h-10 rounded-xl bg-[var(--brand-accent)] text-white flex items-center justify-center text-lg flex-shrink-0">
+                  <i class="bi bi-sun-fill"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-black text-[var(--text-main)]">Daytime Playgroup Daycare</div>
+                  <div class="text-[11px] text-[var(--text-muted)]">$38 / day (7 AM – 7 PM)</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Control 3: Nights / Days Slider -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label for="calcDurationRange" class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">
+                3. Stay Duration (<span id="calcDurationLabel">3 Nights</span>)
+              </label>
+              <span id="calcDiscountTag" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600">
+                Standard Rate
+              </span>
+            </div>
+            <input type="range" id="calcDurationRange" min="1" max="14" value="3" step="1" oninput="updateStayCalculator()"
+                   class="w-full h-2.5 bg-[var(--bg-subtle)] rounded-lg appearance-none cursor-pointer accent-[var(--brand-primary)]">
+            <div class="flex justify-between text-[10px] text-[var(--text-muted)] mt-1.5 font-semibold">
+              <span>1 Night</span>
+              <span>4+ Nights (10% Off)</span>
+              <span>7+ Nights (15% Off)</span>
+              <span>14 Nights</span>
+            </div>
+          </div>
+
+          <!-- Control 4: Optional Add-ons -->
+          <div>
+            <label class="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2.5">
+              4. Daily Wellness & Spa Add-ons
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              
+              <label class="flex items-start gap-3 p-3 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-subtle)] hover:bg-[var(--bg-surface)] transition cursor-pointer">
+                <input type="checkbox" id="addonChefPrep" onchange="updateStayCalculator()" class="mt-1 w-4 h-4 rounded text-[var(--brand-primary)] focus:ring-[var(--brand-primary)]">
+                <div>
+                  <span class="text-xs font-bold text-[var(--text-main)] block">Gourmet Chef Prep</span>
+                  <span class="text-[11px] text-[var(--text-muted)]">Warm bone broth & salmon topper (+$8/day)</span>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-3 p-3 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-subtle)] hover:bg-[var(--bg-surface)] transition cursor-pointer">
+                <input type="checkbox" id="addonAgility" onchange="updateStayCalculator()" class="mt-1 w-4 h-4 rounded text-[var(--brand-primary)] focus:ring-[var(--brand-primary)]">
+                <div>
+                  <span class="text-xs font-bold text-[var(--text-main)] block">1-on-1 Agility Session</span>
+                  <span class="text-[11px] text-[var(--text-muted)]">30m dedicated trainer obstacle drills (+$15/day)</span>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-3 p-3 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-subtle)] hover:bg-[var(--bg-surface)] transition cursor-pointer">
+                <input type="checkbox" id="addonSpaBath" onchange="updateStayCalculator()" class="mt-1 w-4 h-4 rounded text-[var(--brand-primary)] focus:ring-[var(--brand-primary)]">
+                <div>
+                  <span class="text-xs font-bold text-[var(--text-main)] block">Departure Hydro-Spa</span>
+                  <span class="text-[11px] text-[var(--text-muted)]">Blueberry facial + fluff blowout (+$45 flat)</span>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-3 p-3 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-subtle)] hover:bg-[var(--bg-surface)] transition cursor-pointer">
+                <input type="checkbox" id="addonWebcamPriority" onchange="updateStayCalculator()" checked class="mt-1 w-4 h-4 rounded text-[var(--brand-primary)] focus:ring-[var(--brand-primary)]">
+                <div>
+                  <span class="text-xs font-bold text-[var(--text-main)] block">24/7 Priority HD Feed</span>
+                  <span class="text-[11px] text-[var(--text-muted)]">Continuous 60FPS feed + family links (+$5/day)</span>
+                </div>
+              </label>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Real-Time Receipt Summary Column -->
+        <div class="lg:col-span-5 bg-[var(--bg-surface)] rounded-3xl p-6 sm:p-8 border border-[var(--border-color)] shadow-xl space-y-6 sticky top-28">
+          <div class="flex items-center justify-between pb-4 border-b border-[var(--border-color)]">
+            <div>
+              <h3 class="text-lg font-black text-[var(--text-main)]">Instant Quote Estimate</h3>
+              <p class="text-xs text-[var(--text-muted)]">Guaranteed pricing, zero hidden fees</p>
+            </div>
+            <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-lg">
+              <i class="bi bi-shield-check"></i>
+            </div>
+          </div>
+
+          <!-- Itemized Breakdown -->
+          <div class="space-y-3 text-xs">
+            <div class="flex items-center justify-between">
+              <span class="text-[var(--text-muted)]" id="summaryServiceLine">3 Nights Luxury Boarding</span>
+              <span class="font-bold text-[var(--text-main)]" id="summaryBasePrice">$177.00</span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-[var(--text-muted)]">Selected Wellness Add-ons</span>
+              <span class="font-bold text-[var(--text-main)]" id="summaryAddonsPrice">$15.00</span>
+            </div>
+
+            <div class="flex items-center justify-between text-emerald-600 font-bold" id="summaryDiscountRow" style="display: none;">
+              <span id="summaryDiscountText">Multi-Stay Discount (10%)</span>
+              <span id="summaryDiscountAmount">-$17.70</span>
+            </div>
+
+            <div class="pt-3 border-t border-[var(--border-color)] flex items-center justify-between text-sm">
+              <span class="text-[var(--text-muted)] font-semibold">Taxes & Eco-Sanitization</span>
+              <span class="text-emerald-600 font-bold">Included ($0.00)</span>
+            </div>
+          </div>
+
+          <!-- Total Highlight Box -->
+          <div class="p-5 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)] text-center space-y-1">
+            <div class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Estimated Total</div>
+            <div class="text-4xl font-black text-[var(--brand-primary)] tracking-tight">
+              $<span id="calcGrandTotal">192</span>
+              <span class="text-xs font-semibold text-[var(--text-muted)] tracking-normal">USD</span>
+            </div>
+            <p class="text-[11px] text-emerald-600 font-semibold" id="calcSavingsNote">Pay at check-in or reserve online</p>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="space-y-2.5 pt-2">
+            <a href="booking.html" id="btnBookCustomStay" class="btn-brand-accent w-full py-4 rounded-xl font-bold text-sm shadow-lg flex items-center justify-center gap-2">
+              <i class="bi bi-calendar2-check-fill"></i> Lock In This Reservation
+            </a>
+            <p class="text-[10px] text-center text-[var(--text-muted)]">
+              Free cancellation up to 48 hours prior to check-in.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 6: TRANSPARENT MEMBERSHIP & PER-STAY PRICING TIERS
+       ========================================================================= -->
+  <section id="pricing-tiers" class="py-20 lg:py-24 bg-[var(--bg-base)] border-b border-[var(--border-color)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs font-bold text-[var(--brand-primary)] uppercase tracking-wider shadow-sm">
+          <i class="bi bi-tags-fill text-[var(--brand-accent)]"></i> Transparent Memberships & Passes
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--text-main)] tracking-tight">
+          Flexible Passes for Busy Pet Parents
+        </h2>
+        <p class="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
+          Choose between single-stay reservations or unlock VIP perks and guaranteed holiday slots with our monthly daycare & boarding club.
+        </p>
+
+        <!-- Billing Cycle Switcher -->
+        <div class="inline-flex items-center p-1.5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm mt-4">
+          <button type="button" onclick="togglePricingBilling('stay')" id="btnBillingStay" class="px-5 py-2.5 rounded-xl text-xs font-bold transition shadow-sm bg-[var(--brand-primary)] text-white">
+            Pay Per Stay
+          </button>
+          <button type="button" onclick="togglePricingBilling('monthly')" id="btnBillingMonthly" class="px-5 py-2.5 rounded-xl text-xs font-bold transition text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5">
+            Monthly VIP Pass <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 text-[10px] font-black">Save 20%</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Pricing Cards Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        
+        <!-- Tier 1: Daycare Social Pass -->
+        <div class="rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] p-8 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all duration-300">
+          <div class="space-y-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">Daycare & Play</span>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-[var(--bg-subtle)] text-[var(--brand-primary)]">Daytime</span>
+            </div>
+            
+            <div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl sm:text-5xl font-black text-[var(--text-main)] price-display" data-stay="$38" data-monthly="$299">$38</span>
+                <span class="text-xs font-semibold text-[var(--text-muted)] price-unit" data-stay="per day" data-monthly="per month">per day</span>
+              </div>
+              <p class="text-xs text-[var(--text-muted)] mt-2">Perfect for active dogs who need midday socialization, exercise, and companionship.</p>
+            </div>
+
+            <div class="pt-5 border-t border-[var(--border-color)] space-y-3 text-xs text-[var(--text-main)]">
+              <div class="flex items-center gap-2.5">
+                <i class="bi bi-check-circle-fill text-emerald-500 text-sm flex-shrink-0"></i>
+                <span>7 AM – 7 PM full facility access</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i class="bi bi-check-circle-fill text-emerald-500 text-sm flex-shrink-0"></i>
+                <span>Temperament-matched playgroup</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i class="bi bi-check-circle-fill text-emerald-500 text-sm flex-shrink-0"></i>
+                <span>Meadow agility & splash pool access</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i class="bi bi-check-circle-fill text-emerald-500 text-sm flex-shrink-0"></i>
+                <span>Evening digital activity report</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8">
+            <a href="booking.html?service=daycare" class="btn-brand-outline w-full py-3.5 rounded-xl font-bold text-xs text-center block">
+              Choose Daycare Pass
+            </a>
+          </div>
+        </div>
+
+        <!-- Tier 2: Luxury Boarding Suite (Featured) -->
+        <div class="rounded-3xl bg-[var(--bg-surface)] border-2 border-[var(--brand-accent)] p-8 shadow-xl flex flex-col justify-between relative transform lg:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[var(--brand-accent)] text-white text-[11px] font-black uppercase tracking-wider shadow-md">
+            Most Popular
+          </div>
+
+          <div class="space-y-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-[var(--brand-accent)]">Luxury Boarding</span>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-[var(--brand-accent)]/10 text-[var(--brand-accent)]">Full 24h</span>
+            </div>
+            
+            <div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl sm:text-5xl font-black text-[var(--text-main)] price-display" data-stay="$59" data-monthly="$480">$59</span>
+                <span class="text-xs font-semibold text-[var(--text-muted)] price-unit" data-stay="per night" data-monthly="per month">per night</span>
+              </div>
+              <p class="text-xs text-[var(--text-muted)] mt-2">Private glass suite with orthotic bedding, 4 outdoor play sessions, and 24/7 webcams.</p>
+            </div>
+
+            <div class="pt-5 border-t border-[var(--border-color)] space-y-3 text-xs text-[var(--text-main)]">
+              <div class="flex items-center gap-2.5">
+                <i class="bi bi-check-circle-fill text-emerald-500 text-sm flex-shrink-0"></i>
+                <span>Private climate-controlled glass suite</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i class="bi bi-check-circle-fill text-emerald-500 text-sm flex-shrink-0"></i>
+                <span>24/7 Live HD smartphone webcam stream</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i class="bi bi-check-circle-fill text-emerald-500 text-sm flex-shrink-0"></i>
+                <span>4 Daily grass meadow outings & games</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i class="bi bi-check-circle-fill text-emerald-500 text-sm flex-shrink-0"></i>
+                <span>Gram-accurate custom feeding & meds</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i class="bi bi-check-circle-fill text-emerald-500 text-sm flex-shrink-0"></i>
+                <span>Bedtime organic treat & tuck-in ritual</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8">
+            <a href="booking.html?service=boarding" class="btn-brand-accent w-full py-4 rounded-xl font-bold text-sm text-center block shadow-lg">
+              Reserve Luxury Suite
+            </a>
+          </div>
+        </div>
+
+        <!-- Tier 3: VIP Platinum Penthouse -->
+        <div class="rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] p-8 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all duration-300">
+          <div class="space-y-5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">VIP Penthouse</span>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-amber-500/10 text-amber-600">All-Inclusive</span>
+            </div>
+            
+            <div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl sm:text-5xl font-black text-[var(--text-main)] price-display" data-stay="$89" data-monthly="$690">$89</span>
+                <span class="text-xs font-semibold text-[var(--text-muted)] price-unit" data-stay="per night" data-monthly="per month">per night</span>
+              </div>
+              <p class="text-xs text-[var(--text-muted)] mt-2">Extra-spacious 80 sq.ft suite with TV entertainment, personal handler, and spa package.</p>
+            </div>
+
+            <div class="pt-5 border-t border-[var(--border-color)] space-y-3 text-xs text-[var(--text-main)]">
+              <div class="flex items-center gap-2.5">
+                <i class="bi bi-check-circle-fill text-emerald-500 text-sm flex-shrink-0"></i>
+                <span>Massive 80 sq.ft presidential suite</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i class="bi bi-check-circle-fill text-emerald-500 text-sm flex-shrink-0"></i>
+                <span>Dedicated personal caretaker & 1-on-1 agility</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i class="bi bi-check-circle-fill text-emerald-500 text-sm flex-shrink-0"></i>
+                <span>Complimentary departure hydro-spa & blowout</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <i class="bi bi-check-circle-fill text-emerald-500 text-sm flex-shrink-0"></i>
+                <span>Priority peak holiday reservation guarantee</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8">
+            <a href="booking.html?service=penthouse" class="btn-brand-outline w-full py-3.5 rounded-xl font-bold text-xs text-center block">
+              Choose VIP Penthouse
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 7: VERIFIED PET PARENT TELEMETRY REVIEWS & SOCIAL PROOF
+       ========================================================================= -->
+  <section id="verified-reviews" class="py-20 lg:py-24 bg-[var(--bg-surface)] border-b border-[var(--border-color)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Trust Metrics Bar -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-8 rounded-3xl bg-[var(--bg-subtle)] border border-[var(--border-color)] mb-16 text-center">
+        <div>
+          <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-[var(--brand-primary)]">4.98 / 5</div>
+          <div class="text-xs text-[var(--text-muted)] font-semibold mt-1">Average Review Score</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-[var(--brand-accent)]">12,500+</div>
+          <div class="text-xs text-[var(--text-muted)] font-semibold mt-1">Safe Stays Completed</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-[var(--brand-sunny)]">99.8%</div>
+          <div class="text-xs text-[var(--text-muted)] font-semibold mt-1">On-Time Feeding Precision</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl lg:text-4xl font-black text-emerald-600">&lt; 45 Sec</div>
+          <div class="text-xs text-[var(--text-muted)] font-semibold mt-1">Smart Check-In Speed</div>
+        </div>
+      </div>
+
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-subtle)] border border-[var(--border-color)] text-xs font-bold text-[var(--brand-primary)] uppercase tracking-wider">
+          <i class="bi bi-star-fill text-[var(--brand-sunny)]"></i> Verified Stay Reviews
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-main)] tracking-tight">
+          Loved by Pets. Trusted by 12,000+ Pet Parents.
+        </h2>
+        <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+          Read genuine feedback from pet parents who track their dogs and cats through our live telemetry dashboard every single day.
+        </p>
+      </div>
+
+      <!-- Reviews 3-Card Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Review 1 -->
+        <div class="rounded-3xl bg-[var(--bg-base)] border border-[var(--border-color)] p-7 space-y-4 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex text-[var(--brand-sunny)] text-sm">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+              <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center gap-1">
+                <i class="bi bi-patch-check-fill"></i> Verified Stay
+              </span>
+            </div>
+            
+            <p class="text-xs sm:text-sm text-[var(--text-main)] leading-relaxed italic">
+              "The PawsLive webcam gave me complete peace of mind during my 5-day conference in Chicago. Seeing Max happily playing in the agility yard and receiving the daily PawPrint report card made all the difference."
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-[var(--border-color)] flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80" alt="Sarah J." class="w-11 h-11 rounded-full object-cover border-2 border-[var(--brand-accent)]">
+            <div>
+              <div class="text-xs font-black text-[var(--text-main)]">Sarah Jenkins</div>
+              <div class="text-[11px] text-[var(--text-muted)]">Parent of Max (Golden Retriever)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="rounded-3xl bg-[var(--bg-base)] border border-[var(--border-color)] p-7 space-y-4 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex text-[var(--brand-sunny)] text-sm">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+              <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center gap-1">
+                <i class="bi bi-patch-check-fill"></i> Verified Stay
+              </span>
+            </div>
+            
+            <p class="text-xs sm:text-sm text-[var(--text-main)] leading-relaxed italic">
+              "As an emergency physician, I am obsessed with clean airflow and medical rigor. PawsHaven is light years ahead of any kennel I've ever seen. The HEPA filtration and prompt vet logs are simply unmatched."
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-[var(--border-color)] flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="Dr. Aris" class="w-11 h-11 rounded-full object-cover border-2 border-[var(--brand-primary)]">
+            <div>
+              <div class="text-xs font-black text-[var(--text-main)]">Dr. Aris Thorne</div>
+              <div class="text-[11px] text-[var(--text-muted)]">Parent of Luna (Siamese Cat)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="rounded-3xl bg-[var(--bg-base)] border border-[var(--border-color)] p-7 space-y-4 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex text-[var(--brand-sunny)] text-sm">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+              <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center gap-1">
+                <i class="bi bi-patch-check-fill"></i> Verified Stay
+              </span>
+            </div>
+            
+            <p class="text-xs sm:text-sm text-[var(--text-main)] leading-relaxed italic">
+              "The touchless check-in took literally 30 seconds at 7 AM. Rocky ran straight to his handler wagging his tail. He came home smelling wonderful after the blueberry hydro-spa bath. We will never board anywhere else!"
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-[var(--border-color)] flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80" alt="Marcus V." class="w-11 h-11 rounded-full object-cover border-2 border-[var(--brand-sunny)]">
+            <div>
+              <div class="text-xs font-black text-[var(--text-main)]">Marcus Vance</div>
+              <div class="text-[11px] text-[var(--text-muted)]">Parent of Rocky (German Shepherd)</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 8: HOSPITAL-GRADE HEALTH & SAFETY PROTOCOLS
+       ========================================================================= -->
+  <section id="safety-protocols" class="py-20 lg:py-24 bg-[var(--bg-subtle)] border-b border-[var(--border-color)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs font-bold text-[var(--brand-accent)] uppercase tracking-wider shadow-sm">
+          <i class="bi bi-shield-fill-check text-emerald-500"></i> Clinical Safety Standard
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--text-main)] tracking-tight">
+          Hospital-Grade Health & Safety Protocols
+        </h2>
+        <p class="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
+          We maintain higher clinical sanitization benchmarks than standard commercial boarding facilities, protecting every pet against airborne contagion and cross-infection.
+        </p>
+      </div>
+
+      <!-- 4 Safety Grids -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Safety 1 -->
+        <div class="p-6 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-xl">
+            <i class="bi bi-wind"></i>
+          </div>
+          <h3 class="text-base font-black text-[var(--text-main)]">Dual HEPA-14 & UV-C Air Sanitization</h3>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            100% fresh air intake every 4 minutes. In-duct UV-C germicidal irradiation eliminates 99.97% of airborne pathogens and canine cough.
+          </p>
+        </div>
+
+        <!-- Safety 2 -->
+        <div class="p-6 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-[var(--brand-secondary)]/10 text-[var(--brand-secondary)] flex items-center justify-center text-xl">
+            <i class="bi bi-patch-check-fill"></i>
+          </div>
+          <h3 class="text-base font-black text-[var(--text-main)]">Mandatory 4-Way Immunization</h3>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            Rabies, DHPP, Bordetella, and Canine Influenza (H3N2/H3N8) verified directly against vet records before any pet passes through our lobby.
+          </p>
+        </div>
+
+        <!-- Safety 3 -->
+        <div class="p-6 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-xl">
+            <i class="bi bi-people-fill"></i>
+          </div>
+          <h3 class="text-base font-black text-[var(--text-main)]">Strict 1:5 Caretaker Ratio</h3>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            No unattended playgroups. Our handlers are Fear-Free certified and trained in pet CPR, canine body language, and immediate emergency triage.
+          </p>
+        </div>
+
+        <!-- Safety 4 -->
+        <div class="p-6 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-600 flex items-center justify-center text-xl">
+            <i class="bi bi-hospital-fill"></i>
+          </div>
+          <h3 class="text-base font-black text-[var(--text-main)]">24/7 Surgical Trauma Partner</h3>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            Fully equipped animal hospital located 1.2 miles from our facility with 24/7 dedicated ambulance transport on call for urgent emergencies.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 9: SMART RESORT FREQUENTLY ASKED QUESTIONS (ACCORDION)
+       ========================================================================= -->
+  <section id="resort-faq" class="py-20 lg:py-24 bg-[var(--bg-base)] border-b border-[var(--border-color)]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs font-bold text-[var(--brand-primary)] uppercase tracking-wider shadow-sm">
+          <i class="bi bi-question-circle-fill text-[var(--brand-accent)]"></i> Got Questions?
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-main)] tracking-tight">
+          Smart Resort Frequently Asked Questions
+        </h2>
+        <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+          Everything you need to know about our smart check-in, live webcams, dietary protocols, and safety guarantees.
+        </p>
+      </div>
+
+      <!-- FAQ Accordion List -->
+      <div class="space-y-4">
+        
+        <!-- FAQ 1 -->
+        <details class="group p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm transition [&_summary::-webkit-details-marker]:hidden" open>
+          <summary class="flex items-center justify-between cursor-pointer font-bold text-sm sm:text-base text-[var(--text-main)] select-none">
+            <span>How does the live webcam streaming work, and can multiple family members watch?</span>
+            <span class="w-8 h-8 rounded-full bg-[var(--bg-subtle)] text-[var(--brand-primary)] flex items-center justify-center text-sm transition-transform duration-300 group-open:rotate-180">
+              <i class="bi bi-chevron-down"></i>
+            </span>
+          </summary>
+          <div class="pt-4 text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed border-t border-[var(--border-color)] mt-4">
+            Once your reservation is confirmed, your pet portal account unlocks encrypted, high-definition 60FPS video feeds of your pet's private suite and the communal agility meadows. You can share access with family members securely via authorized email invites or the client dashboard.
+          </div>
+        </details>
+
+        <!-- FAQ 2 -->
+        <details class="group p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm transition [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-bold text-sm sm:text-base text-[var(--text-main)] select-none">
+            <span>What vaccinations and medical checks are required before check-in?</span>
+            <span class="w-8 h-8 rounded-full bg-[var(--bg-subtle)] text-[var(--brand-primary)] flex items-center justify-center text-sm transition-transform duration-300 group-open:rotate-180">
+              <i class="bi bi-chevron-down"></i>
+            </span>
+          </summary>
+          <div class="pt-4 text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed border-t border-[var(--border-color)] mt-4">
+            For canines, we require Rabies, DHPP (Distemper, Hepatitis, Parvovirus, Parainfluenza), Bordetella, and the Bivalent Canine Influenza vaccine. For felines, Rabies and FVRCP are required. You can upload digital veterinary records directly to your account during booking.
+          </div>
+        </details>
+
+        <!-- FAQ 3 -->
+        <details class="group p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm transition [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-bold text-sm sm:text-base text-[var(--text-main)] select-none">
+            <span>How do you handle special dietary needs and prescription medications?</span>
+            <span class="w-8 h-8 rounded-full bg-[var(--bg-subtle)] text-[var(--brand-primary)] flex items-center justify-center text-sm transition-transform duration-300 group-open:rotate-180">
+              <i class="bi bi-chevron-down"></i>
+            </span>
+          </summary>
+          <div class="pt-4 text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed border-t border-[var(--border-color)] mt-4">
+            Our veterinary technicians administer oral, topical, and injectable medications (including insulin) strictly according to veterinary timestamps. Meals are weighed on digital scales and cross-checked against allergy alerts to guarantee zero dietary cross-contamination.
+          </div>
+        </details>
+
+        <!-- FAQ 4 -->
+        <details class="group p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm transition [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-bold text-sm sm:text-base text-[var(--text-main)] select-none">
+            <span>Can I tour the facility before booking my pet's stay?</span>
+            <span class="w-8 h-8 rounded-full bg-[var(--bg-subtle)] text-[var(--brand-primary)] flex items-center justify-center text-sm transition-transform duration-300 group-open:rotate-180">
+              <i class="bi bi-chevron-down"></i>
+            </span>
+          </summary>
+          <div class="pt-4 text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed border-t border-[var(--border-color)] mt-4">
+            Absolutely! We offer complimentary guided walkthroughs Monday through Saturday between 10:00 AM and 3:00 PM. You can also view our interactive 360° yard explorer above or request a live video tour with our front-desk concierge.
+          </div>
+        </details>
+
+        <!-- FAQ 5 -->
+        <details class="group p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] shadow-sm transition [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer font-bold text-sm sm:text-base text-[var(--text-main)] select-none">
+            <span>What is your cancellation and rescheduling policy?</span>
+            <span class="w-8 h-8 rounded-full bg-[var(--bg-subtle)] text-[var(--brand-primary)] flex items-center justify-center text-sm transition-transform duration-300 group-open:rotate-180">
+              <i class="bi bi-chevron-down"></i>
+            </span>
+          </summary>
+          <div class="pt-4 text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed border-t border-[var(--border-color)] mt-4">
+            We understand plans change. Standard boarding reservations can be cancelled or rescheduled with a 100% refund up to 48 hours prior to check-in time. For major holidays (Thanksgiving, Christmas, New Year's), we request a 7-day notice.
+          </div>
+        </details>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 10: BOOK-A-STAY QUICK ACTION CALLOUT
+       ========================================================================= -->
+  <section class="py-20 bg-[var(--bg-surface)]">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
       <div class="w-16 h-16 rounded-3xl bg-[var(--brand-primary)] text-white flex items-center justify-center text-3xl mx-auto shadow-xl">
         <i class="bi bi-house-heart-fill"></i>
@@ -478,5 +1730,285 @@
   <script src="js/navbar.js"></script>
   <script src="js/footer.js"></script>
   <script src="js/paws-live.js"></script>
+
+  <!-- Interactive Platform Handlers for home2.html -->
+  <script>
+    // Tab switching for 360 Yard Explorer
+    window.switchFacilityTab = function(idx) {
+      const btns = document.querySelectorAll('.fac-tab-btn');
+      const panes = document.querySelectorAll('.fac-pane');
+
+      btns.forEach((btn, i) => {
+        if (i === idx) {
+          btn.className = 'fac-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold transition shadow-sm bg-[var(--brand-primary)] text-white';
+        } else {
+          btn.className = 'fac-tab-btn px-4 py-2.5 rounded-xl text-xs font-bold transition text-[var(--text-muted)] hover:text-[var(--text-main)]';
+        }
+      });
+
+      panes.forEach((pane, i) => {
+        const vid = document.getElementById(`facVideo-${i}`);
+        if (i === idx) {
+          pane.classList.remove('hidden');
+          pane.classList.add('block');
+        } else {
+          pane.classList.add('hidden');
+          pane.classList.remove('block');
+          if (vid && !vid.paused) {
+            vid.pause();
+            if (typeof updateFacilityVideoUI === 'function') updateFacilityVideoUI(i, false);
+          }
+        }
+      });
+    };
+
+    // Toggle Facility Video Play / Pause
+    window.toggleFacilityVideo = function(idx) {
+      const video = document.getElementById(`facVideo-${idx}`);
+      if (!video) return;
+
+      if (video.paused) {
+        // Pause other facility videos first
+        for (let i = 0; i < 4; i++) {
+          if (i !== idx) {
+            const otherVid = document.getElementById(`facVideo-${i}`);
+            if (otherVid && !otherVid.paused) {
+              otherVid.pause();
+              updateFacilityVideoUI(i, false);
+            }
+          }
+        }
+
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            updateFacilityVideoUI(idx, true);
+          }).catch(err => {
+            console.warn("Autoplay audio blocked, attempting muted play:", err);
+            video.muted = true;
+            video.play().then(() => updateFacilityVideoUI(idx, true));
+          });
+        }
+      } else {
+        video.pause();
+        updateFacilityVideoUI(idx, false);
+      }
+    };
+
+    // Update Facility Video UI Controls and Badges
+    window.updateFacilityVideoUI = function(idx, isPlaying) {
+      const btnText = document.getElementById(`facBtnText-${idx}`);
+      const btnIcon = document.getElementById(`facBtnIcon-${idx}`);
+      const centerBtn = document.getElementById(`facCenterPlay-${idx}`);
+      const centerIcon = document.getElementById(`facCenterIcon-${idx}`);
+      const liveLabel = document.getElementById(`facLiveLabel-${idx}`);
+      const liveDot = document.getElementById(`facLiveDot-${idx}`);
+
+      if (isPlaying) {
+        if (btnText) btnText.textContent = "Pause Live Video";
+        if (btnIcon) btnIcon.className = "bi bi-pause-circle-fill text-amber-500 text-sm";
+        if (centerBtn) {
+          centerBtn.classList.add('opacity-0', 'hover:opacity-100');
+        }
+        if (centerIcon) centerIcon.className = "bi bi-pause-fill";
+        if (liveDot) liveDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping";
+        if (liveLabel && !liveLabel.textContent.includes("STREAMING")) {
+          liveLabel.setAttribute('data-original', liveLabel.textContent);
+          liveLabel.textContent = liveLabel.textContent.replace("CAM", "STREAMING LIVE");
+        }
+      } else {
+        if (btnText) {
+          btnText.textContent = idx === 0 ? "View Live Video" : (idx === 1 ? "View Suite Cam" : (idx === 2 ? "View Splash Cam" : "View Sanctuary Cam"));
+        }
+        if (btnIcon) btnIcon.className = "bi bi-play-circle-fill text-[var(--brand-accent)] text-sm";
+        if (centerBtn) {
+          centerBtn.classList.remove('opacity-0', 'hover:opacity-100');
+        }
+        if (centerIcon) centerIcon.className = "bi bi-play-fill ml-1";
+        if (liveDot) liveDot.className = "w-2.5 h-2.5 rounded-full bg-red-500 animate-ping";
+        if (liveLabel && liveLabel.getAttribute('data-original')) {
+          liveLabel.textContent = liveLabel.getAttribute('data-original');
+        }
+      }
+    };
+
+    // Toggle Audio Sound (Mute / Unmute)
+    window.toggleFacilityAudio = function(idx) {
+      const video = document.getElementById(`facVideo-${idx}`);
+      const audioIcon = document.getElementById(`facAudioIcon-${idx}`);
+      if (!video) return;
+      video.muted = !video.muted;
+      if (audioIcon) {
+        audioIcon.className = video.muted ? "bi bi-volume-mute-fill" : "bi bi-volume-up-fill text-emerald-400";
+      }
+    };
+
+    // Fullscreen view for Facility Video
+    window.toggleFacilityFullscreen = function(idx) {
+      const video = document.getElementById(`facVideo-${idx}`);
+      if (!video) return;
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
+    };
+
+    // Pricing Billing Switcher (Pay per Stay vs Monthly VIP)
+    window.togglePricingBilling = function(cycle) {
+      const btnStay = document.getElementById('btnBillingStay');
+      const btnMonthly = document.getElementById('btnBillingMonthly');
+      const priceDisplays = document.querySelectorAll('.price-display');
+      const priceUnits = document.querySelectorAll('.price-unit');
+
+      if (cycle === 'monthly') {
+        btnMonthly.className = 'px-5 py-2.5 rounded-xl text-xs font-bold transition shadow-sm bg-[var(--brand-primary)] text-white flex items-center gap-1.5';
+        btnStay.className = 'px-5 py-2.5 rounded-xl text-xs font-bold transition text-[var(--text-muted)] hover:text-[var(--text-main)]';
+
+        priceDisplays.forEach(el => {
+          el.textContent = el.getAttribute('data-monthly');
+        });
+        priceUnits.forEach(el => {
+          el.textContent = el.getAttribute('data-monthly');
+        });
+      } else {
+        btnStay.className = 'px-5 py-2.5 rounded-xl text-xs font-bold transition shadow-sm bg-[var(--brand-primary)] text-white';
+        btnMonthly.className = 'px-5 py-2.5 rounded-xl text-xs font-bold transition text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5';
+
+        priceDisplays.forEach(el => {
+          el.textContent = el.getAttribute('data-stay');
+        });
+        priceUnits.forEach(el => {
+          el.textContent = el.getAttribute('data-stay');
+        });
+      }
+    };
+
+    // Live Stay Cost Calculator Logic
+    window.updateStayCalculator = function() {
+      // 1. Pet selection styling
+      const petType = document.querySelector('input[name="calcPetType"]:checked')?.value || 'dog';
+      const labelDogMed = document.getElementById('labelPetDogMed');
+      const labelDogLg = document.getElementById('labelPetDogLg');
+      const labelCat = document.getElementById('labelPetCat');
+
+      [labelDogMed, labelDogLg, labelCat].forEach(lbl => {
+        if (!lbl) return;
+        lbl.className = 'flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-[var(--border-color)] bg-[var(--bg-surface)] cursor-pointer text-center calc-pet-option';
+      });
+
+      if (petType === 'dog' && labelDogMed) {
+        labelDogMed.className = 'flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-[var(--brand-primary)] bg-[var(--bg-subtle)] cursor-pointer text-center calc-pet-option';
+      } else if (petType === 'dog-large' && labelDogLg) {
+        labelDogLg.className = 'flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-[var(--brand-accent)] bg-[var(--bg-subtle)] cursor-pointer text-center calc-pet-option';
+      } else if (petType === 'cat' && labelCat) {
+        labelCat.className = 'flex flex-col items-center justify-center p-3 rounded-2xl border-2 border-[var(--brand-sunny)] bg-[var(--bg-subtle)] cursor-pointer text-center calc-pet-option';
+      }
+
+      // 2. Service selection styling
+      const serviceType = document.querySelector('input[name="calcService"]:checked')?.value || 'boarding';
+      const labelBoarding = document.getElementById('labelServiceBoarding');
+      const labelDaycare = document.getElementById('labelServiceDaycare');
+
+      if (serviceType === 'boarding') {
+        if (labelBoarding) labelBoarding.className = 'flex items-center gap-3 p-3.5 rounded-2xl border-2 border-[var(--brand-primary)] bg-[var(--bg-subtle)] cursor-pointer calc-service-option';
+        if (labelDaycare) labelDaycare.className = 'flex items-center gap-3 p-3.5 rounded-2xl border-2 border-[var(--border-color)] bg-[var(--bg-surface)] cursor-pointer calc-service-option';
+      } else {
+        if (labelDaycare) labelDaycare.className = 'flex items-center gap-3 p-3.5 rounded-2xl border-2 border-[var(--brand-accent)] bg-[var(--bg-subtle)] cursor-pointer calc-service-option';
+        if (labelBoarding) labelBoarding.className = 'flex items-center gap-3 p-3.5 rounded-2xl border-2 border-[var(--border-color)] bg-[var(--bg-surface)] cursor-pointer calc-service-option';
+      }
+
+      // 3. Duration & Base calculation
+      const durationRange = document.getElementById('calcDurationRange');
+      const duration = parseInt(durationRange?.value || '3', 10);
+      const durationLabel = document.getElementById('calcDurationLabel');
+      const discountTag = document.getElementById('calcDiscountTag');
+      
+      const unitWord = serviceType === 'boarding' ? (duration === 1 ? 'Night' : 'Nights') : (duration === 1 ? 'Day' : 'Days');
+      if (durationLabel) durationLabel.textContent = `${duration} ${unitWord}`;
+
+      let baseDailyRate = serviceType === 'boarding' ? 59 : 38;
+      if (petType === 'cat') {
+        baseDailyRate = serviceType === 'boarding' ? 49 : 32;
+      } else if (petType === 'dog-large') {
+        baseDailyRate += 5; // Large breed supplement
+      }
+
+      const rawBaseTotal = baseDailyRate * duration;
+
+      // Discount calculation (10% for 4-6, 15% for 7+)
+      let discountRate = 0;
+      let discountLabelText = 'Standard Rate';
+      if (duration >= 7) {
+        discountRate = 0.15;
+        discountLabelText = '15% Long-Stay Savings';
+      } else if (duration >= 4) {
+        discountRate = 0.10;
+        discountLabelText = '10% Extended Savings';
+      }
+
+      if (discountTag) {
+        discountTag.textContent = discountLabelText;
+        if (discountRate > 0) {
+          discountTag.className = 'text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 animate-pulse';
+        } else {
+          discountTag.className = 'text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)]';
+        }
+      }
+
+      // 4. Addons calculation
+      let dailyAddons = 0;
+      let flatAddons = 0;
+
+      if (document.getElementById('addonChefPrep')?.checked) dailyAddons += 8;
+      if (document.getElementById('addonAgility')?.checked) dailyAddons += 15;
+      if (document.getElementById('addonWebcamPriority')?.checked) dailyAddons += 5;
+      if (document.getElementById('addonSpaBath')?.checked) flatAddons += 45;
+
+      const totalAddons = (dailyAddons * duration) + flatAddons;
+      const discountAmount = Math.round(rawBaseTotal * discountRate);
+      const grandTotal = Math.max(0, (rawBaseTotal - discountAmount) + totalAddons);
+
+      // 5. Update UI Receipt
+      const summaryServiceLine = document.getElementById('summaryServiceLine');
+      const summaryBasePrice = document.getElementById('summaryBasePrice');
+      const summaryAddonsPrice = document.getElementById('summaryAddonsPrice');
+      const summaryDiscountRow = document.getElementById('summaryDiscountRow');
+      const summaryDiscountText = document.getElementById('summaryDiscountText');
+      const summaryDiscountAmount = document.getElementById('summaryDiscountAmount');
+      const calcGrandTotal = document.getElementById('calcGrandTotal');
+      const btnBookCustomStay = document.getElementById('btnBookCustomStay');
+
+      if (summaryServiceLine) {
+        const srvTitle = serviceType === 'boarding' ? 'Luxury Boarding' : 'Daytime Daycare';
+        summaryServiceLine.textContent = `${duration} ${unitWord} ${srvTitle}`;
+      }
+      if (summaryBasePrice) summaryBasePrice.textContent = `$${rawBaseTotal}.00`;
+      if (summaryAddonsPrice) summaryAddonsPrice.textContent = `$${totalAddons}.00`;
+
+      if (discountRate > 0 && summaryDiscountRow) {
+        summaryDiscountRow.style.display = 'flex';
+        if (summaryDiscountText) summaryDiscountText.textContent = `Long-Stay Discount (${Math.round(discountRate * 100)}%)`;
+        if (summaryDiscountAmount) summaryDiscountAmount.textContent = `-$${discountAmount}.00`;
+      } else if (summaryDiscountRow) {
+        summaryDiscountRow.style.display = 'none';
+      }
+
+      if (calcGrandTotal) calcGrandTotal.textContent = grandTotal.toString();
+
+      if (btnBookCustomStay) {
+        btnBookCustomStay.href = `booking.html?service=${serviceType}&duration=${duration}&pet=${petType}&total=${grandTotal}`;
+      }
+    };
+
+    // Auto-run calculator on DOM readiness
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof updateStayCalculator === 'function') {
+        updateStayCalculator();
+      }
+    });
+  </script>
 </body>
 </html>

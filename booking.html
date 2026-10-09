@@ -77,7 +77,7 @@
   <div id="paws-navbar"></div>
 
   <!-- Wizard Header -->
-  <section class="pt-32 pb-8 lg:pt-36 lg:pb-12 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+  <section class="pt-6 sm:pt-10 pb-6 sm:pb-8 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <span class="badge-pet badge-coral mb-3">5-Minute Online Reservation</span>
       <h1 class="text-3xl sm:text-4xl font-black text-[var(--text-main)]">
@@ -88,16 +88,16 @@
       </p>
 
       <!-- 5-Step Visual Wizard Stepper -->
-      <div class="flex items-center justify-between max-w-xl mx-auto mt-8 relative">
-        <div class="wizard-step-node w-10 h-10 rounded-full bg-[var(--brand-accent)] text-white flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-[var(--brand-accent)]/20" data-step="1">1</div>
-        <div class="h-1 flex-1 bg-[var(--border-color)] mx-2"></div>
-        <div class="wizard-step-node w-10 h-10 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-color)] flex items-center justify-center font-bold text-sm" data-step="2">2</div>
-        <div class="h-1 flex-1 bg-[var(--border-color)] mx-2"></div>
-        <div class="wizard-step-node w-10 h-10 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-color)] flex items-center justify-center font-bold text-sm" data-step="3">3</div>
-        <div class="h-1 flex-1 bg-[var(--border-color)] mx-2"></div>
-        <div class="wizard-step-node w-10 h-10 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-color)] flex items-center justify-center font-bold text-sm" data-step="4">4</div>
-        <div class="h-1 flex-1 bg-[var(--border-color)] mx-2"></div>
-        <div class="wizard-step-node w-10 h-10 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-color)] flex items-center justify-center font-bold text-sm" data-step="5">5</div>
+      <div class="flex items-center justify-between max-w-xl mx-auto mt-6 sm:mt-8 relative px-1 sm:px-2">
+        <div class="wizard-step-node w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-[var(--brand-accent)] text-white flex items-center justify-center font-bold text-xs sm:text-sm shadow-md ring-2 sm:ring-4 ring-[var(--brand-accent)]/20 flex-shrink-0" data-step="1">1</div>
+        <div class="h-1 flex-1 bg-[var(--border-color)] mx-1 sm:mx-2 min-w-[8px]"></div>
+        <div class="wizard-step-node w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-color)] flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0" data-step="2">2</div>
+        <div class="h-1 flex-1 bg-[var(--border-color)] mx-1 sm:mx-2 min-w-[8px]"></div>
+        <div class="wizard-step-node w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-color)] flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0" data-step="3">3</div>
+        <div class="h-1 flex-1 bg-[var(--border-color)] mx-1 sm:mx-2 min-w-[8px]"></div>
+        <div class="wizard-step-node w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-color)] flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0" data-step="4">4</div>
+        <div class="h-1 flex-1 bg-[var(--border-color)] mx-1 sm:mx-2 min-w-[8px]"></div>
+        <div class="wizard-step-node w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-color)] flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0" data-step="5">5</div>
       </div>
 
       <h2 id="bookingStepTitle" class="text-lg font-bold text-[var(--brand-primary)] dark:text-emerald-400 mt-4">
@@ -107,9 +107,9 @@
   </section>
 
   <!-- Main Wizard Container -->
-  <section class="pb-24 bg-[var(--bg-base)]">
+  <section class="pt-6 sm:pt-8 pb-16 sm:pb-20 bg-[var(--bg-base)]">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="card-paw p-6 sm:p-10 bg-[var(--bg-surface)] shadow-2xl border-2 border-[var(--border-color)]">
+      <div class="card-paw p-5 sm:p-7 md:p-8 lg:p-10 bg-[var(--bg-surface)] shadow-2xl border-2 border-[var(--border-color)]">
         
         <!-- Authenticated Pet Parent Account Banner -->
         <div id="bookingAuthBanner" class="mb-8 p-4 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-color)] shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
@@ -191,7 +191,7 @@
 
           <div class="pt-4 border-t border-[var(--border-color)]">
             <h3 class="font-bold text-base text-[var(--text-main)] mb-3">Select Suite Accommodation Tier:</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-4">
               
               <div onclick="selectSuiteTier('Standard Cozy Suite', 0)" class="suite-tier-card p-4 rounded-2xl border-2 transition cursor-pointer border-[var(--border-color)] bg-[var(--bg-surface)] hover:border-[var(--brand-primary)]/40 overflow-hidden group" data-tier="Standard Cozy Suite">
                 <div class="relative h-28 -mx-4 -mt-4 mb-3 overflow-hidden rounded-t-2xl">
@@ -330,7 +330,7 @@
               Reservation Summary
             </h4>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3.5 sm:gap-4 text-xs min-w-0 break-words">
               <div>
                 <span class="text-[var(--text-muted)] block">Pet Guest</span>
                 <strong id="sumPetName" class="text-[var(--text-main)] text-sm">Max (Golden Retriever)</strong>
@@ -351,7 +351,7 @@
               <div>
                 <span class="text-[var(--text-muted)] block">Pet Parent Account</span>
                 <strong id="sumOwnerName" class="text-[var(--text-main)]">Sarah Jenkins</strong>
-                <p id="sumOwnerEmail" class="text-[11px] text-[var(--brand-primary)] font-semibold">sarah@example.com</p>
+                <p id="sumOwnerEmail" class="text-[11px] text-[var(--brand-primary)] font-semibold truncate break-all">sarah@example.com</p>
               </div>
               <div>
                 <span class="text-[var(--text-muted)] block">Contact Phone</span>

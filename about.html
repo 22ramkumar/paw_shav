@@ -66,7 +66,7 @@
   <div id="paws-navbar"></div>
 
   <!-- Hero / Header -->
-  <section class="pt-32 pb-20 lg:pt-36 lg:pb-28 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+  <section class="pt-6 sm:pt-10 pb-8 sm:pb-10 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <span class="badge-pet badge-teal mb-4">Our Heart & Heritage</span>
       <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-[var(--text-main)] max-w-3xl mx-auto leading-tight">
@@ -80,7 +80,7 @@
   </section>
 
   <!-- Story & Vision Grid -->
-  <section class="py-16 lg:py-24 bg-[var(--bg-surface)]">
+  <section class="pt-8 sm:pt-10 pb-16 lg:pb-20 bg-[var(--bg-surface)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
@@ -90,7 +90,7 @@
           </div>
           <div class="card-paw absolute -bottom-6 -right-6 p-6 bg-[var(--bg-surface)] rounded-2xl shadow-xl max-w-xs hidden sm:block">
             <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-2xl font-bold">
+              <div class="w-12 h-12 rounded-xl bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center text-2xl font-bold">
                 <i class="bi bi-heart-pulse-fill"></i>
               </div>
               <div>
@@ -114,12 +114,12 @@
           </p>
 
           <div class="grid grid-cols-2 gap-4 pt-4 border-t border-[var(--border-color)]">
-            <div>
-              <h4 class="text-2xl font-black text-[var(--brand-primary)]">12,500+</h4>
+            <div class="stat-card cursor-pointer p-2 rounded-xl transition hover:bg-[var(--bg-subtle)]/50" title="Click to replay animation">
+              <h4 class="text-2xl font-black text-[var(--brand-primary)]"><span class="stat-counter" data-target="12500" data-duration="2000">0</span>+</h4>
               <p class="text-xs text-[var(--text-muted)] mt-1">Stays hosted without incident</p>
             </div>
-            <div>
-              <h4 class="text-2xl font-black text-[var(--brand-accent)]">1:5 Ratio</h4>
+            <div class="stat-card cursor-pointer p-2 rounded-xl transition hover:bg-[var(--bg-subtle)]/50" title="Click to replay animation">
+              <h4 class="text-2xl font-black text-[var(--brand-accent)]">1:<span class="stat-counter" data-target="5" data-duration="1400">0</span> Ratio</h4>
               <p class="text-xs text-[var(--text-muted)] mt-1">Caregiver-to-pet supervision</p>
             </div>
           </div>
