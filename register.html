@@ -229,8 +229,14 @@
 
       setCurrentUser(newUser);
       showToast(`🎉 Welcome to PawsHaven, ${name}! Profile created for ${petName}.`, "success", 4000);
+      const urlParams = new URLSearchParams(window.location.search);
+      const redirect = urlParams.get('redirect') || '';
       setTimeout(() => {
-        window.location.href = "index.html";
+        if (redirect && redirect.includes('.html') && !redirect.includes('user.html') && !redirect.toLowerCase().includes('dashboard')) {
+          window.location.href = redirect;
+        } else {
+          window.location.href = "index.html";
+        }
       }, 900);
     }
   </script>

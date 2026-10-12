@@ -68,26 +68,45 @@
   <!-- =========================================================================
        HERO: SaaS Style Platform Interface
        ========================================================================= -->
-  <section class="pt-6 sm:pt-10 pb-10 sm:pb-12 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="relative pt-8 sm:pt-12 pb-10 sm:pb-14 overflow-hidden bg-[var(--bg-base)]">
+    <!-- Hero Panoramic Background Image Showcase -->
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+      <div class="absolute inset-0 w-full h-full bg-cover bg-center hero-bg-kenburns opacity-35 dark:opacity-20 filter contrast-[1.05] brightness-105 dark:brightness-75"
+           style="background-image: url('images/home2-hero-bg.jpg');"></div>
+      
+      <!-- Multi-stop Gradient Scrim for crisp text contrast & readability -->
+      <div class="absolute inset-0 bg-gradient-to-b from-[var(--bg-base)]/85 via-[var(--bg-base)]/65 to-[var(--bg-base)] dark:from-[var(--bg-base)]/90 dark:via-[var(--bg-base)]/75 dark:to-[var(--bg-base)]"></div>
+      
+      <!-- Vertical edge blend transitions -->
+      <div class="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[var(--bg-base)] to-transparent"></div>
+      <div class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[var(--bg-base)] to-transparent"></div>
+
+      <!-- Ambient Luxury Glow Highlights -->
+      <div class="absolute top-12 right-[-5%] w-[450px] h-[450px] bg-emerald-300/15 dark:bg-emerald-500/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-amber-300/15 dark:bg-amber-500/10 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
         <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs font-bold text-[var(--brand-primary)] uppercase tracking-wider shadow-sm">
           <i class="bi bi-cpu-fill text-[var(--brand-accent)]"></i> The Next-Gen Pet Care Platform
         </span>
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-[var(--text-main)] tracking-tight">
+        <h1 class="text-4xl sm:text-5xl lg:text-5xl font-black text-[var(--text-main)] tracking-tight leading-tight max-w-4xl mx-auto">
           Smart Pet Boarding & Daycare, <br>
           <span class="text-[var(--brand-primary)] dark:text-emerald-400">Streamlined in Real-Time.</span>
         </h1>
-        <p class="text-base text-[var(--text-muted)] max-w-2xl mx-auto leading-relaxed">
+        <p class="text-base sm:text-lg text-[var(--text-muted)] max-w-2xl mx-auto leading-relaxed mt-4">
           Monitor your best friend's wellness, livestream play yards, schedule customized feeding, and review veterinary checks from our unified parent portal.
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-          <a href="booking.html" class="btn-brand-accent py-3.5 px-6 rounded-xl font-bold text-sm">
-            <i class="bi bi-calendar-check"></i> Book a Stay in 60 Seconds
+          <a href="booking.html" class="btn-brand-accent py-3.5 px-7 rounded-2xl font-bold text-base shadow-lg hover:shadow-xl transition-all inline-flex items-center justify-center gap-2.5">
+            <i class="bi bi-calendar-check text-lg"></i>
+            <span>Book a Stay in 60 Seconds</span>
           </a>
-          <a href="user.html" class="btn-brand-outline py-3.5 px-6 rounded-xl font-bold text-sm">
-            <i class="bi bi-speedometer2"></i> Launch Pet Parent Portal
+          <a href="user.html" class="btn-brand-outline py-3.5 px-7 rounded-2xl font-bold text-base hover:shadow-md transition-all inline-flex items-center justify-center gap-2.5">
+            <i class="bi bi-speedometer2 text-lg"></i>
+            <span>Launch Pet Parent Portal</span>
           </a>
         </div>
       </div>
@@ -1291,7 +1310,7 @@
           </div>
 
           <div class="pt-8">
-            <a href="booking.html?service=daycare" class="btn-brand-outline w-full py-3.5 rounded-xl font-bold text-xs text-center block">
+            <a href="booking.html?service=daycare" class="btn-brand-accent w-full py-3.5 rounded-xl font-bold text-xs text-center block shadow-md hover:shadow-lg transition">
               Choose Daycare Pass
             </a>
           </div>
@@ -1385,7 +1404,7 @@
           </div>
 
           <div class="pt-8">
-            <a href="booking.html?service=penthouse" class="btn-brand-outline w-full py-3.5 rounded-xl font-bold text-xs text-center block">
+            <a href="booking.html?service=penthouse" class="btn-brand-accent w-full py-3.5 rounded-xl font-bold text-xs text-center block shadow-md hover:shadow-lg transition">
               Choose VIP Penthouse
             </a>
           </div>

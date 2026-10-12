@@ -1909,6 +1909,62 @@ html.dark .paws-drawer-link.active {
   line-height: 1 !important;
 }
 
+/* Drawer Navigation - Book a Stay CTA Link */
+.paws-drawer-link-book {
+  background-color: rgba(224, 122, 95, 0.08) !important;
+  border: 1px solid rgba(224, 122, 95, 0.22) !important;
+  font-weight: 700 !important;
+}
+
+.paws-drawer-link-book .paws-drawer-label {
+  color: var(--brand-accent) !important;
+  font-weight: 700 !important;
+}
+
+.paws-drawer-link-book .paws-drawer-icon i {
+  color: var(--brand-accent) !important;
+}
+
+.paws-drawer-link-book .paws-drawer-badge {
+  font-size: 0.625rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 0.125rem 0.375rem !important;
+  border-radius: 0.375rem !important;
+  background-color: var(--brand-accent) !important;
+  color: #ffffff !important;
+  line-height: 1 !important;
+  box-shadow: 0 2px 6px rgba(224, 122, 95, 0.25) !important;
+}
+
+.paws-drawer-link-book:hover {
+  background-color: rgba(224, 122, 95, 0.16) !important;
+  border-color: var(--brand-accent) !important;
+}
+
+.paws-drawer-link-book.active {
+  background-color: rgba(224, 122, 95, 0.18) !important;
+  border-color: var(--brand-accent) !important;
+  color: var(--brand-accent) !important;
+}
+
+[data-theme="dark"] .paws-drawer-link-book,
+html.dark .paws-drawer-link-book {
+  background-color: rgba(224, 122, 95, 0.14) !important;
+  border-color: rgba(224, 122, 95, 0.32) !important;
+}
+
+[data-theme="dark"] .paws-drawer-link-book .paws-drawer-label,
+html.dark .paws-drawer-link-book .paws-drawer-label {
+  color: #ff9d82 !important;
+}
+
+[data-theme="dark"] .paws-drawer-link-book:hover,
+html.dark .paws-drawer-link-book:hover {
+  background-color: rgba(224, 122, 95, 0.24) !important;
+}
+
 /* Drawer Footer & Action Buttons */
 .paws-drawer-footer {
   padding: 0.875rem 1rem !important;
@@ -1962,6 +2018,15 @@ html.dark .paws-drawer-link.active {
     padding: 0 0.625rem !important;
     font-size: 0.76rem !important;
     margin-bottom: 0.1875rem !important;
+  }
+  .paws-drawer-link-book {
+    height: 2.25rem !important;
+    padding: 0 0.625rem !important;
+    margin-bottom: 0.1875rem !important;
+  }
+  .paws-drawer-link-book .paws-drawer-badge {
+    font-size: 0.55rem !important;
+    padding: 0.08rem 0.3rem !important;
   }
   .paws-drawer-link .paws-drawer-icon {
     width: 1.125rem !important;
@@ -2352,3 +2417,48 @@ table {
   box-sizing: border-box !important;
   line-height: 1 !important;
 }
+
+/* Facilities Hero CTA Buttons: Harmonized Size, Balanced Geometry & Responsive Alignment */
+.facilities-hero-cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.875rem;
+  width: 100%;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .facilities-hero-cta-group {
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
+
+.facilities-hero-cta {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+
+@media (max-width: 639px) {
+  .facilities-hero-cta {
+    width: 100%;
+    max-width: 20rem; /* 320px: fits comfortably within 360px viewport */
+  }
+}
+
+@media (min-width: 640px) {
+  .facilities-hero-cta {
+    min-width: 17rem; /* 272px: provides symmetrically balanced equal width on tablet & desktop */
+  }
+}
+

@@ -109,6 +109,10 @@ function renderPawsNavbar(force = false) {
         <i class="bi bi-box-arrow-in-right text-sm leading-none flex items-center"></i>
         <span>Log In</span>
       </a>
+      <a href="booking.html" id="headerBookStayBtn" class="hidden sm:inline-flex h-10 btn-brand-accent text-xs font-bold px-2.5 xl:px-4 rounded-xl items-center justify-center gap-1.5 shadow-sm hover:shadow-md transition cursor-pointer whitespace-nowrap flex-shrink-0 leading-none" title="Book Stay">
+        <i class="bi bi-calendar-heart text-xs leading-none flex items-center"></i>
+        <span>Book Stay</span>
+      </a>
     `;
   }
 
@@ -320,6 +324,20 @@ function renderPawsNavbar(force = false) {
           <i class="paws-drawer-arrow bi bi-chevron-right"></i>
         </a>
 
+        <!-- Book a Stay CTA Link inside hamburger menu list -->
+        <a href="booking.html" id="drawerNavBookStay" class="${drawerNavClass('booking.html')} paws-drawer-link-book">
+          <span class="flex items-center gap-2.5 min-w-0">
+            <span class="paws-drawer-icon">
+              <i class="bi bi-calendar-heart text-[var(--brand-accent)]"></i>
+            </span>
+            <span class="paws-drawer-label truncate font-bold text-[var(--brand-accent)] dark:text-[#ff9d82]">Book a Stay</span>
+          </span>
+          <span class="flex items-center gap-1.5 flex-shrink-0">
+            <span class="paws-drawer-badge text-[10px] font-extrabold px-1.5 py-0.5 rounded-md bg-[var(--brand-accent)] text-white leading-none">Book</span>
+            <i class="paws-drawer-arrow bi bi-chevron-right text-[var(--brand-accent)]"></i>
+          </span>
+        </a>
+
         <a href="blog.html" class="${drawerNavClass('blog')}">
           <span class="flex items-center gap-2.5 min-w-0">
             <span class="paws-drawer-icon">
@@ -354,12 +372,13 @@ function renderPawsNavbar(force = false) {
       <!-- Drawer Footer Actions -->
       <div class="paws-drawer-footer">
         <div class="flex flex-col gap-2">
+          <!-- Primary Book a Stay CTA Button (Always displayed in drawer for instant access) -->
+          <a href="booking.html" id="drawerFooterBookStayBtn" class="paws-drawer-btn-book w-full px-3 btn-brand-accent text-xs font-bold text-center flex items-center justify-center gap-2 shadow-sm transition hover:shadow-md cursor-pointer whitespace-nowrap">
+            <i class="bi bi-calendar-heart text-sm"></i>
+            <span>Book a Stay</span>
+          </a>
+
           ${currentUser ? `
-            <!-- Book a Stay CTA: Displayed only when logged in / signed up -->
-            <a href="booking.html" class="paws-drawer-btn-book w-full px-3 btn-brand-accent text-xs font-bold text-center flex items-center justify-center gap-2 shadow-sm transition hover:shadow-md cursor-pointer whitespace-nowrap">
-              <i class="bi bi-calendar-heart text-sm"></i>
-              <span>Book a Stay</span>
-            </a>
             <a href="user.html" class="paws-drawer-btn-account w-full px-3 border border-[var(--border-color)] bg-[var(--bg-surface)] hover:border-[var(--brand-primary)] text-xs font-bold text-center flex items-center justify-center gap-2 text-[var(--text-main)] shadow-xs whitespace-nowrap truncate">
               <i class="bi bi-person-circle text-sm flex-shrink-0"></i>
               <span class="truncate">My Account (${currentUser.name})</span>

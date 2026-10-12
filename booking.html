@@ -41,7 +41,7 @@
       const activeSession = sessionStorage.getItem('paws_logged_in_this_session');
       const currentUser = localStorage.getItem('paws_current_user');
       if (!activeSession || !currentUser) {
-        window.location.replace('index.html?auth=login&redirect=booking.html');
+        window.location.replace('login.html?redirect=booking.html');
       }
     })();
   </script>
@@ -77,7 +77,7 @@
   <div id="paws-navbar"></div>
 
   <!-- Wizard Header -->
-  <section class="pt-6 sm:pt-10 pb-6 sm:pb-8 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
+  <section class="pt-8 sm:pt-12 pb-10 sm:pb-14 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-base)]">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <span class="badge-pet badge-coral mb-3">5-Minute Online Reservation</span>
       <h1 class="text-3xl sm:text-4xl font-black text-[var(--text-main)]">
