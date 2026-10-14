@@ -50,6 +50,9 @@ function renderPawsFooter() {
               <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-[var(--bg-subtle)] hover:bg-[var(--brand-primary)] hover:text-white flex items-center justify-center text-xs transition shadow-xs" title="YouTube" aria-label="Visit PawsHaven on YouTube">
                 <i class="bi bi-youtube"></i>
               </a>
+              <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-[var(--bg-subtle)] hover:bg-[var(--brand-primary)] hover:text-white flex items-center justify-center text-xs transition shadow-xs" title="X / Twitter" aria-label="Visit PawsHaven on X">
+                <i class="bi bi-twitter-x"></i>
+              </a>
             </div>
           </div>
 
@@ -90,6 +93,12 @@ function renderPawsFooter() {
                 <a href="contact.html" class="text-[var(--text-muted)] hover:text-[var(--brand-primary)] transition inline-flex items-center gap-2">
                   <i class="bi bi-chevron-right text-[10px] text-[var(--brand-accent)]"></i>
                   <span>Contact</span>
+                </a>
+              </li>
+              <li>
+                <a href="login.html" class="text-[var(--text-muted)] hover:text-[var(--brand-primary)] transition inline-flex items-center gap-2">
+                  <i class="bi bi-chevron-right text-[10px] text-[var(--brand-accent)]"></i>
+                  <span>Parent Portal (Sign In)</span>
                 </a>
               </li>
             </ul>

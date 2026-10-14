@@ -395,6 +395,207 @@
     </div>
   </section>
 
+  
+  <!-- FAQ Section: Frequently Asked Questions & Visitor Inquiries -->
+  <section id="contact-faq" class="py-14 sm:py-16 bg-gradient-to-b from-[var(--bg-base)] via-[var(--bg-subtle)]/40 to-[var(--bg-base)] border-t border-[var(--border-color)]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <span class="badge-pet badge-teal mb-3 inline-flex items-center gap-1.5 shadow-xs">
+          <i class="bi bi-question-circle-fill"></i> Frequently Asked Questions
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] tracking-tight">
+          Common Questions &amp; <span class="text-[var(--brand-accent)]">Visitor Guidelines</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-2.5 leading-relaxed">
+          Quick clarity on facility tours, check-in logistics, mandatory vaccinations, and 24/7 veterinary care.
+        </p>
+
+        <!-- Search & Filter Controls -->
+        <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <!-- Search Bar -->
+          <div class="relative w-full sm:w-64">
+            <i class="bi bi-search absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)] text-xs"></i>
+            <input 
+              type="text" 
+              id="faqSearchInput" 
+              placeholder="Search FAQ keywords..." 
+              oninput="filterFaqItems()"
+              class="w-full pl-9 pr-8 py-2 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-color)] text-xs text-[var(--text-main)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] shadow-xs transition"
+            >
+            <button 
+              type="button" 
+              id="clearFaqSearch" 
+              onclick="clearFaqSearchInput()" 
+              class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[var(--text-muted)] hover:text-[var(--text-main)]"
+              title="Clear search"
+            >
+              <i class="bi bi-x-circle-fill"></i>
+            </button>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <div class="flex items-center gap-1.5 flex-wrap justify-center w-full sm:w-auto text-xs" id="faqFilterPills">
+            <button type="button" onclick="setFaqCategory('all', this)" class="faq-pill active px-3 py-1 rounded-xl font-bold transition shadow-xs bg-[var(--brand-primary)] text-white">
+              All
+            </button>
+            <button type="button" onclick="setFaqCategory('tours', this)" class="faq-pill px-3 py-1 rounded-xl font-semibold transition border border-[var(--border-color)] bg-[var(--bg-surface)] text-[var(--text-muted)] hover:text-[var(--text-main)] hover:border-[var(--brand-primary)]">
+              Tours
+            </button>
+            <button type="button" onclick="setFaqCategory('hours', this)" class="faq-pill px-3 py-1 rounded-xl font-semibold transition border border-[var(--border-color)] bg-[var(--bg-surface)] text-[var(--text-muted)] hover:text-[var(--text-main)] hover:border-[var(--brand-primary)]">
+              Hours &amp; Arrival
+            </button>
+            <button type="button" onclick="setFaqCategory('health', this)" class="faq-pill px-3 py-1 rounded-xl font-semibold transition border border-[var(--border-color)] bg-[var(--bg-surface)] text-[var(--text-muted)] hover:text-[var(--text-main)] hover:border-[var(--brand-primary)]">
+              Vaccines
+            </button>
+            <button type="button" onclick="setFaqCategory('concierge', this)" class="faq-pill px-3 py-1 rounded-xl font-semibold transition border border-[var(--border-color)] bg-[var(--bg-surface)] text-[var(--text-muted)] hover:text-[var(--text-main)] hover:border-[var(--brand-primary)]">
+              Medical &amp; Care
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Accordion List: 4 Focused Items -->
+      <div class="faq-accordion space-y-3.5" id="faqAccordionContainer">
+
+        <!-- FAQ 1: Tours -->
+        <details name="contact-faq" data-category="tours" class="faq-item card-paw p-5 rounded-2xl group transition-all duration-200" open>
+          <summary class="font-bold text-sm sm:text-base text-[var(--text-main)] cursor-pointer flex items-center justify-between list-none gap-4">
+            <span class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-lg bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center text-xs shrink-0 font-extrabold">1</span>
+              <span>Can I visit and tour the 5-acre resort before booking a stay?</span>
+            </span>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="badge-pet badge-teal text-[10px] hidden sm:inline-block">Tours &amp; Visits</span>
+              <i class="bi bi-chevron-down group-open:rotate-180 transition-transform text-xs text-[var(--text-muted)]"></i>
+            </div>
+          </summary>
+          <div class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mt-3.5 pt-3.5 border-t border-[var(--border-color)] space-y-2">
+            <p>
+              <strong>Yes, absolutely!</strong> We welcome prospective pet parents with an open-door policy. You can drop in for a guided walkthrough of our dog suites, cat penthouse, splash park, and private agility yards any day Monday through Friday between <strong>10:00 AM and 4:00 PM</strong> without an appointment.
+            </p>
+            <p>
+              If you prefer a weekend tour or want to meet directly with our veterinary medical director or senior trainer, simply send a note through our contact form above or call our concierge desk at <a href="tel:5557297428" class="text-[var(--brand-primary)] font-semibold hover:underline">(555) 729-7428</a>.
+            </p>
+          </div>
+        </details>
+
+        <!-- FAQ 2: Hours & Flight Delay -->
+        <details name="contact-faq" data-category="hours" class="faq-item card-paw p-5 rounded-2xl group transition-all duration-200">
+          <summary class="font-bold text-sm sm:text-base text-[var(--text-main)] cursor-pointer flex items-center justify-between list-none gap-4">
+            <span class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-lg bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center text-xs shrink-0 font-extrabold">2</span>
+              <span>What are your check-in &amp; check-out hours, and what if my flight is delayed?</span>
+            </span>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="badge-pet badge-amber text-[10px] hidden sm:inline-block">Hours &amp; Arrival</span>
+              <i class="bi bi-chevron-down group-open:rotate-180 transition-transform text-xs text-[var(--text-muted)]"></i>
+            </div>
+          </summary>
+          <div class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mt-3.5 pt-3.5 border-t border-[var(--border-color)] space-y-2">
+            <p>
+              Our lobby is open <strong>Monday–Friday: 7:00 AM – 7:30 PM</strong> and <strong>Saturday–Sunday: 8:00 AM – 6:30 PM</strong>. Standard check-out time is 12:00 PM (noon) for overnight boarding guests.
+            </p>
+            <p>
+              Since we are situated just 10 minutes from <em>Austin-Bergstrom International Airport (ABIA)</em>, we know travel disruptions happen. If your flight is delayed, call or text our front desk before closing. We provide extended VIP pickup until <strong>9:30 PM</strong> or will comfortably settle your pet into their suite for an extra night with fresh gourmet dinner and morning turnout.
+            </p>
+          </div>
+        </details>
+
+        <!-- FAQ 3: Vaccines -->
+        <details name="contact-faq" data-category="health" class="faq-item card-paw p-5 rounded-2xl group transition-all duration-200">
+          <summary class="font-bold text-sm sm:text-base text-[var(--text-main)] cursor-pointer flex items-center justify-between list-none gap-4">
+            <span class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-lg bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center text-xs shrink-0 font-extrabold">3</span>
+              <span>What mandatory vaccinations and veterinary paperwork are required?</span>
+            </span>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="badge-pet badge-coral text-[10px] hidden sm:inline-block">Vaccines &amp; Health</span>
+              <i class="bi bi-chevron-down group-open:rotate-180 transition-transform text-xs text-[var(--text-muted)]"></i>
+            </div>
+          </summary>
+          <div class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mt-3.5 pt-3.5 border-t border-[var(--border-color)] space-y-2">
+            <p>
+              To safeguard every guest in our sanctuary, we enforce strict veterinary verification:
+            </p>
+            <ul class="list-disc pl-5 space-y-1">
+              <li><strong>Canine Guests:</strong> Rabies, DHPP (Distemper, Hepatitis, Parvovirus, Parainfluenza), and Bordetella within the past 6 or 12 months. Bivalent Canine Influenza (H3N2/H3N8) is strongly encouraged.</li>
+              <li><strong>Feline Guests:</strong> Rabies and FVRCP (Feline Viral Rhinotracheitis, Calicivirus, Panleukopenia).</li>
+              <li><strong>Flea &amp; Tick:</strong> Proof of current veterinary-grade parasite prevention.</li>
+            </ul>
+            <p class="pt-1">
+              You can upload digital certificates straight into your <a href="login.html" class="text-[var(--brand-primary)] font-semibold hover:underline">Parent Portal</a> or have your vet office email records directly to <strong>records@pawshavenresort.com</strong> prior to arrival.
+            </p>
+          </div>
+        </details>
+
+        <!-- FAQ 4: Emergency Vet -->
+        <details name="contact-faq" data-category="concierge" class="faq-item card-paw p-5 rounded-2xl group transition-all duration-200">
+          <summary class="font-bold text-sm sm:text-base text-[var(--text-main)] cursor-pointer flex items-center justify-between list-none gap-4">
+            <span class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-lg bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center text-xs shrink-0 font-extrabold">4</span>
+              <span>How does PawsHaven handle medical emergencies or special medication routines?</span>
+            </span>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="badge-pet badge-teal text-[10px] hidden sm:inline-block">Medical &amp; Care</span>
+              <i class="bi bi-chevron-down group-open:rotate-180 transition-transform text-xs text-[var(--text-muted)]"></i>
+            </div>
+          </summary>
+          <div class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mt-3.5 pt-3.5 border-t border-[var(--border-color)] space-y-2">
+            <p>
+              Safety and medical excellence are built into our resort foundation. Our co-founder, <strong>Dr. Marcus Vance, DVM</strong>, supervises our health protocols and is on-call 24 hours a day. In addition, our campus is located under 5 minutes from Central Texas Veterinary Specialty &amp; Emergency Hospital.
+            </p>
+            <p>
+              If your pet takes prescription pills, eye drops, or insulin injections, our Licensed Veterinary Technicians administer and log every dose with time-stamps in your parent portal. For urgent inquiries, our direct emergency vet hotline is <a href="tel:5559117387" class="text-rose-600 dark:text-rose-400 font-bold hover:underline">(555) 911-PETS</a>.
+            </p>
+          </div>
+        </details>
+
+      </div>
+
+      <!-- No Results State -->
+      <div id="faqNoResults" class="hidden text-center py-10 px-4 card-paw rounded-3xl mt-6 border border-dashed border-[var(--border-color)]">
+        <div class="w-10 h-10 rounded-xl bg-[var(--bg-subtle)] text-[var(--text-muted)] flex items-center justify-center text-lg mx-auto mb-2">
+          <i class="bi bi-search"></i>
+        </div>
+        <h4 class="font-bold text-sm text-[var(--text-main)] mb-1">No matching questions found</h4>
+        <p class="text-xs text-[var(--text-muted)] max-w-sm mx-auto mb-3">
+          Try adjusting your search terms or view all categories to find what you are looking for.
+        </p>
+        <button type="button" onclick="clearFaqSearchInput()" class="btn-brand-primary text-xs px-3.5 py-1.5 rounded-xl font-bold inline-flex items-center gap-1.5 shadow-xs">
+          <i class="bi bi-arrow-counterclockwise"></i> Reset Search
+        </button>
+      </div>
+
+      <!-- Concierge Help Callout Banner -->
+      <div class="mt-10 p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-[var(--bg-surface)] to-[var(--bg-subtle)] border border-[var(--border-color)] shadow-xs flex flex-col md:flex-row items-center justify-between gap-5">
+        <div class="flex items-center gap-3.5 text-center md:text-left">
+          <div class="w-12 h-12 rounded-2xl bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center text-xl shrink-0 shadow-xs hidden sm:flex">
+            <i class="bi bi-headset"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-sm sm:text-base text-[var(--text-main)]">Still have a specific question about your pet?</h3>
+            <p class="text-xs text-[var(--text-muted)] mt-0.5">
+              Our front concierge team is on duty 7 days a week to assist with custom dietary, medical, or reservation needs.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2.5 w-full md:w-auto shrink-0 justify-center">
+          <a href="tel:5557297428" class="btn-brand-secondary h-9 px-3.5 rounded-xl text-xs font-bold inline-flex items-center justify-center gap-1.5 shadow-xs hover:shadow-md transition">
+            <i class="bi bi-telephone-fill"></i>
+            <span>(555) 729-7428</span>
+          </a>
+          <button type="button" onclick="document.getElementById('contactForm') ? document.getElementById('contactForm').scrollIntoView({behavior: 'smooth'}) : window.location.hash = 'contactForm'" class="btn-brand-accent h-9 px-4 rounded-xl text-xs font-bold inline-flex items-center justify-center gap-1.5 shadow-xs hover:shadow-md transition cursor-pointer">
+            <i class="bi bi-envelope-fill"></i>
+            <span>Send Note</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  
   <!-- Footer -->
   <div id="paws-footer"></div>
 
@@ -427,6 +628,84 @@
       showToast(`Thank you, ${name}! Your inquiry regarding "${topic}" was delivered to our concierge. We will reply to ${email} shortly.`, "success", 5000);
       document.getElementById("contactForm").reset();
     }
-  </script>
+  
+    // FAQ Interactive Filter & Live Search
+    let currentFaqCategory = 'all';
+
+    function setFaqCategory(category, buttonEl) {
+      currentFaqCategory = category;
+      document.querySelectorAll('#faqFilterPills .faq-pill').forEach(btn => {
+        btn.classList.remove('active', 'bg-[var(--brand-primary)]', 'text-white');
+        btn.classList.add('bg-[var(--bg-surface)]', 'text-[var(--text-muted)]');
+      });
+      if (buttonEl) {
+        buttonEl.classList.remove('bg-[var(--bg-surface)]', 'text-[var(--text-muted)]');
+        buttonEl.classList.add('active', 'bg-[var(--brand-primary)]', 'text-white');
+      }
+      filterFaqItems();
+    }
+
+    function filterFaqItems() {
+      const searchInput = document.getElementById('faqSearchInput');
+      const clearBtn = document.getElementById('clearFaqSearch');
+      const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+      
+      if (clearBtn) {
+        if (query.length > 0) {
+          clearBtn.classList.remove('hidden');
+        } else {
+          clearBtn.classList.add('hidden');
+        }
+      }
+
+      const items = document.querySelectorAll('#faqAccordionContainer .faq-item');
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const itemCat = item.getAttribute('data-category') || '';
+        const itemText = item.textContent.toLowerCase();
+
+        const matchesCat = (currentFaqCategory === 'all' || itemCat === currentFaqCategory);
+        const matchesQuery = (!query || itemText.includes(query));
+
+        if (matchesCat && matchesQuery) {
+          item.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      const noResults = document.getElementById('faqNoResults');
+      if (noResults) {
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+        }
+      }
+    }
+
+    function clearFaqSearchInput() {
+      const searchInput = document.getElementById('faqSearchInput');
+      if (searchInput) {
+        searchInput.value = '';
+      }
+      currentFaqCategory = 'all';
+      const pills = document.querySelectorAll('#faqFilterPills .faq-pill');
+      if (pills.length > 0) {
+        pills.forEach((btn, idx) => {
+          if (idx === 0) {
+            btn.classList.add('active', 'bg-[var(--brand-primary)]', 'text-white');
+            btn.classList.remove('bg-[var(--bg-surface)]', 'text-[var(--text-muted)]');
+          } else {
+            btn.classList.remove('active', 'bg-[var(--brand-primary)]', 'text-white');
+            btn.classList.add('bg-[var(--bg-surface)]', 'text-[var(--text-muted)]');
+          }
+        });
+      }
+      filterFaqItems();
+    }
+</script>
 </body>
 </html>
